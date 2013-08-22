@@ -7,6 +7,7 @@
 \usepackage{color}
 \usepackage{epsfig}
 \usepackage{latexsym}
+\usepackage{tensor}
 %\usepackage{wasysym}
 \usepackage{comment}
 %\usepackage{graphicx}
@@ -19,7 +20,7 @@
 \newcommand{\ee}[1]{\!\times\!10^{#1}}
 \newcommand{\prob}{{\rm Pr}}
 \newcommand{\grbrate}{{{\mathcal R}_{\mathrm{grb}}}}
-\newcommand{\cbcrate}{{{\mathcal R}_{\mathrm{cbc}}}}
+\newcommand{\cbcrate}{{{\mathcal R}}}
 \newcommand{\diff}{{\mathrm d}}
 \newcommand{\rhostar}{{\rho^*}}
 
@@ -88,9 +89,9 @@ P_F(\rhostar | \cbcrate, C_L, T) = e^{-\cbcrate C_L(\rhostar) T},
 %
 where $C_L(\rhostar)$ is the total luminosity to which the search is sensitive
 and $T$ is the duration of the search.  The overall probability of obtaining
-zero events with ranking statistic $\rho>\rhostar$ is the product of obtaining
-no events from foreground \emph{and} the probability of obtaining no events from
-the background in the detector, denoted $P_B(\rhostar)$,
+no events with ranking statistic $\rho>\rhostar$ is the product of obtaining
+no such events from foreground \emph{and} the probability of obtaining no such
+events from the background in the detector, denoted $P_B(\rhostar)$,
 %
 \begin{equation}
 P(\rhostar|\cbcrate,I) = P_B(\rhostar|I)e^{-\cbcrate C_L(\rhostar) T}
@@ -100,62 +101,66 @@ Using a uniform prior on $\cbcrate$ and inverting the overall probability with
 Bayes' theorem, we arrive at,
 %
 \begin{equation}\label{eq:loudestEventPosterior}
-p(\cbcrate | \hat{\epsilon}, \hat{\Lambda}) =
-\frac{\hat{\epsilon}}{1+\hat{\Lambda}}
-\left(1 + \cbcrate \hat{\epsilon}\hat{\Lambda}\right) e^{-\cbcrate \hat{\epsilon}},
+p(\cbcrate | C_L({\rhostar}, T, \Lambda) \propto p(\cbcrate) \left[ \frac{1+\Lambda
+C_L(\rhostar) T}{1+\Lambda}\right] e^{-\cbcrate C_L(\rhostar) T}
 \end{equation}
 %
-where, for notational and computational convenience and for consistency
-with~\cite{Biswas09}, we set,
+where $p(\cbcrate)$ is the prior probability distribution on the rate.  The
+quantity $\hat{\Lambda}$ measures the relative probability of detecting an event
+with ranking statistic $x$ due to \gws versus the probability of an equally loud
+event arising in the background distribution.  The reader is directed to
+section\,3 of~\cite{BradyFairhurst08} for a full discussion of this quanitity.
+
+Now, recall that our objective is to derive a posterior on the jet angle
+$\theta_j$ from the posterior on the rate of binary coalescence.  It is
+straightforward to reconstruct the rate posterior from the published rate upper
+limits: we simply require the value of $\Lambda$ and the product
+$C_L T$.  
 %
+%To find this, note that the upper limit on the
+%rate for confidence level $\alpha$ is by solving,
+%
+%\begin{equation}
+%\alpha = \sideset{}{_0^{\cbcrate_{\alpha}}}\int p(\cbcrate | C_L(\rhostar), T, \Lambda )~\diff \cbcrate \nonumber
+%\end{equation}
+%
+%for $\cbcrate_{\alpha}$.  
+Assuming a uniform prior on the rate $\cbcrate$ and
+the posterior given by equation~\ref{eq:loudestEventPosterior}, the upper limit
+is given by equation 21 from~\cite{BradyFairhurst08}:
 \begin{equation}
-\epsilon = C_L(\rhostar) T
-\end{equation}
-%
-The quantity $\hat{\Lambda}$ measures the relative probability of detecting an
-event with ranking statistic $x$ due to \gws versus the probability of an
-equally loud event arising in the background distribution.  For now, let us
-focus attention on the interpretation of existing upper limits from past \gw
-searches where no \gw signal has been observed and the loudest event is
-umabiguously due to background noise fluctuations.  That is, the limit in which
-$\hat{\Lambda} \rightarrow 0$.  In this case, the posterior on the rate goes to,
-%
-\begin{equation}
-\label{eq:nullPosterior}
-p(\cbcrate | \hat{\epsilon}, \hat{\Lambda} \rightarrow 0) = \hat{\epsilon} e^{-\cbcrate
-\hat{\epsilon}} 
-\end{equation}
-%
-Now, our objective is to compute a posterior on the GRB beaming angle via
-equation~\ref{eq:rate2angleProb}, for which we require the (unpublished) numerical
-value of $\hat{\epsilon}$.  To proceed, we note that the reported 90\%
-confidence rate upper limits in~\cite{S6lowmass} are found by solving for
-$\cbcrate^{90\%}$ in,
-%
-\begin{eqnarray}
-0.9 & = &\int_0^{\cbcrate^{90\%}} p(\cbcrate | \hat{\epsilon}, \hat{\Lambda} \to
-0)~\diff \cbcrate \nonumber \\
-& = & 1 -
-\left[1+\frac{\cbcrate^{90\%}\hat{\epsilon}\hat{\Lambda}}{1+\hat{\Lambda}}\right]
-e^{-\cbcrate^{90\%} \hat{\epsilon}}.
+1-\alpha =  e^{-\cbcrate_{\alpha} C_L(\rhostar)T)}
+\left[ 
+1+ \left(\frac{\Lambda}{1+\Lambda}\right) \cbcrate_{\alpha} T C_L(\rhostar)
+\right ]
 \label{eq:rateIntegral}
-\end{eqnarray}
+\end{equation}
 %
-So, \emph{given} $\cbcrate^{90\%}$, we simply solve
-equation~\ref{eq:rateIntegral} for $\hat{\epsilon}$ to reconstruct the rate
-posterior obtained in the search~\textcolor{red}{NOTE: I only just noticed
-that~\cite{Biswas09} actually has the expression for this.  Existing results do
-the calculation for $\hat{epsilon}$ iteratively but this is an unnecessary (but
-fun) brute force approach.  I still need to make that change.}
+For now, let us focus attention on the interpretation of upper limits
+from past \gw analyses.  No \gw signal has been observed and the loudest
+event is umabiguously due to background noise fluctuations.  That is, the limit
+in which $\Lambda \rightarrow 0$.  In this case, we simply have,
+\begin{equation}
+C_L(\rhostar)T = -\frac{\log(1-\alpha)}{\cbcrate_{\alpha}},
+\end{equation}
+and the value of $\cbcrate$ can be taken straight from the literature.  Note
+that this procedure necessarily confines our jet angle inferences based on
+progenitor systems for which the rate upper limits are available.  Given that
+the binary coalesence rate limits are quoted for canonical binary neutron star
+and neutron star-black hole systems, both plausible sGRB progenitors, this
+simply means our inferences on the jet angle are specific to each system and
+treated separately.
 
-The reconstructed rate posterior, $p(\cbcrate | \hat{\epsilon}, \hat{\Lambda}
-\to 0)$ and the {\bf upper limit for BNS} is shown in
-figure~\ref{fig:reconstructedRatePosterior}.  Note that this procedure
-necessarily confines our jet angle inferences based on progenitor systems for
-which the rate upper limits are available; we are not free to choose our own
-mass configurations.
+Using the most stringent 90\% confidence upper limit from \gw observations on the
+rate of binary neutron star coalescences to date,
+$\cbcrate^{90\%}_{{\rm bns}} = 1.3\times
+10^{-4}$\,Mpc$^{-3}$yr$^{-1}$~\cite{S6lowmass}, gives $C_L(\rhostar)T=17712$.
+Similarly, for NS-BH systems,  $\cbcrate^{90\%}_{{\rm nsbh}} = 3.1\times
+10^{-5}$\,Mpc$^{-3}$yr$^{-1}$ gives $C_L(\rhostar)T=74277$.  The posteriors on
+the rates, assuming these values and $\Lambda=0$, are shown in
+figure~\ref{fig:reconstructedRatePosterior}.  
 
-Finally, figure~\ref{fig:jetPosterior} shows the resulting posterior on the GRB
+Figure~\ref{fig:jetPosterior} shows the resulting posterior on the GRB
 beaming angle, using the transformation in equation~\ref{eq:rate2angleProb} and
 our results so far.  \textcolor{red}{Informal}: To interpret this posterior and
 hence obtain a limit on the range of possible beaming angles, we need to

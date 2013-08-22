@@ -86,7 +86,10 @@ rateAxis=linspace(1e-8,1e-3,1000)
 
 # found this by iterating through eps vals until i got the 90% rate
 # upper limit from the S6 lowmass paper
-eps=computeEpsilon(rateAxis=rateAxis) 
+#eps=computeEpsilon(rateAxis=rateAxis) 
+
+# Here's the simple analytic expression:
+eps=-1*log(1-0.9)/1.3e-4
 
 cbcRatePos=cbcRatePosteriorNull(eps,rateAxis)
 alphas=[]
