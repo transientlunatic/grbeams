@@ -200,6 +200,70 @@ Marginalise over some stuff for the case of an `impure' GRB sample (unknown
 fraction of CBCs).
 \\
 
+\subsection{Unknown GRB Efficiency}
+Until now, we have made the assumption that every binary neutron star
+coalescence results in a sGRB xand that every sGRB is due to BNS coalescence.
+Let us now relax that assumption.  To do so, we introduce an \emph{efficiency}
+term $\epsilon$ into equation~\ref{eq:rate2angle}:
+\begin{equation}\label{eq:rate2angle_epsilon}
+\cbcrate=\frac{\grbrate}{(1-\cos \theta)\epsilon},
+\end{equation}
+%
+so that $\epsilon$ represents the (unknown) fraction of BNS mergers which result
+in an sGRB.  As before, our inference on the beaming angle $\theta$ is made from
+the posterior probability distribution $p(\theta|D,I)$.  Instead of a simple
+one-to-one mapping between $\theta$ and $\cbcrate$, however, we must now account
+for the extra $\epsilon$ term.  We do this through writing down the target PDF
+as a marginalisation over nuisance parameters and using the Jacobian to
+transform from $(\theta,\cbcrate)$-space to $(\cbcrate,\epsilon)$-space.
+
+First, note that the PDF $p(\theta|D,I)$ may be written as a marginalisation
+over $\cbcrate$ in the the joint PDF $p(\theta, \cbcrate|D,I)$:
+%
+\begin{equation}
+p(\theta) = \int_{\cbcrate} p(\theta,\cbcrate)~\diff \cbcrate,
+\end{equation}
+%
+where we have dropped the conditioning statements temporarily for notational
+convenience.  Next, we note that the joint probability $p(\theta,\cbcrate)$ can
+be written in terms of $\epsilon$ and $\cbcrate$ according to,
+%
+\begin{equation}
+p(\theta,\cbcrate) = p(\epsilon,\cbcrate)
+\left\lvert\left\lvert
+\frac{\partial(\cbcrate,\epsilon)}{\partial(\cbcrate,\theta)}
+\right\rvert\right\rvert,
+\end{equation}
+%
+where the Jacobian matrix is given by,
+%
+\begin{equation}
+\frac{\partial (\cbcrate,\epsilon)}{\partial(\cbcrate,\theta)} =
+\begin{bmatrix}
+\frac{\partial \cbcrate}{\partial \cbcrate} & \frac{\partial \cbcrate}{\partial \theta} \\
+\frac{\partial \epsilon}{\partial \cbcrate} & \frac{\partial \epsilon}{\partial \theta}
+\end{bmatrix}.
+\end{equation}
+%
+Bringing all of these terms together then, and writing out the Jacobian matrix
+determinant, we have
+%
+\begin{equation}\label{eq:marginaltheta}
+p(\theta) = \int_{\cbcrate} p(\epsilon)p(\cbcrate) \left\lvert
+\frac{\partial\cbcrate}{\partial\theta}.\frac{\partial\epsilon}{\partial\cbcrate}\right\rvert~\diff
+\cbcrate,
+\end{equation}
+%
+where we have assumed $\epsilon$ and $\cbcrate$ are logically independent such
+that,
+\begin{equation}
+p(\epsilon,\cbcrate) = p(\epsilon|\cbcrate)p(\cbcrate) = p(\epsilon)p(\cbcrate).
+\end{equation}
+%
+The Jacobian term in equation~\ref{eq:marginaltheta} is simply computed from
+equation~\ref{eq:rate2angle_epsilon} and we just require some prior probability
+distribution on $\epsilon$.\textcolor{red}{What to pick for $p(\epsilon|I)$???}
+
 \subsection{Astrophysical Interpretation \& Comparison With Other Limits}
 The comparison with other limits is straightforward.  I think it looks pretty
 consistent with Dietz, Holtz etc (but should double check).
