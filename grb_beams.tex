@@ -28,7 +28,7 @@
 
 \title{Constraints On Short, Hard Gamma-Ray Burst Beaming Angles From
 Gravitational Wave Observations}
-\author{James Clark and Ik Siong Heng}
+\author{James Clark, Ik Siong Heng, Martin Hendry}
 \date{\today}
 
 \begin{abstract}
@@ -48,175 +48,26 @@ upper limits placed on $\cbcrate$ from all-sky, all-time \gw searches and
 explore the potential for direct inference of sGRB  beaming angles in the
 advanced detector era.
 
-\section{Limits On sGRB Beaming Angles From Past Gravitational Wave Searches}
-
-\subsection{Complete Sky-Coverage \& Known Observed GRB Rate}
-Assuming all-sky Gamma-ray coverage and that all compact binary coalescence
-events result in a short-hard gamma-ray burst, the rate of binary coalescences
-is,
+%\section{Limits On sGRB Beaming Angles From Past Gravitational Wave Searches}
+\section{Inferring The sGRB Beaming Angle From Rate Measurements}
+Assuming that at least some fraction of sGRBs are due to compact binary
+coalescence, the observed rate of sGRBs may be written,
 %
 \begin{equation}\label{eq:rate2angle}
-\cbcrate=\frac{\grbrate}{1-\cos \theta},
+\grbrate=\epsilon\cbcrate(1-\cos \theta),
 \end{equation}
-where $\theta$ is the beaming angle of the outflow from the GRB and $\grbrate$
-is the \emph{observed} sGRB rate.  We take
+%
+where $\cbcrate$ is the rate of binary coalescence, $\theta$ is the beaming
+angle of the outflow from the GRB and $\epsilon$ is the (generally unknown)
+probability that a binary coalescence results in an observed sGRB.  In this
+work, we assume
 $\grbrate=10$\,Gpc$^{-3}$\,yr$^{-1}$~\cite{nakar-2007,Dietz11}.
+ 
+Inferences of the GRB beaming angle are made from the posterior probability
+density on the beaming angle $p(\theta|D,I)$.  Our goal then, is to transform
+the measured posterior probability density on the rate $\cbcrate$ to a posterior
+on the beaming angle.
 %
-Inferences of the GRB beaming angle may then be drawn from the posterior
-probability density on the beaming angle, related to that on the rate posterior
-via,
-%
-\begin{eqnarray}
-p(\theta|D,I) & = & p(\cbcrate|D,I) \left|\frac{\diff \cbcrate}{\diff
-\theta}\right| \\
-\label{eq:rate2angleProb}
-& = & p(\cbcrate|D,I) \times \left| \frac{\grbrate\sin\theta}{(1-\cos \theta)^2} \right|,
-\end{eqnarray}
-%
-where the Jacobian is computed from equation~\ref{eq:rate2angle}, $D$ represents
-our \gw observations and we explicitly include the conditioning information $I$
-to remind us of the assumptions in the analysis.
-
-Following~\cite{Biswas09,BradyFairhurst08}, the posterior on the binary
-coalescence rate may be determined from the loudest event in the \gw
-analysis.  Specifically, for a foreground event rate due to  binary coalescence
-$\cbcrate$, the probability of obtaning no events with ranking statistic $\rho$
-greater than the observed loudested event $\rhostar$ is,
-%
-\begin{equation}
-P_F(\rhostar | \cbcrate, C_L, T) = e^{-\cbcrate C_L(\rhostar) T},
-\end{equation}
-%
-where $C_L(\rhostar)$ is the total luminosity to which the search is sensitive
-and $T$ is the duration of the search.  The overall probability of obtaining
-no events with ranking statistic $\rho>\rhostar$ is the product of obtaining
-no such events from foreground \emph{and} the probability of obtaining no such
-events from the background in the detector, denoted $P_B(\rhostar)$,
-%
-\begin{equation}
-P(\rhostar|\cbcrate,I) = P_B(\rhostar|I)e^{-\cbcrate C_L(\rhostar) T}
-\end{equation}
-%
-Using a uniform prior on $\cbcrate$ and inverting the overall probability with
-Bayes' theorem, we arrive at,
-%
-\begin{equation}\label{eq:loudestEventPosterior}
-p(\cbcrate | C_L({\rhostar}, T, \Lambda) \propto p(\cbcrate) \left[ \frac{1+\Lambda
-C_L(\rhostar) T}{1+\Lambda}\right] e^{-\cbcrate C_L(\rhostar) T}
-\end{equation}
-%
-where $p(\cbcrate)$ is the prior probability distribution on the rate.  The
-quantity $\hat{\Lambda}$ measures the relative probability of detecting an event
-with ranking statistic $x$ due to \gws versus the probability of an equally loud
-event arising in the background distribution.  The reader is directed to
-section\,3 of~\cite{BradyFairhurst08} for a full discussion of this quanitity.
-
-Now, recall that our objective is to derive a posterior on the jet angle
-$\theta_j$ from the posterior on the rate of binary coalescence.  It is
-straightforward to reconstruct the rate posterior from the published rate upper
-limits: we simply require the value of $\Lambda$ and the product
-$C_L T$.  
-%
-%To find this, note that the upper limit on the
-%rate for confidence level $\alpha$ is by solving,
-%
-%\begin{equation}
-%\alpha = \sideset{}{_0^{\cbcrate_{\alpha}}}\int p(\cbcrate | C_L(\rhostar), T, \Lambda )~\diff \cbcrate \nonumber
-%\end{equation}
-%
-%for $\cbcrate_{\alpha}$.  
-Assuming a uniform prior on the rate $\cbcrate$ and
-the posterior given by equation~\ref{eq:loudestEventPosterior}, the upper limit
-is given by equation 21 from~\cite{BradyFairhurst08}:
-\begin{equation}
-1-\alpha =  e^{-\cbcrate_{\alpha} C_L(\rhostar)T)}
-\left[ 
-1+ \left(\frac{\Lambda}{1+\Lambda}\right) \cbcrate_{\alpha} T C_L(\rhostar)
-\right ]
-\label{eq:rateIntegral}
-\end{equation}
-%
-For now, let us focus attention on the interpretation of upper limits
-from past \gw analyses.  No \gw signal has been observed and the loudest
-event is umabiguously due to background noise fluctuations.  That is, the limit
-in which $\Lambda \rightarrow 0$.  In this case, we simply have,
-\begin{equation}
-C_L(\rhostar)T = -\frac{\log(1-\alpha)}{\cbcrate_{\alpha}},
-\end{equation}
-and the value of $\cbcrate$ can be taken straight from the literature.  Note
-that this procedure necessarily confines our jet angle inferences based on
-progenitor systems for which the rate upper limits are available.  Given that
-the binary coalesence rate limits are quoted for canonical binary neutron star
-and neutron star-black hole systems, both plausible sGRB progenitors, this
-simply means our inferences on the jet angle are specific to each system and
-treated separately.
-
-Using the most stringent 90\% confidence upper limit from \gw observations on the
-rate of binary neutron star coalescences to date,
-$\cbcrate^{90\%}_{{\rm bns}} = 1.3\times
-10^{-4}$\,Mpc$^{-3}$yr$^{-1}$~\cite{S6lowmass}, gives $C_L(\rhostar)T=17712$.
-Similarly, for NS-BH systems,  $\cbcrate^{90\%}_{{\rm nsbh}} = 3.1\times
-10^{-5}$\,Mpc$^{-3}$yr$^{-1}$ gives $C_L(\rhostar)T=74277$.  The posteriors on
-the rates, assuming these values and $\Lambda=0$, are shown in
-figure~\ref{fig:reconstructedRatePosterior}.  
-
-Figure~\ref{fig:jetPosterior} shows the resulting posterior on the GRB
-beaming angle, using the transformation in equation~\ref{eq:rate2angleProb} and
-our results so far.  \textcolor{red}{Informal}: To interpret this posterior and
-hence obtain a limit on the range of possible beaming angles, we need to
-consider the question we're asking.  I (James) think this should probably be,
-`what is the smallest jet angle that produces a result consistent with our
-observations?'.  That is, we want a \emph{lower} limit.  Why not the
-\emph{largest} jet angle?  I think that would involve allowing infinitely small
-angles which doesn't really make sense.  I can't quite put my finger on it,
-though.
-
-Now, the quantity of interest is the inferred \emph{lower}
-limit on the jet angle~$\theta^{90\%}$:
-%
-\begin{equation}
-0.9 = \int_{\theta^{90\%}}^{\infty}p(\theta | \cbcrate^{90\%})~\diff \theta
-\end{equation}
-%
-This is indicated with the vertical red line in figure~\ref{fig:jetPosterior}.
-We find $\theta^{90\%}=3.3^{\circ}$.
-
-
-\begin{figure}
-\includegraphics{rate_posterior_s6UL.eps}
-\caption{Rate posterior for S6/VSR2,3 Low-mass Search For Compact Binary
-Coalescence.\label{fig:reconstructedRatePosterior}}
-\end{figure}
-
-\begin{figure}
-\includegraphics{jet_angle_posterior_s6UL.eps}
-\caption{Jet angle posterior derived from S6/VSR2,3 Low-mass Search For Compact Binary
-Coalescence posterior / upper limit on compact binary coalescence
-rate.\label{fig:jetPosterior}}
-\end{figure}
-
-\subsection{Incomplete Sky-Coverage \& Unknown GRB Rate}
-Marginalise over some stuff for the case of an `impure' GRB sample (unknown
-fraction of CBCs).
-\\
-
-\subsection{Unknown GRB Efficiency}
-Until now, we have made the assumption that every binary neutron star
-coalescence results in a sGRB xand that every sGRB is due to BNS coalescence.
-Let us now relax that assumption.  To do so, we introduce an \emph{efficiency}
-term $\epsilon$ into equation~\ref{eq:rate2angle}:
-\begin{equation}\label{eq:rate2angle_epsilon}
-\cbcrate=\frac{\grbrate}{(1-\cos \theta)\epsilon},
-\end{equation}
-%
-so that $\epsilon$ represents the (unknown) fraction of BNS mergers which result
-in an sGRB.  As before, our inference on the beaming angle $\theta$ is made from
-the posterior probability distribution $p(\theta|D,I)$.  Instead of a simple
-one-to-one mapping between $\theta$ and $\cbcrate$, however, we must now account
-for the extra $\epsilon$ term.  We do this through writing down the target PDF
-as a marginalisation over nuisance parameters and using the Jacobian to
-transform from $(\theta,\cbcrate)$-space to $(\cbcrate,\epsilon)$-space.
-
 First, note that the PDF $p(\theta|D,I)$ may be written as a marginalisation
 over $\cbcrate$ in the the joint PDF $p(\theta, \cbcrate|D,I)$:
 %
@@ -260,9 +111,130 @@ that,
 p(\epsilon,\cbcrate) = p(\epsilon|\cbcrate)p(\cbcrate) = p(\epsilon)p(\cbcrate).
 \end{equation}
 %
-The Jacobian term in equation~\ref{eq:marginaltheta} is simply computed from
-equation~\ref{eq:rate2angle_epsilon} and we just require some prior probability
-distribution on $\epsilon$.\textcolor{red}{What to pick for $p(\epsilon|I)$???}
+The Jacobian term in equation~\ref{eq:marginaltheta} is computed from
+equation~\ref{eq:rate2angle}. Finally, to find the target PDF $p(\theta|D,I)$
+then, we must specify a prior PDF for $\epsilon$ which encapsulates
+assumptions made about the relative rates of compact binary mergers and sGRBs.
+We consider a range of scenarios in the sections that follow.
+ 
+Following~\cite{Biswas09,BradyFairhurst08}, the posterior on the binary
+coalescence rate may be determined from the loudest event in the \gw
+analysis.  Specifically, for a foreground event rate due to  binary coalescence
+$\cbcrate$, the probability of obtaning no events with ranking statistic $\rho$
+greater than the observed loudested event $\rhostar$ is,
+%
+\begin{equation}
+P_F(\rhostar | \cbcrate, C_L, T) = e^{-\cbcrate C_L(\rhostar) T},
+\end{equation}
+%
+where $C_L(\rhostar)$ is the total luminosity to which the search is sensitive
+and $T$ is the duration of the search.  The overall probability of obtaining
+no events with ranking statistic $\rho>\rhostar$ is the product of obtaining
+no such events from foreground \emph{and} the probability of obtaining no such
+events from the background in the detector, denoted $P_B(\rhostar)$,
+%
+\begin{equation}
+P(\rhostar|\cbcrate,I) = P_B(\rhostar|I)e^{-\cbcrate C_L(\rhostar) T}
+\end{equation}
+%
+Using a uniform prior on $\cbcrate$ and inverting the overall probability with
+Bayes' theorem, we arrive at,
+%
+\begin{equation}\label{eq:loudestEventPosterior}
+p(\cbcrate | C_L({\rhostar}, T, \Lambda) \propto p(\cbcrate) \left[ \frac{1+\Lambda
+C_L(\rhostar) T}{1+\Lambda}\right] e^{-\cbcrate C_L(\rhostar) T}
+\end{equation}
+%
+where $p(\cbcrate)$ is the prior probability distribution on the rate.  The
+quantity $\hat{\Lambda}$ measures the relative probability of detecting an event
+with ranking statistic $x$ due to \gws versus the probability of an equally loud
+event arising in the background distribution.  The reader is directed to
+section\,3 of~\cite{BradyFairhurst08} for a full discussion of this quantity.
+
+%
+%\subsection{Incomplete Sky-Coverage \& Unknown GRB Rate}
+%Marginalise over some stuff for the case of an `impure' GRB sample (unknown
+%fraction of CBCs).
+%\\
+
+\section{Beaming Angle Limits From Past GW Searches}
+
+In this section, we focus attention on the interpretation of rate upper limits
+from past \gw analyses.  We first reconstruct the measured posterior on the
+binary coalescence rate and go on to compute the posterior and upper limit on
+the sGRB beaming angle under a range of assumptions regarding the sGRB
+efficiency $\epsilon$.
+
+The upper limit on the binary coalescence rate at confidence $\alpha$ is found
+by integrating the rate posterior from zero to $\alpha$.  Assuming a uniform
+prior on the rate $\cbcrate$ and using the rate posterior given by
+equation~\ref{eq:loudestEventPosterior}, the upper limit on the rate
+$\cbcrate_{\alpha}$ is given by equation 21 in~\cite{BradyFairhurst08}:
+%
+\begin{equation}
+1-\alpha =  e^{-\cbcrate_{\alpha} C_L(\rhostar)T)}
+\left[ 
+1+ \left(\frac{\Lambda}{1+\Lambda}\right) \cbcrate_{\alpha} T C_L(\rhostar)
+\right ].
+\label{eq:rateIntegral}
+\end{equation}
+%
+In the event that no \gw signal has been observed and the loudest event is
+umabiguously due to background noise fluctuations, we are in the limit in which
+$\Lambda \rightarrow 0$.  In this case, we simply have,
+\begin{equation}
+C_L(\rhostar)T = -\frac{\log(1-\alpha)}{\cbcrate_{\alpha}},
+\end{equation}
+%
+and the value of $\cbcrate$ can be taken straight from the literature\footnote{Note
+that this procedure necessarily confines our jet angle inferences based on
+progenitor systems for which the rate upper limits are available.  Given that
+the binary coalesence rate limits are quoted for canonical binary neutron star
+and neutron star-black hole systems, both plausible sGRB progenitors, this
+simply means our inferences on the jet angle are specific to each system and
+treated separately.}
+
+Using the most stringent 90\% confidence upper limit from \gw observations on
+the rate of binary neutron star coalescences to date, $\cbcrate^{90\%}_{{\rm
+bns}} = 1.3\times 10^{-4}$\,Mpc$^{-3}$yr$^{-1}$~\cite{S6lowmass}, gives
+$C_L(\rhostar)T=17712$.  Similarly, for NS-BH systems,  $\cbcrate^{90\%}_{{\rm
+nsbh}} = 3.1\times 10^{-5}$\,Mpc$^{-3}$yr$^{-1}$ gives $C_L(\rhostar)T=74277$.
+The posteriors on the rates, assuming these values and $\Lambda=0$, are shown in
+figure~\ref{fig:reconstructedRatePosterior}.  
+
+\begin{figure}
+\includegraphics{rate_posterior_s6UL.eps}
+\caption{Rate posterior for S6/VSR2,3 Low-mass Search For Compact Binary
+Coalescence.\label{fig:reconstructedRatePosterior}}
+\end{figure}
+
+\subsection{Known GRB Efficiency, $\epsilon$}
+
+Figure~\ref{fig:jetPosterior} shows the resulting posterior on the GRB
+beaming angle, using the transformation in equation~\ref{eq:rate2angleProb} and
+our results so far.  
+%
+Now, the quantity of interest is the upper limit on the jet
+angle~$\theta^{90\%}$:
+%
+\begin{equation}
+0.9 = \int_{\theta^{90\%}}^{\infty}p(\theta | \cbcrate^{90\%})~\diff \theta
+\end{equation}
+%
+This is indicated with the vertical red line in figure~\ref{fig:jetPosterior}.
+We find $\theta^{90\%}=3.3^{\circ}$.
+
+
+\begin{figure}
+\includegraphics{jet_angle_posterior_s6UL.eps}
+\caption{Jet angle posterior derived from S6/VSR2,3 Low-mass Search For Compact Binary
+Coalescence posterior / upper limit on compact binary coalescence
+rate.\label{fig:jetPosterior}}
+\end{figure}
+
+
+\subsection{Unknown GRB Efficiency, $\epsilon$}
+
 
 \subsection{Astrophysical Interpretation \& Comparison With Other Limits}
 The comparison with other limits is straightforward.  I think it looks pretty
