@@ -19,7 +19,7 @@
 \newcommand{\subgw}{_{\textrm{\scriptsize{GW}}}}
 \newcommand{\ee}[1]{\!\times\!10^{#1}}
 \newcommand{\prob}{{\rm Pr}}
-\newcommand{\grbrate}{{{\mathcal R}_{\mathrm{grb}}}}
+\newcommand{\grbRate}{{{\mathcal R}_{\mathrm{grb}}}}
 \newcommand{\cbcrate}{{{\mathcal R}}}
 \newcommand{\diff}{{\mathrm d}}
 \newcommand{\rhostar}{{\rho^*}}
@@ -42,7 +42,7 @@ Apologies in advance for inconsistent conditioning statements in probabilities
 
 It is common in the literature to draw inferences on the rate of binary
 coalescence $\cbcrate$, given some estimate for the beaming angle $\theta$ and
-the observed rate of sGRBs $\grbrate$.  In this work, we investigate what
+the observed rate of sGRBs $\grbRate$.  In this work, we investigate what
 statements can \emph{currently} be made on the beaming angle itself using the
 upper limits placed on $\cbcrate$ from all-sky, all-time \gw searches and
 explore the potential for direct inference of sGRB  beaming angles in the
@@ -54,14 +54,14 @@ Assuming that at least some fraction of sGRBs are due to compact binary
 coalescence, the observed rate of sGRBs may be written,
 %
 \begin{equation}\label{eq:rate2angle}
-\grbrate=\epsilon\cbcrate(1-\cos \theta),
+\grbRate=\epsilon\cbcrate(1-\cos \theta),
 \end{equation}
 %
 where $\cbcrate$ is the rate of binary coalescence, $\theta$ is the beaming
 angle of the outflow from the GRB and $\epsilon$ is the (generally unknown)
 probability that a binary coalescence results in an observed sGRB.  In this
 work, we assume
-$\grbrate=10$\,Gpc$^{-3}$\,yr$^{-1}$~\cite{nakar-2007,Dietz11}.
+$\grbRate=10$\,Gpc$^{-3}$\,yr$^{-1}$~\cite{nakar-2007,Dietz11}.
  
 Inferences of the GRB beaming angle are made from the posterior probability
 density on the beaming angle $p(\theta|D,I)$.  Our goal then, is to transform
@@ -112,7 +112,16 @@ p(\epsilon,\cbcrate) = p(\epsilon|\cbcrate)p(\cbcrate) = p(\epsilon)p(\cbcrate).
 \end{equation}
 %
 The Jacobian term in equation~\ref{eq:marginaltheta} is computed from
-equation~\ref{eq:rate2angle}. Finally, to find the target PDF $p(\theta|D,I)$
+equation~\ref{eq:rate2angle}:
+%
+\begin{equation}
+\left\lvert\left\lvert
+\frac{\partial(\cbcrate,\epsilon)}{\partial(\cbcrate,\theta)}
+\right\rvert\right\rvert =
+\frac{2\grbRate \sin \theta}{\epsilon(1-\cos\theta)^2}
+\end{equation}
+%
+Finally, to find the target PDF $p(\theta|D,I)$
 then, we must specify a prior PDF for $\epsilon$ which encapsulates
 assumptions made about the relative rates of compact binary mergers and sGRBs.
 We consider a range of scenarios in the sections that follow.

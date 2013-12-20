@@ -48,18 +48,18 @@ def cbcRatePosteriorNull(eps,rateAxis):
     N=trapz(unnormed,rateAxis)
     return unnormed/N
 
-def rateFromTheta(theta,grbRate):
+def rateFromTheta(theta,epsilon,grbRate):
     """
     Returns Rcbc = Rgrb / (1-cos(theta))
     """
-    return grbRate / (1.-cos(theta * pi / 180)) 
+    return grbRate / ( epsilon*(1.-cos(theta * pi / 180)) )
 
-def jacobian(grbRate,theta):
+def jacobian(grbRate,epsilon,theta):
     """
     Compute the Jacboian for the transformation from rate to angle
     """
-    denom=1-cos(theta * pi/180)
-    return abs(grbRate * sin(theta * pi / 180) / denom**2)
+    denom=epsilon*(1-cos(theta * pi/180))
+    return abs(2*grbRate * sin(theta * pi / 180) / denom**2)
 
 def computeEpsilon(R90=1.3e-4,rateAxis=linspace(1e-8,1e-3,1000)):
     """
@@ -110,17 +110,12 @@ thetaPos=[]
 # terms of Rcbc).  Then multiply by Jacobian to get correct density
 # 3) interpolate the Rcbc posterior to this Rcbc
 
+# XXX Here's where epsilon comes in
+epsilon=1.
 for theta in thetaAxis:
 
-    dRbydTheta=jacobian(grbRate,theta)    
-    cbcRate=rateFromTheta(theta,grbRate)
-
-#   print 'theta=%f'%theta
-#   print 'jacob=%f'%dRbydTheta
-#   print 'cbcRate=%e'%cbcRate
-#   print 'p(cbcRate)=%e'%interp(cbcRate,rateAxis,cbcRatePos)
-#   print 'p(theta)=%e'%(interp(cbcRate,rateAxis,cbcRatePos)*dRbydTheta)
-#   print ''
+    dRbydTheta=jacobian(grbRate,epsilon,theta)    
+    cbcRate=rateFromTheta(theta,epsilon,grbRate)
 
     thetaPos.append(interp(cbcRate,rateAxis,cbcRatePos)*dRbydTheta)
 
