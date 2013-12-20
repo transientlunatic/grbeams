@@ -115,12 +115,12 @@ for theta in thetaAxis:
     dRbydTheta=jacobian(grbRate,theta)    
     cbcRate=rateFromTheta(theta,grbRate)
 
-    print 'theta=%f'%theta
-    print 'jacob=%f'%dRbydTheta
-    print 'cbcRate=%e'%cbcRate
-    print 'p(cbcRate)=%e'%interp(cbcRate,rateAxis,cbcRatePos)
-    print 'p(theta)=%e'%(interp(cbcRate,rateAxis,cbcRatePos)*dRbydTheta)
-    print ''
+#   print 'theta=%f'%theta
+#   print 'jacob=%f'%dRbydTheta
+#   print 'cbcRate=%e'%cbcRate
+#   print 'p(cbcRate)=%e'%interp(cbcRate,rateAxis,cbcRatePos)
+#   print 'p(theta)=%e'%(interp(cbcRate,rateAxis,cbcRatePos)*dRbydTheta)
+#   print ''
 
     thetaPos.append(interp(cbcRate,rateAxis,cbcRatePos)*dRbydTheta)
 
@@ -131,9 +131,10 @@ thetaPos/=trapz(thetaPos,thetaAxis)
 # Now integrate FROM 90
 alphas=[]
 for theta in thetaAxis:
-    alphas.append(1-trapz(thetaPos[thetaAxis>theta],thetaAxis[thetaAxis>theta]))
+    #alphas.append(1-trapz(thetaPos[thetaAxis>theta],thetaAxis[thetaAxis>theta]))
+    alphas.append(trapz(thetaPos[thetaAxis<theta],thetaAxis[thetaAxis<theta]))
 thetaNinety=interp(0.9,alphas,thetaAxis)
-print thetaNinety
+print '90% upper limit on theta: ',thetaNinety
 
 #
 # Plots
@@ -145,7 +146,7 @@ plot(rateAxis,cbcRatePos)
 axvline(rateNinety,color='r')
 
 minorticks_on()
-grid(which='major',linestyle='-',alpha=0.5)
+#grid(which='major',linestyle='-',alpha=0.5)
 xlabel(r'$\textrm{Rate }[\textrm{Mpc}^{-3}\textrm{yr}^{-1}]$')
 ylabel(r'$p({\mathcal R}_{\textrm{cbc}}|D,I)$')
 subplots_adjust(bottom=0.17,left=0.17,top=0.95,right=0.98)
@@ -156,7 +157,7 @@ figure()
 plot(thetaAxis,thetaPos)
 axvline(thetaNinety,color='r')
 minorticks_on()
-grid(which='major',linestyle='-',alpha=0.5)
+#grid(which='major',linestyle='--',alpha=0.5)
 xlim(0,10)
 #subplots_adjust(bottom=0.15,top=0.9,right=0.99)
 xlabel(r'$\textrm{Jet Angle, }\theta~[\textrm{degrees}]$')
