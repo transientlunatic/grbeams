@@ -19,7 +19,7 @@
 \newcommand{\subgw}{_{\textrm{\scriptsize{GW}}}}
 \newcommand{\ee}[1]{\!\times\!10^{#1}}
 \newcommand{\prob}{{\rm Pr}}
-\newcommand{\grbRate}{{{\mathcal R}_{\mathrm{grb}}}}
+\newcommand{\grbrate}{{{\mathcal R}_{\mathrm{grb}}}}
 \newcommand{\cbcrate}{{{\mathcal R}}}
 \newcommand{\diff}{{\mathrm d}}
 \newcommand{\rhostar}{{\rho^*}}
@@ -42,7 +42,7 @@ Apologies in advance for inconsistent conditioning statements in probabilities
 
 It is common in the literature to draw inferences on the rate of binary
 coalescence $\cbcrate$, given some estimate for the beaming angle $\theta$ and
-the observed rate of sGRBs $\grbRate$.  In this work, we investigate what
+the observed rate of sGRBs $\grbrate$.  In this work, we investigate what
 statements can \emph{currently} be made on the beaming angle itself using the
 upper limits placed on $\cbcrate$ from all-sky, all-time \gw searches and
 explore the potential for direct inference of sGRB  beaming angles in the
@@ -54,14 +54,14 @@ Assuming that at least some fraction of sGRBs are due to compact binary
 coalescence, the observed rate of sGRBs may be written,
 %
 \begin{equation}\label{eq:rate2angle}
-\grbRate=\epsilon\cbcrate(1-\cos \theta),
+\grbrate=\epsilon\cbcrate(1-\cos \theta),
 \end{equation}
 %
 where $\cbcrate$ is the rate of binary coalescence, $\theta$ is the beaming
 angle of the outflow from the GRB and $\epsilon$ is the (generally unknown)
 probability that a binary coalescence results in an observed sGRB.  In this
 work, we assume
-$\grbRate=10$\,Gpc$^{-3}$\,yr$^{-1}$~\cite{nakar-2007,Dietz11}.
+$\grbrate=10$\,Gpc$^{-3}$\,yr$^{-1}$~\cite{nakar-2007,Dietz11}.
  
 Inferences of the GRB beaming angle are made from the posterior probability
 density on the beaming angle $p(\theta|D,I)$.  Our goal then, is to transform
@@ -69,10 +69,10 @@ the measured posterior probability density on the rate $\cbcrate$ to a posterior
 on the beaming angle.
 %
 First, note that the PDF $p(\theta|D,I)$ may be written as a marginalisation
-over $\cbcrate$ in the the joint PDF $p(\theta, \cbcrate|D,I)$:
+over $\epsilon$ in the the joint PDF $p(\theta, \epsilon|D,I)$:
 %
 \begin{equation}
-p(\theta) = \int_{\cbcrate} p(\theta,\cbcrate)~\diff \cbcrate,
+p(\theta) = \int_{\epsilon} p(\theta,\epsilon)~\diff \epsilon,
 \end{equation}
 %
 where we have dropped the conditioning statements temporarily for notational
@@ -80,29 +80,36 @@ convenience.  Next, we note that the joint probability $p(\theta,\cbcrate)$ can
 be written in terms of $\epsilon$ and $\cbcrate$ according to,
 %
 \begin{equation}
-p(\theta,\cbcrate) = p(\epsilon,\cbcrate)
+p(\theta,\epsilon) = p(\cbcrate,\epsilon)
 \left\lvert\left\lvert
-\frac{\partial(\cbcrate,\epsilon)}{\partial(\cbcrate,\theta)}
+\frac{\partial(\cbcrate,\epsilon)}{\partial(\theta,\epsilon)}
 \right\rvert\right\rvert,
 \end{equation}
 %
 where the Jacobian matrix is given by,
-%
+% Increase matrix line spacing
+\begingroup
+\renewcommand*{\arraystretch}{1.5}
+
+% matrix:
 \begin{equation}
-\frac{\partial (\cbcrate,\epsilon)}{\partial(\cbcrate,\theta)} =
+\frac{\partial (\cbcrate,\epsilon)}{\partial(\theta,\epsilon)} =
 \begin{bmatrix}
-\frac{\partial \cbcrate}{\partial \cbcrate} & \frac{\partial \cbcrate}{\partial \theta} \\
-\frac{\partial \epsilon}{\partial \cbcrate} & \frac{\partial \epsilon}{\partial \theta}
+\frac{\partial \cbcrate}{\partial \theta} & \frac{\partial \cbcrate}{\partial \epsilon} \\
+\frac{\partial \epsilon}{\partial \theta} & \frac{\partial \epsilon}{\partial \epsilon}
 \end{bmatrix}.
 \end{equation}
-%
+
+% end line spacing increase
+\endgroup
+%%
 Bringing all of these terms together then, and writing out the Jacobian matrix
 determinant, we have
 %
 \begin{equation}\label{eq:marginaltheta}
-p(\theta) = \int_{\cbcrate} p(\epsilon)p(\cbcrate) \left\lvert
-\frac{\partial\epsilon}{\partial\theta} - \frac{\partial\cbcrate}{\partial\theta}.\frac{\partial\epsilon}{\partial\cbcrate}\right\rvert~\diff
-\cbcrate,
+p(\theta) = \frac{2\grbrate \sin
+\theta}{(\cos\theta-1)^2}\int_{\epsilon} \frac{p(\epsilon)p(\cbcrate)}{\epsilon} ~\diff
+\epsilon,
 \end{equation}
 %
 where we have assumed $\epsilon$ and $\cbcrate$ are logically independent such
@@ -111,20 +118,11 @@ that,
 p(\epsilon,\cbcrate) = p(\epsilon|\cbcrate)p(\cbcrate) = p(\epsilon)p(\cbcrate).
 \end{equation}
 %
-The Jacobian term in equation~\ref{eq:marginaltheta} is computed from
-equation~\ref{eq:rate2angle}:
 %
-\begin{equation}
-\left\lvert\left\lvert
-\frac{\partial(\cbcrate,\epsilon)}{\partial(\cbcrate,\theta)}
-\right\rvert\right\rvert =
-\frac{2\grbRate \sin \theta}{\epsilon(1-\cos\theta)^2}
-\end{equation}
-%
-Finally, to find the target PDF $p(\theta|D,I)$
-then, we must specify a prior PDF for $\epsilon$ which encapsulates
-assumptions made about the relative rates of compact binary mergers and sGRBs.
-We consider a range of scenarios in the sections that follow.
+To find the target PDF $p(\theta|D,I)$ then, we require the measured coalescence
+rate posterior $p(\cbcrate|D,I)$, and we must specify a prior PDF for $\epsilon$
+which encapsulates assumptions made about the relative rates of compact binary
+mergers and sGRBs.
  
 Following~\cite{Biswas09,BradyFairhurst08}, the posterior on the binary
 coalescence rate may be determined from the loudest event in the \gw
@@ -212,7 +210,7 @@ The posteriors on the rates, assuming these values and $\Lambda=0$, are shown in
 figure~\ref{fig:reconstructedRatePosterior}.  
 
 \begin{figure}
-\includegraphics{rate_posterior_s6UL.eps}
+\includegraphics{rate_posterior_s6UL_TEST_deltaEffPrior-1.0.eps}
 \caption{Rate posterior for S6/VSR2,3 Low-mass Search For Compact Binary
 Coalescence.\label{fig:reconstructedRatePosterior}}
 \end{figure}
@@ -235,10 +233,10 @@ We find $\theta^{90\%}=3.3^{\circ}$.
 
 
 \begin{figure}
-\includegraphics{jet_angle_posterior_s6UL.eps}
+\includegraphics{jet_angle_posterior_s6UL_TEST_deltaEffPrior-1.0.eps}
 \caption{Jet angle posterior derived from S6/VSR2,3 Low-mass Search For Compact Binary
 Coalescence posterior / upper limit on compact binary coalescence
-rate.\label{fig:jetPosterior}}
+rate, assuming \emph{all} BNS result in sGRBs.\label{fig:jetPosterior}}
 \end{figure}
 
 
@@ -270,6 +268,138 @@ sky-coverage is required in each of the timelines in the observing scenarios
 document to measure the jet angle to some accuracy?
 
 \section{Conclusion}
+
+\appendix
+\section{Jacobian Calculation}
+This doesn't need to be in the publication, these are just notes for James'
+benefit and possibly verification.
+
+\begin{equation}
+\cbcrate=\frac{\grbrate}{\epsilon(1-\cos \theta)},
+\end{equation}
+
+\begin{equation}
+p(\theta) = \int_{\epsilon} p(\theta,\epsilon)~\diff \epsilon,
+\end{equation}
+
+\begin{equation}
+p(\theta,\epsilon) = p(\cbcrate,\epsilon)
+\left\lvert\left\lvert
+\frac{\partial(\cbcrate,\epsilon)}{\partial(\theta,\epsilon)}
+\right\rvert\right\rvert,
+\end{equation}
+
+% Increase matrix line spacing
+\begingroup
+\renewcommand*{\arraystretch}{1.5}
+
+% matrix:
+\begin{equation}
+\frac{\partial (\cbcrate,\epsilon)}{\partial(\theta,\epsilon)} =
+\begin{bmatrix}
+\frac{\partial \cbcrate}{\partial \theta} & \frac{\partial \cbcrate}{\partial \epsilon} \\
+\frac{\partial \epsilon}{\partial \theta} & \frac{\partial \epsilon}{\partial \epsilon}
+\end{bmatrix}.
+\end{equation}
+
+% end line spacing increase
+\endgroup
+
+\begin{eqnarray}
+\frac{\partial \cbcrate}{\partial \theta} & = &
+-\frac{\grbrate\sin\theta}{\epsilon(\cos\theta - 1)^2}\\
+\frac{\partial \cbcrate}{\partial \epsilon} & = &
+\frac{\grbrate}{\epsilon^2(\cos\theta-1)}\\
+\frac{\partial \epsilon}{\partial \theta} & = &
+-\frac{\grbrate\sin\theta}{\cbcrate(\cos\theta-1)^2}\\
+\frac{\partial \epsilon}{\partial \epsilon} & = & 1\\
+\end{eqnarray}
+
+\begin{eqnarray}
+\left\lvert
+\frac{\partial(\cbcrate,\epsilon)}{\partial(\theta,\epsilon)}
+\right\rvert & = & \frac{\partial \cbcrate}{\partial \theta}
+\frac{\partial \epsilon}{\partial \epsilon} - \frac{\partial \cbcrate}{\partial
+\epsilon}\frac{\partial \epsilon}{\partial \theta} \\
+& = & -\frac{2\sin\theta}{\epsilon(\cos\theta-1)^2}
+\end{eqnarray}
+%
+Finally:
+\begin{equation}
+\left\lvert\left\lvert
+\frac{\partial(\cbcrate,\epsilon)}{\partial(\theta,\epsilon)}
+\right\rvert\right\rvert = \frac{2\grbrate\sin\theta}{\epsilon(\cos\theta-1)^2} 
+\end{equation}
+
+\section{Null-detection Jet Angle Posteriors With Different Priors}
+\begin{figure}[h!]
+\includegraphics{jet_angle_posterior_s6UL_TEST_deltaEffPrior-1.0.eps}
+\caption{$p(\epsilon|I)=\delta(\epsilon-1)$: efficiency assumed known:
+$\epsilon=1$}
+\end{figure}
+
+\begin{figure}[h!]
+\includegraphics{jet_angle_posterior_s6UL_TEST_deltaEffPrior-0.5.eps}
+\caption{$p(\epsilon|I)=\delta(\epsilon-0.5)$: efficiency assumed known:
+$\epsilon=0.5$}
+\end{figure}
+
+\begin{figure}[h!]
+\includegraphics{jet_angle_posterior_s6UL_TEST_deltaEffPrior-0.1.eps}
+\caption{$p(\epsilon|I)=\delta(\epsilon-0.1)$: efficiency assumed known:
+$\epsilon=0.1$}
+\end{figure}
+
+\begin{figure}[h!]
+\includegraphics{jet_angle_posterior_s6UL_TEST_flatEffPrior-0.01-1.eps}
+\caption{$p(\epsilon|I) \propto 1,~\epsilon \in (0,1]$. 
+Here, we assume the GRB efficiency is $\epsilon \in (0,1]$, with no
+preference where: the linearly uniform prior.  The reason for choosing a
+non-zero lower bound is that the Jacobian determinant goes to $\inf$ as
+$\epsilon \rightarrow 0$.  \textcolor{red}{James: I'm very open to suggestions
+here as it's not clear to me that this is expected.  In practice, $\epsilon \in
+[0.01,1]$}.}
+\end{figure}
+
+\begin{figure}[h!]
+\includegraphics{jet_angle_posterior_s6UL_TEST_logEffPrior-0.01-1.eps}
+\caption{$p(\epsilon|I) \propto 1/\epsilon,~\epsilon \in (0,1]$
+Now assume the GRB efficiency is $\epsilon \in (0,1]$, with a log-uniform
+prior (commonly but incorrectly referred to as the Jeffrey's prior).  Here, the
+requirement of a non-zero lower bound is imposed by the normalisation for this
+prior.
+}
+\end{figure}
+
+\begin{figure}[h!]
+\includegraphics{jet_angle_posterior_s6UL_TEST_bernoEffPrior.eps}
+\caption{$p(\epsilon|I) = \beta(1/2,1/2),~\epsilon \in (0,1)$.  Here, we use a
+Beta distribution with shape and scale parameters of 1/2.  That prior has a
+slightly surprising shape with a minimum at $\epsilon=0.5$ and shoots off to
+$\infty$ as $\epsilon\rightarrow 0,1$.  It seems \emph{this} is, in fact, the
+Jeffrey's prior for a Bernoulli trial (if we say a toin coss = BNS
+$\rightarrow$GRB). See
+\href{http://en.wikipedia.org/wiki/Jeffreys_prior}{http://en.wikipedia.org/wiki/Jeffreys\_prior}
+}
+\end{figure}
+
+\begin{figure}[h!]
+\includegraphics{jet_angle_posterior_s6UL_TEST_betaEffPrior-2-5.eps}
+\caption{$p(\epsilon|I) = \beta(2,5),~\epsilon \in (0,1)$.  The GRB efficiency
+prior is, this time, a $\beta$ distribution with shape and scale parameters 2
+and 5, respectively.  This is now completely ad hoc but yields a maximum (in the
+prior) around $\epsilon=0.2$ and goes to 0 as $\epsilon \rightarrow 0,1$.  So
+it's a nice example of an asymmetric distribution with quite sensible (and
+presumably tuneable) behaviour.}
+\end{figure}
+
+\begin{figure}[h!]
+\includegraphics{jet_angle_posterior_s6UL_TEST_betaEffPrior-2-2.eps}
+\caption{$p(\epsilon|I) = \beta(2,2),~\epsilon \in (0,1)$.  Finally, we have for
+the GRB efficiency prior a $\beta$ distribution with shape and scale parameters 2
+and 2, respectively.  Again, this is ad hoc but symmetric about $\epsilon=0.5$
+with a cosine-like shape.}
+\end{figure}
 
 \bibliography{grb_beams}
 
