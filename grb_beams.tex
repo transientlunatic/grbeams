@@ -1,4 +1,5 @@
-\documentclass[twocolumn,nofootinbib]{revtex4}
+%\documentclass[twocolumn,nofootinbib]{revtex4}
+\documentclass[nofootinbib]{revtex4}
 %\usepackage{amsmath}
 %\usepackage{iopams}
 \usepackage{amsmath}
@@ -37,6 +38,8 @@ Apologies in advance for inconsistent conditioning statements in probabilities
 \end{abstract}
 
 \maketitle
+
+\tableofcontents
 
 \section{Introduction}
 
@@ -258,14 +261,186 @@ proxy for the Lorentz factor of the outflow (I think):
 %
 So, what \emph{physics} of the progenitor can we constrain with this?
 
-\section{Inferences On Beaming Angles Expected From Future Detections}
-I'm less sure how to address this but I could imagine having a) a mock result
-based on the Big Dog or b) a collection of mock results for e.g., a measured
-non-zero rate after x years of observation (say).  Anything here is going to be
-pretty speculative since we don't know about satellites.  In fact, maybe this is
-an opportunity to devise a simple figure of merit to state what sort of
-sky-coverage is required in each of the timelines in the observing scenarios
-document to measure the jet angle to some accuracy?
+\section{Beaming Angle Inferences In The Detection Era}
+In this section, we discuss an approach to measuring the GRB beaming angle based
+on the binary coalescence rate as measured from a pair of detection scenarios.
+In the first instance, we consider an imagined `early' science run with the the
+advanced LIGO detectors where ${\mathcal O}(1)$ gravitational wave events from
+binary neutron star coalescence are detected.  In the second secnario, we
+consider the measurements possible with multiple gravitational wave detections.
+\textcolor{red}{This section will draw heavily on the observing scenarios
+section (4) in~\cite{ade_prospects}.}
+
+\subsection{For discussion: Post-detection Coalescence Rate Posterior}
+Here, we determine the formalism for the construction of a rate
+posterior in the event of single or multiple gravitational wave detections.
+%
+There needs to be no specific discussion of GRBs here, it's more general than
+that.  In fact, it's worth remembering \emph{nothing} in this paper / analysis
+(so far) has assumed contemporaneous GRB-GW detections!\footnote{although that
+does seem like a potential avenue for measuring the CBC-sGRB efficiency \dots}.
+All we actually do is assume we have independent measurements of BNS and sGRB
+rates.
+
+\textcolor{red}{Rather, the point of this discussion is to determine/describe
+a simple, natural way to construct the posterior on the rate $\cbcrate$, given
+multiple GW detections}, as expected in the advanced detector era.
+
+Recall the rate posterior from Fairhurst \& Brady~\cite{BradyFairhurst08}:
+\begin{equation}\label{eq:full_ratePosterior}
+p(\cbcrate|\rho_m, T, B) \propto p(R) \left[ \frac{1+\Lambda R
+C_L(\rho_m)T}{1+\Lambda} e^{-RC_L(\rho_m)T}\right]
+\end{equation}
+%
+Equation~\ref{eq:full_ratePosterior} is the posterior on the rate, as measured
+by the single loudest event in the search conducted.  In the equation above,
+$\Lambda$ is the likelihood of the \emph{loudest event} being from GW vs
+background and $C_L$ is the cumulative luminosity the search which produced
+loudest event $\rho_m$ is sensitive to.  It's a neat, sensible approach to
+estimating event rates given very rare measurements.  That is, it seems like a
+Good Thing / natural for constructing a rate posterior where we only expect a
+single signal trigger from a population of potentially trigger-inducing events.
+It also seems sensible:
+%
+\begin{itemize}
+\item in the absence of convincing detections (loudest event is unlikely to be a
+signal; $\Lambda \rightarrow 0$),
+\item for a single, convincing detection (loudest event is very likely to be a
+signal; $\Lambda \rightarrow \infty$).
+\end{itemize}
+%
+It's worth highlighting here that there is absolutely nothing \emph{preventing}
+one from using the loudest event statistic when we expect more than one signal
+trigger; regardless of how many events we have, there's always going be a
+loudest one and we can always determine the probability of obtaining a trigger
+that loud, given the sensitivity of the search and a population model.  Indeed,
+consider the key components in the ocnstruction of the L.E. posterior:
+%
+\begin{enumerate}
+\item The loudest event, characterised by, say, single IFO signal-to-noise ratio
+$\rho$.  Label this loudest value $\rho_m$.
+\item The probability of obtaining zero events with $\rho>\rho_m$ from a
+population of signals; this is formed from knowledge of the sensitivity of the
+analysis and a population model.  It does not require that there be only a
+single signal observed in the experiment.
+\item The probability of obtaining zero events with $\rho>\rho_m$, from a
+population of background fluctuations (Gaussian or otherwise).
+\end{enumerate}
+%
+The (potential) issue at hand is the following: suppose the most
+optimistic rate estimates are correct and aLIGO instantaneously reaches full
+design sensitivity.  In one year, we will have acquired ${\mathcal O}(100)$ BNS
+detections.  That's an entire year of measurements and a sizeable population of
+SNR measurements.  Here's the big question: 
+\begin{quote}
+{\bf \textcolor{red}{If we form the rate
+posterior from the loudest event, are we in any sense `throwing away'
+information by considering only the loudest trigger?}}
+\end{quote}
+Equally importantly (and, at the risk of sounding glib, not necessarily the same
+point\dots):
+\begin{quote}
+{\bf \textcolor{red}{Does the L.E. formalism reflect what we'll actually do
+with, say, 100 BNS detections in aLIGO?}}
+\end{quote}
+
+Without thinking about it too hard, it `feels' like we're literally throwing
+away 99\% of the information gathered in the experiment.  But is that true?
+That is, if we use the observation time of the experiment together with an
+estimate of the distance / volume sensitivity of the search, is there actually
+any more information to be gleaned from a sample of GW triggers than is already
+present in the value of the loudest trigger?  Is it perhaps the case that the
+loudest event probes the \emph{tail} of the SNR distribution, while a sample
+of triggers allows one to better estimate the full distribution of SNRs?
+
+\subsection{Alternative Rate Posterior Construction From \S 14 in Gregory}
+Gregory's book, `Logical Data Analysis For The Physical Sciences' has an entire
+chapter (\S 14) devoted to `Bayesian Inference With Poisson Sampling'.  This
+seems to match our problem rather well.  In particular, he derives expressions
+for a Poisson rate posterior in \S 14.3, `Signal + known background' and, even
+better, \S 14.4, `Analysis of ON/OFF measurements' (``we want to infer the
+source rate, s, when the background rate, b, is imprecisely measured'').
+
+I will not reproduce the derivations here - see the book.  Instead, I'll
+write down the posterior for the source rate $s$ when events lie in a background
+with event rate $b$ which is imprecisely measured (e.g., estimated from
+time-slides).  Note that the discussion and examples in Gregory are based on
+things like `on-source' and `off-source' photon counts in high-energy
+astrophysics or `foreground' and `background' in particle physics.  In our case,
+`on-source' is the zero-lag data for a science run and `off-source' is the
+time-slides.
+ 
+The posterior on the rate of GW events \emph{measured in the science run} is,
+\begin{equation}\label{eq:signal_rate_posterior}
+p(s | N_{\textrm{on}}, I) = \sum_{i=0}^{N_{\textrm{on}}} C_i
+\frac{T_{\textrm{on}} (sT_{\textrm{on}})^i e^{-s T_{\textrm{on}} }}{i!},
+\end{equation}
+where,
+\begin{equation}
+C_i \approx \frac{ \left(1 + \frac{T_{\textrm{off}}}{T_{\textrm{on}}}\right)^i
+\frac{(N_{\textrm{on}} + N_{\textrm{off}} - i )!}{(N_{\textrm{on}}-i)!} }
+{\sum_{j=0}^{N_{\textrm{on}}} \left(1 +
+\frac{T_{\textrm{off}}}{T_{\textrm{on}}}\right)^j\frac{(N_{\textrm{on}} +
+N_{\textrm{off}} - j )!}{(N_{\textrm{on}}-j)!}},
+\end{equation}
+%
+and the quantities in both terms are as follows,
+\begin{itemize}
+\item $N_{\textrm{on}}$ is the number of zero-lag events observed in a science
+run of duration $T_{\textrm{on}}$.
+\item $N_{\textrm{off}}$ is the number of time-slide events observed in total
+background time $T_{\textrm{off}}$.
+\end{itemize}
+%
+Now, I placed emphasis on $s$ being the event rate measured in the data with
+good reason.  We are interested in the binary coalescence rate $\cbcrate$.  This
+is not the same thing as the signal rate $s$.  However, the conversion between
+signal rate and coalescence rate is precisely what the `rates'
+paper~\cite{rates_paper} was all about!
+
+In particular,  the detection rate for a given type of binary coalescence in
+LIGO-Virgo is given by equation\,1 in~\cite{rates_paper},
+\begin{equation}
+\dot{N} = \cbcrate \times N_G,
+\end{equation}
+%
+where $\cbcrate$ is the coalescence rate of that type of binary per galaxy and
+$N_G$ is the number of galaxies accessible with a search for the relevant binary
+type.  $N_G$ is well approximated at large distances by,
+%
+\begin{equation}
+N_G = \frac{4}{3} \pi \left( \frac{D_{\textrm{horizon}}}{\textrm{Mpc}}
+\right)^3 (2.26)^{-3} (0.0116).
+\end{equation}
+%
+The reader is directed to~\cite{rates_paper} for a discussion of the numerical
+factors in the equation above.
+
+Finally, we recognise that $\dot{N}$ is the signal rate $s$ in
+equation~\ref{eq:signal_rate_posterior} so that we arrive at the desired
+posterior on the binary coalescence rate, 
+%
+\begin{eqnarray}
+p(\cbcrate|N_{\textrm{on}},I) & = & p(s|N_{\textrm{on}},I) \left|\frac{\diff
+s}{\diff \cbcrate}\right| \\
+& = & N_G . p(s|N_{\textrm{on}},I)
+\end{eqnarray}
+%
+If the above reasoning is sound, then `all' we require to move forward are
+sensible numbers of zero-lag and background events and observation times.
+\textcolor{red}{These numbers \emph{should} be quite straightforward to piece
+together if we assume central $\chi^2$ distributed background triggers and
+non-central $\chi^2$ distributed foreground triggers.  In fact, I've already got
+some codes kicking around from my Cardiff days which I think will compute
+exactly these numbers (this would be a great way to tidy up some loose ends with
+Steve, too!)}
+\\ \\
+Final remark: if the Gregory approach is sane, it'd be tempting to try this for
+the null-detection scenario, too.  Note, however, that would require using
+closed data \dots
+
+\subsection{Early aLIGO Detection Scenario}
+\subsection{Late aLIGO Detection Sceneario}
 
 \section{Conclusion}
 
