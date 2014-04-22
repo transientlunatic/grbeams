@@ -22,7 +22,8 @@ import os,sys
 import numpy as np
 
 #from scipy import stats,misc
-import scipy as sci
+#import scipy as sci
+from scipy.misc import logsumexp
 
 __author__ = "James Clark <james.clark@ligo.org>"
 
@@ -42,8 +43,57 @@ def logstirling(n):
 
     return result
 
-class RatePosterior:
+class RatePosteriorKnownBG:
     """
+    Rate posterior for known background
+    """
+    def __init__(self,Ntrigs,background_rate,Tobs):
+
+        # observations
+        self.Ntrigs=Ntrigs
+        self.background_rate=background_rate
+        self.Tobs=Tobs
+
+        # GW detection rate posterior
+        self.det_rate=np.linspace(sys.float_info.epsilon,2*self.Ntrigs/self.Tobs,1000)
+        self.det_rate_pdf=self.comp_pdf_source_rate(self.det_rate)
+
+    def compute_logInvC(self,i):
+        """
+        Method for Log of Coefficient C^{-1}(i) in gregory poisson rate posterior
+        """
+        return i*np.log(self.background_rate*self.Tobs) \
+                - self.background_rate*self.Tobs - logstirling(i)
+
+    def comp_prob_source_rate(self,source_rate):
+        """
+        Posterior probability of GW detection rate source_rate
+        """
+        i = np.arange(self.Ntrigs+1)
+        logInvC = logsumexp(self.compute_logInvC(i))
+        logC = -1.0*logInvC
+
+        try:
+            return logC + self.Ntrigs \
+                    * np.log(self.Tobs*self.Tobs*(source_rate+self.background_rate))\
+                    - self.Tobs*(source_rate + self.background_rate)\
+                    - logstirling(self.Ntrigs)
+        except RuntimeWarning:
+            return -inf
+
+
+    def comp_pdf_source_rate(self,source_rate):
+        """
+        Vectorise the rate pdf calculation in comp_prob_source_rate()
+        """
+
+        vprob = np.vectorize(self.comp_prob_source_rate)
+
+        return vprob(source_rate)
+
+class RatePosteriorONOFF:
+    """
+    Rate posterior for unknown background
     """
 
     def __init__(self,Non,Noff,Ton,Toff):
@@ -55,8 +105,8 @@ class RatePosterior:
         self.Toff=Toff
 
         # GW detection rate posterior
-        self.source_rate=np.linspace(0,2*self.Non/self.Ton,1000)
-        self.source_rate_pdf=self.comp_pdf_source_rate(self.source_rate)
+        self.det_rate=np.linspace(sys.float_info.epsilon,2*self.Non/self.Ton,1000)
+        self.det_rate_pdf=self.comp_pdf_source_rate(self.det_rate)
 
     def compute_logC(self,i):
         """
@@ -70,40 +120,31 @@ class RatePosterior:
         log_numerator = num_time_term + num_obs_term
 
         # denominator
-        j=np.arange(self.Non)
+        j=np.arange(self.Non+1)
         den_time_term = j*np.log(1.0 + self.Ton/self.Toff)
         den_obs_term = logstirling(self.Non+self.Noff-j) \
                 - logstirling(self.Non-j)
         # denominator is a sum; we do this in log-space
-        log_denominator = sci.misc.logsumexp(den_time_term + den_obs_term)
+        log_denominator = logsumexp(den_time_term + den_obs_term)
 
-        # full expression
-        logC = log_numerator - log_denominator
-
-        return logC
+        return log_numerator - log_denominator
 
     def comp_prob_source_rate(self,source_rate):
         """
         Posterior probability of GW detection rate source_rate
         """
-        i=np.arange(self.Non)
+        i=np.arange(self.Non+1)
         log_time_term = np.log(self.Ton) + i*np.log(source_rate*self.Ton) - \
                 source_rate*self.Ton - logstirling(i)
         logC = self.compute_logC(i)
 
-        # again, we can do the summation in log-space
-        sci.misc.logsumexp(logC + log_time_term)
-
-        return sci.misc.logsumexp(logC + log_time_term)
+        return logsumexp(logC + log_time_term)
 
     def comp_pdf_source_rate(self,source_rate):
         """
-        Compute the posterior probability density function on the rate of GW
-        detections as a function of rate.  Takes the number of on-source events
-        as upper bound on rate.
+        Vectorise the rate pdf calculation in comp_prob_source_rate()
         """
 
-        # vectorise the rate calculation
         vprob = np.vectorize(self.comp_prob_source_rate)
 
         return vprob(source_rate)
@@ -112,10 +153,15 @@ class RatePosterior:
 def  main():
     print 'Executing main() of ' + sys.argv[0]
 
-    g = RatePosterior(Non=24,Noff=9,Ton=3,Toff=3)
+    g = RatePosteriorONOFF(Non=40,Noff=1e-2,Ton=1,Toff=1)
     import pylab as pl
     pl.figure()
-    pl.plot(g.source_rate,np.exp(g.source_rate_pdf))
+    pl.plot(g.det_rate,np.exp(g.det_rate_pdf))
+
+    print np.trapz(np.exp(g.det_rate_pdf),g.det_rate)
+
+    g = RatePosteriorKnownBG(Ntrigs=100,background_rate=1e-2,Tobs=1)
+    pl.plot(g.det_rate,np.exp(g.det_rate_pdf))
     pl.show()
 
 if __name__ == "__main__":
