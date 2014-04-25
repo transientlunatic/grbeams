@@ -142,8 +142,6 @@ class Scenarios:
         self.Ngws=self.compute_num_detections()
         self.far=self.get_far()
 
-        # --- Make posteriors
-
     def compute_posteriors(self):
         """
         Compute the rate posteriors. Get the coalescence rate from the detection
@@ -224,7 +222,7 @@ class Scenarios:
 
 class JetPosterior:
 
-    def __init__(self, observing_scenario, efficiency_prior='delta,0.5',
+    def __init__(self, observing_scenario, efficiency_prior='delta,1.0',
             grb_rate=10e6/1e9):
 
         # Input
@@ -233,17 +231,65 @@ class JetPosterior:
         self.grb_rate = grb_rate 
         self.scenario = observing_scenario
 
-        # Generate efficiency prior
-        self.efficiency, self.prob_efficiency = self.make_efficiency_prior()
+        # Generate efficiency prior (this part for plotting)
+        if efficiency_prior in ['delta,0.1','delta,0.5','delta,1.0']:
+            self.efficiency = np.array([float(efficiency_prior.split(',')[1])])
+        else:
+            self.efficiency = np.linspace(0.01,1,5)
+        self.efficiency_pdf = self.comp_efficiency_pdf(self.efficiency)
 
         # Compute jet posterior
-        self.theta = np.linspace(0.01,90,0.1)
+        self.theta = np.linspace(0.01,90,5000)
+        self.jeteff_pdf_2D = self.comp_jeteff_pdf_2D(self.theta,self.efficiency)
+        self.jet_pdf_1D = self.comp_jet_pdf_1D(self.jeteff_pdf_2D)
 
-    def comp_jet_pdf(self,theta,efficiency):
+    def comp_efficiency_pdf(self,efficiency):
+        """
+        Vectorized version of comp_efficiency_prob()
+        """
+        vfunc = np.vectorize(self.comp_efficiency_prob)
+        return vfunc(efficiency)
+
+    def comp_efficiency_prob(self,efficiency):
+        """
+        Prior on the BNS->GRB efficiency
+        """
+        valid_priors = ['delta,0.1','delta,0.5','delta,1.0']
+        if self.efficiency_prior not in valid_priors:
+            print >> sys.stderr, "ERROR, %s not recognised"%self.efficiency_prior
+            print >> sys.stderr, "valid priors are: ", valid_priors
+            sys.exit()
+
+        prior_type = self.efficiency_prior.split(',')[0]
+        prior_params = self.efficiency_prior.split(',')[1]
+
+        if prior_type == 'delta':
+            if efficiency == float(prior_params):
+                return 1.0
+            else:
+                return 0.0
+
+    def comp_jet_pdf_1D(self,jeteff_pdf_2D):
+        """
+        Compute the 1D marginal distribution on the jet angle
+        """
+        marginal_jet_pdf = np.sum(np.exp(jeteff_pdf_2D),axis=1)
+        return marginal_jet_pdf / np.trapz(marginal_jet_pdf, self.theta)
+
+    def comp_jeteff_pdf_2D(self,theta,efficiency):
         """
         Vectorize the jet posterior evaluation
         """
-        Theta, Eff = np.meshgrid(theta,efficiency)
+        # XXX OPTIMISE THIS XXX
+        #Theta, Efficiency = np.meshgrid(theta,efficiency)
+        #jet_pdf = self.comp_jet_prob(Theta,Efficiency)
+
+        jet_pdf = np.empty(shape=(len(theta),len(efficiency)))
+        for e in xrange(len(efficiency)):
+            print e
+            jet_pdf[:,e] = self.comp_jet_prob(theta,efficiency[e])
+
+        return jet_pdf
 
     def comp_jet_prob(self,theta,efficiency):
         """
@@ -252,7 +298,7 @@ class JetPosterior:
         Here's the procedure:
         1) Given an efficiency and jet angle, find the corresponding cbc rate
         according to Rcbc = Rgrb / (1-cos(theta))
-        2) Interpolate the rate posterior to this value of the cbc rate
+        2) evaluate rate posterior at this value of the cbc rate
         3) The jet angle posterior is then just jacobian * rate
         posterior[rate=rate(theta)]
         """
@@ -266,8 +312,8 @@ class JetPosterior:
         # Compute jacobian
         jacobian = self.compute_jacobian(efficiency,theta)
 
-        #return bns_rate_pdf + np.log(jacobian)
-        return  np.log(jacobian)
+        return bns_rate_pdf + np.log(jacobian) \
+                + np.log(self.comp_efficiency_prob(efficiency))
 
     def compute_jacobian(self,efficiency,theta):
         """
@@ -281,25 +327,6 @@ class JetPosterior:
         Returns Rcbc = Rgrb / (1-cos(theta))
         """
         return self.grb_rate / ( efficiency*(1.-np.cos(theta * np.pi / 180)) )
-
-    def make_efficiency_prior(self):
-        """
-        Prior on the BNS->GRB efficiency
-        """
-        valid_priors = ['delta,0.5']
-        if self.efficiency_prior not in valid_priors:
-            print >> sys.stderr, "ERROR, %s not recognised"
-            print >> sys.stderr, "valid priors are: ", valid_priors
-            sys.exit()
-
-        prior_type = self.efficiency_prior.split(',')[0]
-        prior_params = self.efficiency_prior.split(',')[1]
-
-        if prior_type == 'delta':
-            efficiency = float(prior_params)
-            prob_efficiency = 1.0
-
-        return efficiency, prob_efficiency
 
 
 def  main():
