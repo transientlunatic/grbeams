@@ -26,6 +26,7 @@ from scipy import stats, optimize
 
 __author__ = "James Clark <james.clark@ligo.org>"
 
+epsilon = sys.float_info.epsilon
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~ #
 # ---- USEFUL FUNCTIONS ---- #
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~ #
@@ -82,10 +83,6 @@ class RatePosteriorKnownBG:
         self.far=far
         self.Tobs=Tobs
 
-        # GW detection rate posterior
-        self.det_rate=np.linspace(sys.float_info.epsilon,10*self.Ntrigs/self.Tobs,1000)
-        self.det_rate_pdf=self.comp_pdf_source_rate(self.det_rate)
-
     def compute_logInvC(self,i):
         """
         Method for Log of Coefficient C^{-1}(i) in gregory poisson rate posterior
@@ -93,7 +90,7 @@ class RatePosteriorKnownBG:
         return i*np.log(self.far*self.Tobs) \
                 - self.far*self.Tobs - logstirling(i)
 
-    def comp_prob_source_rate(self,source_rate):
+    def source_rate_prob(self,source_rate):
         """
         Posterior probability of GW detection rate source_rate
         """
@@ -110,141 +107,14 @@ class RatePosteriorKnownBG:
             return -inf
 
 
-    def comp_pdf_source_rate(self,source_rate):
+    def source_rate_pdf(self,source_rate):
         """
         Vectorise the rate pdf calculation in comp_prob_source_rate()
         """
-
-        vprob = np.vectorize(self.comp_prob_source_rate)
-
+ 
+        vprob = np.vectorize(self.source_rate_prob)
+ 
         return vprob(source_rate)
-
-class RatePosteriorONOFF:
-    """
-    Rate posterior for unknown background
-    """
-
-    def __init__(self,Non,Noff,Ton,Toff):
-
-        # observations
-        self.Non=Non
-        self.Noff=Noff
-        self.Ton=Ton
-        self.Toff=Toff
-
-        # GW detection rate posterior
-        self.det_rate=np.linspace(sys.float_info.epsilon,10*self.Non/self.Ton,1000)
-        self.det_rate_pdf=self.comp_pdf_source_rate(self.det_rate)
-
-    def compute_logC(self,i):
-        """
-        Method for Log of Coefficient Ci in gregory poisson rate posterior
-        """
-
-        # numerator
-        num_time_term = i*np.log(1.0 + self.Ton/self.Toff)
-        num_obs_term = logstirling(self.Non+self.Noff-i) \
-                - logstirling(self.Non-i)
-        log_numerator = num_time_term + num_obs_term
-
-        # denominator
-        j=np.arange(self.Non+1)
-        den_time_term = j*np.log(1.0 + self.Ton/self.Toff)
-        den_obs_term = logstirling(self.Non+self.Noff-j) \
-                - logstirling(self.Non-j)
-        # denominator is a sum; we do this in log-space
-        log_denominator = logsumexp(den_time_term + den_obs_term)
-
-        return log_numerator - log_denominator
-
-    def comp_prob_source_rate(self,source_rate):
-        """
-        Posterior probability of GW detection rate source_rate
-        """
-        i=np.arange(self.Non+1)
-        log_time_term = np.log(self.Ton) + i*np.log(source_rate*self.Ton) - \
-                source_rate*self.Ton - logstirling(i)
-        logC = self.compute_logC(i)
-
-        return logsumexp(logC + log_time_term)
-
-    def comp_pdf_source_rate(self,source_rate):
-        """
-        Vectorise the rate pdf calculation in comp_prob_source_rate()
-        """
-
-        vprob = np.vectorize(self.comp_prob_source_rate)
-
-        return vprob(source_rate)
-
-
-class JetPosterior:
-
-    def __init__(self,rate_posterior,effiency_prior='delta,0.5',grb_rate=10/1e9):
-        self.rate_posterior = rate_posterior
-        self.efficiency_prior = efficiency_prior
-
-        # Assumed GRB rate in units of XXX ???
-        self.grb_rate=grb_rate 
-
-        # Generate efficiency prior
-        self.efficiency, self.prob_efficiency = self.generate_efficiency_prior()
-
-        # Compute jet posterior
-        self.theta = np.linspace(0.01,90,0.1)
-
-    def jet_posterior_value(self,theta,efficiency):
-        """
-        Perform the rate->jet posterior transformation.
-
-        Here's the procedure:
-        1) Given an efficiency and jet angle, find the corresponding cbc rate
-        according to Rcbc = Rgrb / (1-cos(theta))
-        2) Interpolate the rate posterior to this value of the cbc rate
-        3) The jet angle posterior is then just jacobian * rate
-        posterior[rate=rate(theta)]
-        """
-
-        # Get BNS rate from theta, efficiency
-        bns_rate = self.rateFromTheta(theta,efficiency)
-
-        # Get value of rate posterior at this rate
-        #p_rate = np.interp(
-
-        # Compute jacobian
-        #jacobian = self.compute_jacobian(self.efficiency,
-
-    def compute_jacobian(self,efficiency,theta):
-        """
-        Compute the Jacboian for the transformation from rate to angle
-        """
-        denom=efficiency*(np.cos(theta * np.pi/180)-1)
-        return abs(2*self.grb_rate * sin(np.theta * np.pi / 180) / denom*denom)
-
-    def rateFromTheta(self,theta,grb_efficiency,grbRate):
-        """
-        Returns Rcbc = Rgrb / (1-cos(theta))
-        """
-        return grbRate / ( grb_efficiency*(1.-cos(theta * pi / 180)) )
-
-    def compute_efficiency_prior(self):
-        """
-        Prior on the BNS->GRB efficiency
-        """
-        valid_priors = ['delta,0.5']
-        if self.efficiency_prior not in valid_priors:
-            print >> sys.stderr, "ERROR, %s not recognised"
-            print >> sys.stderr, "valid priors are: ", valid_priors
-            sys.exit()
-
-        prior_type = self.efficiency_prior.split(',')[0]
-        prior_params = self.efficiency_prior.split[1]
-
-        if prior_type == 'delta':
-            efficiency = float(prior_params)
-            prob_efficiency = 1.0
-
-        return efficiency, prob_efficiency
 
 
 class Scenarios:
@@ -271,27 +141,46 @@ class Scenarios:
         self.Tobs=self.get_run_length(epoch)
         self.Ngws=self.compute_num_detections()
         self.far=self.get_far()
-        #self.Ngals=self.compute_num_galaxies(epoch)
+
+        # --- Make posteriors
 
     def compute_posteriors(self):
         """
-        Compute the rate posteriors
+        Compute the rate posteriors. Get the coalescence rate from the detection
+        rate and the search volume.
 
-        Get the coalescence rate from the detection rate and the number of
-        galaxies accessible by the search
+        First, create an instance of the RatePosterior class, then use this to
+        evalatue the pdfs for the detection and coalescence rate posteriors at
+        specified values.  This lets us produce pre-generated plot data, while
+        retaining the flexibility to evaluate the posteriors at any given value.
         """
-        # detection rate posterior
-        posterior = RatePosteriorKnownBG(Ntrigs=self.Ngws, far=self.far,
+
+        # --- detection rate posterior instance
+        self.det_rate_posterior = RatePosteriorKnownBG(Ntrigs=self.Ngws, far=self.far,
                 Tobs=self.Tobs)
 
-        self.det_rate = posterior.det_rate
-        self.det_rate_pdf = posterior.det_rate_pdf
+        # detection rate posterior arrays
+        self.det_rate = np.linspace(sys.float_info.epsilon,10*self.Ngws/self.Tobs,1000)
+        self.det_rate_pdf = self.comp_det_rate_pdf(self.det_rate)
 
-        # BNS coalescence rate posterior for rate in / Mpc^3 / Myr.
-        # NOTE: take care here; the search volume is normalised to the duration
-        # of the science run
+        # BNS coalescence rate posterior arrays for rate in / Mpc^3 / Myr.
         self.bns_rate=1e6*self.det_rate / (self.bns_search_volume / self.Tobs)
-        self.bns_rate_pdf=self.det_rate_pdf \
+        self.bns_rate_pdf = self.comp_bns_rate_pdf(self.bns_rate)
+
+    def comp_det_rate_pdf(self, det_rate):
+        """
+        Evaluate the detection rate posterior pdf at det_rate
+        """
+        return self.det_rate_posterior.source_rate_pdf(self.det_rate)
+
+    def comp_bns_rate_pdf(self, bns_rate):
+        """
+        Evaluate the bns rate posterior pdf at bns_rate: 
+        p(bns_rate) = p(det_rate) |d det_rate / d bns_rate|
+        """ 
+        # Take care since search volume is normalised to actual run time
+        det_rate = bns_rate/1e6 * (self.bns_search_volume / self.Tobs)
+        return self.det_rate_posterior.source_rate_pdf(det_rate) \
                 + np.log(self.bns_search_volume / self.Tobs) - np.log(1e6)
 
     def get_far(self):
@@ -333,6 +222,85 @@ class Scenarios:
 
         return run_lengths[epoch]
 
+class JetPosterior:
+
+    def __init__(self, observing_scenario, efficiency_prior='delta,0.5',
+            grb_rate=10e6/1e9):
+
+        # Input
+        #self.rate_posterior = rate_posterior
+        self.efficiency_prior = efficiency_prior
+        self.grb_rate = grb_rate 
+        self.scenario = observing_scenario
+
+        # Generate efficiency prior
+        self.efficiency, self.prob_efficiency = self.make_efficiency_prior()
+
+        # Compute jet posterior
+        self.theta = np.linspace(0.01,90,0.1)
+
+    def comp_jet_pdf(self,theta,efficiency):
+        """
+        Vectorize the jet posterior evaluation
+        """
+        Theta, Eff = np.meshgrid(theta,efficiency)
+
+    def comp_jet_prob(self,theta,efficiency):
+        """
+        Perform the rate->jet posterior transformation.
+
+        Here's the procedure:
+        1) Given an efficiency and jet angle, find the corresponding cbc rate
+        according to Rcbc = Rgrb / (1-cos(theta))
+        2) Interpolate the rate posterior to this value of the cbc rate
+        3) The jet angle posterior is then just jacobian * rate
+        posterior[rate=rate(theta)]
+        """
+
+        # Get BNS rate from theta, efficiency
+        bns_rate = self.rateFromTheta(theta,efficiency)
+
+        # Get value of rate posterior at this rate
+        bns_rate_pdf = self.scenario.comp_bns_rate_pdf(bns_rate)
+
+        # Compute jacobian
+        jacobian = self.compute_jacobian(efficiency,theta)
+
+        #return bns_rate_pdf + np.log(jacobian)
+        return  np.log(jacobian)
+
+    def compute_jacobian(self,efficiency,theta):
+        """
+        Compute the Jacboian for the transformation from rate to angle
+        """
+        denom=efficiency*(np.cos(theta * np.pi/180)-1)
+        return abs(2*self.grb_rate * np.sin(theta * np.pi / 180) / denom*denom)
+
+    def rateFromTheta(self,theta,efficiency):
+        """
+        Returns Rcbc = Rgrb / (1-cos(theta))
+        """
+        return self.grb_rate / ( efficiency*(1.-np.cos(theta * np.pi / 180)) )
+
+    def make_efficiency_prior(self):
+        """
+        Prior on the BNS->GRB efficiency
+        """
+        valid_priors = ['delta,0.5']
+        if self.efficiency_prior not in valid_priors:
+            print >> sys.stderr, "ERROR, %s not recognised"
+            print >> sys.stderr, "valid priors are: ", valid_priors
+            sys.exit()
+
+        prior_type = self.efficiency_prior.split(',')[0]
+        prior_params = self.efficiency_prior.split(',')[1]
+
+        if prior_type == 'delta':
+            efficiency = float(prior_params)
+            prob_efficiency = 1.0
+
+        return efficiency, prob_efficiency
+
 
 def  main():
 
@@ -353,3 +321,63 @@ def  main():
 if __name__ == "__main__":
 
     main()
+
+#   class RatePosteriorONOFF:
+#       """
+#       Rate posterior for unknown background
+#       """
+#
+#       def __init__(self,Non,Noff,Ton,Toff):
+#
+#           # observations
+#           self.Non=Non
+#           self.Noff=Noff
+#           self.Ton=Ton
+#           self.Toff=Toff
+#
+#           # GW detection rate posterior
+#           self.det_rate=np.linspace(sys.float_info.epsilon,10*self.Non/self.Ton,1000)
+#           self.det_rate_pdf=self.comp_pdf_source_rate(self.det_rate)
+#
+#       def compute_logC(self,i):
+#           """
+#           Method for Log of Coefficient Ci in gregory poisson rate posterior
+#           """
+#
+#           # numerator
+#           num_time_term = i*np.log(1.0 + self.Ton/self.Toff)
+#           num_obs_term = logstirling(self.Non+self.Noff-i) \
+#                   - logstirling(self.Non-i)
+#           log_numerator = num_time_term + num_obs_term
+#
+#           # denominator
+#           j=np.arange(self.Non+1)
+#           den_time_term = j*np.log(1.0 + self.Ton/self.Toff)
+#           den_obs_term = logstirling(self.Non+self.Noff-j) \
+#                   - logstirling(self.Non-j)
+#           # denominator is a sum; we do this in log-space
+#           log_denominator = logsumexp(den_time_term + den_obs_term)
+#
+#           return log_numerator - log_denominator
+#
+#       def comp_prob_source_rate(self,source_rate):
+#           """
+#           Posterior probability of GW detection rate source_rate
+#           """
+#           i=np.arange(self.Non+1)
+#           log_time_term = np.log(self.Ton) + i*np.log(source_rate*self.Ton) - \
+#                   source_rate*self.Ton - logstirling(i)
+#           logC = self.compute_logC(i)
+#
+#           return logsumexp(logC + log_time_term)
+#
+#       def comp_pdf_source_rate(self,source_rate):
+#           """
+#           Vectorise the rate pdf calculation in comp_prob_source_rate()
+#           """
+#
+#           vprob = np.vectorize(self.comp_prob_source_rate)
+#
+#       return vprob(source_rate)
+
+
