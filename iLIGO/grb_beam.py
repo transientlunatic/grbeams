@@ -246,7 +246,6 @@ savez(outputname, rateAxis=rateAxis, cbcRatePos=cbcRatePos,
         grb_efficiency_axis=grb_efficiency_axis,
         grb_efficiency_prior=grb_efficiency_prior)
 
-
 #
 # Plots
 #

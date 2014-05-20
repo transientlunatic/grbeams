@@ -213,7 +213,7 @@ The posteriors on the rates, assuming these values and $\Lambda=0$, are shown in
 figure~\ref{fig:reconstructedRatePosterior}.  
 
 \begin{figure}
-\includegraphics{rate_posterior_s6UL_TEST_deltaEffPrior-1.0.eps}
+\includegraphics{iLIGO/rate_posterior_s6UL_TEST_deltaEffPrior-1.0.eps}
 \caption{Rate posterior for S6/VSR2,3 Low-mass Search For Compact Binary
 Coalescence.\label{fig:reconstructedRatePosterior}}
 \end{figure}
@@ -236,7 +236,7 @@ We find $\theta^{90\%}=3.3^{\circ}$.
 
 
 \begin{figure}
-\includegraphics{jet_angle_posterior_s6UL_TEST_deltaEffPrior-1.0.eps}
+\includegraphics{iLIGO/jet_angle_posterior_s6UL_TEST_deltaEffPrior-1.0.eps}
 \caption{Jet angle posterior derived from S6/VSR2,3 Low-mass Search For Compact Binary
 Coalescence posterior / upper limit on compact binary coalescence
 rate, assuming \emph{all} BNS result in sGRBs.\label{fig:jetPosterior}}
@@ -434,23 +434,43 @@ non-central $\chi^2$ distributed foreground triggers.  In fact, I've already got
 some codes kicking around from my Cardiff days which I think will compute
 exactly these numbers (this would be a great way to tidy up some loose ends with
 Steve, too!)}
-\\ \\
-Final remark: if the Gregory approach is sane, it'd be tempting to try this for
-the null-detection scenario, too.  Note, however, that would require using
-closed data \dots
-\\ \\
-\textcolor{red}{I remember we decided this was a fine way to get the rate and
-follow the same procedure as before to get the beaming angle.  But there was
-another idea about combining the EM-bright and GW-bright events as different
-Non/Noff.  What was it?}
 
-\begin{itemize}
-\item $N_{\mathrm{on}}$: number of GW+EM coincidences
-\item $N_{\mathrm{off}}$: number of EM-dark GW events
-\item $N_{\mathrm{tot}} = N_{\mathrm{on}} + N_{\mathrm{off}}$
-\item This would allow us to measure the rate of joint detections.  Why is this
-useful \dots ?   
-\end{itemize}
+\section{Summary of Gregory-Posterior Experiment}
+Here's the general procedure:
+\begin{enumerate}
+\item Compute horizon distance from noise curve: $D_{\mathrm{horizon}}$.  For
+this, we want a detection threshold.  Let's go with $\rho_c=12$.
+\item Find number of galaxies accessible to this noise curve from:
+\begin{equation}
+N_G = \frac{4}{3} \pi \left( \frac{D_{\textrm{horizon}}}{\textrm{Mpc}}
+\right)^3 (2.26)^{-3} (0.0116).
+\end{equation}
+\item Detection rate is $\dot{N} = R \times N_G$, where $R$ is the binary
+coalescence rate
+\item Use $\dot{N}$ to determine number of GW-detections in $T_{\mathrm{obs}}$=1 year
+$N_{\mathrm{det}}$
+\item Use figure~\ref{fig:far_fig} to get the background rate at the threshold
+used for the horizon distance.  The prospects document~\cite{ade_prospects}
+conservatively quotes $\rho_c=12$ for FAR$\lesssim 1e-2$\,yr$^{-1}$.
+\item Compute \emph{detection} rate posterior.
+\item The actual rate posterior is then given by 
+\begin{eqnarray}
+p(\cbcrate|N_{\textrm{on}},I) & = & p(s|N_{\textrm{on}},I) \left|\frac{\diff
+s}{\diff \cbcrate}\right| \\
+& = & N_G . p(s|N_{\textrm{on}},I)
+\end{eqnarray}
+\end{enumerate}
+%
+Note, however, that steps 1-4 are already done for us in the prospects document;
+the only ingredients we \emph{really} need are the detection rates for the
+observing scenarios and the the FAR for the threshold used to get those rates!
+It's probably a good thing to stick with the threshold/rates in the prospects
+document, too.
+
+\begin{figure}
+\scalebox{0.6}{\includegraphics{cbc_far_prospectspaper.eps}}
+\caption{\label{fig:far_fit} CBC FAR from prospects document~\cite{ade_prospects}}
+\end{figure}
 
 \subsection{Early aLIGO Detection Scenario}
 \subsection{Late aLIGO Detection Sceneario}
@@ -521,25 +541,25 @@ Finally:
 
 \section{Null-detection Jet Angle Posteriors With Different Priors}
 \begin{figure}[h!]
-\includegraphics{jet_angle_posterior_s6UL_TEST_deltaEffPrior-1.0.eps}
+\includegraphics{iLIGO/jet_angle_posterior_s6UL_TEST_deltaEffPrior-1.0.eps}
 \caption{$p(\epsilon|I)=\delta(\epsilon-1)$: efficiency assumed known:
 $\epsilon=1$}
 \end{figure}
 
 \begin{figure}[h!]
-\includegraphics{jet_angle_posterior_s6UL_TEST_deltaEffPrior-0.5.eps}
+\includegraphics{iLIGO/jet_angle_posterior_s6UL_TEST_deltaEffPrior-0.5.eps}
 \caption{$p(\epsilon|I)=\delta(\epsilon-0.5)$: efficiency assumed known:
 $\epsilon=0.5$}
 \end{figure}
 
 \begin{figure}[h!]
-\includegraphics{jet_angle_posterior_s6UL_TEST_deltaEffPrior-0.1.eps}
+\includegraphics{iLIGO/jet_angle_posterior_s6UL_TEST_deltaEffPrior-0.1.eps}
 \caption{$p(\epsilon|I)=\delta(\epsilon-0.1)$: efficiency assumed known:
 $\epsilon=0.1$}
 \end{figure}
 
 \begin{figure}[h!]
-\includegraphics{jet_angle_posterior_s6UL_TEST_flatEffPrior-0.01-1.eps}
+\includegraphics{iLIGO/jet_angle_posterior_s6UL_TEST_flatEffPrior-0.01-1.eps}
 \caption{$p(\epsilon|I) \propto 1,~\epsilon \in (0,1]$. 
 Here, we assume the GRB efficiency is $\epsilon \in (0,1]$, with no
 preference where: the linearly uniform prior.  The reason for choosing a
@@ -550,7 +570,7 @@ here as it's not clear to me that this is expected.  In practice, $\epsilon \in
 \end{figure}
 
 \begin{figure}[h!]
-\includegraphics{jet_angle_posterior_s6UL_TEST_logEffPrior-0.01-1.eps}
+\includegraphics{iLIGO/jet_angle_posterior_s6UL_TEST_logEffPrior-0.01-1.eps}
 \caption{$p(\epsilon|I) \propto 1/\epsilon,~\epsilon \in (0,1]$
 Now assume the GRB efficiency is $\epsilon \in (0,1]$, with a log-uniform
 prior (commonly but incorrectly referred to as the Jeffrey's prior).  Here, the
@@ -560,7 +580,7 @@ prior.
 \end{figure}
 
 \begin{figure}[h!]
-\includegraphics{jet_angle_posterior_s6UL_TEST_bernoEffPrior.eps}
+\includegraphics{iLIGO/jet_angle_posterior_s6UL_TEST_bernoEffPrior.eps}
 \caption{$p(\epsilon|I) = \beta(1/2,1/2),~\epsilon \in (0,1)$.  Here, we use a
 Beta distribution with shape and scale parameters of 1/2.  That prior has a
 slightly surprising shape with a minimum at $\epsilon=0.5$ and shoots off to
@@ -572,7 +592,7 @@ $\rightarrow$GRB). See
 \end{figure}
 
 \begin{figure}[h!]
-\includegraphics{jet_angle_posterior_s6UL_TEST_betaEffPrior-2-5.eps}
+\includegraphics{iLIGO/jet_angle_posterior_s6UL_TEST_betaEffPrior-2-5.eps}
 \caption{$p(\epsilon|I) = \beta(2,5),~\epsilon \in (0,1)$.  The GRB efficiency
 prior is, this time, a $\beta$ distribution with shape and scale parameters 2
 and 5, respectively.  This is now completely ad hoc but yields a maximum (in the
@@ -582,7 +602,7 @@ presumably tuneable) behaviour.}
 \end{figure}
 
 \begin{figure}[h!]
-\includegraphics{jet_angle_posterior_s6UL_TEST_betaEffPrior-2-2.eps}
+\includegraphics{iLIGO/jet_angle_posterior_s6UL_TEST_betaEffPrior-2-2.eps}
 \caption{$p(\epsilon|I) = \beta(2,2),~\epsilon \in (0,1)$.  Finally, we have for
 the GRB efficiency prior a $\beta$ distribution with shape and scale parameters 2
 and 2, respectively.  Again, this is ad hoc but symmetric about $\epsilon=0.5$
