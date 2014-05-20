@@ -45,11 +45,9 @@ linestyles=['-','--',':','.-','-']
 markers=['.','^','+','v','*']
 
 for p,prediction in enumerate(predictions):
-#for e,epoch in enumerate(epochs):
-    print p,len(predictions)
 
-    f,ax_bns_rate=pl.subplots( figsize=(8,6) )
-    f,ax_jet_angle=pl.subplots( figsize=(8,6) )
+    f_rate,ax_bns_rate=pl.subplots( figsize=(8,6) )
+    f_angle,ax_jet_angle=pl.subplots( figsize=(8,6) )
 
     biggest_ul_rate=0.0
     biggest_ul_jet=0.0
@@ -64,7 +62,8 @@ for p,prediction in enumerate(predictions):
         #if scenario.Ngws < 1: continue
 
         # --- Construct Jet Posteriors
-        jetpos = grbeams_utils.JetPosterior(scenario,'delta,1.0')
+        #jetpos = grbeams_utils.JetPosterior(scenario,'delta,1.0')
+        jetpos = grbeams_utils.JetPosterior(scenario,'uniform')
 
         # --- Plotting
         # Get 90% UL: useful for x-limits in plots
@@ -107,10 +106,10 @@ for p,prediction in enumerate(predictions):
     ax_jet_angle.minorticks_on()
     ax_jet_angle.grid(which='major',color='grey',linestyle='-')
 
-    #pl.show()
-    #sys.exit()
+    f_rate.savefig('rate_%s-%s.eps'%(prediction,epoch))
+    f_angle.savefig('angle_%s-%s.eps'%(prediction,epoch))
 
 pl.subplots_adjust(bottom=0.1,top=0.925)
-pl.show()
+#pl.show()
 
 

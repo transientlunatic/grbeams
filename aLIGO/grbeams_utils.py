@@ -226,7 +226,6 @@ class JetPosterior:
             grb_rate=10e6/1e9):
 
         # Input
-        #self.rate_posterior = rate_posterior
         self.efficiency_prior = efficiency_prior
         self.grb_rate = grb_rate 
         self.scenario = observing_scenario
@@ -235,7 +234,7 @@ class JetPosterior:
         if efficiency_prior in ['delta,0.1','delta,0.5','delta,1.0']:
             self.efficiency = np.array([float(efficiency_prior.split(',')[1])])
         else:
-            self.efficiency = np.linspace(0.01,1,5)
+            self.efficiency = np.linspace(0.01,1,10)
         self.efficiency_pdf = self.comp_efficiency_pdf(self.efficiency)
 
         # Compute jet posterior
@@ -247,6 +246,7 @@ class JetPosterior:
         """
         Vectorized version of comp_efficiency_prob()
         """
+        print efficiency
         vfunc = np.vectorize(self.comp_efficiency_prob)
         return vfunc(efficiency)
 
@@ -254,25 +254,38 @@ class JetPosterior:
         """
         Prior on the BNS->GRB efficiency
         """
-        valid_priors = ['delta,0.1','delta,0.5','delta,1.0']
+        print efficiency
+        sys.exit()
+        valid_priors = ['delta,0.1', 'delta,0.5', 'delta,1.0', 'uniform']
         if self.efficiency_prior not in valid_priors:
             print >> sys.stderr, "ERROR, %s not recognised"%self.efficiency_prior
             print >> sys.stderr, "valid priors are: ", valid_priors
             sys.exit()
 
         prior_type = self.efficiency_prior.split(',')[0]
-        prior_params = self.efficiency_prior.split(',')[1]
 
         if prior_type == 'delta':
+            print >> sys.stdout, "Using delta function efficiency prior"
+            # delta function prior centered at efficiency=prior_params
+            prior_params = self.efficiency_prior.split(',')[1]
             if efficiency == float(prior_params):
                 return 1.0
             else:
                 return 0.0
+        elif prior_type == 'uniform':
+            print >> sys.stdout, "Using uniform efficiency prior"
+            # linear uniform prior
+            # XXX: Be aware that the efficiency is defined at the __init__ level
+            return 1./(max(efficiency)-min(efficiency)) * \
+                    np.ones(len(efficiency))
+            
 
     def comp_jet_pdf_1D(self,jeteff_pdf_2D):
         """
         Compute the 1D marginal distribution on the jet angle
         """
+        print 'line 275'
+        print np.shape(jeteff_pdf_2D)
         marginal_jet_pdf = np.sum(np.exp(jeteff_pdf_2D),axis=1)
         return marginal_jet_pdf / np.trapz(marginal_jet_pdf, self.theta)
 
@@ -285,8 +298,9 @@ class JetPosterior:
         #jet_pdf = self.comp_jet_prob(Theta,Efficiency)
 
         jet_pdf = np.empty(shape=(len(theta),len(efficiency)))
+        print "line 289"
+        print len(efficiency)
         for e in xrange(len(efficiency)):
-            print e
             jet_pdf[:,e] = self.comp_jet_prob(theta,efficiency[e])
 
         return jet_pdf
