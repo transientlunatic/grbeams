@@ -231,32 +231,30 @@ class JetPosterior:
         self.scenario = observing_scenario
 
         # Generate efficiency prior (this part for plotting)
-        if efficiency_prior in ['delta,0.1','delta,0.5','delta,1.0']:
+        if efficiency_prior in ['delta,0.01','delta,0.1','delta,0.5','delta,1.0']:
             self.efficiency = np.array([float(efficiency_prior.split(',')[1])])
         else:
-            self.efficiency = np.linspace(0.01,1,10)
-        self.efficiency_pdf = self.comp_efficiency_pdf(self.efficiency)
+            self.efficiency = np.linspace(0.01,1,100)
+        self.efficiency_pdf = self.comp_efficiency_pdf()
 
         # Compute jet posterior
         self.theta = np.linspace(0.01,90,5000)
-        self.jeteff_pdf_2D = self.comp_jeteff_pdf_2D(self.theta,self.efficiency)
+        #self.jeteff_pdf_2D = self.comp_jeteff_pdf_2D(self.theta,self.efficiency)
+        self.jeteff_pdf_2D = self.comp_jeteff_pdf_2D()
         self.jet_pdf_1D = self.comp_jet_pdf_1D(self.jeteff_pdf_2D)
 
-    def comp_efficiency_pdf(self,efficiency):
+    def comp_efficiency_pdf(self):
         """
         Vectorized version of comp_efficiency_prob()
         """
-        print efficiency
         vfunc = np.vectorize(self.comp_efficiency_prob)
-        return vfunc(efficiency)
+        return vfunc(self.efficiency)
 
     def comp_efficiency_prob(self,efficiency):
         """
         Prior on the BNS->GRB efficiency
         """
-        print efficiency
-        sys.exit()
-        valid_priors = ['delta,0.1', 'delta,0.5', 'delta,1.0', 'uniform']
+        valid_priors = ['delta,0.01','delta,0.1', 'delta,0.5', 'delta,1.0', 'uniform']
         if self.efficiency_prior not in valid_priors:
             print >> sys.stderr, "ERROR, %s not recognised"%self.efficiency_prior
             print >> sys.stderr, "valid priors are: ", valid_priors
@@ -265,31 +263,28 @@ class JetPosterior:
         prior_type = self.efficiency_prior.split(',')[0]
 
         if prior_type == 'delta':
-            print >> sys.stdout, "Using delta function efficiency prior"
+            #print >> sys.stdout, "Using delta function efficiency prior"
             # delta function prior centered at efficiency=prior_params
             prior_params = self.efficiency_prior.split(',')[1]
-            if efficiency == float(prior_params):
+            if self.efficiency == float(prior_params):
                 return 1.0
             else:
                 return 0.0
         elif prior_type == 'uniform':
-            print >> sys.stdout, "Using uniform efficiency prior"
+            #print >> sys.stdout, "Using uniform efficiency prior"
             # linear uniform prior
             # XXX: Be aware that the efficiency is defined at the __init__ level
-            return 1./(max(efficiency)-min(efficiency)) * \
-                    np.ones(len(efficiency))
+            return 1./(max(self.efficiency)-min(self.efficiency))
             
 
     def comp_jet_pdf_1D(self,jeteff_pdf_2D):
         """
         Compute the 1D marginal distribution on the jet angle
         """
-        print 'line 275'
-        print np.shape(jeteff_pdf_2D)
         marginal_jet_pdf = np.sum(np.exp(jeteff_pdf_2D),axis=1)
         return marginal_jet_pdf / np.trapz(marginal_jet_pdf, self.theta)
 
-    def comp_jeteff_pdf_2D(self,theta,efficiency):
+    def comp_jeteff_pdf_2D(self):
         """
         Vectorize the jet posterior evaluation
         """
@@ -297,11 +292,11 @@ class JetPosterior:
         #Theta, Efficiency = np.meshgrid(theta,efficiency)
         #jet_pdf = self.comp_jet_prob(Theta,Efficiency)
 
-        jet_pdf = np.empty(shape=(len(theta),len(efficiency)))
-        print "line 289"
-        print len(efficiency)
-        for e in xrange(len(efficiency)):
-            jet_pdf[:,e] = self.comp_jet_prob(theta,efficiency[e])
+        jet_pdf = np.empty(shape=(len(self.theta),len(self.efficiency)))
+        for e in xrange(len(self.efficiency)):
+            print >> sys.stdout, "...computing posterior for epsilon=%.2f [%d/%d]"%(
+                    self.efficiency[e],e,len(self.efficiency))
+            jet_pdf[:,e] = self.comp_jet_prob(self.theta,self.efficiency[e])
 
         return jet_pdf
 

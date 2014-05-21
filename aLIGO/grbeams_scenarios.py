@@ -38,9 +38,11 @@ __author__ = "James Clark <james.clark@ligo.org>"
 # -*- ADE  -*- #
 
 #epochs = [2015, 2016, 2017, 2019, 2022]
-epochs = [2016, 2022]
+#epochs = [2016, 2022]
+epochs = [2016]
 #predictions = ['low', 're', 'high']
-predictions = ['re', 'high']
+#predictions = ['re', 'high']
+predictions = ['high']
 linestyles=['-','--',':','.-','-']
 markers=['.','^','+','v','*']
 
