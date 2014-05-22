@@ -135,12 +135,15 @@ class Scenarios:
                     valid_rate_predictions
             sys.exit()
 
-        # --- get characteristics
+        # --- get characteristics of this scenario
+        self.duty_cycle=0.5
         self.predicted_bns_rate=self.get_predicted_bns_rate(rate_prediction)
-        self.bns_search_volume=self.get_bns_search_volume(epoch)
         self.Tobs=self.get_run_length(epoch)
-        self.Ngws=self.compute_num_detections()
         self.far=self.get_far()
+
+        # --- compute derived quantities for this scenario
+        self.bns_search_volume=self.get_bns_search_volume(epoch)
+        self.Ngws=self.compute_num_detections()
 
     def compute_posteriors(self):
         """
@@ -200,17 +203,17 @@ class Scenarios:
 
         return rates[prediction]
 
-    def get_bns_search_volume(self,epoch):
+    def get_bns_horizon(self,epoch):
         """
-        The BNS search volume (Mpc^3 yr) at rho_c=12 from the ADE scenarios
-        document.  We could quite easily compute horizon distances and hence
-        volumes ourselves if we wanted but note that these account for expected
-        duty cycles.
+        The BNS horizon distances taken from the ADE scenarios document.
+        Includes the range in values.  We only handle aLIGO here but it
+        shouldn't be difficult to change this.
         """
-        volumes={2015:np.mean([0.4e5,3e5]), 2016:np.mean([0.6e6,2e6]),
-                2017:np.mean([3e6,10e6]), 2019:np.mean([2e7]),
-                2022:np.mean([4e7])}
-        return volumes[epoch]
+        horizons={2015:np.array([40,80]), 2016:np.array([80,120]),
+                2017:np.array([120,170]), 2019:np.array([200]),
+                2022:np.array([200])}
+
+        return horizons[epoch]
 
     def get_run_length(self,epoch):
         """
@@ -219,6 +222,22 @@ class Scenarios:
         run_lengths={2015:1./12, 2016:6./12, 2017:9./12, 2019:1., 2022:1.}
 
         return run_lengths[epoch]
+
+    def get_bns_search_volume(self,epoch):
+        """
+        The BNS search volume (Mpc^3 yr) at rho_c=12 from the ADE scenarios
+        document.  We could quite easily compute horizon distances and hence
+        volumes ourselves if we wanted but note that these account for expected
+        duty cycles.
+        """
+    #    volumes={2015:np.mean([0.4e5,3e5]), 2016:np.mean([0.6e6,2e6]),
+    #            2017:np.mean([3e6,10e6]), 2019:np.mean([2e7]),
+    #            2022:np.mean([4e7])}
+    #    return volumes[epoch]
+        horizon = self.get_bns_horizon(epoch)
+        if len(horizon)>1: horizon = np.mean(horizon)
+
+        return self.duty_cycle * self.Tobs * 4.0 * np.pi * (horizon**3) / 3
 
 class JetPosterior:
 
@@ -234,7 +253,7 @@ class JetPosterior:
         if efficiency_prior in ['delta,0.01','delta,0.1','delta,0.5','delta,1.0']:
             self.efficiency = np.array([float(efficiency_prior.split(',')[1])])
         else:
-            self.efficiency = np.linspace(0.01,1,100)
+            self.efficiency = np.linspace(0.5,1,500)
         self.efficiency_pdf = self.comp_efficiency_pdf()
 
         # Compute jet posterior

@@ -64,8 +64,8 @@ for p,prediction in enumerate(predictions):
         #if scenario.Ngws < 1: continue
 
         # --- Construct Jet Posteriors
-        #jetpos = grbeams_utils.JetPosterior(scenario,'delta,1.0')
-        jetpos = grbeams_utils.JetPosterior(scenario,'uniform')
+        jetpos = grbeams_utils.JetPosterior(scenario,'delta,1.0')
+        #jetpos = grbeams_utils.JetPosterior(scenario,'uniform')
 
         # --- Plotting
         # Get 90% UL: useful for x-limits in plots
