@@ -1,5 +1,6 @@
 \documentclass[twocolumn,nofootinbib]{revtex4-1}
 \usepackage{graphics}
+\usepackage[caption=false]{subfig}
 \usepackage{amsmath}
 \usepackage{hyperref}
 \usepackage{amssymb}
@@ -644,10 +645,7 @@ quoted search volume accounts for a network duty cycle of $\sim 50\%$.
 Full details may be foud in~\cite{ade_prospects}.\label{table:scenarios}}
 \end{table}
 
-\subsection{Early Epoch aLIGO Observing Scenarios}
-In this section, we report results using the search volumes and numbers of
-detections listed in~\ref{table:scenarios} for the 2016--17 epoch.  If the
-expected number of detections $N_{\mathrm{det}}$ is non-integer, we round down.
+
 
 Figures to include here
 \begin{itemize}
@@ -671,8 +669,37 @@ such that the maximum is at 0.5
 \end{itemize}
 
 
+\begin{figure}%[ht]
+\centering
+\subfloat[Part1][Rate Posterior (realistic)]
+{\scalebox{1}{\includegraphics{aLIGO/rate_re.eps}}\label{fig:re_rate}}\\
+\subfloat[Part2][Rate Posterior (high)]
+{\scalebox{1}{\includegraphics{aLIGO/rate_high.eps}}\label{fig:high_rate}}
+\caption{Rate Posteriors}
+\end{figure}
 
-\subsection{Late Epoch aLIGO Observing Scenearios}
+\subsection{Validation}
+
+\begin{figure}%[ht]
+\centering
+\subfloat[Part1][Jet Angle Posterior (realistic)]
+{\scalebox{1}{\includegraphics{aLIGO/angle_re_delta,0.5_sim_theta-10.0_epsilon-0.5.eps}}\label{fig:jet1low}}\\
+\subfloat[Part2][Jet Angle Posterior (high)]
+{\scalebox{1}{\includegraphics{aLIGO/angle_high_delta,0.5_sim_theta-10.0_epsilon-0.5.eps}}\label{fig:jet1high}}\\
+\caption{Jet Posteriors For $\theta_{\mathrm{true}} = 10^{\circ}$,
+$\epsilon=0.5$, with prior pdf $p(\epsilon|I) = \delta(\epsilon-0.5)$.}
+\end{figure}
+
+\begin{figure}%[ht]
+\centering
+%\subfloat[Part1][Jet Angle Posterior (realistic)]
+%{\scalebox{1}{\includegraphics{aLIGO/angle_re_uniform_sim_theta-10.0_epsilon-0.5.eps}}\label{fig:jet2low}}\\
+%\subfloat[Part2][Jet Angle Posterior (high)]
+%{\scalebox{1}{\includegraphics{aLIGO/angle_high_uniform_sim_theta-10.0_epsilon-0.5.eps}}\label{fig:jet2high}}\\
+\caption{Jet Posteriors For $\theta_{\mathrm{true}} = 10^{\circ}$,
+$\epsilon=0.5$, with prior pdf $p(\epsilon|I) = U(0.01,1)$.}
+\end{figure}
+
 
 \section{Conclusion}
 

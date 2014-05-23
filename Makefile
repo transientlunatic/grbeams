@@ -11,5 +11,5 @@ grb_beams:
 	
 clean:
 	@echo "Cleaning directory of backups and logs"
-	rm -f *~ *.log *.aux *.dvi *.lot *.lof *.toc *.bbl *.blg *.out
+	rm -f *~ *.log *.aux *.dvi *.lot *.lof *.toc *.bbl *.blg *.out *pdf
 	

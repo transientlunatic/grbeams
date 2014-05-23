@@ -18,7 +18,7 @@
 """
 
 from __future__ import division
-import os,sys
+import os,sys,time
 import numpy as np
 
 from scipy.misc import logsumexp#,factorial
@@ -66,6 +66,13 @@ def rate_fit(x,C,T,b,n):
 def fit_rate(x,y):
     popt,_ = optimize.curve_fit(rate_fit, x, y)
     return popt
+
+def comp_grb_rate(efficiency, theta, bns_rate):
+    """
+    Computes the GRB rate:
+    Rgrb = epsilon*(1-cos(theta))*Rbns
+    """
+    return efficiency*(1-np.cos(theta/180.0 * np.pi))*bns_rate
     
 
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~ #
@@ -253,7 +260,7 @@ class JetPosterior:
         if efficiency_prior in ['delta,0.01','delta,0.1','delta,0.5','delta,1.0']:
             self.efficiency = np.array([float(efficiency_prior.split(',')[1])])
         else:
-            self.efficiency = np.linspace(0.5,1,500)
+            self.efficiency = np.linspace(0.5,1,5000)
         self.efficiency_pdf = self.comp_efficiency_pdf()
 
         # Compute jet posterior
@@ -313,8 +320,10 @@ class JetPosterior:
 
         jet_pdf = np.empty(shape=(len(self.theta),len(self.efficiency)))
         for e in xrange(len(self.efficiency)):
-            print >> sys.stdout, "...computing posterior for epsilon=%.2f [%d/%d]"%(
-                    self.efficiency[e],e,len(self.efficiency))
+            if e>0:
+                sys.stdout.write("\r...computing posterior for epsilon=%.2f [%d/%d]\n"%(
+                        self.efficiency[e],e+1,len(self.efficiency)))
+                sys.stdout.flush()
             jet_pdf[:,e] = self.comp_jet_prob(self.theta,self.efficiency[e])
 
         return jet_pdf
