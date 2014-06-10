@@ -78,9 +78,9 @@ if sim_grbs:
 
 # ---------- Priors ------------ #
 prior=sys.argv[1]
-valid_priors=['delta,0.1', 'delta,0.5', 'delta,1.0', 'uniform']
+valid_priors=['delta,0.1', 'delta,0.5', 'delta,1.0', 'uniform', 'jeffreys']
 prior_names={'delta,0.1':'delta_0p1', 'delta,0.5':'delta_0p5',
-'delta,1.0':'delta_0p1', 'uniform':'uniform_0p01-1'}
+'delta,1.0':'delta_1', 'uniform':'uniform_0p01-1','jeffreys':'jeffreys'}
 if prior not in valid_priors:
     print >> sys.stderr, "error: invalid prior: ", prior
     sys.exit(-1)
@@ -89,6 +89,7 @@ print >> sys.stdout, "\n --- Using %s efficiency prior ---"%prior
 
 linestyles=['-','--',':','.-','-']
 markers=['.','^','+','v','*']
+
 
 for p,prediction in enumerate(predictions):
     print >> sys.stdout, "-------------------"

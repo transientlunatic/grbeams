@@ -260,11 +260,17 @@ class JetPosterior:
         if efficiency_prior in ['delta,0.01','delta,0.1','delta,0.5','delta,1.0']:
             self.efficiency = np.array([float(efficiency_prior.split(',')[1])])
         else:
-            self.efficiency = np.linspace(0.5,1,5000)
-        self.efficiency_pdf = self.comp_efficiency_pdf()
+            self.efficiency = np.linspace(0.01,1.0,500)
+
+        if efficiency_prior == 'jeffreys':
+            self.efficiency = np.linspace(0.01,0.99,500)
+            self.efficiency_pdf = self.comp_efficiency_prob(self.efficiency)
+        else:
+            self.efficiency_pdf = self.comp_efficiency_pdf()
+        
 
         # Compute jet posterior
-        self.theta = np.linspace(0.01,90,5000)
+        self.theta = np.linspace(0.01,90,500)
         #self.jeteff_pdf_2D = self.comp_jeteff_pdf_2D(self.theta,self.efficiency)
         self.jeteff_pdf_2D = self.comp_jeteff_pdf_2D()
         self.jet_pdf_1D = self.comp_jet_pdf_1D(self.jeteff_pdf_2D)
@@ -280,7 +286,8 @@ class JetPosterior:
         """
         Prior on the BNS->GRB efficiency
         """
-        valid_priors = ['delta,0.01','delta,0.1', 'delta,0.5', 'delta,1.0', 'uniform']
+        valid_priors = ['delta,0.01','delta,0.1', 'delta,0.5', 'delta,1.0',
+                'uniform', 'jeffreys']
         if self.efficiency_prior not in valid_priors:
             print >> sys.stderr, "ERROR, %s not recognised"%self.efficiency_prior
             print >> sys.stderr, "valid priors are: ", valid_priors
@@ -301,6 +308,10 @@ class JetPosterior:
             # linear uniform prior
             # XXX: Be aware that the efficiency is defined at the __init__ level
             return 1./(max(self.efficiency)-min(self.efficiency))
+        elif prior_type == 'jeffreys':
+            prior_dist = stats.beta(0.5,0.5)
+            return prior_dist.pdf(self.efficiency)
+
             
 
     def comp_jet_pdf_1D(self,jeteff_pdf_2D):

@@ -138,7 +138,7 @@ determinant, we have
 %
 \begin{equation}\label{eq:marginaltheta}
 p(\theta) = \frac{2\grbrate \sin
-\theta}{(\cos\theta-1)^2}\int_{\epsilon} \frac{p(\epsilon)p(\cbcrate)}{\epsilon} ~\diff
+\theta~p(\cbcrate)}{(\cos\theta-1)^2}\int_{\epsilon} \frac{p(\epsilon)}{\epsilon} ~\diff
 \epsilon,
 \end{equation}
 %
@@ -528,7 +528,8 @@ paper~\cite{rates_paper} was all about!
 In particular,  the detection rate for a given type of binary coalescence in
 LIGO-Virgo is given by equation\,1 in~\cite{rates_paper},
 \begin{equation}
-\dot{N} = \cbcrate \times N_G,
+%\dot{N} = \cbcrate \times N_G,
+s = \cbcrate \times N_G,
 \end{equation}
 %
 where $\cbcrate$ is the coalescence rate of that type of binary per galaxy and
@@ -548,9 +549,9 @@ equation~\ref{eq:signal_rate_posterior} so that we arrive at the desired
 posterior on the binary coalescence rate, 
 %
 \begin{eqnarray}
-p(\cbcrate|N_{\textrm{on}},I) & = & p(s|N_{\textrm{on}},I) \left|\frac{\diff
+p(\cbcrate|N_{\textrm{det}},I) & = & p(s|N_{\textrm{det}},I) \left|\frac{\diff
 s}{\diff \cbcrate}\right| \\
-& = & N_G . p(s|N_{\textrm{on}},I)
+& = & N_G . p(s|N_{\textrm{det}},I)
 \end{eqnarray}
 %
 If the above reasoning is sound, then `all' we require to move forward are
@@ -590,7 +591,7 @@ $N_{\mathrm{off}}$.  We can find $N_{\mathrm{on}}$ using the search
 \emph{volumes} $V_{\mathrm{search}}$ in the observing scenarios paper:
 %
 \begin{equation}
-N_{\mathrm{on}} = \cbcrate \times V_{\mathrm{search}}
+N_{\mathrm{det}} = \cbcrate \times V_{\mathrm{search}}
 \end{equation}
 
 We now outline the projected observing scenarios.  These are taken directly
@@ -692,18 +693,79 @@ $\epsilon=0.5$, with prior pdf $p(\epsilon|I) = \delta(\epsilon-0.5)$.}
 
 \begin{figure}%[ht]
 \centering
-%\subfloat[Part1][Jet Angle Posterior (realistic)]
-%{\scalebox{1}{\includegraphics{aLIGO/angle_re_uniform_sim_theta-10.0_epsilon-0.5.eps}}\label{fig:jet2low}}\\
-%\subfloat[Part2][Jet Angle Posterior (high)]
-%{\scalebox{1}{\includegraphics{aLIGO/angle_high_uniform_sim_theta-10.0_epsilon-0.5.eps}}\label{fig:jet2high}}\\
+\subfloat[Part1][Jet Angle Posterior (realistic)]
+{\scalebox{1}{\includegraphics{aLIGO/angle_re_uniform_sim_theta-10.0_epsilon-0.5.eps}}\label{fig:jet2low}}\\
+\subfloat[Part2][Jet Angle Posterior (high)]
+{\scalebox{1}{\includegraphics{aLIGO/angle_high_uniform_sim_theta-10.0_epsilon-0.5.eps}}\label{fig:jet2high}}\\
 \caption{Jet Posteriors For $\theta_{\mathrm{true}} = 10^{\circ}$,
 $\epsilon=0.5$, with prior pdf $p(\epsilon|I) = U(0.01,1)$.}
+\end{figure}
+
+\begin{figure}%[ht]
+\centering
+\subfloat[Part1][Jet Angle Posterior (realistic)]
+{\scalebox{1}{\includegraphics{aLIGO/angle_re_jeffreys_sim_theta-10.0_epsilon-0.5.eps}}\label{fig:jet2low}}\\
+\subfloat[Part2][Jet Angle Posterior (high)]
+{\scalebox{1}{\includegraphics{aLIGO/angle_high_jeffreys_sim_theta-10.0_epsilon-0.5.eps}}\label{fig:jet2high}}\\
+\caption{Jet Posteriors For $\theta_{\mathrm{true}} = 10^{\circ}$,
+$\epsilon=0.5$, with prior pdf $p(\epsilon|I) = \beta(\frac{1}{2},\frac{1}{2}$.}
+\end{figure}
+
+\subsection{Unknown $\theta_{\mathrm{jet}}$}
+
+\begin{figure}%[ht]
+\centering
+\subfloat[Part1][Jet Angle Posterior (realistic)]
+{\scalebox{1}{\includegraphics{aLIGO/angle_re_delta_0p5.eps}}\label{fig:jet1low_unknown}}\\
+\subfloat[Part2][Jet Angle Posterior (high)]
+{\scalebox{1}{\includegraphics{aLIGO/angle_high_delta_0p5.eps}}\label{fig:jet1high_unknown}}\\
+\caption{Jet Posteriors For Unknown Jet Angle, prior pdf $p(\epsilon|I) = \delta(\epsilon-0.5)$}
+\end{figure}
+
+\begin{figure}%[ht]
+\centering
+\subfloat[Part1][Jet Angle Posterior (realistic)]
+{\scalebox{1}{\includegraphics{aLIGO/angle_re_delta_1.eps}}\label{fig:jet1low_unknown}}\\
+\subfloat[Part2][Jet Angle Posterior (high)]
+{\scalebox{1}{\includegraphics{aLIGO/angle_high_delta_1.eps}}\label{fig:jet1high_unknown}}\\
+\caption{Jet Posteriors For Unknown Jet Angle, prior pdf $p(\epsilon|I) =
+\delta(\epsilon-1.0)$}
+\end{figure}
+
+\begin{figure}%[ht]
+\centering
+\subfloat[Part1][Jet Angle Posterior (realistic)]
+{\scalebox{1}{\includegraphics{aLIGO/angle_re_uniform_0p01-1.eps}}\label{fig:jet1low_unknown}}\\
+\subfloat[Part2][Jet Angle Posterior (high)]
+{\scalebox{1}{\includegraphics{aLIGO/angle_high_uniform_0p01-1.eps}}\label{fig:jet1high_unknown}}\\
+\caption{Jet Posteriors Unknown Jet Angle, prior pdf $p(\epsilon|I) = U(0.01,1)$.}
+\end{figure}
+
+
+\begin{figure}%[ht]
+\centering
+\subfloat[Part1][Jet Angle Posterior (realistic)]
+{\scalebox{1}{\includegraphics{aLIGO/angle_re_jeffreys.eps}}\label{fig:jet1low_unknown}}\\
+\subfloat[Part2][Jet Angle Posterior (high)]
+{\scalebox{1}{\includegraphics{aLIGO/angle_high_jeffreys.eps}}\label{fig:jet1high_unknown}}\\
+\caption{Jet Posteriors Unknown Jet Angle, prior pdf $p(\epsilon|I) =
+\beta(\frac{1}{2},\frac{1}{2})$.}
 \end{figure}
 
 
 \section{Conclusion}
 
 \appendix
+\section{Priors}
+\begin{figure}%[ht]
+\centering
+%\subfloat[Part1][Jet Angle Posterior (realistic)]
+{\scalebox{1}{\includegraphics{iLIGO/priors.eps}}\label{fig:priors}}\\
+%\subfloat[Part2][Jet Angle Posterior (high)]
+%{\scalebox{1}{\includegraphics{aLIGO/angle_high_uniform_sim_theta-10.0_epsilon-0.5.eps}}\label{fig:jet2high}}\\
+\caption{Priors}
+\end{figure}
+
 \section{Jacobian Calculation}
 This doesn't need to be in the publication, these are just notes for James'
 benefit and possibly verification.
