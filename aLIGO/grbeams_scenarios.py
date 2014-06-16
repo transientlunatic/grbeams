@@ -23,6 +23,8 @@ inferences
 from __future__ import division
 import os,sys
 import numpy as np
+import cPickle as pickle
+import argparse
 
 import matplotlib
 from matplotlib import pyplot as pl
@@ -59,130 +61,166 @@ matplotlib.rcParams['text.latex.preamble']=[r"\usepackage{amsmath}"]
 
 __author__ = "James Clark <james.clark@ligo.org>"
 
+def parse_input():
+    """
+    Option parser
+    """
+    parser = argparse.ArgumentParser()
 
-#######################
-# -*- iLIGO stuff -*- #
+    parser.add_argument('prior', metavar='pi', type=str, nargs=1, 
+            help="type of prior to use for efficiency")
+
+    # --- General
+    parser.add_argument('--Rgrb', type=float, default=None, 
+            help="Observed rate of sGRBs in local Universe")
+
+    parser.add_argument('--bns-rate', type=str, default='re',
+            help="realistic (re) or high (hi) bns rate")
+
+    parser.add_argument('--user-tag', type=str, default='',
+            help="string for human-friendly file ID")
+    
+    # --- For simulating GRBs:
+    parser.add_argument('--sim-grbs', action='store_true', default=False, 
+        help="synthesise an observed grb rate from specified efficiency, \
+                beaming angle and coalesecence rate")
+    parser.add_argument('--sim-epsilon', type=float, default=0.5,
+            help="GRB efficiency to use for simulated Rgrb")
+    parser.add_argument('--sim-theta', type=float, default=10.0,
+            help="GRB beaming angle to use for simulated Rgrb")
+
+    args = parser.parse_args()
+
+    # --- Sanity checks
+    valid_priors=['delta,0.1', 'delta,0.5', 'delta,1.0', 'uniform', 'jeffreys']
+    
+    if args.prior[0] not in valid_priors:
+        print >> sys.stderr, "error: invalid prior: ", args.prior[0]
+        sys.exit(-1)
+
+    #if args.bns_rate[0] not in ['re','hi']:
+
+    
+    return args
 
 #########################
 # -*- ADE  -*- #
 
-epochs = [2016, 2022]
-predictions = ['re', 'high']
+args = parse_input()
 
-sim_grbs=True
-if sim_grbs:
-    epsilon=0.5
-    theta_jet=10.0
-
-# test case (Rgrb from known efficiency, theta, bns_rate):
+epochs = ['2016', '2022']
 
 # ---------- Priors ------------ #
-prior=sys.argv[1]
-valid_priors=['delta,0.1', 'delta,0.5', 'delta,1.0', 'uniform', 'jeffreys']
+
+# this is handy for file naming, so we don't have unwanted characters
 prior_names={'delta,0.1':'delta_0p1', 'delta,0.5':'delta_0p5',
 'delta,1.0':'delta_1', 'uniform':'uniform_0p01-1','jeffreys':'jeffreys'}
-if prior not in valid_priors:
-    print >> sys.stderr, "error: invalid prior: ", prior
-    sys.exit(-1)
 
-print >> sys.stdout, "\n --- Using %s efficiency prior ---"%prior
+print >> sys.stdout, "\n --- Using %s efficiency prior ---"%args.prior[0]
 
 linestyles=['-','--',':','.-','-']
 markers=['.','^','+','v','*']
 
 
-for p,prediction in enumerate(predictions):
-    print >> sys.stdout, "-------------------"
-    print >> sys.stdout, "bns rate: ", prediction
+#for p,prediction in enumerate(predictions):
 
-    #f_rate,ax_bns_rate=pl.subplots( figsize=(8,6) )
-    #f_angle,ax_jet_angle=pl.subplots( figsize=(8,6) )
-    f_rate,ax_bns_rate=pl.subplots( )
-    f_angle,ax_jet_angle=pl.subplots( )
+prediction = args.bns_rate
+print >> sys.stdout, "-------------------"
+print >> sys.stdout, "bns rate: ", prediction
 
-    biggest_ul_rate=0.0
-    biggest_ul_jet=0.0
-    #for p,prediction in enumerate(predictions):
-    for e,epoch in enumerate(epochs):
-        print >> sys.stdout, "epoch: ", epoch
+f_rate,ax_bns_rate=pl.subplots( )
+f_angle,ax_jet_angle=pl.subplots( )
 
-        # --- Create Observation Scenario
-        scenario = grbeams_utils.Scenarios(epoch=epoch, rate_prediction=prediction)
-        scenario.compute_posteriors()
+#for p,prediction in enumerate(predictions):
+for e,epoch in enumerate(epochs):
+    print >> sys.stdout, "epoch: ", epoch
 
-        # --- Construct Jet Posteriors
-        # Get GRB rate for a test case
-        if sim_grbs:
-            grb_rate = grbeams_utils.comp_grb_rate(efficiency=epsilon, theta=theta_jet,
-                    bns_rate=1e6*scenario.predicted_bns_rate)
-            jetpos = grbeams_utils.JetPosterior(scenario,prior,grb_rate=grb_rate)
+    # --- Create Observation Scenario
+    scenario = grbeams_utils.Scenarios(epoch=epoch, rate_prediction=prediction)
+    scenario.compute_posteriors()
+
+    # --- Construct Jet Posteriors
+    # Get GRB rate for a test case
+    if args.sim_grbs:
+        if args.Rgrb is not None:
+            grb_rate = args.Rgrb
         else:
-            jetpos = grbeams_utils.JetPosterior(scenario,prior)
-        #jetpos = grbeams_utils.JetPosterior(scenario,'delta,0.1')
-        #jetpos = grbeams_utils.JetPosterior(scenario,'delta,0.5')
-        #jetpos = grbeams_utils.JetPosterior(scenario,'delta,1.0')
-        #jetpos = grbeams_utils.JetPosterior(scenario,'uniform')
-
-        # --- Plotting
-        # Get 90% UL: useful for x-limits in plots
-
-        # *** Rate Posterior ***
-        ul_rate = grbeams_utils.alpha_ul(scenario.bns_rate, \
-                np.exp(scenario.bns_rate_pdf), alpha=0.99)
-
-        if ul_rate>biggest_ul_rate: biggest_ul_rate = ul_rate
-
-        #label_str='$R_{\mathrm{%s}}$'%prediction
-        label_str='Epoch=%s'%str(epoch)
-
-        ax_bns_rate.plot(scenario.bns_rate,np.exp(scenario.bns_rate_pdf), \
-                color='k', linestyle=linestyles[e], label=r'%s'%label_str)
-
-
-        # *** Jet Posterior ***
-        ul_jet = grbeams_utils.alpha_ul(jetpos.theta, \
-                jetpos.jet_pdf_1D, alpha=0.99)
-        if ul_jet>biggest_ul_jet: biggest_ul_jet = ul_jet
-
-        ax_jet_angle.plot(jetpos.theta,jetpos.jet_pdf_1D, \
-                color='k', linestyle=linestyles[e], 
-                label=r'%s'%label_str)
-
-    print >> sys.stdout, "finalising figures"
-
-    tit_str='Rate: $R_{\mathrm{%s}}$'%prediction
-    #ax_bns_rate.set_title('%s'%str(tit_str))
-    ax_bns_rate.set_xlabel('BNS Coalescence Rate $R$ [Mpc$^{-3}$ Myr$^{-1}$]')
-    ax_bns_rate.set_ylabel('$p(R|N_{\mathrm{det}},T_{\mathrm{obs}},I)$')
-    ax_bns_rate.minorticks_on()
-    #ax_bns_rate.grid(which='major',color='grey',linestyle='-')
-    ax_bns_rate.axvline(scenario.predicted_bns_rate * 1e6, color='r',\
-            label="`True' value")
-    ax_bns_rate.set_xlim(0,5e6*scenario.predicted_bns_rate)
-    ax_bns_rate.legend()
-    f_rate.subplots_adjust(bottom=0.2,left=0.15,right=0.925)
-
-    #ax_jet_angle.set_title('%s'%str(tit_str))
-    ax_jet_angle.set_xlabel(r'$\theta_{\mathrm{jet}}$')
-    ax_jet_angle.set_ylabel(r'$p(\theta_{\mathrm{jet}}|R,I)$')
-    ax_jet_angle.minorticks_on()
-    #ax_jet_angle.grid(which='major',color='grey',linestyle='-')
-    ax_jet_angle.set_xlim(0,60)
-    #if prediction=='re': ax_jet_angle.set_xlim(0,60)
-    #if prediction=='high': ax_jet_angle.set_xlim(0,20)
-    if sim_grbs:
-        ax_jet_angle.axvline(theta_jet, color='r', label="`True' value")
-    ax_jet_angle.legend()
-    f_angle.subplots_adjust(bottom=0.2,top=0.925,left=0.15)
-
-    pl.subplots_adjust(bottom=0.2,top=0.925,left=0.15,right=0.95)
-
-    if sim_grbs:
-        f_angle.savefig('angle_%s_%s_sim_theta-%.1f_epsilon-%.1f.eps'%(prediction,prior,theta_jet,epsilon))
+            grb_rate = grbeams_utils.comp_grb_rate(efficiency=args.sim_epsilon,
+                    theta=args.sim_theta, bns_rate=scenario.predicted_bns_rate)
+        jetpos = grbeams_utils.JetPosterior(scenario,args.prior[0],grb_rate=grb_rate)
     else:
-        f_angle.savefig('angle_%s_%s.eps'%(prediction,prior_names[prior]))
-    f_rate.savefig('rate_%s.eps'%prediction)
+        jetpos = grbeams_utils.JetPosterior(scenario, args.prior[0],
+                grb_rate=args.Rgrb)
 
-#pl.show()
+    # --- Plotting
+    # Get 90% UL: useful for x-limits in plots
+
+    # *** Rate Posterior ***
+    label_str='Epoch=%s'%str(epoch)
+    ax_bns_rate.plot(scenario.bns_rate,np.exp(scenario.bns_rate_pdf), \
+            color='k', linestyle=linestyles[e], label=r'%s'%label_str)
+
+    # *** Jet Posterior ***
+    ax_jet_angle.plot(jetpos.theta,jetpos.jet_pdf_1D, \
+            color='k', linestyle=linestyles[e], 
+            label=r'%s'%label_str)
+
+    # intervals & characteristics
+   #ax_jet_angle.axvline(jetpos.jet_median, color='r',
+   #        linestyle=linestyles[e])
+   #ax_jet_angle.axvline(jetpos.jet_bounds[0], color='r',
+   #        linestyle=linestyles[e])
+   #ax_jet_angle.axvline(jetpos.jet_bounds[1], color='r',
+   #        linestyle=linestyles[e])
+
+print >> sys.stdout, "finalising figures"
+
+tit_str='Rate: $R_{\mathrm{%s}}$'%prediction
+ax_bns_rate.set_xlabel('BNS Coalescence Rate $R$ [Mpc$^{-3}$ Myr$^{-1}$]')
+ax_bns_rate.set_ylabel('$p(R|N_{\mathrm{det}},T_{\mathrm{obs}},I)$')
+ax_bns_rate.minorticks_on()
+ax_bns_rate.axvline(scenario.predicted_bns_rate, color='g',\
+        label="`True' value")
+ax_bns_rate.set_xlim(0,5*scenario.predicted_bns_rate) # multiply by 5 to get
+                                                      # well beyond the 'true' values
+ax_bns_rate.legend()
+f_rate.subplots_adjust(bottom=0.2,left=0.15,right=0.925)
+
+ax_jet_angle.set_xlabel(r'$\theta_{\mathrm{jet}}$')
+ax_jet_angle.set_ylabel(r'$p(\theta_{\mathrm{jet}}|R,I)$')
+ax_jet_angle.minorticks_on()
+ax_jet_angle.set_xlim(0,60)
+
+if args.sim_grbs:
+    ax_jet_angle.axvline(args.sim_theta, color='g', label="`True' value")
+
+ax_jet_angle.legend()
+f_angle.subplots_adjust(bottom=0.2,top=0.925,left=0.15)
+
+pl.subplots_adjust(bottom=0.2,top=0.925,left=0.15,right=0.95)
+
+if args.sim_grbs:
+    f_angle.savefig('angle_%s_%s_sim_theta-%.1f_epsilon-%.1f%s.eps'%(\
+            prediction,args.prior[0],args.sim_theta,args.sim_epsilon,args.user_tag))
+    f_angle_pickle = file('angle_%s_%s_sim_theta-%.1f_epsilon-%.1f%s.pickle'%(\
+            prediction,args.prior[0],args.sim_theta,args.sim_epsilon,args.user_tag),'wb')
+    pickle.dump(jetpos,f_angle_pickle)
+    f_angle_pickle.close()
+
+else:
+    f_angle.savefig('angle_%s_%s%s.eps'%(\
+            prediction,prior_names[args.prior[0]],args.user_tag))
+    f_angle_pickle = file('angle_%s_%s%s.pickle'%(\
+            prediction,prior_names[args.prior[0]],args.user_tag),'wb')
+    pickle.dump(jetpos,f_angle_pickle)
+    f_angle_pickle.close()
+
+f_rate.savefig('rate_%s%s.eps'%(prediction,args.user_tag))
+f_rate_pickle = file('scenario_%s%s.pickle'%(prediction,args.user_tag),'wb')
+pickle.dump(scenario,f_rate_pickle)
+f_rate_pickle.close()
+
+#pl.close(2)
+pl.show()
 
 

@@ -178,7 +178,7 @@ Using a uniform prior on $\cbcrate$ and inverting the overall probability with
 Bayes' theorem, we arrive at,
 %
 \begin{equation}\label{eq:loudestEventPosterior}
-p(\cbcrate | C_L({\rhostar}, T, \Lambda) \propto p(\cbcrate) \left[ \frac{1+\Lambda
+p(\cbcrate | C_L({\rhostar}), T, \Lambda) \propto p(\cbcrate) \left[ \frac{1+\Lambda
 C_L(\rhostar) T}{1+\Lambda}\right] e^{-\cbcrate C_L(\rhostar) T}
 \end{equation}
 %
@@ -607,15 +607,16 @@ Table~\ref{table:scenarios} summarizes the observing scenarios.
 
 Note that the search volume is given by,
 \begin{equation}\label{eq:search_volume}
-V_{\mathrm{search}} = \frac{4}{3}\pi D_{\mathrm{hor}}^3 \times \gamma T,
+V_{\mathrm{search}} = \frac{4}{3}\pi D_{\mathrm{sens}}^3 \times \gamma T,
 \end{equation}
 %
-where $D_{\mathrm{hor}}$ is the BNS horizon distance, $T$ is the duration of the
-science run (i.e., observation time) and $\gamma$ is the \emph{duty} cycle for
-the science run.  Following~\cite{ade_prospects}, we take $\gamma=0.5$.  Since
-there is a range in the horizon distances to account for uncertainty in the
-sensitivity of the early configuration of the detectors, we compute use the
-arithmetic mean of the horizon distance when computing the search volume.
+where $D_{\mathrm{sens}}$ is the BNS sensemon range ($D_{\mathrm{hor}}/2.26$),
+$T$ is the duration of the science run (i.e., observation time) and $\gamma$ is
+the \emph{duty} cycle for the science run.  Following~\cite{ade_prospects}, we
+take $\gamma=0.5$.  Since there is a range in the horizon distances to account
+for uncertainty in the sensitivity of the early configuration of the detectors,
+we compute use the arithmetic mean of the horizon distance when computing the
+search volume.
 %Finally, the expected number of detections is given by,
 %\begin{equation}\label{eq:ndet}
 %N_{\mathrm{det}} = \cbcrate \times \langle V_{\mathrm{search}} \rangle

@@ -74,6 +74,34 @@ def comp_grb_rate(efficiency, theta, bns_rate):
     """
     return efficiency*(1-np.cos(theta/180.0 * np.pi))*bns_rate
     
+def characterise_dist(x,y,alpha):
+    """
+    Return the alpha-confidence limits about the median, and the median of the
+    PDF whose y-values are contained in y and x-values in x
+    """
+
+    # CDF:
+    cdf = np.cumsum(y)
+    cdf /= max(cdf)
+    
+    # Fine-grained values (100x finer than the input):
+    x_interp = np.arange(min(x), max(x), np.diff(x)[0]/100.0)
+    cdf_interp = np.interp(x_interp, x, cdf)
+
+    # median
+    median_val = np.interp(0.5,cdf_interp,x_interp)
+
+    # alpha-ocnfidence width about the median
+    q1 = (1-alpha)/2.0
+    q2 = (1+alpha)/2.0
+    low_bound = np.interp(q1,cdf_interp,x_interp)
+    upp_bound = np.interp(q2,cdf_interp,x_interp)
+
+    # alpha-confidence *upper* limit
+    low_limit = np.interp(alpha,(1-cdf_interp)[::-1],x_interp[::-1])
+    upp_limit = np.interp(alpha,cdf_interp,x_interp)
+
+    return [low_bound,upp_bound],median_val,[low_limit,upp_limit]
 
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~ #
 # ---- CLASS DEFS ---- #
@@ -132,7 +160,7 @@ class Scenarios:
     def __init__(self,epoch,rate_prediction):
 
         # --- sanity checks
-        valid_epochs=[2015, 2016, 2017, 2019, 2022]
+        valid_epochs=['2015', '2016', '2017', '2019', '2022']
         valid_rate_predictions=['low', 're', 'high']
         if epoch not in valid_epochs:
             print >> sys.stderr, "Error, epoch must be in ", valid_epochs
@@ -143,7 +171,7 @@ class Scenarios:
             sys.exit()
 
         # --- get characteristics of this scenario
-        self.duty_cycle=0.5
+        self.duty_cycle=self.get_duty_cycle(epoch)
         self.predicted_bns_rate=self.get_predicted_bns_rate(rate_prediction)
         self.Tobs=self.get_run_length(epoch)
         self.far=self.get_far()
@@ -151,6 +179,15 @@ class Scenarios:
         # --- compute derived quantities for this scenario
         self.bns_search_volume=self.get_bns_search_volume(epoch)
         self.Ngws=self.compute_num_detections()
+
+    def get_duty_cycle(self,epoch):
+        """
+        return the network duty cycle for this observing scenario
+        """
+        if epoch=='2022':
+            return 1.0
+        else:
+            return 0.5
 
     def compute_posteriors(self):
         """
@@ -172,7 +209,7 @@ class Scenarios:
         self.det_rate_pdf = self.comp_det_rate_pdf(self.det_rate)
 
         # BNS coalescence rate posterior arrays for rate in / Mpc^3 / Myr.
-        self.bns_rate=1e6*self.det_rate / (self.bns_search_volume / self.Tobs)
+        self.bns_rate=self.det_rate / (self.bns_search_volume / self.Tobs)
         self.bns_rate_pdf = self.comp_bns_rate_pdf(self.bns_rate)
 
     def comp_det_rate_pdf(self, det_rate):
@@ -187,9 +224,9 @@ class Scenarios:
         p(bns_rate) = p(det_rate) |d det_rate / d bns_rate|
         """ 
         # Take care since search volume is normalised to actual run time
-        det_rate = bns_rate/1e6 * (self.bns_search_volume / self.Tobs)
+        det_rate = bns_rate * (self.bns_search_volume / self.Tobs)
         return self.det_rate_posterior.source_rate_pdf(det_rate) \
-                + np.log(self.bns_search_volume / self.Tobs) - np.log(1e6)
+                + np.log(self.bns_search_volume / self.Tobs) 
 
     def get_far(self):
         """
@@ -206,34 +243,35 @@ class Scenarios:
         """
         Dictionary of bns coalescence rates per Mpc^3 per yr
         """
+        # Divide by 1e6 for Myr -> yr
         rates={'low':0.01/1e6, 're':1.0/1e6, 'high':10/1e6}
 
         return rates[prediction]
 
-    def get_bns_horizon(self,epoch):
+    def get_bns_range(self,epoch):
         """
-        The BNS horizon distances taken from the ADE scenarios document.
+        The BNS range distances taken from the ADE scenarios document.
         Includes the range in values.  We only handle aLIGO here but it
         shouldn't be difficult to change this.
         """
-        horizons={2015:np.array([40,80]), 2016:np.array([80,120]),
-                2017:np.array([120,170]), 2019:np.array([200]),
-                2022:np.array([200])}
+        bns_ranges={'2015':np.array([40,80]), '2016':np.array([80,120]),
+                '2017':np.array([120,170]), '2019':np.array([200]),
+                '2022':np.array([200])}
 
-        return horizons[epoch]
+        return bns_ranges[epoch]
 
     def get_run_length(self,epoch):
         """
         The projected science run durations in years
         """
-        run_lengths={2015:1./12, 2016:6./12, 2017:9./12, 2019:1., 2022:1.}
+        run_lengths={'2015':1./12, '2016':6./12, '2017':9./12, '2019':1., '2022':1.}
 
         return run_lengths[epoch]
 
     def get_bns_search_volume(self,epoch):
         """
         The BNS search volume (Mpc^3 yr) at rho_c=12 from the ADE scenarios
-        document.  We could quite easily compute horizon distances and hence
+        document.  We could quite easily compute ranges and hence
         volumes ourselves if we wanted but note that these account for expected
         duty cycles.
         """
@@ -241,19 +279,19 @@ class Scenarios:
     #            2017:np.mean([3e6,10e6]), 2019:np.mean([2e7]),
     #            2022:np.mean([4e7])}
     #    return volumes[epoch]
-        horizon = self.get_bns_horizon(epoch)
-        if len(horizon)>1: horizon = np.mean(horizon)
-
-        return self.duty_cycle * self.Tobs * 4.0 * np.pi * (horizon**3) / 3
+        bns_range = self.get_bns_range(epoch)
+        if len(bns_range)>1: bns_range = np.mean(bns_range)
+        return self.duty_cycle * self.Tobs * 4.0 * np.pi * (bns_range**3) / 3
 
 class JetPosterior:
 
     def __init__(self, observing_scenario, efficiency_prior='delta,1.0',
-            grb_rate=10e6/1e9):
+            grb_rate=10/1e9):
 
         # Input
         self.efficiency_prior = efficiency_prior
-        self.grb_rate = grb_rate 
+        # grb_rate is in units of Mpc^-3 yr^-1 but the input is Gpc-3 yr-1
+        self.grb_rate = grb_rate #* 1e-9 
         self.scenario = observing_scenario
 
         # Generate efficiency prior (this part for plotting)
@@ -269,11 +307,15 @@ class JetPosterior:
             self.efficiency_pdf = self.comp_efficiency_pdf()
         
 
-        # Compute jet posterior
-        self.theta = np.linspace(0.01,90,500)
+        # --- Compute jet posterior
+        self.theta = np.linspace(0.01,90,1000)
         #self.jeteff_pdf_2D = self.comp_jeteff_pdf_2D(self.theta,self.efficiency)
         self.jeteff_pdf_2D = self.comp_jeteff_pdf_2D()
         self.jet_pdf_1D = self.comp_jet_pdf_1D(self.jeteff_pdf_2D)
+
+        # --- Characterise posterior
+        self.jet_bounds, self.jet_median, self.jet_lims = \
+                characterise_dist(self.theta, self.jet_pdf_1D, alpha=0.9)
 
     def comp_efficiency_pdf(self):
         """
