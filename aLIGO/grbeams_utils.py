@@ -20,6 +20,7 @@
 from __future__ import division
 import os,sys,time
 import numpy as np
+import emcee
 
 from scipy.misc import logsumexp#,factorial
 from scipy import stats, optimize
@@ -73,6 +74,12 @@ def comp_grb_rate(efficiency, theta, bns_rate):
     Rgrb = epsilon*(1-cos(theta))*Rbns
     """
     return efficiency*(1-np.cos(theta/180.0 * np.pi))*bns_rate
+
+def cbc_rate_from_theta(grb_rate,theta,efficiency):
+    """
+    Returns Rcbc = Rgrb / (1-cos(theta))
+    """
+    return grb_rate / ( efficiency*(1.-np.cos(theta * np.pi / 180)) )
     
 def characterise_dist(x,y,alpha):
     """
@@ -295,101 +302,92 @@ class JetPosterior:
     def __init__(self, observing_scenario, efficiency_prior='delta,1.0',
             grb_rate=10/1e9):
 
-        # Input
-        self.efficiency_prior = efficiency_prior
+        # Sanity check efficiency prior
+        valid_priors = ['delta,0.01','delta,0.1', 'delta,0.5', 'delta,1.0',
+                'uniform', 'jeffreys']
+
+        if efficiency_prior not in valid_priors:
+            print >> sys.stderr, "ERROR, %s not recognised"%efficiency_prior
+            print >> sys.stderr, "valid priors are: ", valid_priors
+            sys.exit()
+        else:
+            self.efficiency_prior = efficiency_prior
+
+        # --- MCMC Setup
+        # Dimensionality to increment with every non-delta function prior which
+        # gets added
+        self.ndim = 1
+
+        # --- Prior Setup
+        self.theta_range = np.array([0.0,90.0])
+        if efficiency_prior in ['delta,0.01','delta,0.1','delta,0.5','delta,1.0']:
+            self.efficiency_range = float(efficiency_prior.split(',')[1])
+        else:
+            # increase dimensionality of parameter space
+            self.ndim += 1
+            self.efficiency_range = np.array([0,1])
+
+        # --- Astro configuration
         # grb_rate is in units of Mpc^-3 yr^-1 but the input is Gpc-3 yr-1
         self.grb_rate = grb_rate #* 1e-9 
         self.scenario = observing_scenario
 
-        self.theta = np.linspace(0.01,90,1000)
 
-        # Generate efficiency prior (this part for plotting)
-        if efficiency_prior in ['delta,0.01','delta,0.1','delta,0.5','delta,1.0']:
-            self.efficiency = np.array([float(efficiency_prior.split(',')[1])])
-        else:
-            self.efficiency = np.linspace(0.01,1.0,500)
-
-        if efficiency_prior == 'jeffreys':
-            self.efficiency = np.linspace(0.01,0.99,500)
-            self.efficiency_pdf = self.comp_efficiency_prob(self.efficiency)
-        else:
-            self.efficiency_pdf = self.comp_efficiency_pdf()
-        
-    def eval_pdfs_grid(self):
-
-        # --- Compute jet posterior
-        #self.jeteff_pdf_2D = self.comp_jeteff_pdf_2D(self.theta,self.efficiency)
-        self.jeteff_pdf_2D = self.comp_jeteff_pdf_2D()
-        self.jet_pdf_1D = self.comp_jet_pdf_1D(self.jeteff_pdf_2D)
+#        if efficiency_prior == 'jeffreys':
+#            self.efficiency_axis = np.linspace(0.01,0.99,500)
+#            self.efficiency_pdf = self.comp_efficiency_prob(self.efficiency)
+#       else:
+#           self.efficiency_pdf = self.comp_efficiency_pdf()
 
         # --- Characterise posterior
-        self.jet_bounds, self.jet_median, self.jet_lims = \
-                characterise_dist(self.theta, self.jet_pdf_1D, alpha=0.9)
+        # FIXME need to update this to handle KDE or similar
+        #self.jet_bounds, self.jet_median, self.jet_lims = \
+        #        characterise_dist(self.theta, self.jet_pdf_1D, alpha=0.9)
 
-    def comp_efficiency_pdf(self):
+    def sample_posterior(self, nburnin=100, nsamp=1000, nwalkers=100):
         """
-        Vectorized version of comp_efficiency_prob()
-        """
-        vfunc = np.vectorize(self.comp_efficiency_prob)
-        return vfunc(self.efficiency)
+        Use emcee ensemble sampler to draw samples from the ndim parameter space
+        comprised of (theta, efficiency, delta_theta, ...) etc
 
-    def comp_efficiency_prob(self,efficiency):
-        """
-        Prior on the BNS->GRB efficiency
-        """
-        valid_priors = ['delta,0.01','delta,0.1', 'delta,0.5', 'delta,1.0',
-                'uniform', 'jeffreys']
-        if self.efficiency_prior not in valid_priors:
-            print >> sys.stderr, "ERROR, %s not recognised"%self.efficiency_prior
-            print >> sys.stderr, "valid priors are: ", valid_priors
-            sys.exit()
+        The dimensionality is determined in __init__ based on the priors used
 
-        prior_type = self.efficiency_prior.split(',')[0]
+        The probability function used is the comp_jet_prob() method
+        """
 
-        if prior_type == 'delta':
-            #print >> sys.stdout, "Using delta function efficiency prior"
-            # delta function prior centered at efficiency=prior_params
-            prior_params = self.efficiency_prior.split(',')[1]
-            if self.efficiency == float(prior_params):
-                return 1.0
-            else:
-                return 0.0
-        elif prior_type == 'uniform':
-            #print >> sys.stdout, "Using uniform efficiency prior"
-            # linear uniform prior
-            # XXX: Be aware that the efficiency is defined at the __init__ level
-            return 1./(max(self.efficiency)-min(self.efficiency))
-        elif prior_type == 'jeffreys':
-            prior_dist = stats.beta(0.5,0.5)
-            return prior_dist.pdf(self.efficiency)
+        if 'delta' in self.efficiency_prior:
+
+            # Starting points for walkers
+            p0 = (max(self.theta_range)-min(self.theta_range)) *\
+                    np.random.rand(self.ndim * nwalkers).reshape((nwalkers, self.ndim))
+
+            # Inititalize sampler
+            self.sampler = emcee.EnsembleSampler(nwalkers, self.ndim, self.comp_jet_prob,
+                    args=[float(self.efficiency_prior.split(',')[1])])
+
+        else:
+
+            # Starting points for walkers
+
+            theta0 = (max(self.theta_range)-min(self.theta_range)) *\
+                    np.random.rand(nwalkers)
             
+            efficiency0 = (max(self.efficiency_range)-min(self.efficiency_range)) *\
+                    np.random.rand(nwalkers)
 
-    def comp_jet_pdf_1D(self,jeteff_pdf_2D):
-        """
-        Compute the 1D marginal distribution on the jet angle
-        """
-        marginal_jet_pdf = np.sum(np.exp(jeteff_pdf_2D),axis=1)
-        return marginal_jet_pdf / np.trapz(marginal_jet_pdf, self.theta)
+            p0 = np.transpose(np.array([theta0, efficiency0]))
 
-    def comp_jeteff_pdf_2D(self):
-        """
-        Vectorize the jet posterior evaluation
-        """
-        # XXX OPTIMISE THIS XXX
-        #Theta, Efficiency = np.meshgrid(theta,efficiency)
-        #jet_pdf = self.comp_jet_prob(Theta,Efficiency)
+            # Inititalize sampler
+            print self.ndim
+            self.sampler = emcee.EnsembleSampler(nwalkers, self.ndim, self.comp_jet_prob)
 
-        jet_pdf = np.empty(shape=(len(self.theta),len(self.efficiency)))
-        for e in xrange(len(self.efficiency)):
-            #if e>0:
-            sys.stdout.write("\r...computing posterior for epsilon=%.2f [%d/%d]\n"%(
-                    self.efficiency[e],e+1,len(self.efficiency)))
-            sys.stdout.flush()
+        # Burn-in
+        pos, prob, state = self.sampler.run_mcmc(p0, 100)
+        self.sampler.reset()
 
-            jet_pdf[:,e] = self.comp_jet_prob(self.theta,self.efficiency[e])
+        # Draw samples
+        self.sampler.run_mcmc(pos, 1000)
 
-        return jet_pdf
-
+            
     def comp_jet_prob(self,theta,efficiency):
         """
         Perform the rate->jet posterior transformation.
@@ -401,10 +399,11 @@ class JetPosterior:
         3) The jet angle posterior is then just jacobian * rate
         posterior[rate=rate(theta)]
         """
-        if (theta>=min(self.theta)) and (theta<max(self.theta)):
+        if (theta>=min(self.theta_range)) and \
+                (theta<max(self.theta_range)):
 
             # Get BNS rate from theta, efficiency
-            bns_rate = self.rateFromTheta(theta,efficiency)
+            bns_rate = cbc_rate_from_theta(self.grb_rate, theta, efficiency)
 
             # Get value of rate posterior at this rate
             bns_rate_pdf = self.scenario.comp_bns_rate_pdf(bns_rate)
@@ -416,6 +415,7 @@ class JetPosterior:
                             + np.log(self.comp_efficiency_prob(efficiency))
 
         else:
+            # outside of prior ranges
             jet_prob = -np.inf
 
         return jet_prob
@@ -429,11 +429,37 @@ class JetPosterior:
         return abs(2.0*self.grb_rate * np.sin(theta * np.pi / 180.0) /
                 (denom*denom) )
 
-    def rateFromTheta(self,theta,efficiency):
+
+
+    def comp_efficiency_prob(self,efficiency):
         """
-        Returns Rcbc = Rgrb / (1-cos(theta))
+        Prior on the BNS->GRB efficiency
         """
-        return self.grb_rate / ( efficiency*(1.-np.cos(theta * np.pi / 180)) )
+
+        prior_type = self.efficiency_prior.split(',')[0]
+
+        if prior_type == 'delta':
+            # delta function prior centered at efficiency=prior_params
+
+            if efficiency == float(self.efficiency_prior.split(',')[1]):
+                return 1.0
+            else:
+                return 0.0
+
+        elif prior_type == 'uniform':
+            # linear uniform prior
+
+            if (efficiency>=min(self.efficiency_range)) and (efficiency<max(self.efficiency_range)):
+                return 1./(max(self.efficiency_range)-min(self.efficiency_range))
+            else:
+                return -np.inf
+
+        elif prior_type == 'jeffreys':
+            prior_dist = stats.beta(0.5,0.5)
+            if (efficiency>=min(self.efficiency_range)) and (efficiency<max(self.efficiency_range)):
+                return prior_dist.pdf(self.efficiency)
+            else:
+                return -np.inf
 
 
 def  main():
@@ -455,63 +481,5 @@ def  main():
 if __name__ == "__main__":
 
     main()
-
-#   class RatePosteriorONOFF:
-#       """
-#       Rate posterior for unknown background
-#       """
-#
-#       def __init__(self,Non,Noff,Ton,Toff):
-#
-#           # observations
-#           self.Non=Non
-#           self.Noff=Noff
-#           self.Ton=Ton
-#           self.Toff=Toff
-#
-#           # GW detection rate posterior
-#           self.det_rate=np.linspace(sys.float_info.epsilon,10*self.Non/self.Ton,1000)
-#           self.det_rate_pdf=self.comp_pdf_source_rate(self.det_rate)
-#
-#       def compute_logC(self,i):
-#           """
-#           Method for Log of Coefficient Ci in gregory poisson rate posterior
-#           """
-#
-#           # numerator
-#           num_time_term = i*np.log(1.0 + self.Ton/self.Toff)
-#           num_obs_term = logstirling(self.Non+self.Noff-i) \
-#                   - logstirling(self.Non-i)
-#           log_numerator = num_time_term + num_obs_term
-#
-#           # denominator
-#           j=np.arange(self.Non+1)
-#           den_time_term = j*np.log(1.0 + self.Ton/self.Toff)
-#           den_obs_term = logstirling(self.Non+self.Noff-j) \
-#                   - logstirling(self.Non-j)
-#           # denominator is a sum; we do this in log-space
-#           log_denominator = logsumexp(den_time_term + den_obs_term)
-#
-#           return log_numerator - log_denominator
-#
-#       def comp_prob_source_rate(self,source_rate):
-#           """
-#           Posterior probability of GW detection rate source_rate
-#           """
-#           i=np.arange(self.Non+1)
-#           log_time_term = np.log(self.Ton) + i*np.log(source_rate*self.Ton) - \
-#                   source_rate*self.Ton - logstirling(i)
-#           logC = self.compute_logC(i)
-#
-#           return logsumexp(logC + log_time_term)
-#
-#       def comp_pdf_source_rate(self,source_rate):
-#           """
-#           Vectorise the rate pdf calculation in comp_prob_source_rate()
-#           """
-#
-#           vprob = np.vectorize(self.comp_prob_source_rate)
-#
-#       return vprob(source_rate)
 
 

@@ -23,7 +23,6 @@ inferences
 from __future__ import division
 import os,sys
 import numpy as np
-import emcee
 import cPickle as pickle
 import argparse
 
@@ -173,18 +172,7 @@ for e,epoch in enumerate(epochs):
 
         jetpos = grbeams_utils.JetPosterior(scenario,args.prior[0],grb_rate=grb_rate)
 
-        # EXPERIMENTAL MCMC
-        ndim = 1
-        nwalkers = 100
-
-        p0 = (jetpos.theta.max()-jetpos.theta.min()) *\
-                np.random.rand(ndim * nwalkers).reshape((nwalkers, ndim))
-
-        sampler = emcee.EnsembleSampler(nwalkers, ndim, jetpos.comp_jet_prob,
-                args=[args.sim_epsilon])
-        pos, prob, state = sampler.run_mcmc(p0, 100)
-        sampler.reset()
-        sampler.run_mcmc(pos, 1000)
+        jetpos.sample_posterior()
 
         sys.exit()
 
