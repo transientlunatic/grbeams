@@ -225,8 +225,15 @@ class Scenarios:
         """ 
         # Take care since search volume is normalised to actual run time
         det_rate = bns_rate * (self.bns_search_volume / self.Tobs)
-        return self.det_rate_posterior.source_rate_pdf(det_rate) \
-                + np.log(self.bns_search_volume / self.Tobs) 
+
+        # Set rate pdf=0 unless rate>=0
+        bns_rate_pdf = np.zeros(np.shape(det_rate)) - np.inf
+        non_zero_idx = np.argwhere(det_rate>=0.0)
+        bns_rate_pdf[non_zero_idx] = \
+                self.det_rate_posterior.source_rate_pdf(det_rate) \
+                + np.log(self.bns_search_volume / self.Tobs)
+
+        return bns_rate_pdf 
 
     def get_far(self):
         """
@@ -294,6 +301,8 @@ class JetPosterior:
         self.grb_rate = grb_rate #* 1e-9 
         self.scenario = observing_scenario
 
+        self.theta = np.linspace(0.01,90,1000)
+
         # Generate efficiency prior (this part for plotting)
         if efficiency_prior in ['delta,0.01','delta,0.1','delta,0.5','delta,1.0']:
             self.efficiency = np.array([float(efficiency_prior.split(',')[1])])
@@ -306,9 +315,9 @@ class JetPosterior:
         else:
             self.efficiency_pdf = self.comp_efficiency_pdf()
         
+    def eval_pdfs_grid(self):
 
         # --- Compute jet posterior
-        self.theta = np.linspace(0.01,90,1000)
         #self.jeteff_pdf_2D = self.comp_jeteff_pdf_2D(self.theta,self.efficiency)
         self.jeteff_pdf_2D = self.comp_jeteff_pdf_2D()
         self.jet_pdf_1D = self.comp_jet_pdf_1D(self.jeteff_pdf_2D)
@@ -353,7 +362,6 @@ class JetPosterior:
         elif prior_type == 'jeffreys':
             prior_dist = stats.beta(0.5,0.5)
             return prior_dist.pdf(self.efficiency)
-
             
 
     def comp_jet_pdf_1D(self,jeteff_pdf_2D):
@@ -373,10 +381,11 @@ class JetPosterior:
 
         jet_pdf = np.empty(shape=(len(self.theta),len(self.efficiency)))
         for e in xrange(len(self.efficiency)):
-            if e>0:
-                sys.stdout.write("\r...computing posterior for epsilon=%.2f [%d/%d]\n"%(
-                        self.efficiency[e],e+1,len(self.efficiency)))
-                sys.stdout.flush()
+            #if e>0:
+            sys.stdout.write("\r...computing posterior for epsilon=%.2f [%d/%d]\n"%(
+                    self.efficiency[e],e+1,len(self.efficiency)))
+            sys.stdout.flush()
+
             jet_pdf[:,e] = self.comp_jet_prob(self.theta,self.efficiency[e])
 
         return jet_pdf
@@ -392,25 +401,33 @@ class JetPosterior:
         3) The jet angle posterior is then just jacobian * rate
         posterior[rate=rate(theta)]
         """
+        if (theta>=min(self.theta)) and (theta<max(self.theta)):
 
-        # Get BNS rate from theta, efficiency
-        bns_rate = self.rateFromTheta(theta,efficiency)
+            # Get BNS rate from theta, efficiency
+            bns_rate = self.rateFromTheta(theta,efficiency)
 
-        # Get value of rate posterior at this rate
-        bns_rate_pdf = self.scenario.comp_bns_rate_pdf(bns_rate)
+            # Get value of rate posterior at this rate
+            bns_rate_pdf = self.scenario.comp_bns_rate_pdf(bns_rate)
 
-        # Compute jacobian
-        jacobian = self.compute_jacobian(efficiency,theta)
+            # Compute jacobian
+            jacobian = self.compute_jacobian(efficiency,theta)
 
-        return bns_rate_pdf + np.log(jacobian) \
-                + np.log(self.comp_efficiency_prob(efficiency))
+            jet_prob = bns_rate_pdf + np.log(jacobian) \
+                            + np.log(self.comp_efficiency_prob(efficiency))
+
+        else:
+            jet_prob = -np.inf
+
+        return jet_prob
 
     def compute_jacobian(self,efficiency,theta):
         """
         Compute the Jacboian for the transformation from rate to angle
         """
+
         denom=efficiency*(np.cos(theta * np.pi/180)-1)
-        return abs(2*self.grb_rate * np.sin(theta * np.pi / 180) / denom*denom)
+        return abs(2.0*self.grb_rate * np.sin(theta * np.pi / 180.0) /
+                (denom*denom) )
 
     def rateFromTheta(self,theta,efficiency):
         """

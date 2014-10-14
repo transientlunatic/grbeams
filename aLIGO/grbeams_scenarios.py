@@ -23,6 +23,7 @@ inferences
 from __future__ import division
 import os,sys
 import numpy as np
+import emcee
 import cPickle as pickle
 import argparse
 
@@ -31,33 +32,34 @@ from matplotlib import pyplot as pl
 
 import grbeams_utils
 
-fig_width_pt = 246  # Get this from LaTeX using \showthe\columnwidth
-inches_per_pt = 1.0/72.27               # Convert pt to inch
-golden_mean = (2.236-1.0)/2.0         # Aesthetic ratio
-fig_width = fig_width_pt*inches_per_pt  # width in inches
-fig_height = fig_width*golden_mean      # height in inches
-fig_size =  [fig_width,fig_height]
+if 0:
+    fig_width_pt = 246  # Get this from LaTeX using \showthe\columnwidth
+    inches_per_pt = 1.0/72.27               # Convert pt to inch
+    golden_mean = (2.236-1.0)/2.0         # Aesthetic ratio
+    fig_width = fig_width_pt*inches_per_pt  # width in inches
+    fig_height = fig_width*golden_mean      # height in inches
+    fig_size =  [fig_width,fig_height]
 
-matplotlib.rcParams.update(
-        {'axes.labelsize': 8,
-        'text.fontsize':   8,
-        'legend.fontsize': 8,
-        'xtick.labelsize': 8,
-        'ytick.labelsize': 8,
-        'text.usetex': True,
-        'figure.figsize': fig_size,
-        'font.family': "serif",
-        'font.serif': ["Times"]
-        })  
+    matplotlib.rcParams.update(
+            {'axes.labelsize': 8,
+            'text.fontsize':   8,
+            'legend.fontsize': 8,
+            'xtick.labelsize': 8,
+            'ytick.labelsize': 8,
+            'text.usetex': True,
+            'figure.figsize': fig_size,
+            'font.family': "serif",
+            'font.serif': ["Times"]
+            })  
 
-matplotlib.rcParams.update(
-        {'savefig1.dpi': 200,
-        'xtick.major.size':8,
-        'xtick.minor.size':4,
-        'ytick.major.size':8,
-        'ytick.minor.size':4
-        })  
-matplotlib.rcParams['text.latex.preamble']=[r"\usepackage{amsmath}"]
+    matplotlib.rcParams.update(
+            {'savefig1.dpi': 200,
+            'xtick.major.size':8,
+            'xtick.minor.size':4,
+            'ytick.major.size':8,
+            'ytick.minor.size':4
+            })  
+    matplotlib.rcParams['text.latex.preamble']=[r"\usepackage{amsmath}"]
 
 __author__ = "James Clark <james.clark@ligo.org>"
 
@@ -108,7 +110,8 @@ def parse_input():
 
 args = parse_input()
 
-epochs = ['2016', '2022']
+#epochs = ['2016', '2022']
+epochs = ['2022']
 
 # ---------- Priors ------------ #
 
@@ -137,7 +140,27 @@ for e,epoch in enumerate(epochs):
 
     # --- Create Observation Scenario
     scenario = grbeams_utils.Scenarios(epoch=epoch, rate_prediction=prediction)
+
+    # compute rate posteriors:
     scenario.compute_posteriors()
+
+    # XXX EXPERIMENTAL MCMC
+
+#   # - MCMC for rate posterior
+#   ndim = 1
+#   nwalkers = 100
+#
+#   # starting points for walkers:
+#   p0 = (max(scenario.bns_rate) - min(scenario.bns_rate)) * \
+#           np.random.rand(ndim * nwalkers).reshape((nwalkers, ndim))
+#
+#   sampler = emcee.EnsembleSampler(nwalkers, ndim, scenario.comp_bns_rate_pdf)
+#
+#   pos, prob, state = sampler.run_mcmc(p0, 100)
+#   sampler.reset()
+#   sampler.run_mcmc(pos, 1000)
+#
+#   sys.exit()
 
     # --- Construct Jet Posteriors
     # Get GRB rate for a test case
@@ -147,7 +170,24 @@ for e,epoch in enumerate(epochs):
         else:
             grb_rate = grbeams_utils.comp_grb_rate(efficiency=args.sim_epsilon,
                     theta=args.sim_theta, bns_rate=scenario.predicted_bns_rate)
+
         jetpos = grbeams_utils.JetPosterior(scenario,args.prior[0],grb_rate=grb_rate)
+
+        # EXPERIMENTAL MCMC
+        ndim = 1
+        nwalkers = 100
+
+        p0 = (jetpos.theta.max()-jetpos.theta.min()) *\
+                np.random.rand(ndim * nwalkers).reshape((nwalkers, ndim))
+
+        sampler = emcee.EnsembleSampler(nwalkers, ndim, jetpos.comp_jet_prob,
+                args=[args.sim_epsilon])
+        pos, prob, state = sampler.run_mcmc(p0, 100)
+        sampler.reset()
+        sampler.run_mcmc(pos, 1000)
+
+        sys.exit()
+
     else:
         jetpos = grbeams_utils.JetPosterior(scenario, args.prior[0],
                 grb_rate=args.Rgrb)
