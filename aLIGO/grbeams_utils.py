@@ -361,8 +361,8 @@ class JetPosterior:
                     np.random.rand(self.ndim * nwalkers).reshape((nwalkers, self.ndim))
 
             # Inititalize sampler
-            self.sampler = emcee.EnsembleSampler(nwalkers, self.ndim, self.comp_jet_prob,
-                    args=[float(self.efficiency_prior.split(',')[1])])
+            self.sampler = emcee.EnsembleSampler(nwalkers, self.ndim,
+                    self.comp_jet_prob, args=[float(self.efficiency_prior.split(',')[1])])
 
         else:
 
@@ -375,10 +375,12 @@ class JetPosterior:
                     np.random.rand(nwalkers)
 
             p0 = np.transpose(np.array([theta0, efficiency0]))
+            print np.shape(p0)
 
             # Inititalize sampler
-            print self.ndim
-            self.sampler = emcee.EnsembleSampler(nwalkers, self.ndim, self.comp_jet_prob)
+
+            self.sampler = emcee.EnsembleSampler(nwalkers, self.ndim,
+                    self.comp_jet_prob_nparam)
 
         # Burn-in
         pos, prob, state = self.sampler.run_mcmc(p0, 100)
@@ -386,6 +388,9 @@ class JetPosterior:
 
         # Draw samples
         self.sampler.run_mcmc(pos, 1000)
+
+    def comp_jet_prob_nparam(self, x, fixed_args=None):
+        return self.comp_jet_prob(theta=x[0], efficiency=x[1])
 
             
     def comp_jet_prob(self,theta,efficiency):
@@ -399,6 +404,7 @@ class JetPosterior:
         3) The jet angle posterior is then just jacobian * rate
         posterior[rate=rate(theta)]
         """
+        #print efficiency, self.comp_efficiency_prob(efficiency)
         if (theta>=min(self.theta_range)) and \
                 (theta<max(self.theta_range)):
 
@@ -412,7 +418,8 @@ class JetPosterior:
             jacobian = self.compute_jacobian(efficiency,theta)
 
             jet_prob = bns_rate_pdf + np.log(jacobian) \
-                            + np.log(self.comp_efficiency_prob(efficiency))
+                    + np.log(self.comp_efficiency_prob(efficiency))
+
 
         else:
             # outside of prior ranges
@@ -428,7 +435,6 @@ class JetPosterior:
         denom=efficiency*(np.cos(theta * np.pi/180)-1)
         return abs(2.0*self.grb_rate * np.sin(theta * np.pi / 180.0) /
                 (denom*denom) )
-
 
 
     def comp_efficiency_prob(self,efficiency):
@@ -452,14 +458,14 @@ class JetPosterior:
             if (efficiency>=min(self.efficiency_range)) and (efficiency<max(self.efficiency_range)):
                 return 1./(max(self.efficiency_range)-min(self.efficiency_range))
             else:
-                return -np.inf
+                return 0.0
 
         elif prior_type == 'jeffreys':
             prior_dist = stats.beta(0.5,0.5)
             if (efficiency>=min(self.efficiency_range)) and (efficiency<max(self.efficiency_range)):
                 return prior_dist.pdf(self.efficiency)
             else:
-                return -np.inf
+                return 0.0
 
 
 def  main():
