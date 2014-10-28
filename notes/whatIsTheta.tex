@@ -1,0 +1,148 @@
+\documentclass[onecolumn,nofootinbib]{revtex4-1}
+\usepackage{graphics}
+\usepackage[caption=false]{subfig}
+\usepackage{amsmath}
+\usepackage{hyperref}
+\usepackage{amssymb}
+\usepackage{color}
+\usepackage{epsfig}
+\usepackage{latexsym}
+\usepackage{tensor}
+%\usepackage{wasysym}
+\usepackage{comment}
+%\usepackage{graphicx}
+%\usepackage{psfrag}
+
+
+%\newcommand{\gw}{gravitational wave }
+%\newcommand{\gws}{gravitational waves }
+\newcommand{\subgw}{_{\textrm{\scriptsize{GW}}}}
+\newcommand{\ee}[1]{\!\times\!10^{#1}}
+\newcommand{\prob}{{\rm Pr}}
+\newcommand{\grbrate}{{{\mathcal R}_{\mathrm{grb}}}}
+\newcommand{\cbcrate}{{{\mathcal R}}}
+\newcommand{\diff}{{\mathrm d}}
+\newcommand{\rhostar}{{\rho^*}}
+
+\def\imbh#1{intermediate mass black hole#1(IMBH#1)\gdef\imbh{IMBH}}
+\def\smbh#1{supermassive black hole#1(SMBH#1)\gdef\smbh{SMBH}}
+\def\bbh#1{binary black hole#1 (BBH#1)\gdef\bbh{BBH}}
+\def\bh#1{black hole#1 (BH#1)\gdef\bh{BH}}
+\def\ns#1{neutron star#1 (NS#1)\gdef\ns{NS}}
+\def\gw#1{gravitational wave#1 (GW#1)\gdef\gw{GW}}
+\def\sn#1{core-collapse supernova#1 (CCSN#1)\gdef\sn{CCSN}}
+\def\pnw#1{post-Newtonian#1 (PN#1)\gdef\pnw{PN}}
+\def\eos#1{equation of state#1 (EOS#1)\gdef\eos{EOS}}
+\def\grb#1{gamma-ray burst#1 (GRB#1)\gdef\grb{GRB}}
+\def\amr#1{adaptive mesh refinement#1 (AMR#1)\gdef\amr{AMR}}
+\def\isco#1{innermost stable circular orbit#1 (ISCO#1)\gdef\isco{ISCO}}
+\def\cwb#1{Coherent WaveBurst#1 (CWB#1)\gdef\cwb{CWB}}
+
+\newcommand{\red}[1]{{\color{red}{#1}}}
+\newcommand{\about}[1]{{\color{blue}{[THIS SECTION: #1]}}}
+\newcommand{\add}[1]{{\color{magenta}{[TO INCLUDE: #1]}}}
+\newcommand{\JC}[1]{{\color{magenta}{[[JC #1]]}}}
+\newcommand{\placeholder}[2]{{\color{red}{[PLACEHOLDER](#1):}}{\color{red}{[}}#2{\color{red}{]}}}
+\providecommand{\todo}[1]{{\color{red}$\blacksquare$~\textsf{[TODO: #1]}}}
+\newcommand{\mean}[1]{\langle#1\rangle}
+
+
+%%%%%% Useful for draft editing
+\usepackage{soul} 
+\usepackage{ulem} \normalem 
+\newcommand{\ec}[1]{{\noindent\color{red}{\it [[#1]] }}}
+\newcommand{\laura}[1]{{\color{blue}{#1}}}
+\newcommand{\LC}[1]{{\color{red}{[[LC #1]]}}}
+\newcommand{\AB}[1]{{\color{blue}{[[AB #1]]}}}
+\newcommand{\highlight}[1]{\colorbox{yellow}{#1}}
+\newcommand{\simgt}{\mbox{$^{>}_{\sim}$}}
+
+\begin{document}
+
+\title{What Is $\theta$?}
+\author{James Clark, Ik Siong Heng, Martin Hendry}
+\date{\today}
+
+\begin{abstract}
+Some notes from James \& Siong's chat, Tuesday 28th October.  
+\end{abstract}
+
+\maketitle
+
+\section{Mean Beaming Angle}
+Let's start with the usual equation:
+\begin{equation}\label{eq:rate2angle}
+\grbrate=\epsilon\cbcrate(1-\cos \theta),
+\end{equation}
+%
+where $\grbrate$ is the observed rate of sGRBs, $\cbcrate$ is the binary
+coalescence rate measured from \gw{s}, $\epsilon$ is the fraction of CBCs which
+result in a GRB and $\theta$ is the GRB-beaming angle.
+
+In much of what we've spoken about to date, we've essentially assumed that
+$\theta$ is constant across all GRBs.  For sGRBs in particular, that doesn't
+seem to be terribly plausible.  So how do we handle the fact that $\theta$ for
+GRB X is not necessarily the same as $\theta$ for GRB Y?  First, we need to
+understand what $\theta$ really \emph{is}.
+
+Equation~\ref{eq:rate2angle} relates the observed rates of GRBs and CBCs due to
+beaming.  In other words, it relates the expected numbers of the respective
+observations.  In the case that $\theta$ is fixed for all GRBs this is trivial.
+If there is a distribution of $\theta$'s, however, the relative numbers of
+events in equation~\ref{eq:rate2angle} are dictated by the expectation value for
+$\theta$, which we'll call $\langle\theta\rangle$.  So, really, we should be more
+explicit:
+%
+\begin{equation}\label{eq:rate2angle2}
+    \grbrate=\epsilon \cbcrate\left\{1-\cos \left [\int_{\Theta} \theta
+    p(\theta)~\diff \theta \right ]\right\}
+\end{equation}
+%
+So, really, we're only sensitive to $\hat{\theta}$ if we only look at the raw
+numbers of GRBs and CBCs.   In fact, it's pretty easy to verify this with a very
+simple Monte-Carlo simulation.  E.g.,
+\begin{enumerate}
+    \item Generate a population of `CBC events'; this is just a sample of size
+        $N_{\text{cbc}}$ of inclinations $\iota$ drawn from a uniform
+        $\cos(\iota)$ distribution
+    \item For each CBC event, draw a sample of a jet angle from some
+        distribution with mean $\hat{\theta}$
+    \item If the inclination of the CBC event is smaller than the jet angle,
+        count that as a GRB
+    \item The numbers you get out are $N_{\text{grb}}$ and $N_{\text{cbc}}$ 
+    \item The number of GRBs one `observes' is indeed given by
+        equation~\ref{eq:rate2angle2}
+\end{enumerate}
+%
+The width of the distribution on $\theta$ only affects the numbers at the
+$\sim\%$ level which is probably just sampling error.
+
+{\bf In conclusion:}  If we start with equation~\ref{eq:rate2angle} as our
+premise, then the angle of interest is just the mean of the population.
+
+\begin{comment}
+\section{Refinement by all means!}
+Actually, \emph{all} of the variables in equation~\ref{eq:rate2angle} are
+expectation values:
+%
+\begin{eqnarray}
+    \mean{\grbrate} & = & \mean{\epsilon}\mean{\cbcrate}(1-\cos \mean{\theta}),
+    \\
+    & = & \int_{\epsilon} \int_{\cbcrate}
+\cbcrate.p(\cbcrate)\left\{1-\cos\left[ \int_{\Theta} \theta.p(\theta)~\diff
+\theta\right]\right\}
+\end{eqnarray}
+%
+This also nicely encapsulates our treatment of $\epsilon$ which is really
+supposed to be the probability that a given CBC results in a GRB and should be
+some distribution conditioned on the progenitor physics and parameters.
+
+I'm confused now - is this just working back towards 
+\end{comment}
+
+\end{document}
+
+
+
+
+
