@@ -143,24 +143,6 @@ for e,epoch in enumerate(epochs):
     # compute rate posteriors:
     scenario.compute_posteriors()
 
-    # XXX EXPERIMENTAL MCMC
-
-#   # - MCMC for rate posterior
-#   ndim = 1
-#   nwalkers = 100
-#
-#   # starting points for walkers:
-#   p0 = (max(scenario.bns_rate) - min(scenario.bns_rate)) * \
-#           np.random.rand(ndim * nwalkers).reshape((nwalkers, ndim))
-#
-#   sampler = emcee.EnsembleSampler(nwalkers, ndim, scenario.comp_bns_rate_pdf)
-#
-#   pos, prob, state = sampler.run_mcmc(p0, 100)
-#   sampler.reset()
-#   sampler.run_mcmc(pos, 1000)
-#
-#   sys.exit()
-
     # --- Construct Jet Posteriors
     # Get GRB rate for a test case
     if args.sim_grbs:
@@ -170,18 +152,22 @@ for e,epoch in enumerate(epochs):
             grb_rate = grbeams_utils.comp_grb_rate(efficiency=args.sim_epsilon,
                     theta=args.sim_theta, bns_rate=scenario.predicted_bns_rate)
 
-        jetpos = grbeams_utils.JetPosterior(scenario,args.prior[0],grb_rate=grb_rate)
-
-        jetpos.sample_posterior()
-
-        sys.exit()
-
+        thetapos = grbeams_utils.thetaPosterior(scenario,args.prior[0],grb_rate=grb_rate)
     else:
-        jetpos = grbeams_utils.JetPosterior(scenario, args.prior[0],
+        thetapos = grbeams_utils.thetaPosterior(scenario, args.prior[0],
                 grb_rate=args.Rgrb)
+
+
+    # Get posterior samples and kde
+    thetapos.sample_theta_posterior()
+    thetapos.get_theta_pdf_kde()
 
     # --- Plotting
     # Get 90% UL: useful for x-limits in plots
+    theta_bin_size = 3.5*np.std(thetapos.theta_samples) \
+            / len(thetapos.theta_samples)**(1./3)
+    theta_bins = np.arange(thetapos.theta_range.min(), thetapos.theta_range.max(),
+            theta_bin_size)
 
     # *** Rate Posterior ***
     label_str='Epoch=%s'%str(epoch)
@@ -189,16 +175,18 @@ for e,epoch in enumerate(epochs):
             color='k', linestyle=linestyles[e], label=r'%s'%label_str)
 
     # *** Jet Posterior ***
-    ax_jet_angle.plot(jetpos.theta,jetpos.jet_pdf_1D, \
+    ax_jet_angle.hist(thetapos.theta_samples, bins=theta_bins, normed=True,
+            histtype='stepfilled', alpha=0.5)
+    ax_jet_angle.plot(thetapos.theta_grid,thetapos.theta_pdf_kde, \
             color='k', linestyle=linestyles[e], 
             label=r'%s'%label_str)
 
     # intervals & characteristics
-   #ax_jet_angle.axvline(jetpos.jet_median, color='r',
+   #ax_jet_angle.axvline(thetapos.jet_median, color='r',
    #        linestyle=linestyles[e])
-   #ax_jet_angle.axvline(jetpos.jet_bounds[0], color='r',
+   #ax_jet_angle.axvline(thetapos.jet_bounds[0], color='r',
    #        linestyle=linestyles[e])
-   #ax_jet_angle.axvline(jetpos.jet_bounds[1], color='r',
+   #ax_jet_angle.axvline(thetapos.jet_bounds[1], color='r',
    #        linestyle=linestyles[e])
 
 print >> sys.stdout, "finalising figures"
@@ -232,7 +220,7 @@ if args.sim_grbs:
             prediction,args.prior[0],args.sim_theta,args.sim_epsilon,args.user_tag))
     f_angle_pickle = file('angle_%s_%s_sim_theta-%.1f_epsilon-%.1f%s.pickle'%(\
             prediction,args.prior[0],args.sim_theta,args.sim_epsilon,args.user_tag),'wb')
-    pickle.dump(jetpos,f_angle_pickle)
+    pickle.dump((thetapos.theta_grid,thetapos.theta_pdf_kde),f_angle_pickle)
     f_angle_pickle.close()
 
 else:
@@ -240,12 +228,12 @@ else:
             prediction,prior_names[args.prior[0]],args.user_tag))
     f_angle_pickle = file('angle_%s_%s%s.pickle'%(\
             prediction,prior_names[args.prior[0]],args.user_tag),'wb')
-    pickle.dump(jetpos,f_angle_pickle)
+    pickle.dump((thetapos.theta_grid,thetapos.theta_pdf_kde),f_angle_pickle)
     f_angle_pickle.close()
 
 f_rate.savefig('rate_%s%s.eps'%(prediction,args.user_tag))
-f_rate_pickle = file('scenario_%s%s.pickle'%(prediction,args.user_tag),'wb')
-pickle.dump(scenario,f_rate_pickle)
+f_rate_pickle = file('rate_%s%s.pickle'%(prediction,args.user_tag),'wb')
+pickle.dump((scenario.bns_rate, scenario.bns_rate_pdf),f_rate_pickle)
 f_rate_pickle.close()
 
 #pl.close(2)

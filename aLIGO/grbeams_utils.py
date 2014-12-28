@@ -24,6 +24,7 @@ import emcee
 
 from scipy.misc import logsumexp#,factorial
 from scipy import stats, optimize
+from sklearn.neighbors.kde import KernelDensity
 
 __author__ = "James Clark <james.clark@ligo.org>"
 
@@ -109,6 +110,15 @@ def characterise_dist(x,y,alpha):
     upp_limit = np.interp(alpha,cdf_interp,x_interp)
 
     return [low_bound,upp_bound],median_val,[low_limit,upp_limit]
+
+def kde_sklearn(x, x_grid, bandwidth=0.2, **kwargs):
+    """Kernel Density Estimation with Scikit-learn"""
+    kde_skl = KernelDensity(bandwidth=bandwidth, **kwargs)
+    kde_skl.fit(x[:, np.newaxis])
+    # score_samples() returns the log-likelihood of the samples
+    log_pdf = kde_skl.score_samples(x_grid[:, np.newaxis])
+    return np.exp(log_pdf)
+
 
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~ #
 # ---- CLASS DEFS ---- #
@@ -297,7 +307,7 @@ class Scenarios:
         if len(bns_range)>1: bns_range = np.mean(bns_range)
         return self.duty_cycle * self.Tobs * 4.0 * np.pi * (bns_range**3) / 3
 
-class JetPosterior:
+class thetaPosterior:
 
     def __init__(self, observing_scenario, efficiency_prior='delta,1.0',
             grb_rate=10/1e9):
@@ -341,17 +351,23 @@ class JetPosterior:
 
         # --- Characterise posterior
         # FIXME need to update this to handle KDE or similar
-        #self.jet_bounds, self.jet_median, self.jet_lims = \
-        #        characterise_dist(self.theta, self.jet_pdf_1D, alpha=0.9)
+        #self.theta_bounds, self.theta_median, self.theta_lims = \
+        #        characterise_dist(self.theta, self.theta_pdf_1D, alpha=0.9)
 
-    def sample_posterior(self, nburnin=100, nsamp=1000, nwalkers=100):
+    def get_theta_pdf_kde(self):
+
+        self.theta_grid  = np.arange(self.theta_range[0], self.theta_range[1], 0.01)
+        self.theta_pdf_kde  = kde_sklearn(x=self.theta_samples,
+                x_grid=self.theta_grid, bandwidth=0.25, algorithm='kd_tree') 
+
+    def sample_theta_posterior(self, nburnin=100, nsamp=1000, nwalkers=100):
         """
         Use emcee ensemble sampler to draw samples from the ndim parameter space
         comprised of (theta, efficiency, delta_theta, ...) etc
 
         The dimensionality is determined in __init__ based on the priors used
 
-        The probability function used is the comp_jet_prob() method
+        The probability function used is the comp_theta_prob() method
         """
 
         if 'delta' in self.efficiency_prior:
@@ -362,7 +378,7 @@ class JetPosterior:
 
             # Inititalize sampler
             self.sampler = emcee.EnsembleSampler(nwalkers, self.ndim,
-                    self.comp_jet_prob, args=[float(self.efficiency_prior.split(',')[1])])
+                    self.comp_theta_prob, args=[float(self.efficiency_prior.split(',')[1])])
 
         else:
 
@@ -375,33 +391,35 @@ class JetPosterior:
                     np.random.rand(nwalkers)
 
             p0 = np.transpose(np.array([theta0, efficiency0]))
-            print np.shape(p0)
 
             # Inititalize sampler
 
             self.sampler = emcee.EnsembleSampler(nwalkers, self.ndim,
-                    self.comp_jet_prob_nparam)
+                    self.comp_theta_prob_nparam)
 
         # Burn-in
         pos, prob, state = self.sampler.run_mcmc(p0, 100)
         self.sampler.reset()
 
         # Draw samples
-        self.sampler.run_mcmc(pos, 1000)
+        self.sampler.run_mcmc(pos, 500)
 
-    def comp_jet_prob_nparam(self, x, fixed_args=None):
-        return self.comp_jet_prob(theta=x[0], efficiency=x[1])
+        # 1D array with samples for convenience
+        self.theta_samples = np.concatenate(self.sampler.flatchain)
+
+    def comp_theta_prob_nparam(self, x, fixed_args=None):
+        return self.comp_theta_prob(theta=x[0], efficiency=x[1])
 
             
-    def comp_jet_prob(self,theta,efficiency):
+    def comp_theta_prob(self,theta,efficiency):
         """
-        Perform the rate->jet posterior transformation.
+        Perform the rate->theta posterior transformation.
 
         Here's the procedure:
-        1) Given an efficiency and jet angle, find the corresponding cbc rate
+        1) Given an efficiency and theta angle, find the corresponding cbc rate
         according to Rcbc = Rgrb / (1-cos(theta))
         2) evaluate rate posterior at this value of the cbc rate
-        3) The jet angle posterior is then just jacobian * rate
+        3) The theta angle posterior is then just jacobian * rate
         posterior[rate=rate(theta)]
         """
         #print efficiency, self.comp_efficiency_prob(efficiency)
@@ -417,15 +435,15 @@ class JetPosterior:
             # Compute jacobian
             jacobian = self.compute_jacobian(efficiency,theta)
 
-            jet_prob = bns_rate_pdf + np.log(jacobian) \
+            theta_prob = bns_rate_pdf + np.log(jacobian) \
                     + np.log(self.comp_efficiency_prob(efficiency))
 
 
         else:
             # outside of prior ranges
-            jet_prob = -np.inf
+            theta_prob = -np.inf
 
-        return jet_prob
+        return theta_prob
 
     def compute_jacobian(self,efficiency,theta):
         """
