@@ -119,6 +119,73 @@ def kde_sklearn(x, x_grid, bandwidth=0.2, **kwargs):
     log_pdf = kde_skl.score_samples(x_grid[:, np.newaxis])
     return np.exp(log_pdf)
 
+def characterise_dist(x,y,alpha):
+    """
+    Return the alpha-confidence limits about the median, and the median of the
+    PDF whose y-values are contained in y and x-values in x
+    """
+
+    # Peak
+    posmax = x[np.argmax(y)]
+
+    # CDF:
+    cdf = np.cumsum(y)
+    cdf /= max(cdf)
+    
+    # Fine-grained values (100x finer than the input):
+    x_interp = np.arange(min(x), max(x), np.diff(x)[0]/100.0)
+    cdf_interp = np.interp(x_interp, x, cdf)
+
+    # median
+    median_val = np.interp(0.5,cdf_interp,x_interp)
+
+    # alpha-ocnfidence width about the median
+    q1 = (1-alpha)/2.0
+    q2 = (1+alpha)/2.0
+    low_bound = np.interp(q1,cdf_interp,x_interp)
+    upp_bound = np.interp(q2,cdf_interp,x_interp)
+
+    # alpha-confidence *upper* limit
+    low_limit = np.interp(alpha,(1-cdf_interp)[::-1],x_interp[::-1])
+    upp_limit = np.interp(alpha,cdf_interp,x_interp)
+
+    #return [low_bound,upp_bound],median_val,[low_limit,upp_limit]
+    return [low_limit,upp_limit], median_val, posmax
+
+def compute_confints(x_axis,pdf,alpha):
+    """
+    Confidence Intervals From KDE
+    """
+
+    # Make sure PDF is correctly normalised
+    pdf /= np.trapz(pdf,x_axis)
+
+    # --- initialisation
+    peak = x_axis[np.argmax(pdf)]
+
+    # Initialisation
+    area=0.
+
+    i=0 
+    j=0 
+
+    x_axis_left=x_axis[(x_axis<peak)][::-1]
+    x_axis_right=x_axis[x_axis>peak]
+
+    while area <= alpha:
+
+        x_axis_current=x_axis[(x_axis>=x_axis_left[i])*(x_axis<=x_axis_right[j])]
+        pdf_current=pdf[(x_axis>=x_axis_left[i])*(x_axis<=x_axis_right[j])]
+
+        area=np.trapz(pdf_current,x_axis_current)
+
+        if i<len(x_axis_left)-1: i+=1
+        if j<len(x_axis_right)-1: j+=1
+
+    low_edge, upp_edge = x_axis_left[i], x_axis_right[j]
+
+    return ([low_edge,upp_edge],peak,area)
+
 
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~ #
 # ---- CLASS DEFS ---- #
@@ -333,9 +400,10 @@ class thetaPosterior:
         if efficiency_prior in ['delta,0.01','delta,0.1','delta,0.5','delta,1.0']:
             self.efficiency_range = float(efficiency_prior.split(',')[1])
         else:
-            # increase dimensionality of parameter space
+            # increase dimensionality of parameter space and set efficiency
+            # prior range
             self.ndim += 1
-            self.efficiency_range = np.array([0,1])
+            self.efficiency_range = np.array([0.01,1])
 
         # --- Astro configuration
         # grb_rate is in units of Mpc^-3 yr^-1 but the input is Gpc-3 yr-1
@@ -359,6 +427,8 @@ class thetaPosterior:
         self.theta_grid  = np.arange(self.theta_range[0], self.theta_range[1], 0.01)
         self.theta_pdf_kde  = kde_sklearn(x=self.theta_samples,
                 x_grid=self.theta_grid, bandwidth=0.25, algorithm='kd_tree') 
+        self.theta_bounds, self.theta_median, self.theta_posmax = \
+                characterise_dist(self.theta_grid, self.theta_pdf_kde, 0.9)
 
     def sample_theta_posterior(self, nburnin=100, nsamp=1000, nwalkers=100):
         """
@@ -398,11 +468,11 @@ class thetaPosterior:
                     self.comp_theta_prob_nparam)
 
         # Burn-in
-        pos, prob, state = self.sampler.run_mcmc(p0, 100)
+        pos, prob, state = self.sampler.run_mcmc(p0, nburnin)
         self.sampler.reset()
 
         # Draw samples
-        self.sampler.run_mcmc(pos, 500)
+        self.sampler.run_mcmc(pos, nsamp)
 
         # 1D array with samples for convenience
         self.theta_samples = np.concatenate(self.sampler.flatchain)
