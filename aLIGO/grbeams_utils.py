@@ -81,35 +81,6 @@ def cbc_rate_from_theta(grb_rate,theta,efficiency):
     Returns Rcbc = Rgrb / (1-cos(theta))
     """
     return grb_rate / ( efficiency*(1.-np.cos(theta * np.pi / 180)) )
-    
-def characterise_dist(x,y,alpha):
-    """
-    Return the alpha-confidence limits about the median, and the median of the
-    PDF whose y-values are contained in y and x-values in x
-    """
-
-    # CDF:
-    cdf = np.cumsum(y)
-    cdf /= max(cdf)
-    
-    # Fine-grained values (100x finer than the input):
-    x_interp = np.arange(min(x), max(x), np.diff(x)[0]/100.0)
-    cdf_interp = np.interp(x_interp, x, cdf)
-
-    # median
-    median_val = np.interp(0.5,cdf_interp,x_interp)
-
-    # alpha-ocnfidence width about the median
-    q1 = (1-alpha)/2.0
-    q2 = (1+alpha)/2.0
-    low_bound = np.interp(q1,cdf_interp,x_interp)
-    upp_bound = np.interp(q2,cdf_interp,x_interp)
-
-    # alpha-confidence *upper* limit
-    low_limit = np.interp(alpha,(1-cdf_interp)[::-1],x_interp[::-1])
-    upp_limit = np.interp(alpha,cdf_interp,x_interp)
-
-    return [low_bound,upp_bound],median_val,[low_limit,upp_limit]
 
 def kde_sklearn(x, x_grid, bandwidth=0.2, **kwargs):
     """Kernel Density Estimation with Scikit-learn"""
@@ -118,6 +89,7 @@ def kde_sklearn(x, x_grid, bandwidth=0.2, **kwargs):
     # score_samples() returns the log-likelihood of the samples
     log_pdf = kde_skl.score_samples(x_grid[:, np.newaxis])
     return np.exp(log_pdf)
+    
 
 def characterise_dist(x,y,alpha):
     """
@@ -399,38 +371,30 @@ class thetaPosterior:
         self.theta_range = np.array([0.0,90.0])
         if efficiency_prior in ['delta,0.01','delta,0.1','delta,0.5','delta,1.0']:
             self.efficiency_range = float(efficiency_prior.split(',')[1])
-        else:
+        #elif efficiency_prior == 'uniform':
+        elif efficiency_prior in ['uniform', 'jeffreys']:
             # increase dimensionality of parameter space and set efficiency
             # prior range
             self.ndim += 1
-            self.efficiency_range = np.array([0.01,1])
+            self.efficiency_range = np.array([0.0,1.0])
+#        elif efficiency_prior == 'jeffreys':
+#            self.ndim += 1
+#            self.efficiency_range = np.array([0.001,0.999])
 
         # --- Astro configuration
         # grb_rate is in units of Mpc^-3 yr^-1 but the input is Gpc-3 yr-1
         self.grb_rate = grb_rate #* 1e-9 
         self.scenario = observing_scenario
 
-
-#        if efficiency_prior == 'jeffreys':
-#            self.efficiency_axis = np.linspace(0.01,0.99,500)
-#            self.efficiency_pdf = self.comp_efficiency_prob(self.efficiency)
-#       else:
-#           self.efficiency_pdf = self.comp_efficiency_pdf()
-
-        # --- Characterise posterior
-        # FIXME need to update this to handle KDE or similar
-        #self.theta_bounds, self.theta_median, self.theta_lims = \
-        #        characterise_dist(self.theta, self.theta_pdf_1D, alpha=0.9)
-
     def get_theta_pdf_kde(self):
 
         self.theta_grid  = np.arange(self.theta_range[0], self.theta_range[1], 0.01)
         self.theta_pdf_kde  = kde_sklearn(x=self.theta_samples,
-                x_grid=self.theta_grid, bandwidth=0.25, algorithm='kd_tree') 
+                x_grid=self.theta_grid, bandwidth=1.5, algorithm='kd_tree') 
         self.theta_bounds, self.theta_median, self.theta_posmax = \
                 characterise_dist(self.theta_grid, self.theta_pdf_kde, 0.9)
 
-    def sample_theta_posterior(self, nburnin=100, nsamp=1000, nwalkers=100):
+    def sample_theta_posterior(self, nburnin=100, nsamp=500, nwalkers=100):
         """
         Use emcee ensemble sampler to draw samples from the ndim parameter space
         comprised of (theta, efficiency, delta_theta, ...) etc
@@ -475,7 +439,11 @@ class thetaPosterior:
         self.sampler.run_mcmc(pos, nsamp)
 
         # 1D array with samples for convenience
-        self.theta_samples = np.concatenate(self.sampler.flatchain)
+        if self.ndim==1:
+            self.theta_samples = np.concatenate(self.sampler.flatchain)
+        else:
+            self.theta_samples = self.sampler.flatchain[:,0]
+            self.efficiency_samples = self.sampler.flatchain[:,1]
 
     def comp_theta_prob_nparam(self, x, fixed_args=None):
         return self.comp_theta_prob(theta=x[0], efficiency=x[1])
@@ -551,7 +519,7 @@ class thetaPosterior:
         elif prior_type == 'jeffreys':
             prior_dist = stats.beta(0.5,0.5)
             if (efficiency>=min(self.efficiency_range)) and (efficiency<max(self.efficiency_range)):
-                return prior_dist.pdf(self.efficiency)
+                return prior_dist.pdf(efficiency)
             else:
                 return 0.0
 

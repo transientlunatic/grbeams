@@ -175,15 +175,15 @@ for e,epoch in enumerate(epochs):
             color='k', linestyle=linestyles[e], label=r'%s'%label_str)
 
     # *** Jet Posterior ***
-#    ax_jet_angle.hist(thetapos.theta_samples, bins=theta_bins, normed=True,
-#            histtype='stepfilled', alpha=0.5)
+    ax_jet_angle.hist(thetapos.theta_samples, bins=theta_bins, normed=True,
+            histtype='stepfilled', alpha=0.5)
     ax_jet_angle.plot(thetapos.theta_grid,thetapos.theta_pdf_kde, \
             color='k', linestyle=linestyles[e], 
             label=r'%s'%label_str)
 
     # intervals & characteristics
-#    ax_jet_angle.axvline(thetapos.theta_posmax, color='r',
-#            linestyle=linestyles[e])
+    ax_jet_angle.axvline(thetapos.theta_posmax, color='r',
+            linestyle=linestyles[e])
     ax_jet_angle.axvline(thetapos.theta_median, color='r',
             linestyle=linestyles[e])
     ax_jet_angle.axvline(thetapos.theta_bounds[0], color='r',
