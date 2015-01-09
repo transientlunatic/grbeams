@@ -109,8 +109,9 @@ def parse_input():
 
 args = parse_input()
 
-#epochs = ['2016', '2022']
-epochs = ['2022']
+epochs = ['2016', '2022']
+#epochs = ['2022']
+#epochs = ['2016']
 
 # ---------- Priors ------------ #
 
@@ -165,14 +166,15 @@ for e,epoch in enumerate(epochs):
     theta_bw = 1.06*np.std(thetapos.theta_samples)*\
             len(thetapos.theta_samples)**(-1./5)
 
-    thetapos.get_theta_pdf_kde(bandwidth=theta_bw)
-
     # --- Plotting
     # Get 90% UL: useful for x-limits in plots
     theta_bin_size = 3.5*np.std(thetapos.theta_samples) \
             / len(thetapos.theta_samples)**(1./3)
     theta_bins = np.arange(thetapos.theta_range.min(), thetapos.theta_range.max(),
             theta_bin_size)
+
+    thetapos.get_theta_pdf_kde(bandwidth=theta_bw)
+    #thetapos.get_theta_pdf_kde(bandwidth=theta_bin_size)
 
     # *** Rate Posterior ***
     label_str='Epoch=%s'%str(epoch)
@@ -187,13 +189,13 @@ for e,epoch in enumerate(epochs):
             label=r'%s'%label_str)
 
     # intervals & characteristics
-    ax_jet_angle.axvline(thetapos.theta_posmax, color='r',
+#    ax_jet_angle.axvline(thetapos.theta_posmax, color='k',
+#            linestyle='-')
+    ax_jet_angle.axvline(thetapos.theta_median, color='k',
             linestyle=linestyles[e])
-    ax_jet_angle.axvline(thetapos.theta_median, color='r',
+    ax_jet_angle.axvline(thetapos.theta_bounds[0], color='k',
             linestyle=linestyles[e])
-    ax_jet_angle.axvline(thetapos.theta_bounds[0], color='r',
-            linestyle=linestyles[e])
-    ax_jet_angle.axvline(thetapos.theta_bounds[1], color='r',
+    ax_jet_angle.axvline(thetapos.theta_bounds[1], color='k',
             linestyle=linestyles[e])
 
 print >> sys.stdout, "finalising figures"
@@ -207,23 +209,25 @@ ax_bns_rate.axvline(scenario.predicted_bns_rate, color='g',\
 ax_bns_rate.set_xlim(0,5*scenario.predicted_bns_rate) # multiply by 5 to get
                                                       # well beyond the 'true' values
 ax_bns_rate.legend()
-f_rate.subplots_adjust(bottom=0.2,left=0.15,right=0.925)
+f_rate.subplots_adjust(bottom=0.15,left=0.1,right=0.925)
+f_rate.tight_layout()
 
 ax_jet_angle.set_xlabel(r'$\theta_{\mathrm{jet}}$')
 ax_jet_angle.set_ylabel(r'$p(\theta_{\mathrm{jet}}|R,I)$')
 ax_jet_angle.minorticks_on()
-ax_jet_angle.set_xlim(0,60)
+#ax_jet_angle.set_xlim(0,60)
 
 if args.sim_grbs:
     ax_jet_angle.axvline(args.sim_theta, color='g', label="`True' value")
 
 ax_jet_angle.legend()
-f_angle.subplots_adjust(bottom=0.2,top=0.925,left=0.15)
+f_angle.subplots_adjust(bottom=0.1,top=0.925,left=0.1,right=0.925)
+#f_angle.tight_layout()
 
-pl.subplots_adjust(bottom=0.2,top=0.925,left=0.15,right=0.95)
+#pl.subplots_adjust(bottom=0.2,top=0.925,left=0.15,right=0.95)
 
 if args.sim_grbs:
-    f_angle.savefig('angle_%s_%s_sim_theta-%.1f_epsilon-%.1f%s.eps'%(\
+    f_angle.savefig('angle_%s_%s_sim_theta-%.1f_epsilon-%.1f%s.pdf'%(\
             prediction,args.prior[0],args.sim_theta,args.sim_epsilon,args.user_tag))
     f_angle_pickle = file('angle_%s_%s_sim_theta-%.1f_epsilon-%.1f%s.pickle'%(\
             prediction,args.prior[0],args.sim_theta,args.sim_epsilon,args.user_tag),'wb')
@@ -231,7 +235,7 @@ if args.sim_grbs:
     f_angle_pickle.close()
 
 else:
-    f_angle.savefig('angle_%s_%s%s.eps'%(\
+    f_angle.savefig('angle_%s_%s%s.pdf'%(\
             prediction,prior_names[args.prior[0]],args.user_tag))
     f_angle_pickle = file('angle_%s_%s%s.pickle'%(\
             prediction,prior_names[args.prior[0]],args.user_tag),'wb')

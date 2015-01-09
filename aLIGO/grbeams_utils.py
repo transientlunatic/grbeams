@@ -284,6 +284,7 @@ class Scenarios:
         # Set rate pdf=0 unless rate>=0
         bns_rate_pdf = np.zeros(np.shape(det_rate)) - np.inf
         non_zero_idx = np.argwhere(det_rate>=0.0)
+
         bns_rate_pdf[non_zero_idx] = \
                 self.det_rate_posterior.source_rate_pdf(det_rate) \
                 + np.log(self.bns_search_volume / self.Tobs)
@@ -342,7 +343,7 @@ class Scenarios:
     #            2022:np.mean([4e7])}
     #    return volumes[epoch]
         bns_range = self.get_bns_range(epoch)
-        if len(bns_range)>1: bns_range = np.mean(bns_range)
+        if len(bns_range)>1: bns_range = np.array([np.mean(bns_range)])
         return self.duty_cycle * self.Tobs * 4.0 * np.pi * (bns_range**3) / 3
 
 class thetaPosterior:
@@ -387,7 +388,7 @@ class thetaPosterior:
         self.theta_pdf_kde  = kde_sklearn(x=self.theta_samples,
                 x_grid=self.theta_grid, bandwidth=bandwidth, algorithm='kd_tree') 
         self.theta_bounds, self.theta_median, self.theta_posmax = \
-                characterise_dist(self.theta_grid, self.theta_pdf_kde, 0.9)
+                characterise_dist(self.theta_grid, self.theta_pdf_kde, 0.95)
 
     def sample_theta_posterior(self, nburnin=100, nsamp=500, nwalkers=100):
         """
