@@ -160,7 +160,12 @@ for e,epoch in enumerate(epochs):
 
     # Get posterior samples and kde
     thetapos.sample_theta_posterior()
-    thetapos.get_theta_pdf_kde()
+
+    # select theta posterior bandwidth for KDE
+    theta_bw = 1.06*np.std(thetapos.theta_samples)*\
+            len(thetapos.theta_samples)**(-1./5)
+
+    thetapos.get_theta_pdf_kde(bandwidth=theta_bw)
 
     # --- Plotting
     # Get 90% UL: useful for x-limits in plots

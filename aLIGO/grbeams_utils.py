@@ -90,7 +90,6 @@ def kde_sklearn(x, x_grid, bandwidth=0.2, **kwargs):
     log_pdf = kde_skl.score_samples(x_grid[:, np.newaxis])
     return np.exp(log_pdf)
     
-
 def characterise_dist(x,y,alpha):
     """
     Return the alpha-confidence limits about the median, and the median of the
@@ -371,26 +370,22 @@ class thetaPosterior:
         self.theta_range = np.array([0.0,90.0])
         if efficiency_prior in ['delta,0.01','delta,0.1','delta,0.5','delta,1.0']:
             self.efficiency_range = float(efficiency_prior.split(',')[1])
-        #elif efficiency_prior == 'uniform':
         elif efficiency_prior in ['uniform', 'jeffreys']:
             # increase dimensionality of parameter space and set efficiency
             # prior range
             self.ndim += 1
             self.efficiency_range = np.array([0.0,1.0])
-#        elif efficiency_prior == 'jeffreys':
-#            self.ndim += 1
-#            self.efficiency_range = np.array([0.001,0.999])
 
         # --- Astro configuration
         # grb_rate is in units of Mpc^-3 yr^-1 but the input is Gpc-3 yr-1
         self.grb_rate = grb_rate #* 1e-9 
         self.scenario = observing_scenario
 
-    def get_theta_pdf_kde(self):
+    def get_theta_pdf_kde(self, bandwidth=1.0):
 
         self.theta_grid  = np.arange(self.theta_range[0], self.theta_range[1], 0.01)
         self.theta_pdf_kde  = kde_sklearn(x=self.theta_samples,
-                x_grid=self.theta_grid, bandwidth=1.5, algorithm='kd_tree') 
+                x_grid=self.theta_grid, bandwidth=bandwidth, algorithm='kd_tree') 
         self.theta_bounds, self.theta_median, self.theta_posmax = \
                 characterise_dist(self.theta_grid, self.theta_pdf_kde, 0.9)
 
