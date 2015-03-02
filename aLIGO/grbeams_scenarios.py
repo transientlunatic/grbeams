@@ -31,6 +31,8 @@ from matplotlib import pyplot as pl
 
 import grbeams_utils
 
+from pylal import bayespputils as bppu
+
 if 0:
     fig_width_pt = 246  # Get this from LaTeX using \showthe\columnwidth
     inches_per_pt = 1.0/72.27               # Convert pt to inch
@@ -109,9 +111,9 @@ def parse_input():
 
 args = parse_input()
 
-epochs = ['2016', '2022']
+#epochs = ['2016', '2022']
 #epochs = ['2022']
-#epochs = ['2016']
+epochs = ['2016']
 
 # ---------- Priors ------------ #
 
@@ -153,7 +155,8 @@ for e,epoch in enumerate(epochs):
             grb_rate = grbeams_utils.comp_grb_rate(efficiency=args.sim_epsilon,
                     theta=args.sim_theta, bns_rate=scenario.predicted_bns_rate)
 
-        thetapos = grbeams_utils.thetaPosterior(scenario,args.prior[0],grb_rate=grb_rate)
+        thetapos = grbeams_utils.thetaPosterior(scenario, args.prior[0],
+                grb_rate=grb_rate, sim_theta=args.sim_theta)
     else:
         thetapos = grbeams_utils.thetaPosterior(scenario, args.prior[0],
                 grb_rate=args.Rgrb)
@@ -191,6 +194,14 @@ for e,epoch in enumerate(epochs):
     # intervals & characteristics
 #    ax_jet_angle.axvline(thetapos.theta_posmax, color='k',
 #            linestyle='-')
+#   ax_jet_angle.axvline(thetapos.theta_median, color='k',
+#           linestyle=linestyles[e])
+#   ax_jet_angle.axvline(thetapos.theta_bounds[0], color='k',
+#           linestyle=linestyles[e])
+#   ax_jet_angle.axvline(thetapos.theta_bounds[1], color='k',
+#           linestyle=linestyles[e])
+
+# --- bppu estimates:
     ax_jet_angle.axvline(thetapos.theta_median, color='k',
             linestyle=linestyles[e])
     ax_jet_angle.axvline(thetapos.theta_bounds[0], color='k',
@@ -222,7 +233,7 @@ if args.sim_grbs:
 
 ax_jet_angle.legend()
 f_angle.subplots_adjust(bottom=0.1,top=0.925,left=0.1,right=0.925)
-#f_angle.tight_layout()
+f_angle.tight_layout()
 
 #pl.subplots_adjust(bottom=0.2,top=0.925,left=0.15,right=0.95)
 

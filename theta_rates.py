@@ -121,7 +121,8 @@ for m,mu, in enumerate(theta_mu):
 
 f[1].set_xlabel(r'$\sigma_{\theta}$ [deg]')
 f[1].set_ylabel(r'N$_{\rm{GRB}}$/N$_{\rm{bns}}$ [%]')
-f[1].legend(loc='upper left')
+#f[1].legend(loc='upper left')
+f[1].legend(bbox_to_anchor=(0.8,1.1), ncol=3)
 f[1].minorticks_on()
 
 # XXX NOTE: there is a degeneracy in this resulting plot; e.g., pick the 2%

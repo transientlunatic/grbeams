@@ -25,6 +25,7 @@
 \usepackage{amsfonts, amsmath, amsthm, amssymb} % For math fonts, symbols and environments
 \usepackage{wrapfig} % Allows wrapping text around tables and figures
 \usepackage{tcolorbox}
+\usepackage{subfig}
 
 %\newcommand{\gw}{gravitational wave }
 %\newcommand{\gws}{gravitational waves }
@@ -82,7 +83,7 @@ Hendry$^{2}$}\\ \\% Author(s)
 
 %----------------------------------------------------------------------------------------
 
-\begin{multicols}{3} % This is how many columns your poster will be broken into, a poster with many figures may benefit from less columns whereas a text-heavy poster benefits from more
+\begin{multicols}{4} % This is how many columns your poster will be broken into, a poster with many figures may benefit from less columns whereas a text-heavy poster benefits from more
 
 %----------------------------------------------------------------------------------------
 %	ABSTRACT
@@ -92,7 +93,17 @@ Hendry$^{2}$}\\ \\% Author(s)
 
 \begin{abstract}
 
-Sed fringilla tempus hendrerit. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Etiam ut elit sit amet metus lobortis consequat sit amet in libero. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus vel sem magna. Nunc at convallis urna. isus ante. Pellentesque condimentum dui. Etiam sagittis purus non tellus tempor volutpat. Donec et dui non massa tristique adipiscing. Quisque vestibulum eros eu. Phasellus imperdiet, tortor vitae congue bibendum, felis enim sagittis lorem, et volutpat ante orci sagittis mi. Morbi rutrum laoreet semper. Morbi accumsan enim nec tortor consectetur non commodo nisi sollicitudin. Proin sollicitudin. Pellentesque eget orci eros. Fusce ultricies, tellus et pellentesque fringilla, ante massa luctus libero, quis tristique purus urna nec nibh.
+Sed fringilla tempus hendrerit. Vestibulum ante ipsum primis in faucibus orci
+luctus et ultrices posuere cubilia Curae; Etiam ut elit sit amet metus lobortis
+consequat sit amet in libero. Lorem ipsum dolor sit amet, consectetur adipiscing
+elit. Phasellus vel sem magna. Nunc at convallis urna. isus ante. Pellentesque
+condimentum dui. Etiam sagittis purus non tellus tempor volutpat. Donec et dui
+non massa tristique adipiscing. Quisque vestibulum eros eu. Phasellus imperdiet,
+tortor vitae congue bibendum, felis enim sagittis lorem, et volutpat ante orci
+sagittis mi. Morbi rutrum laoreet semper. Morbi accumsan enim nec tortor
+consectetur non commodo nisi sollicitudin. Proin sollicitudin. Pellentesque eget
+orci eros. Fusce ultricies, tellus et pellentesque fringilla, ante massa luctus
+libero, quis tristique purus urna nec nibh.
 
 \end{abstract}
 
@@ -171,17 +182,61 @@ p(\theta) = \int_{\epsilon} p(\theta,\epsilon)~\diff \epsilon,
 \end{equation}
 
 %------------------------------------------------
+% What IS theta??
+
+\begin{center}\vspace{1cm}
+    %\includegraphics[width=15cm]{theta_dist_grbfrac.png}
+    \includegraphics[width=0.48\linewidth]{theta_dist_grbfrac.pdf}
+        \captionof{figure}{Figure caption}
+\end{center}\vspace{1cm}
+
+%\begin{wrapfigure}{r}{0.45\linewidth} 
+%    \centering
+%        \includegraphics[width=15cm]{theta_dist_grbfrac.pdf}
+        %\includegraphics[width=0.5\linewidth]{efficiency_prior.pdf}
+%        \captionof{figure}{Figure caption}
+%\end{wrapfigure}
+
+%------------------------------------------------
 % Efficiency Prior
 \subsection*{Prior on GRB Efficiency, $\epsilon$}
 
-%------------------------------------------------
-% What IS theta??
-\subsection*{Average Beaming Angle \& Rates}
+Sed fringilla tempus hendrerit. Vestibulum ante ipsum primis in faucibus orci
+luctus et ultrices posuere cubilia Curae; Etiam ut elit sit amet metus lobortis
+consequat sit amet in libero. Lorem ipsum dolor sit amet, consectetur adipiscing
+elit. Phasellus vel sem magna. Nunc at convallis urna. isus ante. Pellentesque
+condimentum dui. Etiam sagittis purus non tellus tempor volutpat. Donec et dui
+non massa tristique adipiscing. Quisque vestibulum eros eu. Phasellus imperdiet,
+tortor vitae congue bibendum, felis enim sagittis lorem, et volutpat ante orci
+sagittis mi. Morbi rutrum laoreet semper. Morbi accumsan enim nec tortor
+consectetur non commodo nisi sollicitudin. Proin sollicitudin. Pellentesque eget
+orci eros. Fusce ultricies, tellus et pellentesque fringilla, ante massa luctus
+libero, quis tristique purus urna nec nibh.
 
+%\begin{wrapfigure}{r}{0.45\linewidth} 
+%    \centering
+%        \includegraphics[width=15cm]{efficiency_prior.pdf}
+%        %\includegraphics[width=0.5\linewidth]{efficiency_prior.pdf}
+%        \captionof{figure}{Figure caption}
+%\end{wrapfigure}
 \begin{center}\vspace{1cm}
-\includegraphics[width=0.5\linewidth]{theta_dist_grbfrac.png}
-\captionof{figure}{Figure caption}
+        %\includegraphics[width=15cm]{efficiency_prior.pdf}
+        \includegraphics[width=0.48\linewidth]{efficiency_prior.pdf}
+        \captionof{figure}{Figure caption}
 \end{center}\vspace{1cm}
+
+Sed fringilla tempus hendrerit. Vestibulum ante ipsum primis in faucibus orci
+luctus et ultrices posuere cubilia Curae; Etiam ut elit sit amet metus lobortis
+consequat sit amet in libero. Lorem ipsum dolor sit amet, consectetur adipiscing
+elit. Phasellus vel sem magna. Nunc at convallis urna. isus ante. Pellentesque
+condimentum dui. Etiam sagittis purus non tellus tempor volutpat. Donec et dui
+non massa tristique adipiscing. Quisque vestibulum eros eu. Phasellus imperdiet,
+tortor vitae congue bibendum, felis enim sagittis lorem, et volutpat ante orci
+sagittis mi. Morbi rutrum laoreet semper. Morbi accumsan enim nec tortor
+consectetur non commodo nisi sollicitudin. Proin sollicitudin. Pellentesque eget
+orci eros. Fusce ultricies, tellus et pellentesque fringilla, ante massa luctus
+libero, quis tristique purus urna nec nibh.
+
 
 %----------------------------------------------------------------------------------------
 %	iLIGO
@@ -193,6 +248,26 @@ p(\theta) = \int_{\epsilon} p(\theta,\epsilon)~\diff \epsilon,
 p(\cbcrate | C_L({\rhostar}), T, \Lambda) \propto p(\cbcrate) \left[ \frac{1+\Lambda
 C_L(\rhostar) T}{1+\Lambda}\right] e^{-\cbcrate C_L(\rhostar) T}
 \end{equation}
+
+
+\subsection*{Jet Angle Posterior}
+
+
+  \begin{minipage}{\columnwidth}
+    \makeatletter
+    \newcommand{\@captype}{figure}
+    \makeatother
+    \centering
+    \subfloat[Rate Posterior]{%
+      \includegraphics[width=0.45\linewidth]{rate_posterior_s6UL.pdf}%
+      \label{fig:}%
+    }\qquad%
+    \subfloat[Jet Posterior]{%
+      \includegraphics[width=0.45\linewidth]{theta_posteriors_s6UL.pdf}%
+      \label{fig:}%
+    }
+    \caption{S6 results}
+  \end{minipage}
 
 %----------------------------------------------------------------------------------------
 %	aLIGO
@@ -260,10 +335,12 @@ s}{\diff \cbcrate}\right| \\
 \end{eqnarray}
 
 \begin{center}\vspace{1cm}
-\includegraphics[width=0.5\linewidth]{rate_re.pdf}
-\captionof{figure}{Figure caption}
+    %\includegraphics[width=15cm]{rate_re.pdf}
+    \includegraphics[width=0.5\linewidth]{rate_re.pdf}
+    \captionof{figure}{Figure caption}
 \end{center}\vspace{1cm}
 
+\subsection*{Jet Angle Posterior}
 
 %----------------------------------------------------------------------------------------
 %	CONCLUSIONS

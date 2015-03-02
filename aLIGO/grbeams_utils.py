@@ -26,6 +26,8 @@ from scipy.misc import logsumexp#,factorial
 from scipy import stats, optimize
 from sklearn.neighbors.kde import KernelDensity
 
+from pylal import bayespputils as bppu
+
 __author__ = "James Clark <james.clark@ligo.org>"
 
 epsilon = sys.float_info.epsilon
@@ -349,7 +351,9 @@ class Scenarios:
 class thetaPosterior:
 
     def __init__(self, observing_scenario, efficiency_prior='delta,1.0',
-            grb_rate=10/1e9):
+            grb_rate=10/1e9, sim_theta=None):
+
+        self.sim_theta=sim_theta
 
         # Sanity check efficiency prior
         valid_priors = ['delta,0.01','delta,0.1', 'delta,0.5', 'delta,1.0',
@@ -390,7 +394,7 @@ class thetaPosterior:
         self.theta_bounds, self.theta_median, self.theta_posmax = \
                 characterise_dist(self.theta_grid, self.theta_pdf_kde, 0.95)
 
-    def sample_theta_posterior(self, nburnin=100, nsamp=500, nwalkers=100):
+    def sample_theta_posterior(self, nburnin=100, nsamp=100, nwalkers=100):
         """
         Use emcee ensemble sampler to draw samples from the ndim parameter space
         comprised of (theta, efficiency, delta_theta, ...) etc
@@ -440,6 +444,12 @@ class thetaPosterior:
         else:
             self.theta_samples = self.sampler.flatchain[:,0]
             self.efficiency_samples = self.sampler.flatchain[:,1]
+
+
+        # Create bppu posterior instance for easy conf intervals and
+        # characterisation
+        self.theta_pos = bppu.PosteriorOneDPDF('theta', self.theta_samples,
+                injected_value=self.sim_theta)
 
     def comp_theta_prob_nparam(self, x, fixed_args=None):
         return self.comp_theta_prob(theta=x[0], efficiency=x[1])

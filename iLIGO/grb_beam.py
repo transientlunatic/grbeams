@@ -19,29 +19,29 @@ from scipy.stats import beta as beta_dist
 from scipy.optimize import curve_fit
 from optparse import OptionParser
 
-fig_width_pt = 245.26653  # Get this from LaTeX using \showthe\columnwidth
-#fig_width_pt=600.
-inches_per_pt = 1.0/72.27               # Convert pt to inch
-golden_mean = (2.236-1.0)/2.0         # Aesthetic ratio
-fig_width = fig_width_pt*inches_per_pt  # width in inches
-fig_height = fig_width*golden_mean      # height in inches
-fig_size =  [fig_width,fig_height]
-rcParams.update(
-		{'axes.labelsize': 10,
-        'text.fontsize':   10,
-        'legend.fontsize': 10,
-        'xtick.labelsize': 10,
-        'ytick.labelsize': 10,
-        'text.usetex': True,
-        'figure.figsize': fig_size,
-        'font.family': "serif",
-        'font.serif': ["Times"],
-        'savefig.dpi': 200,
-        'xtick.major.size':8,
-        'xtick.minor.size':4,
-        'ytick.major.size':8,
-        'ytick.minor.size':4
-        })  
+#   fig_width_pt = 245.26653  # Get this from LaTeX using \showthe\columnwidth
+#   #fig_width_pt=600.
+#   inches_per_pt = 1.0/72.27               # Convert pt to inch
+#   golden_mean = (2.236-1.0)/2.0         # Aesthetic ratio
+#   fig_width = fig_width_pt*inches_per_pt  # width in inches
+#   fig_height = fig_width*golden_mean      # height in inches
+#   fig_size =  [fig_width,fig_height]
+#   rcParams.update(
+#           {'axes.labelsize': 10,
+#           'text.fontsize':   10,
+#           'legend.fontsize': 10,
+#           'xtick.labelsize': 10,
+#           'ytick.labelsize': 10,
+#           'text.usetex': True,
+#           'figure.figsize': fig_size,
+#           'font.family': "serif",
+#           'font.serif': ["Times"],
+#           'savefig.dpi': 200,
+#           'xtick.major.size':8,
+#           'xtick.minor.size':4,
+#           'ytick.major.size':8,
+#           'ytick.minor.size':4
+#           })  
 
 def parser():
     """
@@ -181,13 +181,32 @@ elif opts.beta_eff_prior:
 # Here's the simple analytic expression:
 eps=-1*log(1-0.9)/1.3e-4
 
-rateAxis=linspace(1e-8,1e-3,1000)
+rateAxis=linspace(1e-8,5e-4,5000)
 cbcRatePos=cbcRatePosteriorNull(eps,rateAxis)
 alphas=[]
 for bin in rateAxis:
     alphas.append(trapz(y=cbcRatePos[rateAxis<bin], x=rateAxis[rateAxis<bin], dx=diff(rateAxis)[0]))
 rateNinety=interp(0.9,alphas,rateAxis)
 print '%d %0.3e'%(eps,rateNinety)
+
+close('all')
+
+figure()
+plot(rateAxis,cbcRatePos, color='k',label='S6 result')
+axvline(rateNinety,color='k', linestyle='--',label=r'$90\%$ U.L.')
+
+minorticks_on()
+#grid(which='major',linestyle='-',alpha=0.5)
+#xlabel(r'$\textrm{Rate }[\textrm{Mpc}^{-3}\textrm{yr}^{-1}]$')
+xlabel(r'Binary Coalescence Rate, $R$ [Mpc$^{-3}$yr$^{-1}$]')
+ylabel(r'$p(R|D,I)$')
+#subplots_adjust(bottom=0.2,left=0.2,top=0.95,right=0.98)
+legend()
+tight_layout()
+#grid(which='minor',linestyle='-',alpha=0.5)
+savefig('rate_posterior_s6UL.eps')
+savefig('rate_posterior_s6UL.png')
+savefig('rate_posterior_s6UL.pdf')
 
 #
 # --- Compute Angle Posterior ---
@@ -249,33 +268,22 @@ savez(outputname, rateAxis=rateAxis, cbcRatePos=cbcRatePos,
 #
 # Plots
 #
-close('all')
 
 figure()
-plot(rateAxis,cbcRatePos)
-axvline(rateNinety,color='r')
-
-minorticks_on()
-#grid(which='major',linestyle='-',alpha=0.5)
-xlabel(r'$\textrm{Rate }[\textrm{Mpc}^{-3}\textrm{yr}^{-1}]$')
-ylabel(r'$p({\mathcal R}_{\textrm{cbc}}|D,I)$')
-subplots_adjust(bottom=0.2,left=0.2,top=0.95,right=0.98)
-#grid(which='minor',linestyle='-',alpha=0.5)
-savefig('rate_posterior_s6UL_%s.eps'%outputname)
-
-figure()
-plot(thetaAxis,thetaPos,'-')
-axvline(thetaNinety,color='r',label=r'$%.2f$'%thetaNinety)
+plot(thetaAxis,thetaPos,'-', color='k')
+axvline(thetaNinety, color='k', linestyle='--',label=r'$90\%$ U.L')
 legend()
 minorticks_on()
 #grid(which='major',linestyle='--',alpha=0.5)
 #xlim(0,10)
 #subplots_adjust(bottom=0.15,top=0.9,right=0.99)
 #xscale('log')
-xlabel(r'$\textrm{Jet Angle, }\theta~[\textrm{degrees}]$')
+xlabel(r'Jet Angle, $\theta$ [deg]')
 ylabel(r'$p(\theta|D,I)$')
 subplots_adjust(bottom=0.2,left=0.2,top=0.95,right=0.98)
 savefig('jet_angle_posterior_s6UL_%s.eps'%outputname)
+savefig('jet_angle_posterior_s6UL_%s.png'%outputname)
+savefig('jet_angle_posterior_s6UL_%s.pdf'%outputname)
 
 #show()
 
