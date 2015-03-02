@@ -1,0 +1,305 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% % a0poster Landscape Poster % LaTeX Template % Version 1.0 (22/06/13) % % The a0poster class was created by: % Gerlinde Kettl and Matthias Weiser (tex@kettl.de) % % This template has been downloaded from: % http://www.LaTeXTemplates.com % % License: % CC BY-NC-SA 3.0 (http://creativecommons.org/licenses/by-nc-sa/3.0/)
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%----------------------------------------------------------------------------------------
+%	PACKAGES AND OTHER DOCUMENT CONFIGURATIONS
+%----------------------------------------------------------------------------------------
+
+\documentclass[a0,landscape]{a0poster}
+
+\usepackage{multicol} % This is so we can have multiple columns of text side-by-side
+\columnsep=100pt % This is the amount of white space between the columns in the poster
+\columnseprule=3pt % This is the thickness of the black line between the columns in the poster
+
+\usepackage[svgnames]{xcolor} % Specify colors by their 'svgnames', for a full list of all colors available see here: http://www.latextemplates.com/svgnames-colors
+
+%\usepackage{times} % Use the times font
+\usepackage{palatino} % Uncomment to use the Palatino font
+%\usepackage{ClearSans}
+
+\usepackage{graphicx} % Required for including images
+\graphicspath{{figures/}} % Location of the graphics files
+\usepackage{booktabs} % Top and bottom rules for table
+\usepackage[font=small,labelfont=bf]{caption} % Required for specifying captions to tables and figures
+\usepackage{amsfonts, amsmath, amsthm, amssymb} % For math fonts, symbols and environments
+\usepackage{wrapfig} % Allows wrapping text around tables and figures
+\usepackage{tcolorbox}
+
+%\newcommand{\gw}{gravitational wave }
+%\newcommand{\gws}{gravitational waves }
+\newcommand{\subgw}{_{\textrm{\scriptsize{GW}}}}
+\newcommand{\ee}[1]{\!\times\!10^{#1}}
+\newcommand{\prob}{{\rm Pr}}
+\newcommand{\grbrate}{{{\mathcal R}_{\mathrm{grb}}}}
+\newcommand{\cbcrate}{{{\mathcal R}}}
+\newcommand{\diff}{{\mathrm d}}
+\newcommand{\rhostar}{{\rho^*}}
+
+\def\imbh#1{intermediate mass black hole#1(IMBH#1)\gdef\imbh{IMBH}}
+\def\smbh#1{supermassive black hole#1(SMBH#1)\gdef\smbh{SMBH}}
+\def\bbh#1{binary black hole#1 (BBH#1)\gdef\bbh{BBH}}
+\def\bh#1{black hole#1 (BH#1)\gdef\bh{BH}}
+\def\ns#1{neutron star#1 (NS#1)\gdef\ns{NS}}
+\def\gw#1{gravitational wave#1 (GW#1)\gdef\gw{GW}}
+\def\sn#1{core-collapse supernova#1 (CCSN#1)\gdef\sn{CCSN}}
+\def\pnw#1{post-Newtonian#1 (PN#1)\gdef\pnw{PN}}
+\def\eos#1{equation of state#1 (EOS#1)\gdef\eos{EOS}}
+\def\grb#1{gamma-ray burst#1 (GRB#1)\gdef\grb{GRB}}
+\def\amr#1{adaptive mesh refinement#1 (AMR#1)\gdef\amr{AMR}}
+\def\isco#1{innermost stable circular orbit#1 (ISCO#1)\gdef\isco{ISCO}}
+\def\cwb#1{Coherent WaveBurst#1 (CWB#1)\gdef\cwb{CWB}}
+
+\begin{document}
+
+%----------------------------------------------------------------------------------------
+%	POSTER HEADER 
+%----------------------------------------------------------------------------------------
+
+% The header is divided into three boxes:
+% The first is 55% wide and houses the title, subtitle, names and university/organization
+% The second is 25% wide and houses contact information
+% The third is 19% wide and houses a logo for your university/organization or a photo of you
+% The widths of these boxes can be easily edited to accommodate your content as you see fit
+
+\begin{minipage}[b]{0.7\linewidth}
+\veryHuge \color{NavyBlue} \textbf{Constraining Short, Hard Gamma-Ray Burst Beaming Angles From
+Gravitational Wave Event Rate Measurements} \color{Black}\\ \\% Title
+\huge \textbf{James A. Clark$^{1}$, Ik Siong Heng$^{2}$ \& Martin
+Hendry$^{2}$}\\ \\% Author(s)
+\large 1. Georgia Institude of Technology\\ % University/organization
+\large 2. University of Glasgow\\ % University/organization
+\end{minipage}
+%
+\hspace{10cm}
+%
+\begin{minipage}[b]{0.2\linewidth}
+\includegraphics[height=5cm]{cra.png} \\ \\% Logo or a photo of you, adjust its dimensions here
+\includegraphics[height=5cm]{uni_glasgow_logo.png} \\ \\% Logo or a photo of you, adjust its dimensions here
+\end{minipage}
+
+\vspace{1cm} % A bit of extra whitespace between the header and poster content
+
+%----------------------------------------------------------------------------------------
+
+\begin{multicols}{3} % This is how many columns your poster will be broken into, a poster with many figures may benefit from less columns whereas a text-heavy poster benefits from more
+
+%----------------------------------------------------------------------------------------
+%	ABSTRACT
+%----------------------------------------------------------------------------------------
+
+\color{Navy} % Navy color for the abstract
+
+\begin{abstract}
+
+Sed fringilla tempus hendrerit. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Etiam ut elit sit amet metus lobortis consequat sit amet in libero. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus vel sem magna. Nunc at convallis urna. isus ante. Pellentesque condimentum dui. Etiam sagittis purus non tellus tempor volutpat. Donec et dui non massa tristique adipiscing. Quisque vestibulum eros eu. Phasellus imperdiet, tortor vitae congue bibendum, felis enim sagittis lorem, et volutpat ante orci sagittis mi. Morbi rutrum laoreet semper. Morbi accumsan enim nec tortor consectetur non commodo nisi sollicitudin. Proin sollicitudin. Pellentesque eget orci eros. Fusce ultricies, tellus et pellentesque fringilla, ante massa luctus libero, quis tristique purus urna nec nibh.
+
+\end{abstract}
+
+%----------------------------------------------------------------------------------------
+%	INTRODUCTION
+%----------------------------------------------------------------------------------------
+%\color{SaddleBrown} % SaddleBrown color for the introduction
+\color{DarkSlateGray} % DarkSlateGray color for the rest of the content
+
+%\section*{Introduction}
+
+
+%----------------------------------------------------------------------------------------
+%	OBJECTIVES
+%----------------------------------------------------------------------------------------
+
+
+%\begin{tcolorbox}[width=\columnwidth, colback={green}, title={Objective},
+%    colbacktitle=yellow, coltitle=blue]
+%    BLAH
+%\end{tcolorbox} 
+
+\color{DarkSlateGray} % DarkSlateGray color for the rest of the content
+
+\section*{This Work}
+
+\begin{enumerate}
+\item Lorem ipsum dolor sit amet, consectetur.
+\item Nullam at mi nisl. Vestibulum est purus, ultricies cursus volutpat sit amet, vestibulum eu.
+\item Praesent tortor libero, vulputate quis elementum a, iaculis.
+\item Phasellus a quam mauris, non varius mauris. Fusce tristique, enim tempor varius porta, elit purus commodo velit, pretium mattis ligula nisl nec ante.
+\item Ut adipiscing accumsan sapien, sit amet pretium.
+\item Estibulum est purus, ultricies cursus volutpat
+\item Nullam at mi nisl. Vestibulum est purus, ultricies cursus volutpat sit amet, vestibulum eu.
+\item Praesent tortor libero, vulputate quis elementum a, iaculis.
+\end{enumerate}
+
+%----------------------------------------------------------------------------------------
+%	MATERIALS AND METHODS
+%----------------------------------------------------------------------------------------
+
+\section*{GRB Beaming Angles From Coalescence Rate Measurements}
+Assuming that at least some fraction of sGRBs are due to compact binary
+coalescence, the observed rate of sGRBs may be written,
+%
+\begin{equation}\label{eq:rate2angle}
+\grbrate=\epsilon\cbcrate(1-\cos \theta),
+\end{equation}
+
+\begin{equation}
+p(\theta,\epsilon) = p(\cbcrate,\epsilon)
+\left\lvert\left\lvert
+\frac{\partial(\cbcrate,\epsilon)}{\partial(\theta,\epsilon)}
+\right\rvert\right\rvert,
+\end{equation}
+
+where the Jacobian matrix is given by,
+% Increase matrix line spacing
+\begingroup
+\renewcommand*{\arraystretch}{1.5}
+
+% matrix:
+\begin{equation}
+\frac{\partial (\cbcrate,\epsilon)}{\partial(\theta,\epsilon)} =
+\begin{bmatrix}
+\frac{\partial \cbcrate}{\partial \theta} & \frac{\partial \cbcrate}{\partial \epsilon} \\
+\frac{\partial \epsilon}{\partial \theta} & \frac{\partial \epsilon}{\partial \epsilon}
+\end{bmatrix}.
+\end{equation}
+
+% end line spacing increase
+\endgroup
+
+\begin{equation}
+p(\theta) = \int_{\epsilon} p(\theta,\epsilon)~\diff \epsilon,
+\end{equation}
+
+%------------------------------------------------
+% Efficiency Prior
+\subsection*{Prior on GRB Efficiency, $\epsilon$}
+
+%------------------------------------------------
+% What IS theta??
+\subsection*{Average Beaming Angle \& Rates}
+
+\begin{center}\vspace{1cm}
+\includegraphics[width=0.5\linewidth]{theta_dist_grbfrac.png}
+\captionof{figure}{Figure caption}
+\end{center}\vspace{1cm}
+
+%----------------------------------------------------------------------------------------
+%	iLIGO
+%----------------------------------------------------------------------------------------
+\section*{Constraints From The Initial Detector Era}
+
+\subsection*{Constructing The Rate Posterior}
+\begin{equation}\label{eq:loudestEventPosterior}
+p(\cbcrate | C_L({\rhostar}), T, \Lambda) \propto p(\cbcrate) \left[ \frac{1+\Lambda
+C_L(\rhostar) T}{1+\Lambda}\right] e^{-\cbcrate C_L(\rhostar) T}
+\end{equation}
+
+%----------------------------------------------------------------------------------------
+%	aLIGO
+%----------------------------------------------------------------------------------------
+\section*{Constraints In The Advanced Detector Era}
+
+\subsection*{Constructing The Rate Posterior}
+
+So let $b=10^{-2}$\,yr$^{-1}$.  From there, we can get the detection rate
+posterior using equations 14.10--14.12 of Gregory.  The measured rate $r$
+consists of two components, one due to a signal of interest, $s$, and the other
+a known background rate, $b$:
+\begin{equation}
+r = s + b
+\begin{cases}
+s = \text{signal rate} \\
+b = \text{background rate}
+\end{cases}
+\end{equation}
+%
+Since the background rate is known,
+\begin{equation}
+p(s|n,b,I) = p(r|n,b,I),
+\end{equation}
+%
+where $n$ is the number of \gw{} detections.  From eq 14.8 of Gregory, we get
+to:
+\begin{equation}
+p(s|n,b,I) = C \frac{ T\left[(s+b)T\right]^n e^{-(s+b)T}}{n!},
+\end{equation}
+%
+where,
+\begin{eqnarray}
+C^{-1} & = &\frac{e^{-bT}}{n!} \int_0^{\infty}\diff(sT)(s+b)^n T^n e^{-sT}\\
+& = & \sum_{i=0}^n \frac{ (bT)^i e^{-bT}}{i!}.
+\end{eqnarray}
+
+In particular,  the detection rate for a given type of binary coalescence in
+LIGO-Virgo is given by equation\,1 in~\cite{rates_paper},
+\begin{equation}
+%\dot{N} = \cbcrate \times N_G,
+s = \cbcrate \times N_G,
+\end{equation}
+%
+where $\cbcrate$ is the coalescence rate of that type of binary per galaxy and
+$N_G$ is the number of galaxies accessible with a search for the relevant binary
+type.  $N_G$ is well approximated at large distances by,
+%
+\begin{equation}
+N_G = \frac{4}{3} \pi \left( \frac{D_{\textrm{horizon}}}{\textrm{Mpc}}
+\right)^3 (2.26)^{-3} (0.0116).
+\end{equation}
+%
+The reader is directed to~\cite{rates_paper} for a discussion of the numerical
+factors in the equation above.
+
+Finally, we recognise that $\dot{N}$ is the signal rate $s$ in
+equation~\ref{eq:signal_rate_posterior} so that we arrive at the desired
+posterior on the binary coalescence rate, 
+%
+\begin{eqnarray}
+p(\cbcrate|N_{\textrm{det}},I) & = & p(s|N_{\textrm{det}},I) \left|\frac{\diff
+s}{\diff \cbcrate}\right| \\
+& = & N_G . p(s|N_{\textrm{det}},I)
+\end{eqnarray}
+
+\begin{center}\vspace{1cm}
+\includegraphics[width=0.5\linewidth]{rate_re.pdf}
+\captionof{figure}{Figure caption}
+\end{center}\vspace{1cm}
+
+
+%----------------------------------------------------------------------------------------
+%	CONCLUSIONS
+%----------------------------------------------------------------------------------------
+
+\color{SaddleBrown} % SaddleBrown color for the conclusions to make them stand out
+
+\section*{Conclusions}
+
+\begin{itemize}
+\item Pellentesque eget orci eros. Fusce ultricies, tellus et pellentesque fringilla, ante massa luctus libero, quis tristique purus urna nec nibh. Phasellus fermentum rutrum elementum. Nam quis justo lectus.
+\item Vestibulum sem ante, hendrerit a gravida ac, blandit quis magna.
+\item Donec sem metus, facilisis at condimentum eget, vehicula ut massa. Morbi consequat, diam sed convallis tincidunt, arcu nunc.
+\item Nunc at convallis urna. isus ante. Pellentesque condimentum dui. Etiam sagittis purus non tellus tempor volutpat. Donec et dui non massa tristique adipiscing.
+\end{itemize}
+
+\color{DarkSlateGray} % Set the color back to DarkSlateGray for the rest of the content
+
+
+ %----------------------------------------------------------------------------------------
+%	REFERENCES
+%----------------------------------------------------------------------------------------
+
+\nocite{*} % Print all references regardless of whether they were cited in the poster or not
+\bibliographystyle{plain} % Plain referencing style
+\bibliography{sample} % Use the example bibliography file sample.bib
+
+%----------------------------------------------------------------------------------------
+%	ACKNOWLEDGEMENTS
+%----------------------------------------------------------------------------------------
+
+\section*{Acknowledgements}
+
+Etiam fermentum, arcu ut gravida fringilla, dolor arcu laoreet justo, ut imperdiet urna arcu a arcu. Donec nec ante a dui tempus consectetur. Cras nisi turpis, dapibus sit amet mattis sed, laoreet.
+
+%----------------------------------------------------------------------------------------
+
+\end{multicols}
+\end{document}
