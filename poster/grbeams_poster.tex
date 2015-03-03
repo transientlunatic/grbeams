@@ -205,13 +205,6 @@ Sed fringilla tempus hendrerit. Vestibulum ante ipsum primis in faucibus orci
 luctus et ultrices posuere cubilia Curae; Etiam ut elit sit amet metus lobortis
 consequat sit amet in libero. Lorem ipsum dolor sit amet, consectetur adipiscing
 elit. Phasellus vel sem magna. Nunc at convallis urna. isus ante. Pellentesque
-condimentum dui. Etiam sagittis purus non tellus tempor volutpat. Donec et dui
-non massa tristique adipiscing. Quisque vestibulum eros eu. Phasellus imperdiet,
-tortor vitae congue bibendum, felis enim sagittis lorem, et volutpat ante orci
-sagittis mi. Morbi rutrum laoreet semper. Morbi accumsan enim nec tortor
-consectetur non commodo nisi sollicitudin. Proin sollicitudin. Pellentesque eget
-orci eros. Fusce ultricies, tellus et pellentesque fringilla, ante massa luctus
-libero, quis tristique purus urna nec nibh.
 
 %\begin{wrapfigure}{r}{0.45\linewidth} 
 %    \centering
@@ -250,7 +243,7 @@ C_L(\rhostar) T}{1+\Lambda}\right] e^{-\cbcrate C_L(\rhostar) T}
 \end{equation}
 
 
-\subsection*{Jet Angle Posterior}
+\subsection*{Results}
 
 
   \begin{minipage}{\columnwidth}
@@ -259,11 +252,11 @@ C_L(\rhostar) T}{1+\Lambda}\right] e^{-\cbcrate C_L(\rhostar) T}
     \makeatother
     \centering
     \subfloat[Rate Posterior]{%
-      \includegraphics[width=0.45\linewidth]{rate_posterior_s6UL.pdf}%
+      \includegraphics[width=0.45\linewidth]{S6_rate.pdf}%
       \label{fig:}%
     }\qquad%
     \subfloat[Jet Posterior]{%
-      \includegraphics[width=0.45\linewidth]{theta_posteriors_s6UL.pdf}%
+      \includegraphics[width=0.45\linewidth]{jet_angle_posterior_S6.pdf}%
       \label{fig:}%
     }
     \caption{S6 results}
@@ -334,13 +327,49 @@ s}{\diff \cbcrate}\right| \\
 & = & N_G . p(s|N_{\textrm{det}},I)
 \end{eqnarray}
 
+\subsection*{Results: Validation}
+
 \begin{center}\vspace{1cm}
-    %\includegraphics[width=15cm]{rate_re.pdf}
-    \includegraphics[width=0.5\linewidth]{rate_re.pdf}
+    \includegraphics[width=0.5\linewidth]{aligo_rate_re.pdf}
     \captionof{figure}{Figure caption}
 \end{center}\vspace{1cm}
 
-\subsection*{Jet Angle Posterior}
+\begin{minipage}{\columnwidth}
+  \makeatletter
+  \newcommand{\@captype}{figure}
+  \makeatother
+  \centering
+  \subfloat[Rate Posterior]{%
+    \includegraphics[width=0.45\linewidth]{jet_angle_posterior_aligo_2016.pdf}%
+    \label{fig:}%
+  }\qquad%
+  \subfloat[Jet Posterior]{%
+    \includegraphics[width=0.45\linewidth]{jet_angle_posterior_aligo_2022.pdf}%
+    \label{fig:}%
+  }
+  \caption{Example results for $\theta_{\rm jet}=15^{\circ}$ and binary
+  coalescence rates in~\cite{scenarios} to derive a `simulated' GRB rate.}
+\end{minipage}
+
+\subsection*{Results: Predictions}
+
+\begin{minipage}{\columnwidth}
+  \makeatletter
+  \newcommand{\@captype}{figure}
+  \makeatother
+  \centering
+  \subfloat[Rate Posterior]{%
+    \includegraphics[width=0.45\linewidth]{jet_angle_posterior_aligo_2016_real.pdf}%
+    \label{fig:}%
+  }\qquad%
+  \subfloat[Jet Posterior]{%
+    \includegraphics[width=0.45\linewidth]{jet_angle_posterior_aligo_2022_real.pdf}%
+    \label{fig:}%
+  }
+  \caption{Results in ADE assuming $\grbrate =
+      3\times10^{-9}$\,Mpc$^{-3}$yr$^{-1}$ and binary coalescence rates
+  in~\cite{scenarios}.}
+\end{minipage}
 
 %----------------------------------------------------------------------------------------
 %	CONCLUSIONS
