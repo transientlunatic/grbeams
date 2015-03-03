@@ -74,7 +74,7 @@ def parse_input():
             help="type of prior to use for efficiency")
 
     # --- General
-    parser.add_argument('--Rgrb', type=float, default=None, 
+    parser.add_argument('--Rgrb', type=float, default=3e-9, 
             help="Observed rate of sGRBs in local Universe")
 
     parser.add_argument('--bns-rate', type=str, default='re',
@@ -111,9 +111,9 @@ def parse_input():
 
 args = parse_input()
 
-#epochs = ['2016', '2022']
+epochs = ['2016', '2022']
 #epochs = ['2022']
-epochs = ['2016']
+#epochs = ['2016']
 
 # ---------- Priors ------------ #
 
@@ -149,11 +149,11 @@ for e,epoch in enumerate(epochs):
     # --- Construct Jet Posteriors
     # Get GRB rate for a test case
     if args.sim_grbs:
-        if args.Rgrb is not None:
-            grb_rate = args.Rgrb
-        else:
-            grb_rate = grbeams_utils.comp_grb_rate(efficiency=args.sim_epsilon,
-                    theta=args.sim_theta, bns_rate=scenario.predicted_bns_rate)
+#        if args.Rgrb is not None:
+#            grb_rate = args.Rgrb
+#        else:
+        grb_rate = grbeams_utils.comp_grb_rate(efficiency=args.sim_epsilon,
+                theta=args.sim_theta, bns_rate=scenario.predicted_bns_rate)
 
         thetapos = grbeams_utils.thetaPosterior(scenario, args.prior[0],
                 grb_rate=grb_rate, sim_theta=args.sim_theta)
@@ -177,7 +177,6 @@ for e,epoch in enumerate(epochs):
             theta_bin_size)
 
     thetapos.get_theta_pdf_kde(bandwidth=theta_bw)
-    #thetapos.get_theta_pdf_kde(bandwidth=theta_bin_size)
 
     # *** Rate Posterior ***
     label_str='Epoch=%s'%str(epoch)
@@ -191,17 +190,7 @@ for e,epoch in enumerate(epochs):
             color='k', linestyle=linestyles[e], 
             label=r'%s'%label_str)
 
-    # intervals & characteristics
-#    ax_jet_angle.axvline(thetapos.theta_posmax, color='k',
-#            linestyle='-')
-#   ax_jet_angle.axvline(thetapos.theta_median, color='k',
-#           linestyle=linestyles[e])
-#   ax_jet_angle.axvline(thetapos.theta_bounds[0], color='k',
-#           linestyle=linestyles[e])
-#   ax_jet_angle.axvline(thetapos.theta_bounds[1], color='k',
-#           linestyle=linestyles[e])
-
-# --- bppu estimates:
+    # --- bppu estimates:
     ax_jet_angle.axvline(thetapos.theta_median, color='k',
             linestyle=linestyles[e])
     ax_jet_angle.axvline(thetapos.theta_bounds[0], color='k',
@@ -209,13 +198,28 @@ for e,epoch in enumerate(epochs):
     ax_jet_angle.axvline(thetapos.theta_bounds[1], color='k',
             linestyle=linestyles[e])
 
+    if args.sim_grbs:
+        # just dump the posterior object - that has everything we need
+        f_angle_pickle = file('angle_%s_%s_%s_sim_theta-%.1f_epsilon-%.1f%s.pickle'%(\
+                prediction,epoch,args.prior[0],args.sim_theta,args.sim_epsilon,args.user_tag),'wb')
+        pickle.dump(thetapos.theta_pos,f_angle_pickle)
+    else:
+        f_angle_pickle = file('angle_%s_%s_%s%s.pickle'%(\
+                prediction,epoch,prior_names[args.prior[0]],args.user_tag),'wb')
+        # just dump the posterior object - that has everything we need
+        pickle.dump(thetapos.theta_pos,f_angle_pickle)
+
+    f_angle_pickle.close()
+
+
+
 print >> sys.stdout, "finalising figures"
 
 tit_str='Rate: $R_{\mathrm{%s}}$'%prediction
 ax_bns_rate.set_xlabel('BNS Coalescence Rate $R$ [Mpc$^{-3}$ Myr$^{-1}$]')
 ax_bns_rate.set_ylabel('$p(R|N_{\mathrm{det}},T_{\mathrm{obs}},I)$')
 ax_bns_rate.minorticks_on()
-ax_bns_rate.axvline(scenario.predicted_bns_rate, color='g',\
+ax_bns_rate.axvline(scenario.predicted_bns_rate, color='k',\
         label="`True' value")
 ax_bns_rate.set_xlim(0,5*scenario.predicted_bns_rate) # multiply by 5 to get
                                                       # well beyond the 'true' values
@@ -240,25 +244,29 @@ f_angle.tight_layout()
 if args.sim_grbs:
     f_angle.savefig('angle_%s_%s_sim_theta-%.1f_epsilon-%.1f%s.pdf'%(\
             prediction,args.prior[0],args.sim_theta,args.sim_epsilon,args.user_tag))
-    f_angle_pickle = file('angle_%s_%s_sim_theta-%.1f_epsilon-%.1f%s.pickle'%(\
-            prediction,args.prior[0],args.sim_theta,args.sim_epsilon,args.user_tag),'wb')
-    pickle.dump((thetapos.theta_grid,thetapos.theta_pdf_kde),f_angle_pickle)
-    f_angle_pickle.close()
+    f_angle.savefig('angle_%s_%s_sim_theta-%.1f_epsilon-%.1f%s.eps'%(\
+            prediction,args.prior[0],args.sim_theta,args.sim_epsilon,args.user_tag))
+    f_angle.savefig('angle_%s_%s_sim_theta-%.1f_epsilon-%.1f%s.png'%(\
+            prediction,args.prior[0],args.sim_theta,args.sim_epsilon,args.user_tag))
+
+
 
 else:
     f_angle.savefig('angle_%s_%s%s.pdf'%(\
             prediction,prior_names[args.prior[0]],args.user_tag))
-    f_angle_pickle = file('angle_%s_%s%s.pickle'%(\
-            prediction,prior_names[args.prior[0]],args.user_tag),'wb')
-    pickle.dump((thetapos.theta_grid,thetapos.theta_pdf_kde),f_angle_pickle)
-    f_angle_pickle.close()
+    f_angle.savefig('angle_%s_%s%s.eps'%(\
+            prediction,prior_names[args.prior[0]],args.user_tag))
+    f_angle.savefig('angle_%s_%s%s.png'%(\
+            prediction,prior_names[args.prior[0]],args.user_tag))
 
 f_rate.savefig('rate_%s%s.eps'%(prediction,args.user_tag))
+f_rate.savefig('rate_%s%s.pdf'%(prediction,args.user_tag))
+f_rate.savefig('rate_%s%s.png'%(prediction,args.user_tag))
 f_rate_pickle = file('rate_%s%s.pickle'%(prediction,args.user_tag),'wb')
 pickle.dump((scenario.bns_rate, scenario.bns_rate_pdf),f_rate_pickle)
 f_rate_pickle.close()
 
 #pl.close(2)
-pl.show()
+#pl.show()
 
 

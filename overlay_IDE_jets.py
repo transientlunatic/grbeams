@@ -21,9 +21,6 @@ from matplotlib import pyplot as pl
 import grbeams_utils
 
 resultsfiles = sys.argv[1].split('|')
-epoch=sys.argv[2]
-if len(sys.argv)==4: injvalue=float(sys.argv[3])
-else: injvalue=None
 
 f, ax = pl.subplots()
 labels=[r"\delta(1)", r"U(0,1)", r"\beta(0,1)"]
@@ -49,6 +46,7 @@ for r,result in enumerate(resultsfiles):
             bandwidth=theta_bw)
 
     intervals = data.prob_interval([0.9])
+    UL = np.percentile(data.samples, 90)
 
     if r==2: linewidth=2
     else: linewidth=1
@@ -56,22 +54,21 @@ for r,result in enumerate(resultsfiles):
 #    ax.hist(data.samples, bins=theta_bins, normed=True, histtype='stepfilled',
 #            alpha=0.5)
 
-    labelstr=r'$p(\theta|I)=%s$, $\langle \theta_{\rm jet} \rangle_{1/2}=%.2f^{+%.2f}_{-%.2f}$'%(\
-            labels[r], data.median, intervals[0][1]-data.median,
-            data.median-intervals[0][0])
+    labelstr=r"$p(\theta|I)={0}$, $90\%$ UL={1:.2f}".format(labels[r], UL)
+
+    #$\langle \theta_{\rm jet} \rangle_{1/2}=%.2f^{+%.2f}_{-%.2f}$'%(\
+    #        #labels[r], data.median, intervals[0][1]-data.median,
+    #        #data.median-intervals[0][0])
 
     ax.plot(theta_grid, theta_pdf, color='k', linestyle=linestyles[r],
             linewidth=linewidth, label=labelstr)
 
-#    ax.axvline(intervals[0][0], color='k', linestyle=linestyles[r])
-#    ax.axvline(intervals[0][1], color='k', linestyle=linestyles[r])
-    ax.axvline(data.median, color='k', linestyle=linestyles[r])
+    ax.axvline(UL, color='k', linestyle=linestyles[r])
 
-if injvalue is not None:
-    ax.axvline(injvalue, label="`True' value", color='r')
 
 ax.legend()
 ax.minorticks_on()
+ax.set_xlim(0,25)
 
 ax.set_xlabel(r'Jet Angle, $\theta_{\rm jet}$ [deg]')
 ax.set_ylabel(r'$p(\theta|D,I)$')

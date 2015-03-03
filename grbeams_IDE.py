@@ -141,42 +141,32 @@ theta_bins = np.arange(thetapos.theta_range.min(), thetapos.theta_range.max(),
 thetapos.get_theta_pdf_kde(bandwidth=theta_bw)
 
 # *** Rate Posterior ***
-ax_bns_rate.plot(scenario.bns_rate,np.exp(scenario.bns_rate_pdf), \
-        color='k',  label=r'reconstructed S6 posterior')
+ax_bns_rate.plot(scenario.bns_rate,np.exp(scenario.bns_rate_pdf), color='k')
+ax_bns_rate.axvline(scenario.upper_limit, color='k', linestyle='--', 
+        label='S6 $90\%$ upper limit')
 
 # *** Jet Posterior ***
 ax_jet_angle.hist(thetapos.theta_samples, bins=theta_bins, normed=True,
         histtype='stepfilled', alpha=0.5)
 ax_jet_angle.plot(thetapos.theta_grid,thetapos.theta_pdf_kde, \
         color='k')
+ax_jet_angle.axvline(np.percentile(thetapos.theta_pos.samples, 90),
+        linestyle='--')
 
-# --- bppu estimates:
-ax_jet_angle.axvline(thetapos.theta_median, color='k',
-        linestyle=linestyles[e])
-ax_jet_angle.axvline(thetapos.theta_bounds[0], color='k',
-        linestyle=linestyles[e])
-ax_jet_angle.axvline(thetapos.theta_bounds[1], color='k',
-        linestyle=linestyles[e])
 
-f_angle_pickle = file('angle_%s_%s_%s%s.pickle'%(\
-        prediction,epoch,prior_names[args.prior[0]],args.user_tag),'wb')
+f_angle_pickle = file('S6_angle_%s.pickle'%(prior_names[args.prior[0]]),'wb')
+
 # just dump the posterior object - that has everything we need
 pickle.dump(thetapos.theta_pos,f_angle_pickle)
 
 f_angle_pickle.close()
 
 
-
 print >> sys.stdout, "finalising figures"
 
-tit_str='Rate: $R_{\mathrm{%s}}$'%prediction
 ax_bns_rate.set_xlabel('BNS Coalescence Rate $R$ [Mpc$^{-3}$ Myr$^{-1}$]')
-ax_bns_rate.set_ylabel('$p(R|N_{\mathrm{det}},T_{\mathrm{obs}},I)$')
+ax_bns_rate.set_ylabel('$p(R|D,I)$')
 ax_bns_rate.minorticks_on()
-ax_bns_rate.axvline(scenario.predicted_bns_rate, color='k',\
-        label="`True' value")
-ax_bns_rate.set_xlim(0,5*scenario.predicted_bns_rate) # multiply by 5 to get
-                                                      # well beyond the 'true' values
 ax_bns_rate.legend()
 f_rate.subplots_adjust(bottom=0.15,left=0.1,right=0.925)
 f_rate.tight_layout()
@@ -184,39 +174,23 @@ f_rate.tight_layout()
 ax_jet_angle.set_xlabel(r'$\theta_{\mathrm{jet}}$')
 ax_jet_angle.set_ylabel(r'$p(\theta_{\mathrm{jet}}|R,I)$')
 ax_jet_angle.minorticks_on()
-#ax_jet_angle.set_xlim(0,60)
-
-if args.sim_grbs:
-    ax_jet_angle.axvline(args.sim_theta, color='g', label="`True' value")
 
 ax_jet_angle.legend()
+
 f_angle.subplots_adjust(bottom=0.1,top=0.925,left=0.1,right=0.925)
 f_angle.tight_layout()
 
-#pl.subplots_adjust(bottom=0.2,top=0.925,left=0.15,right=0.95)
+f_angle.savefig('S6_angle_%s.pdf'%(\
+        prior_names[args.prior[0]]))
+f_angle.savefig('S6_angle_%s.eps'%(\
+        prior_names[args.prior[0]]))
+f_angle.savefig('S6_angle_%s.png'%(\
+        prior_names[args.prior[0]]))
 
-if args.sim_grbs:
-    f_angle.savefig('angle_%s_%s_sim_theta-%.1f_epsilon-%.1f%s.pdf'%(\
-            prediction,args.prior[0],args.sim_theta,args.sim_epsilon,args.user_tag))
-    f_angle.savefig('angle_%s_%s_sim_theta-%.1f_epsilon-%.1f%s.eps'%(\
-            prediction,args.prior[0],args.sim_theta,args.sim_epsilon,args.user_tag))
-    f_angle.savefig('angle_%s_%s_sim_theta-%.1f_epsilon-%.1f%s.png'%(\
-            prediction,args.prior[0],args.sim_theta,args.sim_epsilon,args.user_tag))
-
-
-
-else:
-    f_angle.savefig('angle_%s_%s%s.pdf'%(\
-            prediction,prior_names[args.prior[0]],args.user_tag))
-    f_angle.savefig('angle_%s_%s%s.eps'%(\
-            prediction,prior_names[args.prior[0]],args.user_tag))
-    f_angle.savefig('angle_%s_%s%s.png'%(\
-            prediction,prior_names[args.prior[0]],args.user_tag))
-
-f_rate.savefig('rate_%s%s.eps'%(prediction,args.user_tag))
-f_rate.savefig('rate_%s%s.pdf'%(prediction,args.user_tag))
-f_rate.savefig('rate_%s%s.png'%(prediction,args.user_tag))
-f_rate_pickle = file('rate_%s%s.pickle'%(prediction,args.user_tag),'wb')
+f_rate.savefig('S6_rate.eps')
+f_rate.savefig('S6_rate.pdf')
+f_rate.savefig('S6_rate.png')
+f_rate_pickle = file('S6_rate.pickle','wb')
 pickle.dump((scenario.bns_rate, scenario.bns_rate_pdf),f_rate_pickle)
 f_rate_pickle.close()
 

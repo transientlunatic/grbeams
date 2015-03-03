@@ -82,6 +82,8 @@ def cbc_rate_from_theta(grb_rate,theta,efficiency):
     """
     Returns Rcbc = Rgrb / (1-cos(theta))
     """
+#   print grb_rate, efficiency, theta
+#   sys.exit()
     return grb_rate / ( efficiency*(1.-np.cos(theta * np.pi / 180)) )
 
 def kde_sklearn(x, x_grid, bandwidth=0.2, **kwargs):
@@ -159,6 +161,13 @@ def compute_confints(x_axis,pdf,alpha):
 
     return ([low_edge,upp_edge],peak,area)
 
+def cbcRatePosteriorNull(eps,bnsrate):
+    """
+    Returns the value of the posterior on the cbc Rate for Lambda=0
+    """
+    #return eps*np.exp(-bnsrate*eps)
+    return np.log(eps)-bnsrate*eps
+
 
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~ #
 # ---- CLASS DEFS ---- #
@@ -208,10 +217,27 @@ class RatePosteriorKnownBG:
  
         return vprob(source_rate)
 
+class S6Scenario:
+    """
+    class with the observing scenario information for the null detection run and
+    an upper limit from the loudest event formalism
+    """
+
+    def __init__(self, rate_upper_limit=1.3e-4, alpha=0.9):
+        self.upper_limit = rate_upper_limit
+        self.eps = -1*np.log(1-alpha)/rate_upper_limit
+
+    def comp_bns_rate_pdf(self, bns_rate):
+        return cbcRatePosteriorNull(self.eps, bns_rate)
+
+    def compute_posteriors(self):
+        # BNS coalescence rate posterior arrays for rate in / Mpc^3 / Myr.
+        self.bns_rate=np.linspace(1e-8,5e-4,5000)
+        self.bns_rate_pdf = self.comp_bns_rate_pdf(self.bns_rate)
 
 class Scenarios:
     """
-    Class with the observing scenario information
+    class with the observing scenario information
     """
 
     def __init__(self,epoch,rate_prediction):
@@ -351,7 +377,7 @@ class Scenarios:
 class thetaPosterior:
 
     def __init__(self, observing_scenario, efficiency_prior='delta,1.0',
-            grb_rate=10/1e9, sim_theta=None):
+            grb_rate=3/1e9, sim_theta=None):
 
         self.sim_theta=sim_theta
 
@@ -394,7 +420,7 @@ class thetaPosterior:
         self.theta_bounds, self.theta_median, self.theta_posmax = \
                 characterise_dist(self.theta_grid, self.theta_pdf_kde, 0.95)
 
-    def sample_theta_posterior(self, nburnin=100, nsamp=100, nwalkers=100):
+    def sample_theta_posterior(self, nburnin=100, nsamp=500, nwalkers=100):
         """
         Use emcee ensemble sampler to draw samples from the ndim parameter space
         comprised of (theta, efficiency, delta_theta, ...) etc
