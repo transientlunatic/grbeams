@@ -26,9 +26,9 @@ if len(sys.argv)==4: injvalue=float(sys.argv[3])
 else: injvalue=None
 
 f, ax = pl.subplots()
-labels=[r"\delta(1)", r"U(0,1)", r"\beta(0,1)"]
+labels=[r"\delta(0.5)", r"\delta(1.0)", r"U(0,1)", r"\beta(0,1)"]
 
-linestyles=['-', '--', ':']
+linestyles=['-', '--', ':', '-.']
 
 for r,result in enumerate(resultsfiles):
 
@@ -49,7 +49,11 @@ for r,result in enumerate(resultsfiles):
             bandwidth=theta_bw)
 
     intervals = data.prob_interval([0.9])
-    LL = np.percentile(data.samples, 5) 
+    LL = np.percentile(data.samples, 10) 
+    #mode = theta_grid[np.argmin(abs((np.diff(theta_pdf)/np.diff(theta_grid))))]
+    mode = theta_grid[np.argmax(theta_pdf)]
+
+
     if r==2: linewidth=2 
     else: linewidth=1 
     #    ax.hist(data.samples, bins=theta_bins, normed=True, histtype='stepfilled', 
@@ -57,19 +61,26 @@ for r,result in enumerate(resultsfiles):
     #labelstr=r'$p(\theta|I)=%s$, $\langle \theta_{\rm jet} \rangle_{1/2}=%.2f^{+%.2f}_{-%.2f}$'%(\
     #        labels[r], data.median, intervals[0][1]-data.median,
     #        data.median-intervals[0][0])
-    labelstr=r'$p(\theta|I)=%s$, lower limmit=%.2f'%(labels[r], LL)
+    labelstr=r'$p(\epsilon|I)=%s$, $\theta_{\rm jet}^{\rm MAP}=%.2f^{+%.2f}_{-%.2f}$'%(\
+            labels[r], mode, intervals[0][1]-mode,
+            mode-intervals[0][0])
+    #labelstr=r'$p(\theta|I)=%s$, lower limmit=%.2f'%(labels[r], LL)
 
-    ax.plot(theta_grid, theta_pdf, color='k', linestyle=linestyles[r],
+    ax.semilogy(theta_grid, theta_pdf, color='k', linestyle=linestyles[r],
             linewidth=linewidth, label=labelstr)
 
 #    ax.axvline(intervals[0][0], color='k', linestyle=linestyles[r])
 #    ax.axvline(intervals[0][1], color='k', linestyle=linestyles[r])
 #    ax.axvline(data.median, color='k', linestyle=linestyles[r])
-    ax.axvline(LL, color='k', linestyle=linestyles[r])
+    ax.axvline(mode, color='k', linestyle=linestyles[r])
+#    ax.axvline(LL, color='k', linestyle=linestyles[r])
 
 if injvalue is not None:
     ax.axvline(injvalue, label="`True' value", color='r')
 
+if injvalue is None:
+    ax.set_xlim(0,30)
+ax.set_ylim(1e-2,1)
 ax.legend()
 ax.minorticks_on()
 
@@ -79,11 +90,16 @@ f.tight_layout()
 
 #sys.exit()
 
-pl.savefig('jet_angle_posterior_aligo_%s.eps'%epoch)
-pl.savefig('jet_angle_posterior_aligo_%s.png'%epoch)
-pl.savefig('jet_angle_posterior_aligo_%s.pdf'%epoch)
+if result.find('sim') > -1:
+    pl.savefig('jet_angle_posterior_aligo_%s.eps'%epoch)
+    pl.savefig('jet_angle_posterior_aligo_%s.png'%epoch)
+    pl.savefig('jet_angle_posterior_aligo_%s.pdf'%epoch)
+else:
+    pl.savefig('jet_angle_posterior_aligo_%s_real.eps'%epoch)
+    pl.savefig('jet_angle_posterior_aligo_%s_real.png'%epoch)
+    pl.savefig('jet_angle_posterior_aligo_%s_real.pdf'%epoch)
 
-pl.show()
+#pl.show()
 
 
 
