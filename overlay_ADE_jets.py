@@ -49,23 +49,23 @@ for r,result in enumerate(resultsfiles):
             bandwidth=theta_bw)
 
     intervals = data.prob_interval([0.9])
-
-    if r==2: linewidth=2
-    else: linewidth=1
-
-#    ax.hist(data.samples, bins=theta_bins, normed=True, histtype='stepfilled',
-#            alpha=0.5)
-
-    labelstr=r'$p(\theta|I)=%s$, $\langle \theta_{\rm jet} \rangle_{1/2}=%.2f^{+%.2f}_{-%.2f}$'%(\
-            labels[r], data.median, intervals[0][1]-data.median,
-            data.median-intervals[0][0])
+    LL = np.percentile(data.samples, 5) 
+    if r==2: linewidth=2 
+    else: linewidth=1 
+    #    ax.hist(data.samples, bins=theta_bins, normed=True, histtype='stepfilled', 
+    #            alpha=0.5) 
+    #labelstr=r'$p(\theta|I)=%s$, $\langle \theta_{\rm jet} \rangle_{1/2}=%.2f^{+%.2f}_{-%.2f}$'%(\
+    #        labels[r], data.median, intervals[0][1]-data.median,
+    #        data.median-intervals[0][0])
+    labelstr=r'$p(\theta|I)=%s$, lower limmit=%.2f'%(labels[r], LL)
 
     ax.plot(theta_grid, theta_pdf, color='k', linestyle=linestyles[r],
             linewidth=linewidth, label=labelstr)
 
 #    ax.axvline(intervals[0][0], color='k', linestyle=linestyles[r])
 #    ax.axvline(intervals[0][1], color='k', linestyle=linestyles[r])
-    ax.axvline(data.median, color='k', linestyle=linestyles[r])
+#    ax.axvline(data.median, color='k', linestyle=linestyles[r])
+    ax.axvline(LL, color='k', linestyle=linestyles[r])
 
 if injvalue is not None:
     ax.axvline(injvalue, label="`True' value", color='r')
@@ -79,9 +79,9 @@ f.tight_layout()
 
 #sys.exit()
 
-pl.savefig('jet_angle_posterior_aligo_%s_real.eps'%epoch)
-pl.savefig('jet_angle_posterior_aligo_%s_real.png'%epoch)
-pl.savefig('jet_angle_posterior_aligo_%s_real.pdf'%epoch)
+pl.savefig('jet_angle_posterior_aligo_%s.eps'%epoch)
+pl.savefig('jet_angle_posterior_aligo_%s.png'%epoch)
+pl.savefig('jet_angle_posterior_aligo_%s.pdf'%epoch)
 
 pl.show()
 
