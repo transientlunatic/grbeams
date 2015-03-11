@@ -92,7 +92,10 @@ def kde_sklearn(x, x_grid, bandwidth=0.2, **kwargs):
     kde_skl.fit(x[:, np.newaxis])
     # score_samples() returns the log-likelihood of the samples
     log_pdf = kde_skl.score_samples(x_grid[:, np.newaxis])
-    return np.exp(log_pdf)
+    
+    N = np.trapz(np.exp(log_pdf), x_grid)
+
+    return np.exp(log_pdf)/N
     
 def characterise_dist(x,y,alpha):
     """

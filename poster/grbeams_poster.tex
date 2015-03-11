@@ -26,6 +26,8 @@
 \usepackage{wrapfig} % Allows wrapping text around tables and figures
 \usepackage{tcolorbox}
 \usepackage{subfig}
+\usepackage{bm}
+\usepackage[parfill]{parskip}
 
 %\newcommand{\gw}{gravitational wave }
 %\newcommand{\gws}{gravitational waves }
@@ -64,8 +66,8 @@
 % The widths of these boxes can be easily edited to accommodate your content as you see fit
 
 \begin{minipage}[b]{0.7\linewidth}
-\veryHuge \color{NavyBlue} \textbf{Gravitational Wave Constraints On Gamma-Ray
-Burst Beaming Angles} \color{Black}\\ \\% Title
+\veryHuge \color{NavyBlue} \textbf{Gravitational Wave Constraints On Beaming
+    Angles in GRBs From Binary Coalescence} \color{Black}\\ \\% Title
 \huge \textbf{James A. Clark$^{1}$, Ik Siong Heng$^{2}$ \& Martin
 Hendry$^{2}$}\\ \\% Author(s)
 \large 1. Georgia Institude of Technology\\ % University/organization
@@ -89,23 +91,18 @@ Hendry$^{2}$}\\ \\% Author(s)
 %	ABSTRACT
 %----------------------------------------------------------------------------------------
 
-\color{Navy} % Navy color for the abstract
-
-\begin{abstract}
-
-Sed fringilla tempus hendrerit. Vestibulum ante ipsum primis in faucibus orci
-luctus et ultrices posuere cubilia Curae; Etiam ut elit sit amet metus lobortis
-consequat sit amet in libero. Lorem ipsum dolor sit amet, consectetur adipiscing
-elit. Phasellus vel sem magna. Nunc at convallis urna. isus ante. Pellentesque
-condimentum dui. Etiam sagittis purus non tellus tempor volutpat. Donec et dui
-non massa tristique adipiscing. Quisque vestibulum eros eu. Phasellus imperdiet,
-tortor vitae congue bibendum, felis enim sagittis lorem, et volutpat ante orci
-sagittis mi. Morbi rutrum laoreet semper. Morbi accumsan enim nec tortor
-consectetur non commodo nisi sollicitudin. Proin sollicitudin. Pellentesque eget
-orci eros. Fusce ultricies, tellus et pellentesque fringilla, ante massa luctus
-libero, quis tristique purus urna nec nibh.
-
-\end{abstract}
+%   \color{Navy} % Navy color for the abstract
+%
+%   \begin{abstract}
+%
+%   Sed fringilla tempus hendrerit. Vestibulum ante ipsum primis in faucibus orci
+%   luctus et ultrices posuere cubilia Curae; Etiam ut elit sit amet metus lobortis
+%   consequat sit amet in libero. Lorem ipsum dolor sit amet, consectetur adipiscing
+%   elit. Phasellus vel sem magna. Nunc at convallis urna. isus ante. Pellentesque
+%   condimentum dui. Etiam sagittis purus non tellus tempor volutpat. Donec et dui
+%   non massa tristique adipiscing. Quisque vestibulum eros eu. Phasellus imperdiet,
+%
+%   \end{abstract}
 
 %----------------------------------------------------------------------------------------
 %	INTRODUCTION
@@ -128,38 +125,163 @@ libero, quis tristique purus urna nec nibh.
 
 \color{DarkSlateGray} % DarkSlateGray color for the rest of the content
 
-\section*{This Work}
+\section*{\centering Outline}
 
 \begin{enumerate}
-\item Lorem ipsum dolor sit amet, consectetur.
-\item Nullam at mi nisl. Vestibulum est purus, ultricies cursus volutpat sit amet, vestibulum eu.
-\item Praesent tortor libero, vulputate quis elementum a, iaculis.
-\item Phasellus a quam mauris, non varius mauris. Fusce tristique, enim tempor varius porta, elit purus commodo velit, pretium mattis ligula nisl nec ante.
-\item Ut adipiscing accumsan sapien, sit amet pretium.
-\item Estibulum est purus, ultricies cursus volutpat
-\item Nullam at mi nisl. Vestibulum est purus, ultricies cursus volutpat sit amet, vestibulum eu.
-\item Praesent tortor libero, vulputate quis elementum a, iaculis.
+    \item Most short \grb{s} are probably associated with
+        compact binary coalescence
+    \item The observed rate of \grb{s} in the local Universe is a function of the
+        geometry of the beamed jet and the rate of binary coalescence
+    \item Searches for \gw{s} yield direct constraints on the binary coalescence
+        rate
+    \item {\bf We demonstrate a how to transform the posterior measurement of
+            the binary coalescence rate measured from \gw{} observations to a
+        direct measurement of the \grb{} beaming angle}, while accounting for
+            the uncertainty in the rate measurement and our ignorance in the
+            details of the \grb{} progenitor model
 \end{enumerate}
 
 %----------------------------------------------------------------------------------------
 %	MATERIALS AND METHODS
 %----------------------------------------------------------------------------------------
 
-\section*{GRB Beaming Angles From Coalescence Rate Measurements}
+\section*{\centering GRB Beaming Angles From Coalescence Rate Measurements}
 Assuming that at least some fraction of sGRBs are due to compact binary
 coalescence, the observed rate of sGRBs may be written,
 %
 \begin{equation}\label{eq:rate2angle}
 \grbrate=\epsilon\cbcrate(1-\cos \theta),
 \end{equation}
+%
+where:
+\begin{itemize}
+    \item $\theta$ is the \emph{mean} GRB jet opening angle, given a population
+        of angles.% ({\bf not all GRBs need have the same opening angle}).
+    \item $\cbcrate$ is the rate of GRB progenitor events (binary
+        neutron star coalescence).  
+    \item $\epsilon$ is the (unknown) probability that any given coalescence will
+        sucessfully generate a GRB, hereafter referred to as `efficiency'.  Note
+        that the inclusion of the efficiency term $\epsilon$ allows for the
+        possibility that not all GRB progenitors are BNS mergers.
+\end{itemize}
 
-\begin{equation}
-p(\theta,\epsilon) = p(\cbcrate,\epsilon)
-\left\lvert\left\lvert
-\frac{\partial(\cbcrate,\epsilon)}{\partial(\theta,\epsilon)}
-\right\rvert\right\rvert,
-\end{equation}
+{\large Objective}: determine the value of and uncertainty in the jet
+angle $\theta$, given \gw{} constraints on the binary coalescence rate
+$\cbcrate$ and a clearly stated level of ignorance on the \grb{} efficiency
+$\epsilon$.
 
+For the purposes of this study, we assume that the sGRB rate $\grbrate$ in the
+local Universe is known to arbitrary accuracy and adopt a fiducial value of
+\textcolor{red}{10XXXXXXXXXXXXXXXXX}.
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection*{\centering Robustness of Mean Angle Inference To Distribution Width}
+
+%Our goal is to infer the \emph{mean} GRB beaming angle based \emph{solely} on
+%the binary coalescence event rate.  
+How robust is our inference on the \emph{mean} GRB beaming angle to the
+\emph{width} of the distribution of angles?  
+%In other words, how much does the
+%width in the distribution of GRB beaming angles affect the relative rates of
+%observed GRBs and binary coalescence? 
+
+We conduct a simple Monte-Carlo experiment: simulate a population of binary
+inclinations and count how many of these events would be observed, given a
+certain jet angle distribution.  Figure~\ref{fig:thetapopulation} compares the
+ratio of observed GRBs to all mergers, $N_{\rm bns}/N_{\rm GRB}$ for a variety
+of jet angle distributions
+
+\begin{center}%\vspace{1cm}
+    %\includegraphics[width=15cm]{theta_dist_grbfrac.png}
+    \includegraphics[width=0.5\linewidth]{theta_dist_grbfrac.pdf}
+    \captionof{figure}{\label{fig:thetapopulation} Expected relative
+    numbers of observed GRBs and binary coalescences for different distributions
+on the GRB beaming angle.  Lines in the figure correspond to jet angle
+population means, while the $x$-axis shows the width of the distribution.  All
+distributions are Gaussian, truncated at $(0, 90]$ degrees.}
+\end{center}\vspace{1cm}
+
+\begin{comment}
+    \begin{enumerate}
+        \item Generate a population of binary inclination angles drawn from a
+            uniform distribution in $\cos \iota$.  Call the size of this population
+            $N_{\rm bns}$.
+        \item For each of these `merger events' draw a GRB jet angle from a
+            truncated Normal distribution with $N(\langle \theta \rangle,
+            \sigma_{\theta})$.  If the inclination lies within the jet cone
+            represented by this GRB jet angle, increment the number of `observed
+            GRBs' $N_{\rm GRB}$ by 1.
+        \item Study the ratio of observed GRBs to all mergers, $N_{\rm bns}/N_{\rm
+            GRB}$ for a variety of jet angle distributions
+    \end{enumerate}
+\end{comment}
+
+Figure~\ref{fig:thetapopulation} shows that the relative numbers of observed GRBs
+to all binary mergers, for a given distribution mean, is quite insensitive to
+the distribution width - the relative numbers only change by a few \%.
+%
+Note, however, that the relative numbers of events are degenerate across a range
+of distribution means (e.g., the result for $p(\theta) = N(5,10)$ is
+approximately the same as the result for $p(\theta) = N(10,5)$).  
+
+{\bf Key finding}: event rate-based inferences on $\theta$ are really \emph{upper
+bounds} on the \emph{mean} of the GRB jet angle population.
+
+% What IS theta??
+
+%\begin{wrapfigure}{r}{0.45\linewidth} 
+%    \centering
+%        \includegraphics[width=15cm]{theta_dist_grbfrac.pdf}
+        %\includegraphics[width=0.5\linewidth]{efficiency_prior.pdf}
+%        \captionof{figure}{Figure caption}
+%\end{wrapfigure}
+
+\section*{\centering Posterior Inferences On The Jet Angle}
+%\To make meaningful inferences regarding the  mean GRB jet angle $\theta$ one
+%must construct the posterior probability density function $p(\theta|D,I)$, where
+%$D$ represents some data or measurement and $I$ some prior conditioning
+%information.
+
+Given equation~\ref{eq:rate2theta}, a posterior PDF on the rate $\cbcrate$ and
+some prior information regarding the efficiency $\epsilon$ and the observed GRB
+rate $\grbrate$, one may construct a jet angle posterior via 
+transformation of the rate posterior:
+\begin{enumerate}
+    \item Construct the joint-PDF on the jet angle $\theta$ and efficiency
+        $\epsilon$ from the joint-PDF on the rate and the efficiency,
+
+    \begin{equation}
+    p(\theta,\epsilon) = p(\cbcrate,\epsilon)
+    \left\lvert\left\lvert
+    \frac{\partial(\cbcrate,\epsilon)}{\partial(\theta,\epsilon)}
+    \right\rvert\right\rvert,
+    \end{equation}
+
+    where the second term is the Jacobian determinant for the transformation and
+    we assume that the rate posterior and the prior PDF on the efficiency are
+    logically independent, such that,
+
+    \begin{equation}
+        p(\cbcrate, \epsilon) =  p(\epsilon|\cbcrate)p(\cbcrate) =
+        p(\epsilon)p(\cbcrate)
+    \end{equation}
+
+    \item Inferences on the jet angle are then arrived at by marginalising the joint
+        posterior $p(\theta,\epsilon)$ over the unknown efficency:
+
+        \begin{eqnarray}
+        p(\theta) = \int_{\epsilon} p(\theta,\epsilon)~\diff \epsilon =
+        \int_{\epsilon} ~\diff \epsilon p(\cbcrate)(\epsilon)
+            \left\lvert\left\lvert
+            \frac{\partial(\cbcrate,\epsilon)}{\partial(\theta,\epsilon)}
+            \right\rvert\right\rvert,
+        \end{eqnarray}
+
+\end{enumerate}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%55
+\begin{comment}
 where the Jacobian matrix is given by,
 % Increase matrix line spacing
 \begingroup
@@ -176,29 +298,13 @@ where the Jacobian matrix is given by,
 
 % end line spacing increase
 \endgroup
-
-\begin{equation}
-p(\theta) = \int_{\epsilon} p(\theta,\epsilon)~\diff \epsilon,
-\end{equation}
+\end{comment}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%55
 
 %------------------------------------------------
-% What IS theta??
-
-\begin{center}\vspace{1cm}
-    %\includegraphics[width=15cm]{theta_dist_grbfrac.png}
-    \includegraphics[width=0.48\linewidth]{theta_dist_grbfrac.pdf}
-        \captionof{figure}{Figure caption}
-\end{center}\vspace{1cm}
-
-%\begin{wrapfigure}{r}{0.45\linewidth} 
-%    \centering
-%        \includegraphics[width=15cm]{theta_dist_grbfrac.pdf}
-        %\includegraphics[width=0.5\linewidth]{efficiency_prior.pdf}
-%        \captionof{figure}{Figure caption}
-%\end{wrapfigure}
-
 %------------------------------------------------
 % Efficiency Prior
+\begin{comment}
 \subsection*{Prior on GRB Efficiency, $\epsilon$}
 
 Sed fringilla tempus hendrerit. Vestibulum ante ipsum primis in faucibus orci
@@ -229,21 +335,22 @@ sagittis mi. Morbi rutrum laoreet semper. Morbi accumsan enim nec tortor
 consectetur non commodo nisi sollicitudin. Proin sollicitudin. Pellentesque eget
 orci eros. Fusce ultricies, tellus et pellentesque fringilla, ante massa luctus
 libero, quis tristique purus urna nec nibh.
+\end{comment}
 
 
 %----------------------------------------------------------------------------------------
 %	iLIGO
 %----------------------------------------------------------------------------------------
-\section*{Constraints From The Initial Detector Era}
+\section*{\centering Constraints From The Initial Detector Era}
 
-\subsection*{Constructing The Rate Posterior}
+%\subsection*{Constructing The Rate Posterior}
 \begin{equation}\label{eq:loudestEventPosterior}
 p(\cbcrate | C_L({\rhostar}), T, \Lambda) \propto p(\cbcrate) \left[ \frac{1+\Lambda
 C_L(\rhostar) T}{1+\Lambda}\right] e^{-\cbcrate C_L(\rhostar) T}
 \end{equation}
 
 
-\subsection*{Results}
+%\subsection*{Results}
 
 
   \begin{minipage}{\columnwidth}
@@ -265,9 +372,9 @@ C_L(\rhostar) T}{1+\Lambda}\right] e^{-\cbcrate C_L(\rhostar) T}
 %----------------------------------------------------------------------------------------
 %	aLIGO
 %----------------------------------------------------------------------------------------
-\section*{Constraints In The Advanced Detector Era}
+\section*{\centering Constraints In The Advanced Detector Era}
 
-\subsection*{Constructing The Rate Posterior}
+%\subsection*{Constructing The Rate Posterior}
 
 So let $b=10^{-2}$\,yr$^{-1}$.  From there, we can get the detection rate
 posterior using equations 14.10--14.12 of Gregory.  The measured rate $r$
@@ -327,7 +434,7 @@ s}{\diff \cbcrate}\right| \\
 & = & N_G . p(s|N_{\textrm{det}},I)
 \end{eqnarray}
 
-\subsection*{Results: Validation}
+\subsection*{Validation}
 
 \begin{center}\vspace{1cm}
     \includegraphics[width=0.5\linewidth]{aligo_rate_re.pdf}
@@ -351,7 +458,7 @@ s}{\diff \cbcrate}\right| \\
   coalescence rates in~\cite{scenarios} to derive a `simulated' GRB rate.}
 \end{minipage}
 
-\subsection*{Results: Predictions}
+\subsection*{Predictions}
 
 \begin{minipage}{\columnwidth}
   \makeatletter
@@ -401,9 +508,11 @@ s}{\diff \cbcrate}\right| \\
 %	ACKNOWLEDGEMENTS
 %----------------------------------------------------------------------------------------
 
-\section*{Acknowledgements}
+%\section*{Acknowledgements}
 
-Etiam fermentum, arcu ut gravida fringilla, dolor arcu laoreet justo, ut imperdiet urna arcu a arcu. Donec nec ante a dui tempus consectetur. Cras nisi turpis, dapibus sit amet mattis sed, laoreet.
+%Etiam fermentum, arcu ut gravida fringilla, dolor arcu laoreet justo, ut
+%imperdiet urna arcu a arcu. Donec nec ante a dui tempus consectetur. Cras nisi
+%turpis, dapibus sit amet mattis sed, laoreet.
 
 %----------------------------------------------------------------------------------------
 

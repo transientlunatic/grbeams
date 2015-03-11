@@ -104,7 +104,7 @@ args = parse_input()
 
 # this is handy for file naming, so we don't have unwanted characters
 prior_names={'delta,0.1':'delta_0p1', 'delta,0.5':'delta_0p5',
-'delta,1.0':'delta_1', 'uniform':'uniform_0p01-1','jeffreys':'jeffreys'}
+'delta,1.0':'delta_1', 'uniform':'uniform','jeffreys':'jeffreys'}
 
 print >> sys.stdout, "\n --- Using %s efficiency prior ---"%args.prior[0]
 
