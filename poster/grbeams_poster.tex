@@ -67,7 +67,7 @@
 
 \begin{minipage}[b]{0.7\linewidth}
 \veryHuge \color{NavyBlue} \textbf{Gravitational Wave Constraints On Beaming
-    Angles in GRBs From Binary Coalescence} \color{Black}\\ \\% Title
+    Angles in GRBs} \color{Black}\\ \\% Title
 \huge \textbf{James A. Clark$^{1}$, Ik Siong Heng$^{2}$ \& Martin
 Hendry$^{2}$}\\ \\% Author(s)
 \large 1. Georgia Institude of Technology\\ % University/organization
@@ -188,9 +188,10 @@ How robust is our inference on the \emph{mean} GRB beaming angle to the
 
 We conduct a simple Monte-Carlo experiment: simulate a population of binary
 inclinations and count how many of these events would be observed, given a
-certain jet angle distribution.  Figure~\ref{fig:thetapopulation} compares the
-ratio of observed GRBs to all mergers, $N_{\rm bns}/N_{\rm GRB}$ for a variety
-of jet angle distributions
+certain jet angle distribution.  
+%Figure~\ref{fig:thetapopulation} compares the
+%ratio of observed GRBs to all mergers, $N_{\rm bns}/N_{\rm GRB}$ for a variety
+%of jet angle distributions
 
 \begin{center}%\vspace{1cm}
     %\includegraphics[width=15cm]{theta_dist_grbfrac.png}
@@ -243,9 +244,11 @@ bounds} on the \emph{mean} of the GRB jet angle population.
 %$D$ represents some data or measurement and $I$ some prior conditioning
 %information.
 
-Given equation~\ref{eq:rate2theta}, a posterior PDF on the rate $\cbcrate$ and
-some prior information regarding the efficiency $\epsilon$ and the observed GRB
-rate $\grbrate$, one may construct a jet angle posterior via 
+%Given equation~\ref{eq:rate2theta}, a posterior PDF on the rate $\cbcrate$ and
+%some prior information regarding the efficiency $\epsilon$ and the observed GRB
+%rate $\grbrate$, one may construct a jet angle posterior via 
+%transformation of the rate posterior:
+Given equation~\ref{eq:rate2theta} one may construct a jet angle posterior via 
 transformation of the rate posterior:
 \begin{enumerate}
     \item Construct the joint-PDF on the jet angle $\theta$ and efficiency
@@ -260,12 +263,12 @@ transformation of the rate posterior:
 
     where the second term is the Jacobian determinant for the transformation and
     we assume that the rate posterior and the prior PDF on the efficiency are
-    logically independent, such that,
-
-    \begin{equation}
-        p(\cbcrate, \epsilon) =  p(\epsilon|\cbcrate)p(\cbcrate) =
-        p(\epsilon)p(\cbcrate)
-    \end{equation}
+    logically independent, such that:
+    %
+    %\begin{equation}
+        $p(\cbcrate, \epsilon) =  p(\epsilon|\cbcrate)p(\cbcrate) =
+        p(\epsilon)p(\cbcrate)$
+    %\end{equation}
 
     \item Inferences on the jet angle are then arrived at by marginalising the joint
         posterior $p(\theta,\epsilon)$ over the unknown efficency:
@@ -279,6 +282,21 @@ transformation of the rate posterior:
         \end{eqnarray}
 
 \end{enumerate}
+
+Our approach requires the explicit specification of a prior probability
+distribution function for the GRB efficiency $\epsilon$ (effectively, the
+average probability that any given binary merger yields a \grb{} counterpart).
+For the purposes of this study, we consider:
+\begin{itemize}
+    \item $p(\epsilon|I) = \delta(\epsilon-1.0)$: Efficiency known; all mergers
+        yield \grb{s}
+    \item $p(\epsilon|I) = \delta(\epsilon-0.5)$: Efficiency known; 50\% of
+        mergers yield \grb{s}
+    \item $p(\epsilon|I) = U(0,1])$: Unknown efficiency, equal probability in
+        $(0,1]$
+    \item $p(\epsilon|I) = \beta(0,1])$: Unknown efficiency, Jeffrey's prior for
+        Bernoulli trial (success=\grb{}!)
+\end{itemize}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%55
 \begin{comment}
@@ -343,11 +361,12 @@ libero, quis tristique purus urna nec nibh.
 %----------------------------------------------------------------------------------------
 \section*{\centering Constraints From The Initial Detector Era}
 
+
 %\subsection*{Constructing The Rate Posterior}
-\begin{equation}\label{eq:loudestEventPosterior}
-p(\cbcrate | C_L({\rhostar}), T, \Lambda) \propto p(\cbcrate) \left[ \frac{1+\Lambda
-C_L(\rhostar) T}{1+\Lambda}\right] e^{-\cbcrate C_L(\rhostar) T}
-\end{equation}
+%\begin{equation}\label{eq:loudestEventPosterior}
+%p(\cbcrate | C_L({\rhostar}), T, \Lambda) \propto p(\cbcrate) \left[ \frac{1+\Lambda
+%C_L(\rhostar) T}{1+\Lambda}\right] e^{-\cbcrate C_L(\rhostar) T}
+%\end{equation}
 
 
 %\subsection*{Results}
@@ -376,63 +395,66 @@ C_L(\rhostar) T}{1+\Lambda}\right] e^{-\cbcrate C_L(\rhostar) T}
 
 %\subsection*{Constructing The Rate Posterior}
 
-So let $b=10^{-2}$\,yr$^{-1}$.  From there, we can get the detection rate
-posterior using equations 14.10--14.12 of Gregory.  The measured rate $r$
-consists of two components, one due to a signal of interest, $s$, and the other
-a known background rate, $b$:
-\begin{equation}
-r = s + b
-\begin{cases}
-s = \text{signal rate} \\
-b = \text{background rate}
-\end{cases}
-\end{equation}
-%
-Since the background rate is known,
-\begin{equation}
-p(s|n,b,I) = p(r|n,b,I),
-\end{equation}
-%
-where $n$ is the number of \gw{} detections.  From eq 14.8 of Gregory, we get
-to:
-\begin{equation}
-p(s|n,b,I) = C \frac{ T\left[(s+b)T\right]^n e^{-(s+b)T}}{n!},
-\end{equation}
-%
-where,
-\begin{eqnarray}
-C^{-1} & = &\frac{e^{-bT}}{n!} \int_0^{\infty}\diff(sT)(s+b)^n T^n e^{-sT}\\
-& = & \sum_{i=0}^n \frac{ (bT)^i e^{-bT}}{i!}.
-\end{eqnarray}
+\begin{comment}
+    So let $b=10^{-2}$\,yr$^{-1}$.  From there, we can get the detection rate
+    posterior using equations 14.10--14.12 of Gregory.  The measured rate $r$
+    consists of two components, one due to a signal of interest, $s$, and the other
+    a known background rate, $b$:
+    \begin{equation}
+    r = s + b
+    \begin{cases}
+    s = \text{signal rate} \\
+    b = \text{background rate}
+    \end{cases}
+    \end{equation}
+    %
+    Since the background rate is known,
+    \begin{equation}
+    p(s|n,b,I) = p(r|n,b,I),
+    \end{equation}
+    %
+    where $n$ is the number of \gw{} detections.  From eq 14.8 of Gregory, we get
+    to:
+    \begin{equation}
+    p(s|n,b,I) = C \frac{ T\left[(s+b)T\right]^n e^{-(s+b)T}}{n!},
+    \end{equation}
+    %
+    where,
+    \begin{eqnarray}
+    C^{-1} & = &\frac{e^{-bT}}{n!} \int_0^{\infty}\diff(sT)(s+b)^n T^n e^{-sT}\\
+    & = & \sum_{i=0}^n \frac{ (bT)^i e^{-bT}}{i!}.
+    \end{eqnarray}
 
-In particular,  the detection rate for a given type of binary coalescence in
-LIGO-Virgo is given by equation\,1 in~\cite{rates_paper},
-\begin{equation}
-%\dot{N} = \cbcrate \times N_G,
-s = \cbcrate \times N_G,
-\end{equation}
-%
-where $\cbcrate$ is the coalescence rate of that type of binary per galaxy and
-$N_G$ is the number of galaxies accessible with a search for the relevant binary
-type.  $N_G$ is well approximated at large distances by,
-%
-\begin{equation}
-N_G = \frac{4}{3} \pi \left( \frac{D_{\textrm{horizon}}}{\textrm{Mpc}}
-\right)^3 (2.26)^{-3} (0.0116).
-\end{equation}
-%
-The reader is directed to~\cite{rates_paper} for a discussion of the numerical
-factors in the equation above.
+    In particular,  the detection rate for a given type of binary coalescence in
+    LIGO-Virgo is given by equation\,1 in~\cite{rates_paper},
+    \begin{equation}
+    %\dot{N} = \cbcrate \times N_G,
+    s = \cbcrate \times N_G,
+    \end{equation}
+    %
+    where $\cbcrate$ is the coalescence rate of that type of binary per galaxy and
+    $N_G$ is the number of galaxies accessible with a search for the relevant binary
+    type.  $N_G$ is well approximated at large distances by,
+    %
+    \begin{equation}
+    N_G = \frac{4}{3} \pi \left( \frac{D_{\textrm{horizon}}}{\textrm{Mpc}}
+    \right)^3 (2.26)^{-3} (0.0116).
+    \end{equation}
+    %
+    The reader is directed to~\cite{rates_paper} for a discussion of the numerical
+    factors in the equation above.
 
-Finally, we recognise that $\dot{N}$ is the signal rate $s$ in
-equation~\ref{eq:signal_rate_posterior} so that we arrive at the desired
-posterior on the binary coalescence rate, 
-%
-\begin{eqnarray}
-p(\cbcrate|N_{\textrm{det}},I) & = & p(s|N_{\textrm{det}},I) \left|\frac{\diff
-s}{\diff \cbcrate}\right| \\
-& = & N_G . p(s|N_{\textrm{det}},I)
-\end{eqnarray}
+    Finally, we recognise that $\dot{N}$ is the signal rate $s$ in
+    equation~\ref{eq:signal_rate_posterior} so that we arrive at the desired
+    posterior on the binary coalescence rate, 
+    %
+    \begin{eqnarray}
+    p(\cbcrate|N_{\textrm{det}},I) & = & p(s|N_{\textrm{det}},I) \left|\frac{\diff
+    s}{\diff \cbcrate}\right| \\
+    & = & N_G . p(s|N_{\textrm{det}},I)
+    \end{eqnarray}
+
+\end{comment}
 
 \subsection*{Validation}
 
