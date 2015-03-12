@@ -59,15 +59,10 @@
 %	POSTER HEADER 
 %----------------------------------------------------------------------------------------
 
-% The header is divided into three boxes:
-% The first is 55% wide and houses the title, subtitle, names and university/organization
-% The second is 25% wide and houses contact information
-% The third is 19% wide and houses a logo for your university/organization or a photo of you
-% The widths of these boxes can be easily edited to accommodate your content as you see fit
-
-\begin{minipage}[b]{0.7\linewidth}
-\veryHuge \color{NavyBlue} \textbf{Gravitational Wave Constraints On Beaming
-    Angles in GRBs} \color{Black}\\ \\% Title
+\begin{minipage}[b]{0.70\linewidth}
+%\vspace{-50cm}
+\veryHuge \color{NavyBlue} \textbf{Gravitational Wave Event Rate Constraints On
+GRB Jet Angles} \color{Black}\\ \\% Title
 \huge \textbf{James A. Clark$^{1}$, Ik Siong Heng$^{2}$ \& Martin
 Hendry$^{2}$}\\ \\% Author(s)
 \large 1. Georgia Institude of Technology\\ % University/organization
@@ -76,12 +71,14 @@ Hendry$^{2}$}\\ \\% Author(s)
 %
 \hspace{10cm}
 %
+%\vspace{-5cm}
 \begin{minipage}[b]{0.2\linewidth}
+\vspace{-5cm}
 \includegraphics[height=5cm]{cra.png} \\ \\% Logo or a photo of you, adjust its dimensions here
-\includegraphics[height=5cm]{uni_glasgow_logo.png} \\ \\% Logo or a photo of you, adjust its dimensions here
+\includegraphics[height=4cm]{uni_glasgow_logo.png} \\ \\% Logo or a photo of you, adjust its dimensions here
 \end{minipage}
 
-\vspace{1cm} % A bit of extra whitespace between the header and poster content
+%\vspace{1cm} % A bit of extra whitespace between the header and poster content
 
 %----------------------------------------------------------------------------------------
 
@@ -104,78 +101,63 @@ Hendry$^{2}$}\\ \\% Author(s)
 %
 %   \end{abstract}
 
-%----------------------------------------------------------------------------------------
-%	INTRODUCTION
-%----------------------------------------------------------------------------------------
-%\color{SaddleBrown} % SaddleBrown color for the introduction
-\color{DarkSlateGray} % DarkSlateGray color for the rest of the content
-
-%\section*{Introduction}
-
-
-%----------------------------------------------------------------------------------------
-%	OBJECTIVES
-%----------------------------------------------------------------------------------------
-
-
-%\begin{tcolorbox}[width=\columnwidth, colback={green}, title={Objective},
-%    colbacktitle=yellow, coltitle=blue]
-%    BLAH
-%\end{tcolorbox} 
 
 \color{DarkSlateGray} % DarkSlateGray color for the rest of the content
+%\color{SaddleBrown} % DarkSlateGray color for the rest of the content
 
 \section*{\centering Outline}
 
 \begin{enumerate}
     \item Most short \grb{s} are probably associated with
-        compact binary coalescence
-    \item The observed rate of \grb{s} in the local Universe is a function of the
-        geometry of the beamed jet and the rate of binary coalescence
-    \item Searches for \gw{s} yield direct constraints on the binary coalescence
-        rate
+        compact binary coalescence.
+    \item The observed rate of \grb{s} in the local Universe is a function of
+        the opening angle of the beamed jet emmitted by \grb{s}, and the rate of
+        compact binary coalescence; searches for \gw{s} yield direct constraints
+        on the binary coalescence rate.
+    \item It has previously been shown
+        (e.g.,~\cite{2013PhRvL.111r1101C,2014arXiv1409.8149C}) how coalescence
+        rate limits may be used to constrain the jet opening angle.
     \item {\bf We demonstrate a how to transform the posterior measurement of
-            the binary coalescence rate measured from \gw{} observations to a
-        direct measurement of the \grb{} beaming angle}, while accounting for
-            the uncertainty in the rate measurement and our ignorance in the
-            details of the \grb{} progenitor model
+        the binary coalescence rate measured from \gw{} observations to a direct
+    measurement of the \grb{} beaming angle}, \emph{while accounting for the
+        uncertainty in the rate measurement and our ignorance in the details of
+    the \grb{} progenitor model}.
 \end{enumerate}
 
+%\color{DarkSlateGray} % DarkSlateGray color for the rest of the content
 %----------------------------------------------------------------------------------------
 %	MATERIALS AND METHODS
 %----------------------------------------------------------------------------------------
 
 \section*{\centering GRB Beaming Angles From Coalescence Rate Measurements}
-Assuming that at least some fraction of sGRBs are due to compact binary
+Assuming at least some fraction of sGRBs are due to compact binary
 coalescence, the observed rate of sGRBs may be written,
 %
 \begin{equation}\label{eq:rate2angle}
 \grbrate=\epsilon\cbcrate(1-\cos \theta),
 \end{equation}
 %
-where:
 \begin{itemize}
     \item $\theta$ is the \emph{mean} GRB jet opening angle, given a population
         of angles.% ({\bf not all GRBs need have the same opening angle}).
     \item $\cbcrate$ is the rate of GRB progenitor events (binary
         neutron star coalescence).  
     \item $\epsilon$ is the (unknown) probability that any given coalescence will
-        sucessfully generate a GRB, hereafter referred to as `efficiency'.  Note
-        that the inclusion of the efficiency term $\epsilon$ allows for the
-        possibility that not all GRB progenitors are BNS mergers.
+        sucessfully generate a GRB, a.k.a `efficiency'.
 \end{itemize}
 
-{\large Objective}: determine the value of and uncertainty in the jet
+{\large \textsc{Objective}}: infer the value of and uncertainty in the jet
 angle $\theta$, given \gw{} constraints on the binary coalescence rate
 $\cbcrate$ and a clearly stated level of ignorance on the \grb{} efficiency
 $\epsilon$.
 
 For the purposes of this study, we assume that the sGRB rate $\grbrate$ in the
 local Universe is known to arbitrary accuracy and adopt a fiducial value of
-\textcolor{red}{10XXXXXXXXXXXXXXXXX}.
+$\grbrate = 3\times10^{-9}$\,Mpc$^{-3}$yr$^{-1}$
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%~\\~\\~\\~\\
 \subsection*{\centering Robustness of Mean Angle Inference To Distribution Width}
 
 %Our goal is to infer the \emph{mean} GRB beaming angle based \emph{solely} on
@@ -201,7 +183,18 @@ certain jet angle distribution.
 on the GRB beaming angle.  Lines in the figure correspond to jet angle
 population means, while the $x$-axis shows the width of the distribution.  All
 distributions are Gaussian, truncated at $(0, 90]$ degrees.}
-\end{center}\vspace{1cm}
+\end{center}%\vspace{1cm}
+
+\begin{comment}
+\begin{wrapfigure}{r}{0.5\linewidth}
+    \includegraphics[width=\linewidth]{theta_dist_grbfrac.pdf}
+    \caption{\label{fig:thetapopulation} Expected relative
+    numbers of observed GRBs and binary coalescences for different distributions
+on the GRB beaming angle.  Lines in the figure correspond to jet angle
+population means, while the $x$-axis shows the width of the distribution.  All
+distributions are Gaussian, truncated at $(0, 90]$ degrees.}
+\end{wrapfigure}
+\end{comment}
 
 \begin{comment}
     \begin{enumerate}
@@ -218,13 +211,13 @@ distributions are Gaussian, truncated at $(0, 90]$ degrees.}
     \end{enumerate}
 \end{comment}
 
-Figure~\ref{fig:thetapopulation} shows that the relative numbers of observed GRBs
-to all binary mergers, for a given distribution mean, is quite insensitive to
-the distribution width - the relative numbers only change by a few \%.
-%
-Note, however, that the relative numbers of events are degenerate across a range
-of distribution means (e.g., the result for $p(\theta) = N(5,10)$ is
-approximately the same as the result for $p(\theta) = N(10,5)$).  
+Figure~\ref{fig:thetapopulation} shows the fraction of mergers observed as GRBs
+is quite insensitive to the the distribution width - the ratio only changes by a
+few \%, for a given distribution mean.
+ 
+Notice that the ratio is degenerate across a range of distribution means (e.g.,
+the result for $p(\theta) = N(5,10)$ is approximately the same as the result for
+$p(\theta) = N(10,5)$).  
 
 {\bf Key finding}: event rate-based inferences on $\theta$ are really \emph{upper
 bounds} on the \emph{mean} of the GRB jet angle population.
@@ -248,8 +241,7 @@ bounds} on the \emph{mean} of the GRB jet angle population.
 %some prior information regarding the efficiency $\epsilon$ and the observed GRB
 %rate $\grbrate$, one may construct a jet angle posterior via 
 %transformation of the rate posterior:
-Given equation~\ref{eq:rate2theta} one may construct a jet angle posterior via 
-transformation of the rate posterior:
+To build the jet angle posterior:
 \begin{enumerate}
     \item Construct the joint-PDF on the jet angle $\theta$ and efficiency
         $\epsilon$ from the joint-PDF on the rate and the efficiency,
@@ -262,18 +254,17 @@ transformation of the rate posterior:
     \end{equation}
 
     where the second term is the Jacobian determinant for the transformation and
-    we assume that the rate posterior and the prior PDF on the efficiency are
-    logically independent, such that:
+    we assume:
     %
     %\begin{equation}
         $p(\cbcrate, \epsilon) =  p(\epsilon|\cbcrate)p(\cbcrate) =
         p(\epsilon)p(\cbcrate)$
     %\end{equation}
 
-    \item Inferences on the jet angle are then arrived at by marginalising the joint
+    \item Get the 1-D jet angle posterior by marginalising the joint
         posterior $p(\theta,\epsilon)$ over the unknown efficency:
 
-        \begin{eqnarray}
+        \begin{eqnarray}\label{eq:transformationmarginalisation}
         p(\theta) = \int_{\epsilon} p(\theta,\epsilon)~\diff \epsilon =
         \int_{\epsilon} ~\diff \epsilon p(\cbcrate)(\epsilon)
             \left\lvert\left\lvert
@@ -283,20 +274,44 @@ transformation of the rate posterior:
 
 \end{enumerate}
 
-Our approach requires the explicit specification of a prior probability
-distribution function for the GRB efficiency $\epsilon$ (effectively, the
-average probability that any given binary merger yields a \grb{} counterpart).
-For the purposes of this study, we consider:
+%Our approach requires the explicit specification of a prior probability
+%distribution function for the GRB efficiency $\epsilon$ (effectively, the
+%average probability that any given binary merger yields a \grb{} counterpart).
+%For the purposes of this study, we consider:
+\subsection*{Priors On GRB `Efficiency' $\epsilon$}
+%We present results for the following:
 \begin{itemize}
-    \item $p(\epsilon|I) = \delta(\epsilon-1.0)$: Efficiency known; all mergers
-        yield \grb{s}
-    \item $p(\epsilon|I) = \delta(\epsilon-0.5)$: Efficiency known; 50\% of
-        mergers yield \grb{s}
-    \item $p(\epsilon|I) = U(0,1])$: Unknown efficiency, equal probability in
-        $(0,1]$
-    \item $p(\epsilon|I) = \beta(0,1])$: Unknown efficiency, Jeffrey's prior for
+    \item $p(\epsilon|I) = \delta(\epsilon-\epsilon_0)$: Efficiency known to be
+        $\epsilon_0$
+%    \item $p(\epsilon|I) = \delta(\epsilon-0.5)$: Efficiency known; 50\% of
+%        mergers yield \grb{s}
+    \item $p(\epsilon|I) = U(0,1]$: Unknown efficiency, uniform prior.
+    \item $p(\epsilon|I) = \beta(0,1]$: Unknown efficiency, Jeffrey's prior for
         Bernoulli trial (success=\grb{}!)
 \end{itemize}
+
+\subsection*{Rate Posteriors}
+We consider two forms for the rate posterior in this study:
+\begin{description}
+    \item [GW Null-detection / initial detector era results]
+         ~\\The final binary neutron star coalescence rate posterior from observing
+        runs in the initial-detector era: the {\bf S6/vSR2,3 loudest event rate
+        posterior}, constructed via the formalism
+        of~\cite{2008CQGra..25j5002B},
+        and using the results from~\cite{s6lowmass}.
+    \item [Multiple GW detections / advanced detector era results]
+         ~\\We consider two scenarios based on those described
+         in~\cite{2013arXiv1304.0670L}: a 2016 observing run and a 2022 observing run.
+         The rate posteriors are constructed via a Bayesian analysis of a
+         Poission signal rate in the presence of known background, described
+         in~\cite{Gregory05}.
+\end{description}
+%
+The results presented here are concerned with the hypothesis that BNS are \grb{}
+progenitors;  the result is quite general and trivially extended to rate
+posteriors for other sources.
+    
+
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%55
 \begin{comment}
@@ -336,11 +351,11 @@ elit. Phasellus vel sem magna. Nunc at convallis urna. isus ante. Pellentesque
 %        %\includegraphics[width=0.5\linewidth]{efficiency_prior.pdf}
 %        \captionof{figure}{Figure caption}
 %\end{wrapfigure}
-\begin{center}\vspace{1cm}
+\begin{center}%\vspace{1cm}
         %\includegraphics[width=15cm]{efficiency_prior.pdf}
         \includegraphics[width=0.48\linewidth]{efficiency_prior.pdf}
         \captionof{figure}{Figure caption}
-\end{center}\vspace{1cm}
+\end{center}%\vspace{1cm}
 
 Sed fringilla tempus hendrerit. Vestibulum ante ipsum primis in faucibus orci
 luctus et ultrices posuere cubilia Curae; Etiam ut elit sit amet metus lobortis
@@ -377,15 +392,21 @@ libero, quis tristique purus urna nec nibh.
     \newcommand{\@captype}{figure}
     \makeatother
     \centering
-    \subfloat[Rate Posterior]{%
+    \subfloat[S6/VSR2,3 BNS Rate Posterior]{%
       \includegraphics[width=0.45\linewidth]{S6_rate.pdf}%
-      \label{fig:}%
+      \label{fig:S6ratePosterior}%
     }\qquad%
-    \subfloat[Jet Posterior]{%
+    \subfloat[S6/VSR2,3 Jet Posterior]{%
       \includegraphics[width=0.45\linewidth]{jet_angle_posterior_iligo.pdf}%
-      \label{fig:}%
+      \label{fig:S6JetPosterior}%
     }
-    \caption{S6 results}
+    \caption{\emph{Left}: The binary neutron star merger rate posterior
+        constructed from the 90\% rate upper limit (dashed line) reported
+        in~\cite{s6lowmass} and the formalism described
+    in~\cite{2008CQGra..25j5002B}.  \emph{Right}: the jet angle
+posteriors obatined from equation~\ref{eq:transformationmarginalisation}.
+Different lines for the jet posterior correspond to the different priors on the
+GRB efficiency.} 
   \end{minipage}
 
 %----------------------------------------------------------------------------------------
@@ -457,77 +478,100 @@ libero, quis tristique purus urna nec nibh.
 \end{comment}
 
 
-\begin{center}\vspace{1cm}
-    \includegraphics[width=0.5\linewidth]{aligo_rate_re.pdf}
-    \captionof{figure}{Figure caption}
-\end{center}\vspace{1cm}
+
+\begin{center}%\vspace{1cm}
+    \includegraphics[width=0.45\linewidth]{aligo_rate_re.pdf}
+    \captionof{figure}{Rate posterior PDFs expected following the 2016 and 2022
+        observing scenarios described in~\cite{2013arXiv1304.0670L}, assuming
+        the `realistic' rate of BNS coalescence from~\cite{2013arXiv1304.0670L}
+        (solid vertical line) and using the Bayesian Poisson rate determination
+    described in~\cite{Gregory05}.}
+\end{center}%\vspace{1cm}
+
+%   \begin{figure}[H]
+%       \includegraphics[width=0.45\linewidth]{aligo_rate_re.pdf}
+%       \caption{Rate posterior PDFs expected following the 2016 and 2022
+%       observing scenarios described in~\cite{2013arXiv1304.0670L}, assuming the
+%   so-called `realistic rate of BNS coalescence (solid vertical line) and using the
+%   Bayesian Poisson rate determination described in~\cite{Gregory05}.}
+%   \end{figure}
 
 
-\subsection*{Validation}
+\subsection*{\centering Validation: Posteriors For `Known' Jet Angle}
 
 \begin{minipage}{\columnwidth}
   \makeatletter
   \newcommand{\@captype}{figure}
   \makeatother
   \centering
-  \subfloat[Rate Posterior]{%
+  \subfloat[Simulated 2016 jet posteriors]{%
     \includegraphics[width=0.45\linewidth]{jet_angle_posterior_aligo_2016.pdf}%
-    \label{fig:}%
+    \label{fig:jet_injection_2016}%
   }\qquad%
-  \subfloat[Jet Posterior]{%
+  \subfloat[Simulated 2022 jet posteriors]{%
     \includegraphics[width=0.45\linewidth]{jet_angle_posterior_aligo_2022.pdf}%
-    \label{fig:}%
+    \label{fig:jet_injection_2022}%
   }
-  \caption{Example results for $\theta_{\rm jet}=30^{\circ}$ and binary
-  coalescence rates in~\cite{scenarios} to derive a `simulated' GRB rate.}
+  \
+  \caption{Simulated jet angle posterior PDFs generated by setting
+      $\theta=30^{\circ}$ and computing the corresponding $\grbrate$ using
+      $\epsilon=1.0$ and $\cbcrate \sim
+      10^{-6}$\,Mpc$^{-3}$\,yr$^{-1}$.
+  }
 \end{minipage}
 
-\subsection*{Predictions}
+\subsection*{\centering Predictions: Jet Angle Posteriors In ADE Observing
+Scenarios}
 
 \begin{minipage}{\columnwidth}
   \makeatletter
   \newcommand{\@captype}{figure}
   \makeatother
   \centering
-  \subfloat[Rate Posterior]{%
+  \subfloat[Expected 2016 jet posteriors]{%
     \includegraphics[width=0.45\linewidth]{jet_angle_posterior_aligo_2016_real.pdf}%
     \label{fig:}%
   }\qquad%
-  \subfloat[Jet Posterior]{%
+  \subfloat[Expected 2022 jet posteriors]{%
     \includegraphics[width=0.45\linewidth]{jet_angle_posterior_aligo_2022_real.pdf}%
     \label{fig:}%
   }
-  \caption{Results in ADE assuming $\grbrate =
-      3\times10^{-9}$\,Mpc$^{-3}$yr$^{-1}$ and binary coalescence rates
-  in~\cite{scenarios}.}
+  \caption{Results Expected in ADE, given~\cite{2013arXiv1304.0670L}.}
 \end{minipage}
 
 %----------------------------------------------------------------------------------------
 %	CONCLUSIONS
 %----------------------------------------------------------------------------------------
 
-\color{SaddleBrown} % SaddleBrown color for the conclusions to make them stand out
+%\color{SaddleBrown} % SaddleBrown color for the conclusions to make them stand out
 
 \section*{Conclusions}
 
 \begin{itemize}
-\item Pellentesque eget orci eros. Fusce ultricies, tellus et pellentesque fringilla, ante massa luctus libero, quis tristique purus urna nec nibh. Phasellus fermentum rutrum elementum. Nam quis justo lectus.
-\item Vestibulum sem ante, hendrerit a gravida ac, blandit quis magna.
-\item Donec sem metus, facilisis at condimentum eget, vehicula ut massa. Morbi consequat, diam sed convallis tincidunt, arcu nunc.
-\item Nunc at convallis urna. isus ante. Pellentesque condimentum dui. Etiam sagittis purus non tellus tempor volutpat. Donec et dui non massa tristique adipiscing.
+    \item General framework described for astrophysical inferences
+        ($\theta$ measurement) from \gw{} observations
+    \item Interpretation of \grb{} beaming angles in terms of \gw{} rates
+        contingent on prior knowledge of progenitor physics ($\epsilon$)
+    \item Conversely, independent measurements of jet angle could be
+        used to infer mean probability ($\epsilon$) that BNS $\rightarrow$ \grb{s}
 \end{itemize}
-
-\color{DarkSlateGray} % Set the color back to DarkSlateGray for the rest of the content
+%   \item Vestibulum sem ante, hendrerit a gravida ac, blandit quis magna.
+%   \item Donec sem metus, facilisis at condimentum eget, vehicula ut massa. Morbi consequat, diam sed convallis tincidunt, arcu nunc.
+%   \item Nunc at convallis urna. isus ante. Pellentesque condimentum dui. Etiam sagittis purus non tellus tempor volutpat. Donec et dui non massa tristique adipiscing.
+%   \end{itemize}
+%
+   \color{DarkSlateGray} % Set the color back to DarkSlateGray for the rest of the content
 
 
  %----------------------------------------------------------------------------------------
 %	REFERENCES
 %----------------------------------------------------------------------------------------
 
-\section*{References}
-\nocite{*} % Print all references regardless of whether they were cited in the poster or not
-\bibliographystyle{plain} % Plain referencing style
-\bibliography{sample} % Use the example bibliography file sample.bib
+%\nocite{*} % Print all references regardless of whether they were cited in the poster or not
+\footnotesize{
+\bibliographystyle{unsrt} % Plain referencing style
+\bibliography{grbeams_poster} % Use the example bibliography file sample.bib
+}
 
 %----------------------------------------------------------------------------------------
 %	ACKNOWLEDGEMENTS
