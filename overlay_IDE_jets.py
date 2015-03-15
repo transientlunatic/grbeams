@@ -45,8 +45,7 @@ for r,result in enumerate(resultsfiles):
     theta_pdf = grbeams_utils.kde_sklearn(data.samples, theta_grid,
             bandwidth=theta_bw)
 
-    intervals = data.prob_interval([0.9])
-    UL = np.percentile(data.samples, 90)
+    UL = np.percentile(data.samples, 10)
 
     if r==2: linewidth=2
     else: linewidth=1
@@ -54,7 +53,7 @@ for r,result in enumerate(resultsfiles):
 #    ax.hist(data.samples, bins=theta_bins, normed=True, histtype='stepfilled',
 #            alpha=0.5)
 
-    labelstr=r"$p(\theta|I)={0}$, $90\%$ UL={1:.2f}".format(labels[r], UL)
+    labelstr=r"$p(\theta|I)={0}$, $90\%$ LL={1:.2f}".format(labels[r], UL)
 
     #$\langle \theta_{\rm jet} \rangle_{1/2}=%.2f^{+%.2f}_{-%.2f}$'%(\
     #        #labels[r], data.median, intervals[0][1]-data.median,

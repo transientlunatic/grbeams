@@ -13,6 +13,7 @@
 %\usepackage{graphicx}
 %\usepackage{psfrag}
 
+\graphicspath{{poster/figures/}}
 
 %\newcommand{\gw}{gravitational wave }
 %\newcommand{\gws}{gravitational waves }
@@ -102,6 +103,13 @@ First, note that the PDF $p(\theta|D,I)$ may be written as a marginalisation
 over $\epsilon$ in the the joint PDF $p(\theta, \epsilon|D,I)$:
 %
 \begin{equation}
+p(\theta,\epsilon) = p(\cbcrate,\epsilon)
+\left\lvert\left\lvert
+\frac{\partial(\cbcrate,\epsilon)}{\partial(\theta,\epsilon)}
+\right\rvert\right\rvert,
+\end{equation}
+%
+\begin{equation}
 p(\theta) = \int_{\epsilon} p(\theta,\epsilon)~\diff \epsilon,
 \end{equation}
 %
@@ -109,29 +117,23 @@ where we have dropped the conditioning statements temporarily for notational
 convenience.  Next, we note that the joint probability $p(\theta,\cbcrate)$ can
 be written in terms of $\epsilon$ and $\cbcrate$ according to,
 %
-\begin{equation}
-p(\theta,\epsilon) = p(\cbcrate,\epsilon)
-\left\lvert\left\lvert
-\frac{\partial(\cbcrate,\epsilon)}{\partial(\theta,\epsilon)}
-\right\rvert\right\rvert,
-\end{equation}
 %
-where the Jacobian matrix is given by,
-% Increase matrix line spacing
-\begingroup
-\renewcommand*{\arraystretch}{1.5}
-
-% matrix:
-\begin{equation}
-\frac{\partial (\cbcrate,\epsilon)}{\partial(\theta,\epsilon)} =
-\begin{bmatrix}
-\frac{\partial \cbcrate}{\partial \theta} & \frac{\partial \cbcrate}{\partial \epsilon} \\
-\frac{\partial \epsilon}{\partial \theta} & \frac{\partial \epsilon}{\partial \epsilon}
-\end{bmatrix}.
-\end{equation}
-
-% end line spacing increase
-\endgroup
+%   where the Jacobian matrix is given by,
+%   % Increase matrix line spacing
+%   \begingroup
+%   \renewcommand*{\arraystretch}{1.5}
+%
+%   % matrix:
+%   \begin{equation}
+%   \frac{\partial (\cbcrate,\epsilon)}{\partial(\theta,\epsilon)} =
+%   \begin{bmatrix}
+%   \frac{\partial \cbcrate}{\partial \theta} & \frac{\partial \cbcrate}{\partial \epsilon} \\
+%   \frac{\partial \epsilon}{\partial \theta} & \frac{\partial \epsilon}{\partial \epsilon}
+%   \end{bmatrix}.
+%   \end{equation}
+%
+%   % end line spacing increase
+%   \endgroup
 %%
 Bringing all of these terms together then, and writing out the Jacobian matrix
 determinant, we have
@@ -153,7 +155,23 @@ To find the target PDF $p(\theta|D,I)$ then, we require the measured coalescence
 rate posterior $p(\cbcrate|D,I)$, and we must specify a prior PDF for $\epsilon$
 which encapsulates assumptions made about the relative rates of compact binary
 mergers and sGRBs.
+
+\section{Robustness of Mean Angle Inference To Distribution Width}
+
+\begin{figure}
+\centering
+\includegraphics[width=\linewidth]{theta_dist_grbfrac.eps}
+\caption{\label{fig:thetapopulation} Expected relative
+numbers of observed GRBs and binary coalescences for different distributions
+on the GRB beaming angle.  Lines in the figure correspond to jet angle
+population means, while the $x$-axis shows the width of the distribution.  All 
+distributions are Gaussian, truncated at $(0, 90]$ degrees.}
+\end{figure}
  
+
+\section{Beaming Angle Limits From Past GW Searches}
+
+\subsection{Constructing The Rate Posterior}
 Following~\cite{Biswas09,BradyFairhurst08}, the posterior on the binary
 coalescence rate may be determined from the loudest event in the \gw{}
 analysis.  Specifically, for a foreground event rate due to  binary coalescence
@@ -188,8 +206,6 @@ with ranking statistic $x$ due to \gw{s} versus the probability of an equally lo
 event arising in the background distribution.  The reader is directed to
 section\,3 of~\cite{BradyFairhurst08} for a full discussion of this quantity.
 
-
-\section{Beaming Angle Limits From Past GW Searches}
 
 In this section, we focus attention on the interpretation of rate upper limits
 from past \gw{} analyses.  We first reconstruct the measured posterior on the
@@ -235,96 +251,21 @@ The posteriors on the rates, assuming these values and $\Lambda=0$, are shown in
 figure~\ref{fig:reconstructedRatePosterior}.  
 
 \begin{figure}
-\includegraphics{iLIGO/rate_posterior_s6UL_TEST_deltaEffPrior-1.0.eps}
-\caption{Rate posterior for S6/VSR2,3 Low-mass Search For Compact Binary
-Coalescence.\label{fig:reconstructedRatePosterior}}
+\centering
+\includegraphics[width=\linewidth]{S6_rate.eps}
+\caption{S6/VSR2,3 Rate Posterior\label{fig:s6rate}}
 \end{figure}
 
-Figure~\ref{fig:jetPosterior} shows the posteriors on the GRB
-beaming angle, using the transformation in equation~\ref{eq:rate2angleProb} and
-a variety of different priors for the GRB efficiency, $\epsilon$.  The prior
-pdfs are summarized in figure~\ref{fig:efficiency_priors}.
-%
-Finally, the quantity of interest is the upper limit on the jet
-angle~$\theta^{90\%}$:
-%
-\begin{equation}
-0.9 = \int_{\theta^{90\%}}^{\infty}p(\theta | \cbcrate^{90\%})~\diff \theta
-\end{equation}
-%
-This is indicated with the vertical red line in figure~\ref{fig:jetPosterior}.
-\textcolor{red}{TODO: combine jet posteriors onto a single plot and make a
-figure showing the efficiency priors}.
+
+\subsection{Results}
+
 
 \begin{figure}
-\includegraphics{iLIGO/jet_angle_posterior_s6UL_TEST_deltaEffPrior-1.0.eps}
-\caption{Jet angle posterior derived from S6/VSR2,3 Low-mass Search For Compact Binary
-Coalescence posterior / upper limit on compact binary coalescence
-rate, assuming \emph{all} BNS result in sGRBs.\label{fig:jetPosterior}}
+\centering
+\includegraphics[width=\linewidth]{jet_angle_posterior_iligo.eps}
+\caption{S6/VSR2,3 Jet Angle Posterior\label{fig:s6angle}}
 \end{figure}
 
-\begin{figure}[h!]
-\includegraphics{iLIGO/jet_angle_posterior_s6UL_TEST_deltaEffPrior-0.5.eps}
-\caption{$p(\epsilon|I)=\delta(\epsilon-0.5)$: efficiency assumed known:
-$\epsilon=0.5$}
-\end{figure}
-
-\begin{figure}[h!]
-\includegraphics{iLIGO/jet_angle_posterior_s6UL_TEST_deltaEffPrior-0.1.eps}
-\caption{$p(\epsilon|I)=\delta(\epsilon-0.1)$: efficiency assumed known:
-$\epsilon=0.1$}
-\end{figure}
-
-\begin{figure}[h!]
-\includegraphics{iLIGO/jet_angle_posterior_s6UL_TEST_flatEffPrior-0.01-1.eps}
-\caption{$p(\epsilon|I) \propto 1,~\epsilon \in (0,1]$. 
-Here, we assume the GRB efficiency is $\epsilon \in (0,1]$, with no
-preference where: the linearly uniform prior.  The reason for choosing a
-non-zero lower bound is that the Jacobian determinant goes to $\inf$ as
-$\epsilon \rightarrow 0$.  \textcolor{red}{James: I'm very open to suggestions
-here as it's not clear to me that this is expected.  In practice, $\epsilon \in
-[0.01,1]$}.}
-\end{figure}
-
-\begin{figure}[h!]
-\includegraphics{iLIGO/jet_angle_posterior_s6UL_TEST_logEffPrior-0.01-1.eps}
-\caption{$p(\epsilon|I) \propto 1/\epsilon,~\epsilon \in (0,1]$
-Now assume the GRB efficiency is $\epsilon \in (0,1]$, with a log-uniform
-prior (commonly but incorrectly referred to as the Jeffrey's prior).  Here, the
-requirement of a non-zero lower bound is imposed by the normalisation for this
-prior.
-}
-\end{figure}
-
-\begin{figure}[h!]
-\includegraphics{iLIGO/jet_angle_posterior_s6UL_TEST_bernoEffPrior.eps}
-\caption{$p(\epsilon|I) = \beta(1/2,1/2),~\epsilon \in (0,1)$.  Here, we use a
-Beta distribution with shape and scale parameters of 1/2.  That prior has a
-slightly surprising shape with a minimum at $\epsilon=0.5$ and shoots off to
-$\infty$ as $\epsilon\rightarrow 0,1$.  It seems \emph{this} is, in fact, the
-Jeffrey's prior for a Bernoulli trial (if we say a toin coss = BNS
-$\rightarrow$GRB). See
-\href{http://en.wikipedia.org/wiki/Jeffreys_prior}{http://en.wikipedia.org/wiki/Jeffreys\_prior}
-}
-\end{figure}
-
-\begin{figure}[h!]
-\includegraphics{iLIGO/jet_angle_posterior_s6UL_TEST_betaEffPrior-2-5.eps}
-\caption{$p(\epsilon|I) = \beta(2,5),~\epsilon \in (0,1)$.  The GRB efficiency
-prior is, this time, a $\beta$ distribution with shape and scale parameters 2
-and 5, respectively.  This is now completely ad hoc but yields a maximum (in the
-prior) around $\epsilon=0.2$ and goes to 0 as $\epsilon \rightarrow 0,1$.  So
-it's a nice example of an asymmetric distribution with quite sensible (and
-presumably tuneable) behaviour.}
-\end{figure}
-
-\begin{figure}[h!]
-\includegraphics{iLIGO/jet_angle_posterior_s6UL_TEST_betaEffPrior-2-2.eps}
-\caption{$p(\epsilon|I) = \beta(2,2),~\epsilon \in (0,1)$.  Finally, we have for
-the GRB efficiency prior a $\beta$ distribution with shape and scale parameters 2
-and 2, respectively.  Again, this is ad hoc but symmetric about $\epsilon=0.5$
-with a cosine-like shape.}
-\end{figure}
 
 \section{Beaming Angle Inferences In The Detection Era}
 In this section, we discuss an approach to measuring the GRB beaming angle based
@@ -334,90 +275,8 @@ advanced LIGO detectors where ${\mathcal O}(1)$ gravitational wave events from
 binary neutron star coalescence are detected.  In the second secnario, we
 consider the measurements possible with multiple gravitational wave detections.
 
-%\subsection{For discussion: Post-detection Coalescence Rate Posterior}
-%Here, we determine the formalism for the construction of a rate
-%posterior in the event of single or multiple gravitational wave detections.
-%%
-%There needs to be no specific discussion of GRBs here, it's more general than
-%that.  In fact, it's worth remembering \emph{nothing} in this paper / analysis
-%(so far) has assumed contemporaneous GRB-GW detections!\footnote{although that
-%does seem like a potential avenue for measuring the CBC-sGRB efficiency \dots}.
-%All we actually do is assume we have independent measurements of BNS and sGRB
-%rates.
-%
-%\textcolor{red}{Rather, the point of this discussion is to determine/describe
-%a simple, natural way to construct the posterior on the rate $\cbcrate$, given
-%multiple GW detections}, as expected in the advanced detector era.
-%
-%Recall the rate posterior from Fairhurst \& Brady~\cite{BradyFairhurst08}:
-%\begin{equation}\label{eq:full_ratePosterior}
-%p(\cbcrate|\rho_m, T, B) \propto p(R) \left[ \frac{1+\Lambda R
-%C_L(\rho_m)T}{1+\Lambda} e^{-RC_L(\rho_m)T}\right]
-%\end{equation}
-%%
-%Equation~\ref{eq:full_ratePosterior} is the posterior on the rate, as measured
-%by the single loudest event in the search conducted.  In the equation above,
-%$\Lambda$ is the likelihood of the \emph{loudest event} being from GW vs
-%background and $C_L$ is the cumulative luminosity the search which produced
-%loudest event $\rho_m$ is sensitive to.  It's a neat, sensible approach to
-%estimating event rates given very rare measurements.  That is, it seems like a
-%Good Thing / natural for constructing a rate posterior where we only expect a
-%single signal trigger from a population of potentially trigger-inducing events.
-%It also seems sensible:
-%%
-%\begin{itemize}
-%\item in the absence of convincing detections (loudest event is unlikely to be a
-%signal; $\Lambda \rightarrow 0$),
-%\item for a single, convincing detection (loudest event is very likely to be a
-%signal; $\Lambda \rightarrow \infty$).
-%\end{itemize}
-%%
-%It's worth highlighting here that there is absolutely nothing \emph{preventing}
-%one from using the loudest event statistic when we expect more than one signal
-%trigger; regardless of how many events we have, there's always going be a
-%loudest one and we can always determine the probability of obtaining a trigger
-%that loud, given the sensitivity of the search and a population model.  Indeed,
-%consider the key components in the ocnstruction of the L.E. posterior:
-%%
-%\begin{enumerate}
-%\item The loudest event, characterised by, say, single IFO signal-to-noise ratio
-%$\rho$.  Label this loudest value $\rho_m$.
-%\item The probability of obtaining zero events with $\rho>\rho_m$ from a
-%population of signals; this is formed from knowledge of the sensitivity of the
-%analysis and a population model.  It does not require that there be only a
-%single signal observed in the experiment.
-%\item The probability of obtaining zero events with $\rho>\rho_m$, from a
-%population of background fluctuations (Gaussian or otherwise).
-%\end{enumerate}
-%%
-%The (potential) issue at hand is the following: suppose the most
-%optimistic rate estimates are correct and aLIGO instantaneously reaches full
-%design sensitivity.  In one year, we will have acquired ${\mathcal O}(100)$ BNS
-%detections.  That's an entire year of measurements and a sizeable population of
-%SNR measurements.  Here's the big question: 
-%\begin{quote}
-%{\bf \textcolor{red}{If we form the rate
-%posterior from the loudest event, are we in any sense `throwing away'
-%information by considering only the loudest trigger?}}
-%\end{quote}
-%Equally importantly (and, at the risk of sounding glib, not necessarily the same
-%point\dots):
-%\begin{quote}
-%{\bf \textcolor{red}{Does the L.E. formalism reflect what we'll actually do
-%with, say, 100 BNS detections in aLIGO?}}
-%\end{quote}
-%
-%Without thinking about it too hard, it `feels' like we're literally throwing
-%away 99\% of the information gathered in the experiment.  But is that true?
-%That is, if we use the observation time of the experiment together with an
-%estimate of the distance / volume sensitivity of the search, is there actually
-%any more information to be gleaned from a sample of GW triggers than is already
-%present in the value of the loudest trigger?  Is it perhaps the case that the
-%loudest event probes the \emph{tail} of the SNR distribution, while a sample
-%of triggers allows one to better estimate the full distribution of SNRs?
 
-%\subsection{Alternative Rate Posterior Construction From \S 14 in Gregory}
-\subsection{Inferring The Detection Rate}
+\subsection{Constructing The Rate Posterior}
 Gregory's book, `Logical Data Analysis For The Physical Sciences' has an entire
 chapter (\S 14) devoted to `Bayesian Inference With Poisson Sampling'.  This
 seems to match our problem rather well.  In particular, he derives expressions
@@ -425,8 +284,6 @@ for a Poisson rate posterior in \S 14.3, `Signal + known background' and \S
 14.4, `Analysis of ON/OFF measurements' (``we want to infer the source rate, s,
 when the background rate, b, is imprecisely measured'').
 
-
-\subsubsection{Known Background Rate}
 It's tempting to jump straight into the On/off measurement stuff in \S~14.4 of
 Gregory, where the construction of the rate posterior includes the raw
 measurements of background rate.  I actually think this over-complicates things;
@@ -484,41 +341,8 @@ studies and, again, is a number we can take directly from the observing
 scenarios document.
 \end{enumerate}
 
-
- 
-\subsubsection{Unknown Background Rate: `On/Off Measurement'}
-Gregory also has a neat formalism for including a \emph{measured} background
-rate.  This is very interesting and useful for general rates measurements but I
-don't really think it's something we need for this paper, since the background
-rate is known\footnote{Put another way: we can take the background rate directly
-from the observing scenarios paper and we'll save a lot of extra work and we'll
-be perfectly consistent with the Collaborations' official projections.}.  I'll
-include the expressions below for now, it seems like extremely important stuff
-for the rates sub-group (I believe Matt West is doing something with it).
-
-The posterior on the rate of GW events \emph{measured in the science run} is,
-\begin{equation}\label{eq:signal_rate_posterior}
-p(s | N_{\textrm{on}}, I) = \sum_{i=0}^{N_{\textrm{on}}} C_i
-\frac{T_{\textrm{on}} (sT_{\textrm{on}})^i e^{-s T_{\textrm{on}} }}{i!},
-\end{equation}
-where,
-\begin{equation}
-C_i \approx \frac{ \left(1 + \frac{T_{\textrm{off}}}{T_{\textrm{on}}}\right)^i
-\frac{(N_{\textrm{on}} + N_{\textrm{off}} - i )!}{(N_{\textrm{on}}-i)!} }
-{\sum_{j=0}^{N_{\textrm{on}}} \left(1 +
-\frac{T_{\textrm{off}}}{T_{\textrm{on}}}\right)^j\frac{(N_{\textrm{on}} +
-N_{\textrm{off}} - j )!}{(N_{\textrm{on}}-j)!}},
-\end{equation}
 %
-and the quantities in both terms are as follows,
-\begin{itemize}
-\item $N_{\textrm{on}}$ is the number of zero-lag events observed in a science
-run of duration $T_{\textrm{on}}$.
-\item $N_{\textrm{off}}$ is the number of time-slide events observed in total
-background time $T_{\textrm{off}}$.
-\end{itemize}
-%
-\subsection{Inferring The Binary Coalescence Rate}
+%\subsection{Inferring The Binary Coalescence Rate}
 Now, I placed emphasis on $s$ being the event rate measured in the data with
 good reason.  We are interested in the binary coalescence rate $\cbcrate$.  This
 is not the same thing as the signal rate $s$.  However, the conversion between
@@ -554,8 +378,6 @@ s}{\diff \cbcrate}\right| \\
 & = & N_G . p(s|N_{\textrm{det}},I)
 \end{eqnarray}
 %
-If the above reasoning is sound, then `all' we require to move forward are
-sensible numbers of zero-lag and background events and observation times.
 
 \section{Summary of Gregory-Posterior Experiment}
 Here's the general procedure:
@@ -579,11 +401,6 @@ s}{\diff \cbcrate}\right| \\
 & = & N_G . p(s|N_{\textrm{on}},I)
 \end{eqnarray}
 \end{enumerate}
-%
-Note, however, that steps 1-4 are already done for us in the prospects document;
-the only ingredients we need are the detection rates for the observing scenarios
-and the the FAR for the threshold used to get those rates.  All of this
-information can be taken \emph{directly} from the observing scenarios paper.
 
 In particular, we require the expected number of on-source events
 $N_{\mathrm{on}}$ and the expected number of off-source events
@@ -617,9 +434,6 @@ take $\gamma=0.5$.  Since there is a range in the horizon distances to account
 for uncertainty in the sensitivity of the early configuration of the detectors,
 we compute use the arithmetic mean of the horizon distance when computing the
 search volume.
-%Finally, the expected number of detections is given by,
-%\begin{equation}\label{eq:ndet}
-%N_{\mathrm{det}} = \cbcrate \times \langle V_{\mathrm{search}} \rangle
 %\end{equation}
 
 \begin{table}
@@ -648,112 +462,44 @@ Full details may be foud in~\cite{ade_prospects}.\label{table:scenarios}}
 \end{table}
 
 
-
-Figures to include here
-\begin{itemize}
-\item Rate posteriors
-\item Jet posteriors for 3 delta function efficiency priors (0.1, 0.5, 1.0)
-\item Jet posterior (and jet-efficiency posterior) for uniform efficiency prior
-\item Jet posterior (and jet-efficiency posterior) for log-uniform efficiency
-prior 
-\item Jet posterior (and jet-efficiency posterior) Beta distribution with
-$\beta(1/2,1/2)$ (Jeffrey's)
-\item Jet posterior (and jet-efficiency posterior) Beta distribution with
-$\beta(2,5)$ (Jeffrey's).
-\end{itemize}
-
-Other figures to make
-\begin{itemize}
-\item Plot the efficiency priors
-\item iLIGO jet posterior for efficiency prior $\beta(a,b)$ with $(a,b)$ chosen
-such that the maximum is at 0.5
-\item jet-efficiency posteriors for iLIGO
-\end{itemize}
-
-\begin{comment}
-
-\begin{figure}%[ht]
+\begin{figure}
 \centering
-\subfloat[Part1][Rate Posterior (realistic)]
-{\scalebox{1}{\includegraphics{aLIGO/rate_re.eps}}\label{fig:re_rate}}\\
-\subfloat[Part2][Rate Posterior (high)]
-{\scalebox{1}{\includegraphics{aLIGO/rate_high.eps}}\label{fig:high_rate}}
-\caption{Rate Posteriors}
+{\includegraphics[width=\linewidth]{aligo_rate_re.eps}}
+\caption{ADE Rate Posterior\label{fig:aligorate}}
 \end{figure}
 
-\subsection{Validation}
+\subsection{Jet Angle Results}
 
-\begin{figure}%[ht]
+\subsubsection{Validation}
+
+\begin{figure}
 \centering
-\subfloat[Part1][Jet Angle Posterior (realistic)]
-{\scalebox{1}{\includegraphics{aLIGO/angle_re_delta,0.5_sim_theta-10.0_epsilon-0.5.eps}}\label{fig:jet1low}}\\
-\subfloat[Part2][Jet Angle Posterior (high)]
-{\scalebox{1}{\includegraphics{aLIGO/angle_high_delta,0.5_sim_theta-10.0_epsilon-0.5.eps}}\label{fig:jet1high}}\\
-\caption{Jet Posteriors For $\theta_{\mathrm{true}} = 10^{\circ}$,
-$\epsilon=0.5$, with prior pdf $p(\epsilon|I) = \delta(\epsilon-0.5)$.}
+{\includegraphics[width=\linewidth]{jet_angle_posterior_aligo_2016.eps}}
+\caption{ADE 2016 jet angle posterior, 
+$\theta = 30^{\deg}$\label{fig:njjetposterio2016}}
 \end{figure}
 
-\begin{figure}%[ht]
+\begin{figure}
 \centering
-\subfloat[Part1][Jet Angle Posterior (realistic)]
-{\scalebox{1}{\includegraphics{aLIGO/angle_re_uniform_sim_theta-10.0_epsilon-0.5.eps}}\label{fig:jet2low}}\\
-\subfloat[Part2][Jet Angle Posterior (high)]
-{\scalebox{1}{\includegraphics{aLIGO/angle_high_uniform_sim_theta-10.0_epsilon-0.5.eps}}\label{fig:jet2high}}\\
-\caption{Jet Posteriors For $\theta_{\mathrm{true}} = 10^{\circ}$,
-$\epsilon=0.5$, with prior pdf $p(\epsilon|I) = U(0.01,1)$.}
-\end{figure}
-
-\begin{figure}%[ht]
-\centering
-\subfloat[Part1][Jet Angle Posterior (realistic)]
-{\scalebox{1}{\includegraphics{aLIGO/angle_re_jeffreys_sim_theta-10.0_epsilon-0.5.eps}}\label{fig:jet2low}}\\
-\subfloat[Part2][Jet Angle Posterior (high)]
-{\scalebox{1}{\includegraphics{aLIGO/angle_high_jeffreys_sim_theta-10.0_epsilon-0.5.eps}}\label{fig:jet2high}}\\
-\caption{Jet Posteriors For $\theta_{\mathrm{true}} = 10^{\circ}$,
-$\epsilon=0.5$, with prior pdf $p(\epsilon|I) = \beta(\frac{1}{2},\frac{1}{2}$.}
-\end{figure}
-
-\subsection{Unknown $\theta_{\mathrm{jet}}$}
-
-\begin{figure}%[ht]
-\centering
-\subfloat[Part1][Jet Angle Posterior (realistic)]
-{\scalebox{1}{\includegraphics{aLIGO/angle_re_delta_0p5.eps}}\label{fig:jet1low_unknown}}\\
-\subfloat[Part2][Jet Angle Posterior (high)]
-{\scalebox{1}{\includegraphics{aLIGO/angle_high_delta_0p5.eps}}\label{fig:jet1high_unknown}}\\
-\caption{Jet Posteriors For Unknown Jet Angle, prior pdf $p(\epsilon|I) = \delta(\epsilon-0.5)$}
-\end{figure}
-
-\begin{figure}%[ht]
-\centering
-\subfloat[Part1][Jet Angle Posterior (realistic)]
-{\scalebox{1}{\includegraphics{aLIGO/angle_re_delta_1.eps}}\label{fig:jet1low_unknown}}\\
-\subfloat[Part2][Jet Angle Posterior (high)]
-{\scalebox{1}{\includegraphics{aLIGO/angle_high_delta_1.eps}}\label{fig:jet1high_unknown}}\\
-\caption{Jet Posteriors For Unknown Jet Angle, prior pdf $p(\epsilon|I) =
-\delta(\epsilon-1.0)$}
-\end{figure}
-
-\begin{figure}%[ht]
-\centering
-\subfloat[Part1][Jet Angle Posterior (realistic)]
-{\scalebox{1}{\includegraphics{aLIGO/angle_re_uniform_0p01-1.eps}}\label{fig:jet1low_unknown}}\\
-\subfloat[Part2][Jet Angle Posterior (high)]
-{\scalebox{1}{\includegraphics{aLIGO/angle_high_uniform_0p01-1.eps}}\label{fig:jet1high_unknown}}\\
-\caption{Jet Posteriors Unknown Jet Angle, prior pdf $p(\epsilon|I) = U(0.01,1)$.}
+{\includegraphics[width=\linewidth]{jet_angle_posterior_aligo_2022.eps}}
+\caption{ADE 2022 jet angle posterior, 
+$\theta = 30^{\deg}$\label{fig:njjetposterio2022}}
 \end{figure}
 
 
-\begin{figure}%[ht]
+\subsubsection{Jet Angle Posteriors From Observing Scenarios}
+
+\begin{figure}
 \centering
-\subfloat[Part1][Jet Angle Posterior (realistic)]
-{\scalebox{1}{\includegraphics{aLIGO/angle_re_jeffreys.eps}}\label{fig:jet1low_unknown}}\\
-\subfloat[Part2][Jet Angle Posterior (high)]
-{\scalebox{1}{\includegraphics{aLIGO/angle_high_jeffreys.eps}}\label{fig:jet1high_unknown}}\\
-\caption{Jet Posteriors Unknown Jet Angle, prior pdf $p(\epsilon|I) =
-\beta(\frac{1}{2},\frac{1}{2})$.}
+{\includegraphics[width=\linewidth]{jet_angle_posterior_aligo_2016_real.eps}}
+\caption{ADE 2016 jet angle posterior}
 \end{figure}
 
+\begin{figure}
+\centering
+{\includegraphics[width=\linewidth]{jet_angle_posterior_aligo_2022_real.eps}}
+\caption{ADE 2022 jet angle posterior}
+\end{figure}
 
 \section{Conclusion}
 
@@ -761,10 +507,7 @@ $\epsilon=0.5$, with prior pdf $p(\epsilon|I) = \beta(\frac{1}{2},\frac{1}{2}$.}
 \section{Priors}
 \begin{figure}%[ht]
 \centering
-%\subfloat[Part1][Jet Angle Posterior (realistic)]
-{\scalebox{1}{\includegraphics{iLIGO/priors.eps}}\label{fig:priors}}\\
-%\subfloat[Part2][Jet Angle Posterior (high)]
-%{\scalebox{1}{\includegraphics{aLIGO/angle_high_uniform_sim_theta-10.0_epsilon-0.5.eps}}\label{fig:jet2high}}\\
+{\includegraphics[width=\linewidth]{efficiency_prior.eps}}\label{fig:priors}
 \caption{Priors}
 \end{figure}
 
@@ -830,7 +573,6 @@ Finally:
 \end{equation}
 
 \section{Null-detection Jet Angle Posteriors With Different Priors}
-\end{comment}
 
 \bibliography{grb_beams}
 
