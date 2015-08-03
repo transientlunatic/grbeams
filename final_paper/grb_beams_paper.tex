@@ -24,6 +24,7 @@
 \newcommand{\cbcrate}{{{\mathcal R}}}
 \newcommand{\diff}{{\mathrm d}}
 \newcommand{\rhostar}{{\rho^*}}
+\newcommand{\dhor}{{\mathcal D}_{\mathrm{hor}}}
 
 \def\imbh#1{intermediate mass black hole#1(IMBH#1)\gdef\imbh{IMBH}}
 \def\smbh#1{supermassive black hole#1(SMBH#1)\gdef\smbh{SMBH}}
@@ -234,21 +235,21 @@ the \gw{} analysis.  At large distances, this is well approximated at large
 distances by~\cite{rates_paper},
 %
 \begin{equation}
-    N_G = \frac{4}{3} \pi \left( \frac{\mathcal{D}}{\textrm{Mpc}}
+    N_G = \frac{4}{3} \pi \left( \frac{\dhor}{\textrm{Mpc}}
 \right)^3 (2.26)^{-3} (0.0116),
 \end{equation}
 %
-where ${\mathcal D}$ is the distance at which an optimally-oriented
-\bns{} merger yields $\rho_c\geq12$, the factor of 2.26 results from averaging
-over sky-locations and orientations and $1.16\times 10^{-2}$\,Mpc$^{-3}$ is the
-extrapolated density of \mweg{} in space.
+where $\dhor$ is the horizon distance; the distance at which an
+optimally-oriented \bns{} merger yields $\rho_c\geq12$, the factor of 2.26
+results from averaging over sky-locations and orientations and $1.16\times
+10^{-2}$\,Mpc$^{-3}$ is the extrapolated density of \mweg{} in space.
 
 Finally, the posterior on the binary coalescene rate $\cbcrate$ is obtained from
 a trivial transformation of the posterior on the signal rate $s$,
 %
 \begin{eqnarray}
-    p(\cbcrate|n,T,b,{\mathcal D}) & = & p(s|n,T,b) \left|\frac{\diff s}{\diff \cbcrate}\right| \\
-                                   & = & N_G(\mathcal{D})p(s|n,T,b)
+    p(\cbcrate|n,T,b,\dhor) & = & p(s|n,T,b) \left|\frac{\diff s}{\diff \cbcrate}\right| \\
+                                   & = & N_G(\dhor)p(s|n,T,b)
 \end{eqnarray}
 %
 
