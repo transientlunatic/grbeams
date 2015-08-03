@@ -28,6 +28,7 @@
 \def\imbh#1{intermediate mass black hole#1(IMBH#1)\gdef\imbh{IMBH}}
 \def\smbh#1{supermassive black hole#1(SMBH#1)\gdef\smbh{SMBH}}
 \def\bbh#1{binary black hole#1 (BBH#1)\gdef\bbh{BBH}}
+\def\bns#1{binary neutron star#1 (BNS#1)\gdef\bns{BNS}}
 \def\bh#1{black hole#1 (BH#1)\gdef\bh{BH}}
 \def\ns#1{neutron star#1 (NS#1)\gdef\ns{NS}}
 \def\gw#1{gravitational wave#1 (GW#1)\gdef\gw{GW}}
@@ -35,9 +36,11 @@
 \def\pnw#1{post-Newtonian#1 (PN#1)\gdef\pnw{PN}}
 \def\eos#1{equation of state#1 (EOS#1)\gdef\eos{EOS}}
 \def\grb#1{gamma-ray burst#1 (GRB#1)\gdef\grb{GRB}}
+\def\sgrb#1{short gamma-ray burst#1 (sGRB#1)\gdef\sgrb{sGRB}}
 \def\amr#1{adaptive mesh refinement#1 (AMR#1)\gdef\amr{AMR}}
 \def\isco#1{innermost stable circular orbit#1 (ISCO#1)\gdef\isco{ISCO}}
 \def\cwb#1{Coherent WaveBurst#1 (CWB#1)\gdef\cwb{CWB}}
+\def\mweg#1{Milky Way Equivalent Galaxy#1 (MWEG#1)\gdef\mweg{MWEG}}
 
 \newcommand{\red}[1]{{\color{red}{#1}}}
 \newcommand{\about}[1]{{\color{blue}{[THIS SECTION: #1]}}}
@@ -114,17 +117,27 @@ work, we assume
 $\grbrate=10$\,Gpc$^{-3}$\,yr$^{-1}$~\cite{nakar-2007,Dietz11}.
  
 
+\begin{figure}
+\centering
+\includegraphics[width=\linewidth]{theta_dist_grbfrac.eps}
+\caption{\label{fig:thetapopulation} Expected relative
+numbers of observed GRBs and binary coalescences for different distributions
+on the GRB beaming angle.  Lines in the figure correspond to jet angle
+population means, while the $x$-axis shows the width of the distribution.  All 
+distributions are Gaussian, truncated at $(0, 90]$ degrees.}
+\end{figure}
 
 
 \section{Method}
 
-\subsection{Beaming angle inferences}
-In this section, we discuss our approach to estimating the short GRB beaming angle based
-on the binary neutron star inspiral rate, estimated through the observed number of gravitational waves
-from binary neutron star inspirals. The aim here is to develop an approach that 
-folds in uncertainties in in the binary neutron star inspiral rate and our ignorance
-about the rate at which binary neutron star inspirals lead to short gamma-ray bursts.
-
+%\subsection{Beaming angle inferences}
+In this section, we discuss our approach to estimating the short GRB beaming
+angle based on the binary neutron star inspiral rate, estimated through a number
+of \gw{} observations of \bns{} coalescence. The aim here is to develop an
+approach that folds in uncertainties in in the binary neutron star inspiral rate
+and our ignorance about the rate at which binary neutron star inspirals lead to
+short gamma-ray bursts.
+%
 An overview of our approach is as follows:
 
 \begin{enumerate}
@@ -142,46 +155,64 @@ analysis.
 
 
 \subsection{Constructing The Rate Posterior}
-Gregory's book, `Logical Data Analysis For The Physical Sciences' has an entire
-chapter (\S 14) devoted to `Bayesian Inference With Poisson Sampling'.  This
-seems to match our problem rather well.  In particular, he derives expressions
-for a Poisson rate posterior in \S 14.3, `Signal + known background' and \S
-14.4, `Analysis of ON/OFF measurements' (``we want to infer the source rate, s,
-when the background rate, b, is imprecisely measured'').
-
-It's tempting to jump straight into the On/off measurement stuff in \S~14.4 of
-Gregory, where the construction of the rate posterior includes the raw
-measurements of background rate.  I actually think this over-complicates things;
-if we wanted to do follow that procedure, we have to figure out the expected FAR
-for a given size of template bank etc.  There's a pretty well-established
-procedure for measuring this number: time-slides.  In fact, we don't even have
-to do any analysis.  Figure 3 (left panel) from the observing scenarios paper
-tells us everything we need to know.  Specifically, the following sentance has
-the information we need:
-\begin{quote}
-``We conservatively estimate a $\rho_c$ threshold of 12 is required for a false rate below
-$\sim 10^{−2}$\,yr$^{−1}$.''
-\end{quote}
+%   Gregory's book, `Logical Data Analysis For The Physical Sciences' has an entire
+%   chapter (\S 14) devoted to `Bayesian Inference With Poisson Sampling'.  This
+%   seems to match our problem rather well.  In particular, he derives expressions
+%   for a Poisson rate posterior in \S 14.3, `Signal + known background' and \S
+%   14.4, `Analysis of ON/OFF measurements' (``we want to infer the source rate, s,
+%   when the background rate, b, is imprecisely measured'').
 %
-So let $b=10^{-2}$\,yr$^{-1}$.  From there, we can get the detection rate
-posterior using equations 14.10--14.12 of Gregory.  The measured rate $r$
-consists of two components, one due to a signal of interest, $s$, and the other
-a known background rate, $b$:
+%It's tempting to jump straight into the On/off measurement stuff in \S~14.4 of
+%Gregory, where the construction of the rate posterior includes the raw
+%measurements of background rate.  I actually think this over-complicates things;
+%if we wanted to do follow that procedure, we have to figure out the expected FAR
+%for a given size of template bank etc.  There's a pretty well-established
+%procedure for measuring this number: time-slides.  In fact, we don't even have
+%to do any analysis.  Figure 3 (left panel) from the observing scenarios paper
+%tells us everything we need to know.  Specifically, the following sentance has
+%the information we need:
+
+Our goal is to infer the posterior probability distribution for the mean \sgrb{}
+beaming angle $\theta$ from \gw{} constraints on the rate of \bns{} coalescence
+$\cbcrate$.  The core ingredient to the analysis then, is the posterior
+probability distribution on the coalescence rate $p(\cbcrate|D,I)$, where $D$
+represents some \gw{} observation and $I$ denotes other unenumerated prior
+information.   To begin we will demonstrate how $p(\cbcrate|D,I)$ may be
+constructed given a variety of the projected observation scenarios using aLIGO
+which are described in~\cite{ade_prospects}.  Later, in
+section~\ref{sec:beaming_limits} where we extend the analysis to place upper
+limits on $\theta$ from the initial detector era, we consider the rate posterior
+yielded by previous \gw{} analyses.
+
+To form the posterior on the coalescence rate, we begin by constructing the
+posterior on the \emph{signal} rate.  Note that these are not identical since
+only those \bns{} mergers which occur within a certain range yield a detectable
+signal.  Assume we have a data analysis pipeline (e.g.,
+{\tt FINDCHIRP}~\cite{2012PhRvD..85l2006A}) which, when applied to the data from
+our instrument, results in discrete `events' which are characterized by network
+signal-to-noise ratio $\rho_c$ and which correspond to the potential
+detection of an inspiral \gw{} signal from \bns{} coalescence.  The measured
+rate $r$ of these events consists of two components, one due to the signals of
+interest $s$, and the other a background rate $b$, which arises due to random
+chance and, more importantly, instrumental and terrestrial disturbances:
+%
 \begin{equation}
 r = s + b
 \begin{cases}
 s = \text{signal rate} \\
-b = \text{background rate}
+b = \text{background rate}.
 \end{cases}
 \end{equation}
 %
-Since the background rate is known,
-\begin{equation}
-p(s|n,b,I) = p(r|n,b,I),
-\end{equation}
+Typically for an all-sky, all-time analysis, a threshold $\rho_c\geq 12$ is
+applied to the events arising from the pipeline such that
+$b=10^{-2}$\,yr$^{-1}$~\cite{ade_prospects}.  Since the background rate $b$ is
+known then, we are just left with the problem of inferring the signal rate $s$.
+Assuming a uniform prior on $s$ and a Poisson process underlying the events, it
+may be shown (e.g.,~\cite{2010blda.book.....G}) that the posterior for the
+signal rate, given a known background rate $b$ and $n$ events observed over a
+time period $T$ is,
 %
-where $n$ is the number of \gw{} detections.  From eq 14.8 of Gregory, we get
-to:
 \begin{equation}
 p(s|n,b,I) = C \frac{ T\left[(s+b)T\right]^n e^{-(s+b)T}}{n!},
 \end{equation}
@@ -192,105 +223,35 @@ C^{-1} & = &\frac{e^{-bT}}{n!} \int_0^{\infty}\diff(sT)(s+b)^n T^n e^{-sT}\\
 & = & \sum_{i=0}^n \frac{ (bT)^i e^{-bT}}{i!}.
 \end{eqnarray}
 %
-So, in this approach we only need three pieces of information which constitute
-the observing scenario:
-\begin{enumerate}
-\item $n$, the number of triggers.  This should be \emph{all} triggers:
-background plus signal.  Note, however, that the operating point of the search
-is such that the number of background triggers can reasonably be expected to be
-$\ll 1$.
-\item $T$, the observation time / science run duration.  To be taken directly
-from the scenarios paper.
-\item $b$, the background rate.  As discussed, this is known from many previous
-studies and, again, is a number we can take directly from the observing
-scenarios document.
-\end{enumerate}
-
-%
-%\subsection{Inferring The Binary Coalescence Rate}
-Now, I placed emphasis on $s$ being the event rate measured in the data with
-good reason.  We are interested in the binary coalescence rate $\cbcrate$.  This
-is not the same thing as the signal rate $s$.  However, the conversion between
-signal rate and coalescence rate is precisely what the `rates'
-paper~\cite{rates_paper} was all about!
-
-In particular,  the detection rate for a given type of binary coalescence in
-LIGO-Virgo is given by equation\,1 in~\cite{rates_paper},
-\begin{equation}
-%\dot{N} = \cbcrate \times N_G,
-s = \cbcrate \times N_G,
-\end{equation}
-%
-where $\cbcrate$ is the coalescence rate of that type of binary per galaxy and
-$N_G$ is the number of galaxies accessible with a search for the relevant binary
-type.  $N_G$ is well approximated at large distances by,
+Finally, we can transform the posterior on the \emph{signal} rate to the
+underlying \emph{coalescence} rate via our knowledge of the sensitivity of the
+\gw{} analysis.  In particular,  the signal detection rate is simply the product
+of the intrinsic coalescence rate $\cbcrate$ and the number of \bns{} mergers
+which would result in a \gw{} signal with $\rho_c\geq12$.   Expressing the
+binary coalescence rate in terms of the number of mergers per \mweg{}, per year
+then we require the number of galaxies $N_{\mathrm{G}}$ which may be probed by
+the \gw{} analysis.  At large distances, this is well approximated at large
+distances by~\cite{rates_paper},
 %
 \begin{equation}
 N_G = \frac{4}{3} \pi \left( \frac{D_{\textrm{horizon}}}{\textrm{Mpc}}
-\right)^3 (2.26)^{-3} (0.0116).
+\right)^3 (2.26)^{-3} (0.0116),
 \end{equation}
 %
-The reader is directed to~\cite{rates_paper} for a discussion of the numerical
-factors in the equation above.
+where $D_{\mathrm{horizon}}$ is the distance at which an optimally-oriented
+\bns{} merger yields $\rho_c\geq12$, the factor of 2.26 results from averaging
+over sky-locations and orientations and $1.16\times 10^{-2}$\,Mpc$^{-3}$ is the
+extrapolated density of \mweg{} in space.
 
-Finally, we recognise that $\dot{N}$ is the signal rate $s$ in
-equation~\ref{eq:signal_rate_posterior} so that we arrive at the desired
-posterior on the binary coalescence rate, 
+Finally, the posterior on the binary coalescene rate $\cbcrate$ is obtained from
+a trivial transformation of the posterior on the signal rate $s$,
 %
 \begin{eqnarray}
-p(\cbcrate|N_{\textrm{det}},I) & = & p(s|N_{\textrm{det}},I) \left|\frac{\diff
-s}{\diff \cbcrate}\right| \\
-& = & N_G . p(s|N_{\textrm{det}},I)
+    p(\cbcrate|n,T,b,D_{\mathrm{horizon}}) & = & p(s|n,T,b) \left|\frac{\diff s}{\diff \cbcrate}\right| \\
+                                           & = & N_G(D_{\mathrm{horizon}})p(s|n,T,b)
 \end{eqnarray}
 %
 
-\subsection{Summary of Gregory-Posterior Experiment}
-Here's the general procedure:
-\begin{enumerate}
-\item Compute horizon distance from noise curve: $D_{\mathrm{horizon}}$,
-assuming $\rho_c=12$ (as in rates paper).
-\item Find number of galaxies accessible to this horizon distance from:
-\begin{equation}
-N_G = \frac{4}{3} \pi \left( \frac{D_{\textrm{horizon}}}{\textrm{Mpc}}
-\right)^3 (2.26)^{-3} (0.0116).
-\end{equation}
-\item Detection rate is $\dot{N} = R \times N_G$, where $R$ is the binary
-coalescence rate
-\item Use $\dot{N}$ to determine number of GW-detections in $T_{\mathrm{obs}}$=1 year
-$N_{\mathrm{det}}$
-\item Compute \emph{detection} rate posterior, $p(s|N_{\textrm{on}},I)$.  The
-rate posterior is then given by 
-\begin{eqnarray}
-p(\cbcrate|N_{\textrm{on}},I) & = & p(s|N_{\textrm{on}},I) \left|\frac{\diff
-s}{\diff \cbcrate}\right| \\
-& = & N_G . p(s|N_{\textrm{on}},I)
-\end{eqnarray}
-\end{enumerate}
-
-In particular, we require the expected number of on-source events
-$N_{\mathrm{on}}$ and the expected number of off-source events
-$N_{\mathrm{off}}$.  We can find $N_{\mathrm{on}}$ using the search
-\emph{volumes} $V_{\mathrm{search}}$ in the observing scenarios paper:
-%
-\begin{equation}
-N_{\mathrm{det}} = \cbcrate \times V_{\mathrm{search}}
-\end{equation}
-
-
-
-Note that the search volume is given by,
-\begin{equation}\label{eq:search_volume}
-V_{\mathrm{search}} = \frac{4}{3}\pi D_{\mathrm{sens}}^3 \times \gamma T,
-\end{equation}
-%
-where $D_{\mathrm{sens}}$ is the BNS sensemon range ($D_{\mathrm{hor}}/2.26$),
-$T$ is the duration of the science run (i.e., observation time) and $\gamma$ is
-the \emph{duty} cycle for the science run.  Following~\cite{ade_prospects}, we
-take $\gamma=0.5$.  Since there is a range in the horizon distances to account
-for uncertainty in the sensitivity of the early configuration of the detectors,
-we compute use the arithmetic mean of the horizon distance when computing the
-search volume.
-%\end{equation}
 
 \subsection{Constructing the beaming angle posterior}
 Inferences of the GRB beaming angle are made from the posterior probability
@@ -369,6 +330,54 @@ and marginalise over this parameter.
 
 
 \section{Simulations (for want of a better name)}
+
+\subsection{Summary of Gregory-Posterior Experiment}
+Here's the general procedure:
+\begin{enumerate}
+\item Compute horizon distance from noise curve: $D_{\mathrm{horizon}}$,
+assuming $\rho_c=12$ (as in rates paper).
+\item Find number of galaxies accessible to this horizon distance from:
+\begin{equation}
+N_G = \frac{4}{3} \pi \left( \frac{D_{\textrm{horizon}}}{\textrm{Mpc}}
+\right)^3 (2.26)^{-3} (0.0116).
+\end{equation}
+\item Detection rate is $\dot{N} = R \times N_G$, where $R$ is the binary
+coalescence rate
+\item Use $\dot{N}$ to determine number of GW-detections in $T_{\mathrm{obs}}$=1 year
+$N_{\mathrm{det}}$
+\item Compute \emph{detection} rate posterior, $p(s|N_{\textrm{on}},I)$.  The
+rate posterior is then given by 
+\begin{eqnarray}
+p(\cbcrate|N_{\textrm{on}},I) & = & p(s|N_{\textrm{on}},I) \left|\frac{\diff
+s}{\diff \cbcrate}\right| \\
+& = & N_G . p(s|N_{\textrm{on}},I)
+\end{eqnarray}
+\end{enumerate}
+
+In particular, we require the expected number of on-source events
+$N_{\mathrm{on}}$ and the expected number of off-source events
+$N_{\mathrm{off}}$.  We can find $N_{\mathrm{on}}$ using the search
+\emph{volumes} $V_{\mathrm{search}}$ in the observing scenarios paper:
+%
+\begin{equation}
+N_{\mathrm{det}} = \cbcrate \times V_{\mathrm{search}}
+\end{equation}
+
+
+
+Note that the search volume is given by,
+\begin{equation}\label{eq:search_volume}
+V_{\mathrm{search}} = \frac{4}{3}\pi D_{\mathrm{sens}}^3 \times \gamma T,
+\end{equation}
+%
+where $D_{\mathrm{sens}}$ is the BNS sensemon range ($D_{\mathrm{hor}}/2.26$),
+$T$ is the duration of the science run (i.e., observation time) and $\gamma$ is
+the \emph{duty} cycle for the science run.  Following~\cite{ade_prospects}, we
+take $\gamma=0.5$.  Since there is a range in the horizon distances to account
+for uncertainty in the sensitivity of the early configuration of the detectors,
+we compute use the arithmetic mean of the horizon distance when computing the
+search volume.
+%\end{equation}
 
 \subsection{Advanced detector observations}
 We now outline the projected observing scenarios.  These are taken directly
@@ -453,22 +462,11 @@ $\theta = 30^{\deg}$\label{fig:njjetposterio2022}}
 \caption{ADE 2022 jet angle posterior}
 \end{figure}
 
-\subsection{Robustness of Mean Angle Inference To Distribution Width}
-
-\begin{figure}
-\centering
-\includegraphics[width=\linewidth]{theta_dist_grbfrac.eps}
-\caption{\label{fig:thetapopulation} Expected relative
-numbers of observed GRBs and binary coalescences for different distributions
-on the GRB beaming angle.  Lines in the figure correspond to jet angle
-population means, while the $x$-axis shows the width of the distribution.  All 
-distributions are Gaussian, truncated at $(0, 90]$ degrees.}
-\end{figure}
-
 
 
 
 \subsection{Beaming angle limits from upper limits}
+\label{sec:beaming_limits}
 
 \subsubsection{Constructing The Rate Posterior}
 
