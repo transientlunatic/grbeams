@@ -328,16 +328,49 @@ this work, we will present results using three different priors:
         a $\beta$-distribution with shape parameters $\alpha=\beta=\frac{1}{2}$.
 \end{description}
 
-
-
 %   \begin{figure}%[ht]
 %   \centering
 %   {\includegraphics[width=\linewidth]{efficiency_prior.eps}}\label{fig:priors}
 %   \caption{Priors}
 %   \end{figure}
-%
 
-\section{Simulations (for want of a better name)}
+%\section{Simulations (for want of a better name)}
+\section{Prospects For Beaming Angle Constraints With aLIGO}
+We now demonstrate the derivation of the rate posterior $p(\cbcrate)$ and the
+subsequent transformation to the beaming angle posterior $p(\theta)$.  We
+consider four \gw{} observation scenarios with aLIGO based on the work
+in~\cite{ade_prospects}.  An observing scenario essentially consists of an epoch
+of aLIGO operation, which defines an expected search sensitivity (i.e., \bns{}
+horizon distance $\dhor$) and observation time $T$; as well as an assumption on
+the rate of \bns{} coalescence in the local Universe.  For this study, we
+consider two operation epochs, the 2016--17 and 2022+ scenarios described
+in~\cite{ade_prospects}. For each epoch, we produce results for both the
+`realistic' and `high' \bns{} rates described in~\cite{rates_paper}.
+
+\begin{table}
+\centering
+\begin{tabular}{l c c c c c }
+\toprule
+Epoch & $T$ & $D_{\mathrm{hor}}$ &
+$\langle V_{\mathrm{search}}\rangle$ & $\cbcrate$ & $N_{\mathrm{det}}$ \\
+ & [yr] & [Mpc] & [Mpc$^3$yr] &  [Mpc$^{-3}$yr$^{-1}$] \\
+\colrule
+2016--17 & 0.5 & 80--120 & $1.05\times10^6$ & $10^{-6}$ & 1.3 \\
+2016--17 & 0.5 & 80--120 & $1.05\times10^6$ & $10^{-5}$ & 13 \\
+2022+ & 1 & 200 & $4\times10^7$ & $10^{-6}$ & 40 \\
+2022+ & 1 & 200 & $4\times10^7$ & $10^{-5}$ & 400 \\
+\botrule
+\end{tabular}
+\caption{Advanced detector era observing scenarios considered in this work.  $T$
+is the expected duration of the science run and $D_{\mathrm{hor}}$ is the BNS
+horizon distance for the sensitivity expected to be acheived at the given epoch.
+$\langle V_{\mathrm{search}}\rangle $ is the sensitive volume of the search,
+where the angled brackets $\langle \rangle$ indicate averaging over the range
+in horzizon distance, $\cbcrate$ is the assumed BNS coalescence rate and
+$N_{\mathrm{det}}$ is the expected number of \gw{} detections.  Note that the
+quoted search volume accounts for a network duty cycle of $\sim 50\%$.
+Full details may be foud in~\cite{ade_prospects}.\label{table:scenarios}}
+\end{table}
 
 \subsection{Summary of Gregory-Posterior Experiment}
 Here's the general procedure:
@@ -399,30 +432,6 @@ in this work).  For each epoch, we will produce results for the ``realistic''
 and ``high'' rates.   We can very easily include other scenarios/rates.
 Table~\ref{table:scenarios} summarizes the observing scenarios.
 
-\begin{table}
-\centering
-\begin{tabular}{l c c c c c }
-\toprule
-Epoch & $T$ & $D_{\mathrm{hor}}$ &
-$\langle V_{\mathrm{search}}\rangle$ & $\cbcrate$ & $N_{\mathrm{det}}$ \\
- & [yr] & [Mpc] & [Mpc$^3$yr] &  [Mpc$^{-3}$yr$^{-1}$] \\
-\colrule
-2016--17 & 0.5 & 80--120 & $1.05\times10^6$ & $10^{-6}$ & 1.3 \\
-2016--17 & 0.5 & 80--120 & $1.05\times10^6$ & $10^{-5}$ & 13 \\
-2022+ & 1 & 200 & $4\times10^7$ & $10^{-6}$ & 40 \\
-2022+ & 1 & 200 & $4\times10^7$ & $10^{-5}$ & 400 \\
-\botrule
-\end{tabular}
-\caption{Advanced detector era observing scenarios considered in this work.  $T$
-is the expected duration of the science run and $D_{\mathrm{hor}}$ is the BNS
-horizon distance for the sensitivity expected to be acheived at the given epoch.
-$\langle V_{\mathrm{search}}\rangle $ is the sensitive volume of the search,
-where the angled brackets $\langle \rangle$ indicate averaging over the range
-in horzizon distance, $\cbcrate$ is the assumed BNS coalescence rate and
-$N_{\mathrm{det}}$ is the expected number of \gw{} detections.  Note that the
-quoted search volume accounts for a network duty cycle of $\sim 50\%$.
-Full details may be foud in~\cite{ade_prospects}.\label{table:scenarios}}
-\end{table}
 
 
 \subsubsection{Binary neutron star inspiral rate}
