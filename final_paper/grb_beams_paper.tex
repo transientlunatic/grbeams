@@ -129,29 +129,31 @@ distributions are Gaussian, truncated at $(0, 90]$ degrees.}
 \end{figure}
 
 
-\section{Method}
+\section{From Rates To Beaming Angles}
 
-%\subsection{Beaming angle inferences}
-In this section, we discuss our approach to estimating the short GRB beaming
+In this section, we discuss our approach to estimating the \sgrb{} beaming
 angle based on the binary neutron star inspiral rate, estimated through a number
-of \gw{} observations of \bns{} coalescence. The aim here is to develop an
-approach that folds in uncertainties in in the binary neutron star inspiral rate
-and our ignorance about the rate at which binary neutron star inspirals lead to
-short gamma-ray bursts.
+of \gw{} observations of \bns{} coalescence. We demonstrate the approach by
+considering plausible detection scenarios in aLIGO.  Our ultimate goal is to
+develop a generic approach that folds in uncertainties in in the binary neutron
+star inspiral rate and our ignorance about the probability with which binary
+neutron star inspirals actually result in \sgrb{s}.
 %
-An overview of our approach is as follows:
+An overview of the general method is as follows:
 
 \begin{enumerate}
-\item Estimate the binary neutron star inspiral rate from the corresponding 
-number of gravitational wave signals observed. This gives a posterior
-probability distribution on the binary neutron star rate.
-\item Use the assumed relationship between binary neutron star inspirals
-and short gamma-ray bursts to transform the rate posterior probability to
-a posterior probability on the mean short gamma-ray burst beaming angle.
-\item Marginalise over our assumed values of $\epsilon$. We choose to 
-consider $\epsilon$ a nuisance parameter because, to date, there is no 
-accurate estimate of this parameter and it is not the main focus of our 
-analysis. 
+    \item Estimate the posterior probability distribution on the \bns{} merger rate
+    in the local Universe from a number of observed gravitational wave signals
+    and our knowledge of the sensitivity of the detectors.  We construct a joint
+    posterior distribution on the \bns{} rate and the (unknown) probability
+    $\epsilon$ that a given merger results in a \sgrb{}.
+\item Use equation~\ref{eq:rate2angle}, which relates the \bns{} merger and
+    \sgrb{} rates via the geometry of the beaming angle, to transform the rate
+    posterior probability to a posterior probability on the mean short gamma-ray
+    burst beaming angle.
+\item Marginalize over $\epsilon$. We choose to consider $\epsilon$ a nuisance
+    parameter because, to date, there is no accurate estimate of this parameter
+    and it is not the main focus of our analysis. 
 \end{enumerate}
 
 
@@ -244,25 +246,31 @@ optimally-oriented \bns{} merger yields $\rho_c\geq12$, the factor of 2.26
 results from averaging over sky-locations and orientations and $1.16\times
 10^{-2}$\,Mpc$^{-3}$ is the extrapolated density of \mweg{} in space.
 
-Finally, the posterior on the binary coalescene rate $\cbcrate$ is obtained from
+Finally, the posterior on the binary coalescence rate $\cbcrate$ is obtained from
 a trivial transformation of the posterior on the signal rate $s$,
 %
 \begin{eqnarray}
     p(\cbcrate|n,T,b,\dhor) & = & p(s|n,T,b) \left|\frac{\diff s}{\diff \cbcrate}\right| \\
-                                   & = & N_G(\dhor)p(s|n,T,b)
+                                   & = & N_G(\dhor)p(s|n,T,b).
 \end{eqnarray}
 %
-
+We see then that in this approach, the rate posterior depends only on the number
+of signal detections $n$, the observation time $T$, the background rate $b$ and
+the horizon distance of the search $\dhor$.  It is precisely these quantities
+that comprise the detection scenarios outlined in~\cite{ade_prospects}.  Before
+constructing expected rate posteriors, let us outline the transformation from
+rate to beaming angle.
 
 \subsection{Constructing the beaming angle posterior}
 Inferences of the GRB beaming angle are made from the posterior probability
-density on the beaming angle $p(\theta|D,I)$.  Our goal then, is to transform
-the measured posterior probability density on the rate $\cbcrate$ to a posterior
-on the beaming angle.
+density on the beaming angle $p(\theta|D,I)$ where, as usual $D$ indicates some
+set of observations and $I$ unenumerated prior knowledge.  Our goal then, is to
+transform the measured posterior probability density on the rate $\cbcrate$ to a
+posterior on the beaming angle.
 %
-First, note that the PDF $p(\theta|D,I)$ may be written as a marginalisation
-over $\epsilon$ in the the joint PDF $p(\theta, \epsilon|D,I)$:
-%
+First, note that we can express the joint distribution $p(\theta, \epsilon|D,I)$
+as a Jacobian transformation of the joint distribution $p(\cbcrate,
+\epsilon|D,I)$:
 \begin{equation}
 p(\theta,\epsilon) = p(\cbcrate,\epsilon)
 \left\lvert\left\lvert
@@ -270,40 +278,21 @@ p(\theta,\epsilon) = p(\cbcrate,\epsilon)
 \right\rvert\right\rvert,
 \end{equation}
 %
-\begin{equation}
-p(\theta) = \int_{\epsilon} p(\theta,\epsilon)~\diff \epsilon,
-\end{equation}
+where we have dropped conditioning statements for notational convenience.  The
+Jacobian determinant is can be  computed from equation~\ref{eq:rate2angle}.  It
+is then straightforward to marginalize over $\epsilon$ to yield the posterior
+on $\theta$ itself:
 %
-where we have dropped the conditioning statements temporarily for notational
-convenience.  Next, we note that the joint probability $p(\theta,\cbcrate)$ can
-be written in terms of $\epsilon$ and $\cbcrate$ according to,
-%
-%
-%   where the Jacobian matrix is given by,
-%   % Increase matrix line spacing
-%   \begingroup
-%   \renewcommand*{\arraystretch}{1.5}
-%
-%   % matrix:
-%   \begin{equation}
-%   \frac{\partial (\cbcrate,\epsilon)}{\partial(\theta,\epsilon)} =
-%   \begin{bmatrix}
-%   \frac{\partial \cbcrate}{\partial \theta} & \frac{\partial \cbcrate}{\partial \epsilon} \\
-%   \frac{\partial \epsilon}{\partial \theta} & \frac{\partial \epsilon}{\partial \epsilon}
-%   \end{bmatrix}.
-%   \end{equation}
-%
-%   % end line spacing increase
-%   \endgroup
-%%
-Bringing all of these terms together then, and writing out the Jacobian matrix
-determinant, we have
-%
-\begin{equation}\label{eq:marginaltheta}
-p(\theta) = \frac{2\grbrate \sin
-\theta~p(\cbcrate)}{(\cos\theta-1)^2}\int_{\epsilon} \frac{p(\epsilon)}{\epsilon} ~\diff
-\epsilon,
-\end{equation}
+\begin{eqnarray}
+    p(\theta) & = & \int_{\epsilon} p(\theta,\epsilon)~\diff \epsilon\\
+              & = & \int_{\epsilon} p(\cbcrate,\epsilon)
+    \left\lvert\left\lvert
+    \frac{\partial(\cbcrate,\epsilon)}{\partial(\theta,\epsilon)}
+    \right\rvert\right\rvert~\diff \epsilon \\
+              & = & \frac{2\grbrate \sin
+\theta~p(\cbcrate)}{(\cos\theta-1)^2}\int_{\epsilon}
+\frac{p(\epsilon)}{\epsilon} ~\diff \epsilon,
+\end{eqnarray}
 %
 where we have assumed $\epsilon$ and $\cbcrate$ are logically independent such
 that,
@@ -311,17 +300,9 @@ that,
 p(\epsilon,\cbcrate) = p(\epsilon|\cbcrate)p(\cbcrate) = p(\epsilon)p(\cbcrate).
 \end{equation}
 %
-%
-To find the target PDF $p(\theta|D,I)$ then, we require the measured coalescence
-rate posterior $p(\cbcrate|D,I)$, and we must specify a prior PDF for $\epsilon$
-which encapsulates assumptions made about the relative rates of compact binary
-mergers and sGRBs.
+Given the posterior on the rate $p(\cbcrate)$ then, the final ingredient in this
+approach is the specification of some prior distribution for $\epsilon$.
 
-
-\subsection{Marginalising over $\epsilon$}
-
-The final step is to declare our assumptions about the efficiency parameter, $\epsilon$,
-and marginalise over this parameter.
 
 \begin{figure}%[ht]
 \centering
@@ -569,6 +550,8 @@ figure~\ref{fig:reconstructedRatePosterior}.
 
 \section{Conclusion}
 
+\begin{comment}
+
 \appendix
 
 
@@ -634,6 +617,8 @@ Finally:
 \end{equation}
 
 \section{Null-detection Jet Angle Posteriors With Different Priors}
+
+\end{comment}
 
 \bibliography{grb_beams_paper}
 
