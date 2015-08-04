@@ -334,7 +334,6 @@ this work, we will present results using three different priors:
 %   \caption{Priors}
 %   \end{figure}
 
-%\section{Simulations (for want of a better name)}
 \section{Prospects For Beaming Angle Constraints With aLIGO}
 We now demonstrate the derivation of the rate posterior $p(\cbcrate)$ and the
 subsequent transformation to the beaming angle posterior $p(\theta)$.  We
@@ -342,104 +341,66 @@ consider four \gw{} observation scenarios with aLIGO based on the work
 in~\cite{ade_prospects}.  An observing scenario essentially consists of an epoch
 of aLIGO operation, which defines an expected search sensitivity (i.e., \bns{}
 horizon distance $\dhor$) and observation time $T$; as well as an assumption on
-the rate of \bns{} coalescence in the local Universe.  For this study, we
-consider two operation epochs, the 2016--17 and 2022+ scenarios described
-in~\cite{ade_prospects}. For each epoch, we produce results for both the
-`realistic' and `high' \bns{} rates described in~\cite{rates_paper}.
+the rate of \bns{} coalescence in the local Universe.  Each observing scenario
+ultimately results in an expectation for the number of observed \gw{s} from
+\bns{} coalescence. For this study, we
+consider two operation epochs: the 2016 and 2022+ scenarios described
+in~\cite{ade_prospects}. For each epoch we produce results for the `realistic'
+and `high' \bns{} rates described in~\cite{rates_paper}.
+
+Our first goal is to establish the expected number of detections in each
+scenario. Given the observation time and horizon distance of the observation
+epoch we first compute the volume accessible to the analysis,
+%
+\begin{equation}
+    \label{eq:search_volume}
+    V_{\mathrm{search}} = \frac{4}{3}\pi \left(\frac{\dhor}{2.26}\right)^3 \times \gamma T,
+\end{equation}
+%
+where the factor 2.26 arises from averaging over source sky location and
+orientation, $T$ is the observation time and $\gamma$ is the \emph{duty cycle}
+for the science run.  Following~\cite{ade_prospects}, we take $\gamma=0.5$.
+Where there is a range in the horizon distances quoted in~\cite{ade_prospects}
+to account for uncertainty in the sensitivity of the early configuration of the
+detectors, we use the arithmetic mean of the lower and upper bounds on when
+computing the search volume. Table~\ref{table:scenarios} lists the details of
+each observing scenario.
+
 
 \begin{table}
 \centering
 \begin{tabular}{l c c c c c }
 \toprule
-Epoch & $T$ & $D_{\mathrm{hor}}$ &
-$\langle V_{\mathrm{search}}\rangle$ & $\cbcrate$ & $N_{\mathrm{det}}$ \\
+Epoch & $T$ & $\dhor$ &
+$\langle V_{\mathrm{search}}\rangle$ & $\cbcrate$ & $n$ \\
  & [yr] & [Mpc] & [Mpc$^3$yr] &  [Mpc$^{-3}$yr$^{-1}$] \\
 \colrule
-2016--17 & 0.5 & 80--120 & $1.05\times10^6$ & $10^{-6}$ & 1.3 \\
-2016--17 & 0.5 & 80--120 & $1.05\times10^6$ & $10^{-5}$ & 13 \\
+2016 & 0.5 & 80--120 & $1.05\times10^6$ & $10^{-6}$ & 1.3 \\
+2016 & 0.5 & 80--120 & $1.05\times10^6$ & $10^{-5}$ & 13 \\
 2022+ & 1 & 200 & $4\times10^7$ & $10^{-6}$ & 40 \\
 2022+ & 1 & 200 & $4\times10^7$ & $10^{-5}$ & 400 \\
 \botrule
 \end{tabular}
 \caption{Advanced detector era observing scenarios considered in this work.  $T$
-is the expected duration of the science run and $D_{\mathrm{hor}}$ is the BNS
+is the expected duration of the science run and $\dhor$ is the BNS
 horizon distance for the sensitivity expected to be acheived at the given epoch.
 $\langle V_{\mathrm{search}}\rangle $ is the sensitive volume of the search,
 where the angled brackets $\langle \rangle$ indicate averaging over the range
 in horzizon distance, $\cbcrate$ is the assumed BNS coalescence rate and
-$N_{\mathrm{det}}$ is the expected number of \gw{} detections.  Note that the
+$n$ is the expected number of \gw{} detections.  Note that the
 quoted search volume accounts for a network duty cycle of $\sim 50\%$.
 Full details may be foud in~\cite{ade_prospects}.\label{table:scenarios}}
 \end{table}
-
-\subsection{Summary of Gregory-Posterior Experiment}
-Here's the general procedure:
-\begin{enumerate}
-\item Compute horizon distance from noise curve: $D_{\mathrm{horizon}}$,
-assuming $\rho_c=12$ (as in rates paper).
-\item Find number of galaxies accessible to this horizon distance from:
-\begin{equation}
-N_G = \frac{4}{3} \pi \left( \frac{D_{\textrm{horizon}}}{\textrm{Mpc}}
-\right)^3 (2.26)^{-3} (0.0116).
-\end{equation}
-\item Detection rate is $\dot{N} = R \times N_G$, where $R$ is the binary
-coalescence rate
-\item Use $\dot{N}$ to determine number of GW-detections in $T_{\mathrm{obs}}$=1 year
-$N_{\mathrm{det}}$
-\item Compute \emph{detection} rate posterior, $p(s|N_{\textrm{on}},I)$.  The
-rate posterior is then given by 
-\begin{eqnarray}
-p(\cbcrate|N_{\textrm{on}},I) & = & p(s|N_{\textrm{on}},I) \left|\frac{\diff
-s}{\diff \cbcrate}\right| \\
-& = & N_G . p(s|N_{\textrm{on}},I)
-\end{eqnarray}
-\end{enumerate}
-
-In particular, we require the expected number of on-source events
-$N_{\mathrm{on}}$ and the expected number of off-source events
-$N_{\mathrm{off}}$.  We can find $N_{\mathrm{on}}$ using the search
-\emph{volumes} $V_{\mathrm{search}}$ in the observing scenarios paper:
 %
-\begin{equation}
-N_{\mathrm{det}} = \cbcrate \times V_{\mathrm{search}}
-\end{equation}
 
-
-
-Note that the search volume is given by,
-\begin{equation}\label{eq:search_volume}
-V_{\mathrm{search}} = \frac{4}{3}\pi D_{\mathrm{sens}}^3 \times \gamma T,
-\end{equation}
-%
-where $D_{\mathrm{sens}}$ is the BNS sensemon range ($D_{\mathrm{hor}}/2.26$),
-$T$ is the duration of the science run (i.e., observation time) and $\gamma$ is
-the \emph{duty} cycle for the science run.  Following~\cite{ade_prospects}, we
-take $\gamma=0.5$.  Since there is a range in the horizon distances to account
-for uncertainty in the sensitivity of the early configuration of the detectors,
-we compute use the arithmetic mean of the horizon distance when computing the
-search volume.
-%\end{equation}
-
-\subsection{Advanced detector observations}
-We now outline the projected observing scenarios.  These are taken directly
-from~\cite{ade_prospects}.  There are four scenarios in that paper,
-corresponding to different run durations, epochs (i.e., sensitivity achieved)
-for aLIGO/AdVirgo.  There are also three numbers in use for the binary
-coalescence rate (the ``low'', ``realistic'' and ``high'' rates).  In the
-interests of brevity we will consider the projected 2016--17 run (``early''
-detection scenario as described here) and the fully advanced 2022+ run (``late''
-in this work).  For each epoch, we will produce results for the ``realistic''
-and ``high'' rates.   We can very easily include other scenarios/rates.
-Table~\ref{table:scenarios} summarizes the observing scenarios.
-
-
-
-\subsubsection{Binary neutron star inspiral rate}
-
-In the first instance (2016), we consider an imagined `early' science run with the the
-advanced LIGO detectors where ${\mathcal O}(1)$ gravitational wave events from
-binary neutron star coalescence are detected.  In the second scenario (2022), we
-consider the measurements possible with multiple gravitational wave detections.
+\subsection{Posterior Results}
+Figure~\ref{fig:aligorate} shows the rate posteriors resulting from the
+observations described in table~\ref{table:scenarios} for the expected early
+aLIGO sensitivity in the 2016 epoch (broad, solid curve) and the nominal design
+sensivity (narrow, dashed curve), using the `realistic' rate
+$\cbcrate=10^{-6}$\,Mpc$^{-3}$yr$^{-1}$\footnote{The curves corresponding to the
+    `high' rate show similar qualitative behaviour and are not included here in
+the interests of brevity.}.
 
 \begin{figure}
 \centering
@@ -478,8 +439,6 @@ $\theta = 30^{\deg}$\label{fig:njjetposterio2022}}
 {\includegraphics[width=\linewidth]{jet_angle_posterior_aligo_2022_real.eps}}
 \caption{ADE 2022 jet angle posterior}
 \end{figure}
-
-
 
 
 \subsection{Beaming angle limits from upper limits}
