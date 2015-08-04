@@ -300,16 +300,42 @@ that,
 p(\epsilon,\cbcrate) = p(\epsilon|\cbcrate)p(\cbcrate) = p(\epsilon)p(\cbcrate).
 \end{equation}
 %
+It is important note here that the entire procedure of deriving the jet angle
+posterior is completely independent of the approach used to derive the rate
+posterior. In the preceeding section we adopted a straightforward Bayesian
+analysis of a Poisson rate which is amenable to a simple application of plausible
+future detection scenarios; there is no inherent requirement to use that method
+to derive the rate posterior.
+
 Given the posterior on the rate $p(\cbcrate)$ then, the final ingredient in this
-approach is the specification of some prior distribution for $\epsilon$.
+approach is the specification of some prior distribution for $\epsilon$.  In
+this work, we will present results using three different priors:
+%
+\begin{description}
+\item [Delta-function] $p(\epsilon) = \delta(\epsilon=0.5)$;
+        the probability that \bns{} mergers yield \sgrb{s} is known to be 50\%
+        exactly.
+
+\item [Uniform] $p(\epsilon)=U(0,1)$;
+        the probability that \bns{} mergers yield \sgrb{s} may lie anywhere
+    $\epsilon \in (0,1]$ with equal support in that range. 
+
+    \item [Jeffreys] $p(\epsilon)=\beta(\frac{1}{2},\frac{1}{2})$; treating the
+        outcome of a \bns{} merger as a Bernoulli trial in which a \sgrb{}
+        constitutes `success' and $\epsilon$ is the probability of that success,
+        the least informative prior, as derived from the square root of the
+        determinant of the Fisher information for the Bernoulli distribution, is
+        a $\beta$-distribution with shape parameters $\alpha=\beta=\frac{1}{2}$.
+\end{description}
 
 
-\begin{figure}%[ht]
-\centering
-{\includegraphics[width=\linewidth]{efficiency_prior.eps}}\label{fig:priors}
-\caption{Priors}
-\end{figure}
 
+%   \begin{figure}%[ht]
+%   \centering
+%   {\includegraphics[width=\linewidth]{efficiency_prior.eps}}\label{fig:priors}
+%   \caption{Priors}
+%   \end{figure}
+%
 
 \section{Simulations (for want of a better name)}
 
