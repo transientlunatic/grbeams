@@ -29,7 +29,7 @@ else: injvalue=None
 f, ax = pl.subplots()
 
 if len(resultsfiles)==4:
-    labels=[r"\delta(0.5)", r"\delta(1.0)", r"U(0,1)", r"\beta(0,1)"]
+    labels=[r"\delta(0.5)", r"\delta(1.0)", r"U(0,1)", r"\beta(\frac{1}{2},\frac{1}{2})"]
 if len(resultsfiles)==3:
     labels=[r"\delta(0.5)", r"U(0,1)", r"\beta(0,1)"]
 
@@ -97,12 +97,12 @@ f.tight_layout()
 
 if result.find('sim') > -1:
     pl.savefig('jet_angle_posterior_aligo_%s_%s.eps'%(epoch,rate))
-    pl.savefig('jet_angle_posterior_aligo_%s_%s.png'%(epoch,rate))
-    pl.savefig('jet_angle_posterior_aligo_%s_%s.pdf'%(epoch,rate))
+#    pl.savefig('jet_angle_posterior_aligo_%s_%s.png'%(epoch,rate))
+#    pl.savefig('jet_angle_posterior_aligo_%s_%s.pdf'%(epoch,rate))
 else:
     pl.savefig('jet_angle_posterior_aligo_%s_%s_real.eps'%(epoch,rate))
-    pl.savefig('jet_angle_posterior_aligo_%s_%s_real.png'%(epoch,rate))
-    pl.savefig('jet_angle_posterior_aligo_%s_%s_real.pdf'%(epoch,rate))
+#    pl.savefig('jet_angle_posterior_aligo_%s_%s_real.png'%(epoch,rate))
+#    pl.savefig('jet_angle_posterior_aligo_%s_%s_real.pdf'%(epoch,rate))
 
 #pl.show()
 

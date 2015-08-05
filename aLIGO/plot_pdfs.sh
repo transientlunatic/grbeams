@@ -1,13 +1,13 @@
 pickle1=angle_re_2022_delta_0p5.pickle
 #pickle2=angle_re_2022_delta_1.pickle
-pickle3=angle_re_2022_uniform.pickle
+pickle3=angle_re_2022_uniform_0p01-1.pickle
 pickle4=angle_re_2022_jeffreys.pickle
 ../overlay_ADE_jets.py "${pickle1}|${pickle3}|${pickle4}" 2022 re
 echo "done 22"
 
 pickle1=angle_re_2016_delta_0p5.pickle
 #pickle2=angle_re_2016_delta_1.pickle
-pickle3=angle_re_2016_uniform.pickle
+pickle3=angle_re_2016_uniform_0p01-1.pickle
 pickle4=angle_re_2016_jeffreys.pickle
 ../overlay_ADE_jets.py "${pickle1}|${pickle3}|${pickle4}" 2016 re
 echo "done 16"
