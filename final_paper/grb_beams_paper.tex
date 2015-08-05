@@ -432,7 +432,13 @@ corresponding beaming angle posteriors.
 \begin{figure}
 \centering
 {\includegraphics[width=\linewidth]{aligo_rate_re.eps}}
-\caption{ADE Rate Posterior\label{fig:aligorate}}
+\caption{Posterior probability distribution for the rate of \bns{} coalescence
+    assuming the 2016 (solid curve) \& 2022 (dashed curve) detection scenarios.
+    These posteriors have been computed assuming a number of \gw{} inspiral
+    detections commensurate with the `realistic' value
+$\cbcrate=10^{-6}$\,Mpc$^{3}$yr$^{-1}$.  The 2022 epoch results in a greater
+number of expected detections (40 vs 1.3), reducing the uncertainty in the
+measurement.\label{fig:aligorate}}
 \end{figure}
 
 \subsubsection{Validation}
@@ -447,21 +453,27 @@ which would correspond to these parameter choices.  Finally, we simply use this
 we compute the posterior on the beaming angle on the understanding that the
 resulting posterior should yield an inference consistent with the `true' value
 $\theta=30^{\circ}$.
-
+%
 \begin{figure}
 \centering
 {\includegraphics[width=\linewidth]{jet_angle_posterior_aligo_2016.eps}}
-\caption{ADE 2016 jet angle posterior, 
-$\theta = 30^{\circ}$\label{fig:injjetposterio2016}}
+\caption{Beaming angle posteriors with different priors and where an artificial \sgrb{}
+    rate has been imposed in order that the target value of the beaming angle is
+$\theta = 30^{\circ}$.  These posteriors are based on the 2016 observing
+scenario and the `realistic' binary coalescence rate (see
+table~\ref{table:scenarios}). \label{fig:injjetposterio2016}}
 \end{figure}
-
+%
 \begin{figure}
 \centering
 {\includegraphics[width=\linewidth]{jet_angle_posterior_aligo_2022.eps}}
-\caption{ADE 2022 jet angle posterior, 
-$\theta = 30^{\circ}$\label{fig:injjetposterio2022}}
+\caption{Beaming angle posteriors with different priors and where an artificial \sgrb{}
+    rate has been imposed in order that the target value of the beaming angle is
+$\theta = 30^{\circ}$.  These posteriors are based on the 2022 observing
+scenario and the `realistic' binary coalescence rate (see
+table~\ref{table:scenarios}). \label{fig:injjetposterio2016}}
 \end{figure}
-
+%
 Figures~\ref{fig:injjetposterio2016} and~\ref{fig:injjetposterio2022} show the
 beaming angle posteriors which result from this analysis for the 2016 and 2022
 scenarios, respectively.  Unsurprisingly, the most accurate constraints arise
@@ -481,16 +493,27 @@ $\beta$-distribution priors are broadly equivalent.
 
 \begin{figure}
 \centering
-{\includegraphics[width=\linewidth]{jet_angle_posterior_aligo_2016_real.eps}}
-\caption{ADE 2016 jet angle posterior}
+{\includegraphics[width=\linewidth]{jet_angle_posterior_aligo_2016_re_real.eps}}
+\caption{ADE 2016 jet angle posterior, realistic rate}
 \end{figure}
 
 \begin{figure}
 \centering
-{\includegraphics[width=\linewidth]{jet_angle_posterior_aligo_2022_real.eps}}
-\caption{ADE 2022 jet angle posterior}
+{\includegraphics[width=\linewidth]{jet_angle_posterior_aligo_2022_re_real.eps}}
+\caption{ADE 2022 jet angle posterior, realistic rate}
 \end{figure}
 
+\begin{figure}
+\centering
+{\includegraphics[width=\linewidth]{jet_angle_posterior_aligo_2016_high_real.eps}}
+\caption{ADE 2016 jet angle posterior, high rate}
+\end{figure}
+
+\begin{figure}
+\centering
+{\includegraphics[width=\linewidth]{jet_angle_posterior_aligo_2022_high_real.eps}}
+\caption{ADE 2022 jet angle posterior, high rate}
+\end{figure}
 
 \subsection{Beaming angle limits from upper limits}
 \label{sec:beaming_limits}
