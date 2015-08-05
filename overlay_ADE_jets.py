@@ -22,7 +22,8 @@ import grbeams_utils
 
 resultsfiles = sys.argv[1].split('|')
 epoch=sys.argv[2]
-if len(sys.argv)==4: injvalue=float(sys.argv[3])
+rate=sys.argv[3]
+if len(sys.argv)==5: injvalue=float(sys.argv[4])
 else: injvalue=None
 
 f, ax = pl.subplots()
@@ -76,7 +77,7 @@ for r,result in enumerate(resultsfiles):
 #    ax.axvline(intervals[0][0], color='k', linestyle=linestyles[r])
 #    ax.axvline(intervals[0][1], color='k', linestyle=linestyles[r])
 #    ax.axvline(data.median, color='k', linestyle=linestyles[r])
-    ax.axvline(mode, color='k', linestyle=linestyles[r])
+#    ax.axvline(mode, color='k', linestyle=linestyles[r])
 #    ax.axvline(LL, color='k', linestyle=linestyles[r])
 
 if injvalue is not None:
@@ -95,13 +96,13 @@ f.tight_layout()
 #sys.exit()
 
 if result.find('sim') > -1:
-    pl.savefig('jet_angle_posterior_aligo_%s.eps'%epoch)
-    pl.savefig('jet_angle_posterior_aligo_%s.png'%epoch)
-    pl.savefig('jet_angle_posterior_aligo_%s.pdf'%epoch)
+    pl.savefig('jet_angle_posterior_aligo_%s_%s.eps'%(epoch,rate))
+    pl.savefig('jet_angle_posterior_aligo_%s_%s.png'%(epoch,rate))
+    pl.savefig('jet_angle_posterior_aligo_%s_%s.pdf'%(epoch,rate))
 else:
-    pl.savefig('jet_angle_posterior_aligo_%s_real.eps'%epoch)
-    pl.savefig('jet_angle_posterior_aligo_%s_real.png'%epoch)
-    pl.savefig('jet_angle_posterior_aligo_%s_real.pdf'%epoch)
+    pl.savefig('jet_angle_posterior_aligo_%s_%s_real.eps'%(epoch,rate))
+    pl.savefig('jet_angle_posterior_aligo_%s_%s_real.png'%(epoch,rate))
+    pl.savefig('jet_angle_posterior_aligo_%s_%s_real.pdf'%(epoch,rate))
 
 #pl.show()
 
