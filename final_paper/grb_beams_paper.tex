@@ -111,6 +111,7 @@ here.
 
 %\section{Inferring The sGRB Beaming Angle From Rate Measurements}
 \section{Short gamma-ray bursts and compact binary coalescences}
+\label{sec:sgrbs}
 
 \about{Some description of BNS and how they are likely progenitors of short
 gamma-ray bursts (This section describes our model and how sGRBs relate to BNS, currently with text taken from LVC search plans}
@@ -178,6 +179,7 @@ An overview of the general method is as follows:
 
 
 \subsection{Constructing The Rate Posterior}
+\label{sec:rate_posterior}
 %   Gregory's book, `Logical Data Analysis For The Physical Sciences' has an entire
 %   chapter (\S 14) devoted to `Bayesian Inference With Poisson Sampling'.  This
 %   seems to match our problem rather well.  In particular, he derives expressions
@@ -304,6 +306,7 @@ is then straightforward to marginalize over $\epsilon$ to yield the posterior
 on $\theta$ itself:
 %
 \begin{eqnarray}
+    \label{eq:beam_posterior}
     p(\theta) & = & \int_{\epsilon} p(\theta,\epsilon)~\diff \epsilon\\
               & = & \int_{\epsilon} p(\cbcrate,\epsilon)
     \left\lvert\left\lvert
@@ -419,8 +422,12 @@ observations described in table~\ref{table:scenarios} for the expected early
 aLIGO sensitivity in the 2016 epoch (broad, solid curve) and the nominal design
 sensivity (narrow, dashed curve), using the `realistic' rate
 $\cbcrate=10^{-6}$\,Mpc$^{-3}$yr$^{-1}$\footnote{The curves corresponding to the
-    `high' rate show similar qualitative behaviour and are not included here in
-the interests of brevity.}.
+`high' rate show similar qualitative behaviour and are not included here in the
+interests of brevity.}.  We now use curves such as these together with the prior
+distributions described in section~\ref{sec:rate_posterior} and the observed
+rate of \sgrb{s} (as described in section~\ref{sec:sgrbs}, we use
+$\grbrate=10$\,Gpc$^{-3}$yr$^{-1}$~\cite{nakar-2007,Dietz11}) to derive the
+corresponding beaming angle posteriors.
 
 \begin{figure}
 \centering
@@ -428,22 +435,46 @@ the interests of brevity.}.
 \caption{ADE Rate Posterior\label{fig:aligorate}}
 \end{figure}
 
-
 \subsubsection{Validation}
+Before we go ahead and derive beaming angle posteriors corresponding to the
+aforementioned observing scenarios, however, it is useful to establish some form
+of validation for our procedure.  This validation is performed by first
+selecting values of the beaming angle, say $\theta=30^{\circ}$; the \sgrb{}
+efficiency, say $\epsilon=0.5$ and we use the `realistic' rate for the rate of
+\bns{} coalescence $\cbcrate$.  We then compute the value of the \sgrb{} rate
+which would correspond to these parameter choices.  Finally, we simply use this
+\emph{artificial} value for $\grbrate$ in equation~\ref{eq:beam_posterior} when
+we compute the posterior on the beaming angle on the understanding that the
+resulting posterior should yield an inference consistent with the `true' value
+$\theta=30^{\circ}$.
 
 \begin{figure}
 \centering
 {\includegraphics[width=\linewidth]{jet_angle_posterior_aligo_2016.eps}}
 \caption{ADE 2016 jet angle posterior, 
-$\theta = 30^{\deg}$\label{fig:njjetposterio2016}}
+$\theta = 30^{\circ}$\label{fig:injjetposterio2016}}
 \end{figure}
 
 \begin{figure}
 \centering
 {\includegraphics[width=\linewidth]{jet_angle_posterior_aligo_2022.eps}}
 \caption{ADE 2022 jet angle posterior, 
-$\theta = 30^{\deg}$\label{fig:njjetposterio2022}}
+$\theta = 30^{\circ}$\label{fig:injjetposterio2022}}
 \end{figure}
+
+Figures~\ref{fig:injjetposterio2016} and~\ref{fig:injjetposterio2022} show the
+beaming angle posteriors which result from this analysis for the 2016 and 2022
+scenarios, respectively.  Unsurprisingly, the most accurate constraints arise
+when we already have the tightest possible constraints on the \sgrb{} efficiency
+$\epsilon$.  That is, the beaming angle posterior arising from the
+$\delta$-function prior on $\epsilon$ is the narrowest, yielding the shortest
+possible confidence interval.  It is well worth remembering, however, that had
+we been incorrect regarding the value of $\epsilon$ when using the
+$\delta$-function prior, the result would be significantly biased and our
+inference on the beaming angle would be incorrect.  This highlights the
+necessity of building a suitable representation of our ignorance into the
+analysis.  Finally, we note that the results from the uniform and
+$\beta$-distribution priors are broadly equivalent.
 
 
 \subsubsection{Jet Angle Posteriors From Observing Scenarios}
