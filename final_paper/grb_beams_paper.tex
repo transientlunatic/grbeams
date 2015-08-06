@@ -357,23 +357,22 @@ this work, we will present results using three different priors:
 %   \caption{Priors}
 %   \end{figure}
 
-\section{Prospects For Beaming Angle Constraints With aLIGO}
-We now demonstrate the derivation of the rate posterior $p(\cbcrate)$ and the
-subsequent transformation to the beaming angle posterior $p(\theta)$.  We
-consider four \gw{} observation scenarios with aLIGO based on the work
+\section{Prospects For Beaming Angle Constraints With aLIGO} We now demonstrate
+the derivation of the rate posterior $p(\cbcrate)$ and the subsequent
+transformation to the beaming angle posterior $p(\theta)$.  We consider four
+\gw{} observation scenarios with aLIGO based on the work
 in~\cite{ade_prospects}.  An observing scenario essentially consists of an epoch
 of aLIGO operation, which defines an expected search sensitivity (i.e., \bns{}
 horizon distance $\dhor$) and observation time $T$; as well as an assumption on
-the rate of \bns{} coalescence in the local Universe.  Each observing scenario
-ultimately results in an expectation for the number of observed \gw{s} from
-\bns{} coalescence. For this study, we
-consider two operation epochs: the 2016 and 2022+ scenarios described
-in~\cite{ade_prospects}. For each epoch we produce results for the `realistic'
-and `high' \bns{} rates described in~\cite{rates_paper}.
+the rate of \bns{} coalescence in the local Universe $\cbcrate$.  Each observing
+scenario ultimately results in an expectation for the number of observed \gw{s}
+from \bns{} coalescence. For this study, we consider two operation epochs: the
+2016 and 2022+ scenarios described in~\cite{ade_prospects} and we assume the
+`realistic rate' for $\cbcrate$ as described in~\cite{rates_paper}.
 
 Our first goal is to establish the expected number of detections in each
 scenario. Given the observation time and horizon distance of the observation
-epoch we first compute the volume accessible to the analysis,
+epoch we first compute the 4-volume accessible to the analysis,
 %
 \begin{equation}
     \label{eq:search_volume}
@@ -399,9 +398,9 @@ $\langle V_{\mathrm{search}}\rangle$ & $\cbcrate$ & $n$ \\
  & [yr] & [Mpc] & [Mpc$^3$yr] &  [Mpc$^{-3}$yr$^{-1}$] \\
 \colrule
 2016 & 0.5 & 80--120 & $1.05\times10^6$ & $10^{-6}$ & 1.3 \\
-2016 & 0.5 & 80--120 & $1.05\times10^6$ & $10^{-5}$ & 13 \\
+%2016 & 0.5 & 80--120 & $1.05\times10^6$ & $10^{-5}$ & 13 \\
 2022+ & 1 & 200 & $4\times10^7$ & $10^{-6}$ & 40 \\
-2022+ & 1 & 200 & $4\times10^7$ & $10^{-5}$ & 400 \\
+%2022+ & 1 & 200 & $4\times10^7$ & $10^{-5}$ & 400 \\
 \botrule
 \end{tabular}
 \caption{Advanced detector era observing scenarios considered in this work.  $T$
@@ -421,11 +420,13 @@ Figure~\ref{fig:aligorate} shows the rate posteriors resulting from the
 observations described in table~\ref{table:scenarios} for the expected early
 aLIGO sensitivity in the 2016 epoch (broad, solid curve) and the nominal design
 sensivity (narrow, dashed curve), using the `realistic' rate
-$\cbcrate=10^{-6}$\,Mpc$^{-3}$yr$^{-1}$\footnote{The curves corresponding to the
-`high' rate show similar qualitative behaviour and are not included here in the
-interests of brevity.}.  We now use curves such as these together with the prior
-distributions described in section~\ref{sec:rate_posterior} and the observed
-rate of \sgrb{s} (as described in section~\ref{sec:sgrbs}, we use
+$\cbcrate=10^{-6}$\,Mpc$^{-3}$yr$^{-1}$
+%\footnote{The curves corresponding to the
+%`high' rate show similar qualitative behaviour and are not included here in the
+%interests of brevity.}.  
+We now use curves such as these together with the prior distributions described
+in section~\ref{sec:rate_posterior} and the observed rate of \sgrb{s} (as
+described in section~\ref{sec:sgrbs}, we use
 $\grbrate=10$\,Gpc$^{-3}$yr$^{-1}$~\cite{nakar-2007,Dietz11}) to derive the
 corresponding beaming angle posteriors.
 
@@ -471,7 +472,7 @@ table~\ref{table:scenarios}). \label{fig:injjetposterio2016}}
     rate has been imposed in order that the target value of the beaming angle is
 $\theta = 30^{\circ}$.  These posteriors are based on the 2022 observing
 scenario and the `realistic' binary coalescence rate (see
-table~\ref{table:scenarios}). \label{fig:injjetposterio2016}}
+table~\ref{table:scenarios}). \label{fig:injjetposterio2022}}
 \end{figure}
 %
 Figures~\ref{fig:injjetposterio2016} and~\ref{fig:injjetposterio2022} show the
@@ -503,17 +504,17 @@ $\beta$-distribution priors are broadly equivalent.
 \caption{ADE 2022 jet angle posterior, realistic rate}
 \end{figure}
 
-\begin{figure}
-\centering
-{\includegraphics[width=\linewidth]{jet_angle_posterior_aligo_2016_high_real.eps}}
-\caption{ADE 2016 jet angle posterior, high rate}
-\end{figure}
-
-\begin{figure}
-\centering
-{\includegraphics[width=\linewidth]{jet_angle_posterior_aligo_2022_high_real.eps}}
-\caption{ADE 2022 jet angle posterior, high rate}
-\end{figure}
+%   \begin{figure}
+%   \centering
+%   {\includegraphics[width=\linewidth]{jet_angle_posterior_aligo_2016_high_real.eps}}
+%   \caption{ADE 2016 jet angle posterior, high rate}
+%   \end{figure}
+%
+%   \begin{figure}
+%   \centering
+%   {\includegraphics[width=\linewidth]{jet_angle_posterior_aligo_2022_high_real.eps}}
+%   \caption{ADE 2022 jet angle posterior, high rate}
+%   \end{figure}
 
 \subsection{Beaming angle limits from upper limits}
 \label{sec:beaming_limits}
