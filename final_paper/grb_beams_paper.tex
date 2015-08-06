@@ -8,6 +8,8 @@
 \usepackage{epsfig}
 \usepackage{latexsym}
 \usepackage{tensor}
+\usepackage{float}
+\usepackage{multirow}
 %\usepackage{wasysym}
 \usepackage{comment}
 %\usepackage{graphicx}
@@ -357,6 +359,8 @@ this work, we will present results using three different priors:
 %   \caption{Priors}
 %   \end{figure}
 
+\subsection{A Note On Implementation}
+
 \section{Prospects For Beaming Angle Constraints With aLIGO} We now demonstrate
 the derivation of the rate posterior $p(\cbcrate)$ and the subsequent
 transformation to the beaming angle posterior $p(\theta)$.  We consider four
@@ -430,7 +434,7 @@ described in section~\ref{sec:sgrbs}, we use
 $\grbrate=10$\,Gpc$^{-3}$yr$^{-1}$~\cite{nakar-2007,Dietz11}) to derive the
 corresponding beaming angle posteriors.
 
-\begin{figure}
+\begin{figure}%[H]
 \centering
 {\includegraphics[width=\linewidth]{aligo_rate_re.eps}}
 \caption{Posterior probability distribution for the rate of \bns{} coalescence
@@ -455,24 +459,22 @@ we compute the posterior on the beaming angle on the understanding that the
 resulting posterior should yield an inference consistent with the `true' value
 $\theta=30^{\circ}$.
 %
-\begin{figure}
+\begin{figure}%[H]
 \centering
 {\includegraphics[width=\linewidth]{jet_angle_posterior_aligo_2016.eps}}
 \caption{Beaming angle posteriors with different priors and where an artificial \sgrb{}
     rate has been imposed in order that the target value of the beaming angle is
 $\theta = 30^{\circ}$.  These posteriors are based on the 2016 observing
-scenario and the `realistic' binary coalescence rate (see
-table~\ref{table:scenarios}). \label{fig:injjetposterio2016}}
+scenario (see table~\ref{table:scenarios}). \label{fig:injjetposterio2016}}
 \end{figure}
 %
-\begin{figure}
+\begin{figure}%[H]
 \centering
 {\includegraphics[width=\linewidth]{jet_angle_posterior_aligo_2022.eps}}
 \caption{Beaming angle posteriors with different priors and where an artificial \sgrb{}
     rate has been imposed in order that the target value of the beaming angle is
 $\theta = 30^{\circ}$.  These posteriors are based on the 2022 observing
-scenario and the `realistic' binary coalescence rate (see
-table~\ref{table:scenarios}). \label{fig:injjetposterio2022}}
+scenario (see table~\ref{table:scenarios}). \label{fig:injjetposterio2022}}
 \end{figure}
 %
 Figures~\ref{fig:injjetposterio2016} and~\ref{fig:injjetposterio2022} show the
@@ -491,18 +493,55 @@ $\beta$-distribution priors are broadly equivalent.
 
 
 \subsubsection{Jet Angle Posteriors From Observing Scenarios}
+Figures~\ref{fig:jetposterior2016} and~\ref{fig:jetposterior2022} show the
+beaming angle posteriors obtained for our two detection scenarios.  Since it is
+a common assumption in related literature, we also now include a prior on the
+\sgrb{} efficiency which dictates that all \bns{} produce a \sgrb{},
+$p(\epsilon|I)=\delta(\epsilon=1)$, as well as our previous strong
+$\delta$-function prior.  For the 2016 scenario where inferences are somewhat
+weak (i.e., broad posteriors) due to the sparcity of \gw{} detections, the
+uncertainties are large enough that the results from each prior are broadly
+consistent.  In the 2022 scenario, where the posterior is more peaked, it is
+clear that the strong $\delta$-function priors lead to inconsistent inferences
+on the \sgrb{} beaming angle.  The much weaker uniform and $\beta$
+distributions, by contrast, are again largely consistent with each other
+yielding more conservative and robust results, as well as being a more
+representative expression of our state of knowledge.  The inferences drawn from
+each scenario and each prior are summarised in terms of the maximum \emph{a
+posteriori} measurement and the 90\% confidence interval around the maximum in
+table~\ref{table:aligo_beam_inference}.
 
 \begin{figure}
 \centering
 {\includegraphics[width=\linewidth]{jet_angle_posterior_aligo_2016_re_real.eps}}
-\caption{ADE 2016 jet angle posterior, realistic rate}
+\caption{Beaming angle posteriors using different priors on \sgrb{} efficiency
+$\epsilon$ in the 2016 observing scenario.\label{fig:jetposterior2016}}
 \end{figure}
 
 \begin{figure}
 \centering
 {\includegraphics[width=\linewidth]{jet_angle_posterior_aligo_2022_re_real.eps}}
-\caption{ADE 2022 jet angle posterior, realistic rate}
+\caption{Beaming angle posteriors using different priors on \sgrb{} efficiency
+$\epsilon$ in the 2022 observing scenario.\label{fig:jetposterior2022}}
 \end{figure}
+
+\begin{table}
+\centering
+\begin{tabular}{l c c c c }
+\toprule
+% &\multicolumn{4}{c}{Prior} \\
+Scenario & $\delta(\epsilon=0.5)$ & $\delta(\epsilon=1)$ & $U(0,1)$ & $\beta(\frac{1}{2},\frac{1}{2})$\\
+\cline{1-1}\cline{2-5}
+\colrule
+2016  & $4.10^{+6.67}_{-1.16}$ & $2.90^{+4.34}_{-0.82}$ &\ $6.50^{+68.37}_{-3.00}$ & $6.20^{76.34}_{-2.26}$ \\
+2022 & $6.20^{+0.99}_{-0.73}$ & $4.30^{+0.79}_{-0.46}$ & $7.00^{+65.99}_{-2.11}$ & $6.90^{+72.85}_{-2.29}$ \\
+\botrule
+\end{tabular}
+\caption{Summary of the beaming angle inferences for each prior in the two
+observing scenarios considered in this work.  Point estimates are the maximimum
+a posteriori estimates and errors correspond to the $90\%$ confidence interval
+around the maximum.\label{table:aligo_beam_inference}}
+\end{table}
 
 %   \begin{figure}
 %   \centering
