@@ -53,6 +53,8 @@
 \providecommand{\todo}[1]{{\color{red}$\blacksquare$~\textsf{[TODO: #1]}}}
 
 
+\def\pasp{Publications of the Astronomical Society of the Pacific}
+
 %%%%%% Useful for draft editing
 \usepackage{soul} 
 \usepackage{ulem} \normalem 
@@ -360,6 +362,17 @@ this work, we will present results using three different priors:
 %   \end{figure}
 
 \subsection{A Note On Implementation}
+Rather than directly evaluating the beaming angle posterior in
+equation~\ref{eq:beam_posterior} we choose to sample points from the posterior
+using a Markov-Chain Monte-Carlo algorithm, implemented using the python package
+{\tt EMCEE}~\cite{2013PASP..125..306F}.  Points are sampled from the joint
+distribution $p(\theta,\epsilon)$, where equation~\ref{eq:rate2angle} is used to
+derive the corresponding value of $\cbcrate$ for a given $(\theta,\epsilon)$.
+We then obtain the marginal distribution $p(\theta)$ via kernel density
+estimation (KDE) of the $\theta$-samples.  The mode of the KDE yields the
+maximimum a posteriori (MAP) estimate for the measurement and the upper and
+lower bounds are found from the 95\% confidence interval around the median of
+the samples.
 
 \section{Prospects For Beaming Angle Constraints With aLIGO} We now demonstrate
 the derivation of the rate posterior $p(\cbcrate)$ and the subsequent
