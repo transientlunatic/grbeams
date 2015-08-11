@@ -54,6 +54,9 @@
 
 
 \def\pasp{Publications of the Astronomical Society of the Pacific}
+\def\mnras{Monthly Notices of the Royal Astronomical Society}
+\def\aap{Astronomy and Astrophysics}
+
 
 %%%%%% Useful for draft editing
 \usepackage{soul} 
@@ -688,15 +691,33 @@ Figure~\ref{fig:s6angle} shows the four posteriors on the beaming angle,
 corresponding to the four priors on the grb efficiency $\epsilon$, using the
 rate posterior obtained from \gw{} measurements in the final science run of the
 first generation of ground based \gw{} detectors.  In this null-detection
-scenario, where the rate posterior is relatively uninformative, the results are
-dominated by the uncertainty in $\epsilon$: there are now even substantive
+scenario, we choose to compute the 95\% confidence \emph{upper} limit on the
+beaming angle,
+\begin{equation}
+    \label{eq:beaming_upper_limit}
+    0.95 = \int_0^{\theta^{\mathrm{ul}}} p(\theta|D,I)~\diff \theta
+\end{equation}
+%
+We see that here, where the rate posterior is rather uninformative, the results
+are dominated by the uncertainty in $\epsilon$: there are substantive
 differences in the beaming angle upper limits yielded by the uniform ($U(0,1)$)
 and $\beta$-distribution priors, while the $\delta$-function priors yield
-dramatically different upper limits.
+dramatically different upper limits.  Indeed, the most stringent (and mutually
+incompatible) upper limits are obtained using the strong $\delta$-function
+priors.  In fact, these beaming angle upper limits are also incompatible with
+the values of $3^{\circ}\mbox{-}8^{\circ}$ that have been inferred from
+observations of jet breaks in \sgrb{} afterglows~\cite{2014ApJ...780..118F,
+2006MNRAS.367L..42P, 2012A&A...538L...7N}.  Recall, however, from the discussion
+in section~\ref{sec:sgrbs} that we interpret the beaming angle inference from
+our rate measurements as the upper bound on the mean of a population of beaming
+angles.  It would, therefore, seem premature to conclude that there is tension
+in these results; instead, we can only state that either the population of
+\sgrb{s} have a distributio of beaming angles with some finite width or that the
+fraction of \bns{} mergers which yield a \sgrb{} is smaller than 0.5.
 
-It is interesting to compare these upper limits on the beaming angle with those
-in~\cite{2013PhRvL.111r1101C}, where the upper limit on the rate itself is used
-as a constraint (rather than transforming the posterior).  This has the
+It is also interesting to compare these upper limits on the beaming angle with
+those in~\cite{2013PhRvL.111r1101C}, where the upper limit on the rate itself is
+used as a constraint (rather than transforming the posterior).  This has the
 important implication that the constraint thus obtained is the \emph{smallest}
 angle consistent with the rate:
 %
@@ -720,7 +741,8 @@ is implicitly assumed that \emph{all} \bns{} mergers yield an \sgrb{}.  That is,
 there is no factor or $\epsilon$ to account for the unknown fraction of mergers
 which successfully launch a \grb{} jet.  With these differences noted, the lower
 bound on the beaming angle is found to be $\theta \geq 0.8^{\circ}$, as compared
-with our 95\% confidence upper limit $\theta^{\mathrm{ul}}=1.94^{\circ}$.
+with our 95\% confidence upper limit $\theta^{\mathrm{ul}}=1.94^{\circ}$ when
+assuming $\epsilon=1$.  
 
 \begin{figure}
 \centering
