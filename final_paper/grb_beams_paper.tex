@@ -684,12 +684,50 @@ figure~\ref{fig:s6rate}.
 %figure~\ref{fig:reconstructedRatePosterior}.  
 
 \subsection{Results}
+Figure~\ref{fig:s6angle} shows the four posteriors on the beaming angle,
+corresponding to the four priors on the grb efficiency $\epsilon$, using the
+rate posterior obtained from \gw{} measurements in the final science run of the
+first generation of ground based \gw{} detectors.  In this null-detection
+scenario, where the rate posterior is relatively uninformative, the results are
+dominated by the uncertainty in $\epsilon$: there are now even substantive
+differences in the beaming angle upper limits yielded by the uniform ($U(0,1)$)
+and $\beta$-distribution priors, while the $\delta$-function priors yield
+dramatically different upper limits.
 
+It is interesting to compare these upper limits on the beaming angle with those
+in~\cite{2013PhRvL.111r1101C}, where the upper limit on the rate itself is used
+as a constraint (rather than transforming the posterior).  This has the
+important implication that the constraint thus obtained is the \emph{smallest}
+angle consistent with the rate:
+%
+\begin{equation}
+    1 - \cos \theta \geq \frac{\grbrate}{\epsilon \cbcrate^{\mathrm{ul}}},
+\end{equation}
+%
+where $\cbcrate^{\mathrm{ul}}$ is the \emph{upper limit} on the \bns{} rate.
+The same idea is used in~\cite{0004-637X-809-1-53} to estimate beaming
+constraints in the advanced detector era.  Thus, when comparing the constraints
+in e.g.,~\cite{2013PhRvL.111r1101C} and the upper limits obtained from the
+transformed posterior (i.e., equation~\ref{eq:beam_posterior} and
+figure~\ref{fig:s6angle}), one should remember that they are quite different
+quantities.  There are two other noteworthy differences
+between~\cite{2013PhRvL.111r1101C} and this work: (i) the rate upper limit is
+computed based on the sensitivity of the initial LIGO/Virgo network (see
+e.g.,~\cite{BradyFairhurst08}), which gives $\cbcrate=4.5\times
+10^{-4}$\,Mpc$^{-3}$yr$^{-1}$ (as compared with $\cbcrate=1.3 \times
+10^{-4}$\,Mpc$^{-3}$yr$^{-1}$ from the analysis in~\cite{S6lowmass}) and (ii) it
+is implicitly assumed that \emph{all} \bns{} mergers yield an \sgrb{}.  That is,
+there is no factor or $\epsilon$ to account for the unknown fraction of mergers
+which successfully launch a \grb{} jet.  With these differences noted, the lower
+bound on the beaming angle is found to be $\theta \geq 0.8^{\circ}$, as compared
+with our 95\% confidence upper limit $\theta^{\mathrm{ul}}=1.94^{\circ}$.
 
 \begin{figure}
 \centering
 \includegraphics[width=\linewidth]{jet_angle_posterior_iligo.eps}
-\caption{S6/VSR2,3 Jet Angle Posterior\label{fig:s6angle}}
+\caption{Beaming angle posterior using the rate posterior (see
+figure~\ref{fig:s6rate}) obtained from S6/VSR2,3 observations~\cite{S6lowmass}.
+Priors on $\epsilon$ now dominate our results.\label{fig:s6angle}}
 \end{figure}
 
 \section{Conclusion}
