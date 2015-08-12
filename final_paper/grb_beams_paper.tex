@@ -168,16 +168,38 @@ likely from \electro{} observations, characterizing the relative rates of
 $\langle \theta \rangle$.  To explore this point further we construct a simple
 Monte-Carlo simulation to study the effect on the relative rates of \sgrb{s} and
 \bns{} mergers.  We arrange the following toy problem:
+%
 \begin{enumerate}
+    \item Set the number of `observed \grb{s} to zero: $N_{\mathrm{GRB}}=0$.
     \item Draw $N_{\mathrm{bns}}$ values of orbital inclination $\iota$ from a
         distribution which is uniform in $\cos \iota$ in the range $[0,1]$.
-    \item Draw $N_{\mathrm{GRB}}$ values of beaming angle $\theta$ from a
-        truncated Normal distribution of mean $\langle \theta \rangle$, standard
-    deviation $\sigma_{\theta}$, limited to the range $(0,90]^{\circ}$.
-    \item \dots
+    \item For each value of $\iota$, draw a value for the beaming angle
+    $\theta$, from some distribution with finite width and limited to the range
+$(0,90]^{\circ}$.  
+    \item If $\iota<\theta$ then this combination of orbital inclination and
+        beaming angle would result in an observable \grb{}, so increment
+        $N_{\mathrm{GRB}}$
 \end{enumerate}
+%
+Such a simulation allows us to study the ratio of the number of observed
+\grb{s} to the total number of \bns{} mergers $N_{\mathrm{GRB}}
+N_{\mathrm{bns}}$.  Since it is the comparison of the rates of these events
+which informs our inference on $\theta$,  studying the ratio $N_{\mathrm{GRB}}
+N_{\mathrm{bns}}$ provides some intuition as to the effect and features of
+various $\theta$ distributions.  Figure~\ref{fig:thetapop} plots this ratio as a
+function of various truncated normal distributions to demonstrate the effect of
+shifting the mean and scaling the width of the distribution. Points along the
+$x$-axis correspond to different choices of the distribution width and the
+separate curves correspond to different choices of the distribution mean.  We
+stress here that such $\theta$ distributions are \emph{not} intended to
+represent any physical reality; rather, they are merely intended to easily
+demonstrate the qualitative effects of different $\theta$ distributions on the
+ratio 
 
-figure~\ref{fig:thetapop}
+truncated Normal distribution of mean $\langle \theta
+\rangle$, standard deviation $\sigma_{\theta}$, 
+
+
  
 
 \begin{figure}
