@@ -165,7 +165,18 @@ assumptions (or ignorance) regarding its value.
 If the \sgrb{} population has a distribution of beaming angles, as would seem
 likely from \electro{} observations, characterizing the relative rates of
 \sgrb{} and \bns{} coalescence will inform us as to the mean of that population,
-$\langle \theta \rangle$.  To explore this point further,
+$\langle \theta \rangle$.  To explore this point further we construct a simple
+Monte-Carlo simulation to study the effect on the relative rates of \sgrb{s} and
+\bns{} mergers.  We arrange the following toy problem:
+\begin{enumerate}
+    \item Draw $N_{\mathrm{bns}}$ values of orbital inclination $\iota$ from a
+        distribution which is uniform in $\cos \iota$ in the range $[0,1]$.
+    \item Draw $N_{\mathrm{GRB}}$ values of beaming angle $\theta$ from a
+        truncated Normal distribution of mean $\langle \theta \rangle$, standard
+    deviation $\sigma_{\theta}$, limited to the range $(0,90]^{\circ}$.
+    \item \dots
+\end{enumerate}
+
 figure~\ref{fig:thetapop}
  
 
