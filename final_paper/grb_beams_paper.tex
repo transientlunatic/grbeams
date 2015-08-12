@@ -40,10 +40,12 @@
 \def\eos#1{equation of state#1 (EOS#1)\gdef\eos{EOS}}
 \def\grb#1{gamma-ray burst#1 (GRB#1)\gdef\grb{GRB}}
 \def\sgrb#1{short gamma-ray burst#1 (sGRB#1)\gdef\sgrb{sGRB}}
+\def\electro#1{electromagnetic#1 (EM#1)\gdef\electro{EM}}
 \def\amr#1{adaptive mesh refinement#1 (AMR#1)\gdef\amr{AMR}}
 \def\isco#1{innermost stable circular orbit#1 (ISCO#1)\gdef\isco{ISCO}}
 \def\cwb#1{Coherent WaveBurst#1 (CWB#1)\gdef\cwb{CWB}}
 \def\mweg#1{Milky Way Equivalent Galaxy#1 (MWEG#1)\gdef\mweg{MWEG}}
+\def\snr#1{signal-to-noise ratio#1 (SNR#1)\gdef\snr{SNR}}
 
 \newcommand{\red}[1]{{\color{red}{#1}}}
 \newcommand{\about}[1]{{\color{blue}{[THIS SECTION: #1]}}}
@@ -129,21 +131,28 @@ At full sensitivity, they are potentially observable by advanced GW detectors to
 It is worth noting that at galactic or near-galactic distances, soft gamma-ray repeater (SGR) hyperflares can also be observed as a \sgrb{}. 
 These SGR hyperflares are the likely explanations for GRB 070201 and GRB 051103 since compact binary coalescences at the distance of their host galaxies were excluded with greater than $90\%$ confidence as progenitors of these \sgrb{s} [refs]. 
 
-Given the link between \sgrb{s} and compact binary coalescences, it is common in the literature to draw inferences on the rate of binary
-coalescence $\cbcrate$, given some estimate for the beaming angle $\theta$ and
-the observed rate of \sgrb{s} $\grbrate$. 
-Assuming that at least some fraction of sgrb{s} are due to compact binary
-coalescence, the observed rate of sgrb{s} may be written,
+Given the link between \sgrb{s} and compact binary coalescences, it is interest
+to ask whether the \sgrb{} beaming angle can be inferred from \gw{}
+observations.  For example, a joint \gw{}-\grb{} observation could, in
+principal, constrain the beaming angle by directly measuring the orbital
+inclination of the system via \gw{s}.  As discussed
+in~\cite{0004-637X-809-1-53}, however, the likely low \snr{} of such an
+observation and the degeneracy between orbital inclination and distance suggest
+that a comparison of the populations of observed \sgrb{s} and \bns{} mergers may
+be more promising.   Motivated by the study in~\cite{2013PhRvL.111r1101C}, we
+note that if the \sgrb{} population posseses a distribution of beaming angles
+$p(\theta)$ then the \emph{observed} rate of \sgrb{s} is related to the rate of
+\bns{} coalescence $\cbcrate$ via,
 %
 \begin{equation}\label{eq:rate2angle}
-\grbrate=\epsilon\cbcrate(1-\cos \theta),
+\grbrate=\epsilon\cbcrate \left \langle 1-\cos \theta \right \rangle,
 \end{equation}
 %
-where $\cbcrate$ is the rate of binary coalescence, $\theta$ is the beaming
-angle of the outflow from the \grb{} and $\epsilon$ is the (generally unknown)
-probability that a binary coalescence results in an observed \sgrb{}.  In this
-work, we assume
-$\grbrate=10$\,Gpc$^{-3}$\,yr$^{-1}$~\cite{nakar-2007,Dietz11}.
+where angled brackets $\langle \rangle$ indicate the population mean and
+$\epsilon$ is the (generally unknown) probability that a binary coalescence
+results in an observed \sgrb{}.  In this work, we assume
+$\grbrate=10$\,Gpc$^{-3}$\,yr$^{-1}$~\cite{nakar-2007,Dietz11} and we shall
+refer to $\epsilon$ as the \sgrb{} \emph{efficiency}.
  
 
 \begin{figure}
