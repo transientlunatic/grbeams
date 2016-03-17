@@ -238,6 +238,34 @@ class S6Scenario:
         self.bns_rate=np.linspace(1e-8,5e-4,5000)
         self.bns_rate_pdf = self.comp_bns_rate_pdf(self.bns_rate)
 
+    def dump_posterior(self, filename="bns_rate_posterior.txt"):
+
+        f = open(filename, 'w')
+        for rate, pdf in zip(self.bns_rate, self.bns_rate_pdf):
+            f.writelines("{0} {1}\n".format(rate, pdf))
+        f.close()
+
+class O1Scenario:
+    """
+    class with the observing scenario information for the null detection run and
+    an upper limit from the loudest event formalism
+    """
+
+    def __init__(self, rate_posterior_file, upper_limit=1e-4):
+        self.rate_posterior_file = rate_posterior_file
+        self.posterior_data = np.loadtxt(rate_posterior_file)
+
+        # Should probably compute this directly
+        self.upper_limit = upper_limit
+
+    def compute_posteriors(self):
+        self.bns_rate = self.posterior_data[:,0]
+        self.bns_rate_pdf = self.posterior_data[:,1]
+
+    def comp_bns_rate_pdf(self, bns_rate):
+        pdf_value = np.interp(bns_rate, self.bns_rate, self.bns_rate_pdf)
+        return pdf_value
+
 class Scenarios:
     """
     class with the observing scenario information
