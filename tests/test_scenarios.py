@@ -21,8 +21,10 @@ class TestScenarios(unittest.TestCase):
         # Create a BNS distribution which is uniform
         rates = np.linspace(0, 100, 100)*self.rateunits
         pdf = np.ones(len(rates)) * (1.0/100)
-        
         self.bnsuniform = scenarios.BNSDistribution(rates, pdf)
+        # Create an observing scenario with the same BNS distribution
+        self.uniformscenario = scenarios.Scenario(self.bnsuniform)
+        self.grb_rate = 3*self.rateunits
 
     def test_bns_negative_rate(self):
         # A negative rate has no physical meaning, and should return a probability of zero.
@@ -35,6 +37,17 @@ class TestScenarios(unittest.TestCase):
     def test_bns_in_range(self):
         # Return a non-zero probability from the distro in range
         self.assertGreater(self.bnsuniform.pdf(50*self.rateunits), 0)
+
+    def test_scenario_bns_prior(self):
+        # Test that the scenario correctly returns the BNS Prior
+        self.assertEqual(self.uniformscenario.comp_bns_rate_pdf(40*self.rateunits), self.bnsuniform.pdf(40*self.rateunits))
+
+    def test_scenario_cbc_rate_negative(self):
+        self.assertEqual(self.uniformscenario.cbc_rate_from_theta(theta=10, efficiency=-0.5, grb_rate = self.grb_rate), 0)
+                         
+    def test_scenario_cbc_rate_gt1(self):
+        self.assertEqual(self.uniformscenario.cbc_rate_from_theta(theta=10, efficiency=1.5, grb_rate = self.grb_rate), 0)
+                                                  
         
     def tearDown(self):
         pass
