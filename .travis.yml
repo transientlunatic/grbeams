@@ -29,7 +29,7 @@ before_install:
 # Install packages
 install:
   - conda create --yes -q -n test-environment python=$TRAVIS_PYTHON_VERSION  numpy scipy matplotlib nose astropy
-  - conda install -c https://conda.anaconda.org/jesserobertson python-coveralls
+  - conda install --yes -c https://conda.anaconda.org/jesserobertson python-coveralls
   - source activate test-environment
   - python setup.py install
 
