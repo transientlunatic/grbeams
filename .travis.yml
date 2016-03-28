@@ -28,13 +28,13 @@ before_install:
   # - sudo ln -s /run/shm /dev/shm
 # Install packages
 install:
-  - conda create --yes -q -n test-environment python=$TRAVIS_PYTHON_VERSION  numpy scipy matplotlib nose astropy tox
+  - conda create --yes -q -n test-environment python=$TRAVIS_PYTHON_VERSION  numpy scipy matplotlib nose astropy
   - conda install -c https://conda.anaconda.org/jesserobertson python-coveralls
   - source activate test-environment
   - python setup.py install
 
 # command to run tests, e.g. python setup.py test
-script: tox
+script: coverage run setup.py tests
 
 # After you create the Github repo and add it to Travis, run the
 # travis_pypi_setup.py script to finish PyPI deployment setup
