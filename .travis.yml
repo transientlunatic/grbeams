@@ -22,13 +22,13 @@ before_install:
   - chmod +x miniconda.sh
   - hash -r 
   - export PATH=$HOME/miniconda/bin:$PATH
-  - conda update -q conda
+  - conda update -q --yes conda
   # The next couple lines fix a crash with multiprocessing on Travis and are not specific to using Miniconda
   # - sudo rm -rf /dev/shm
   # - sudo ln -s /run/shm /dev/shm
 # Install packages
 install:
-  - conda create -q -n test-environment python=$TRAVIS_PYTHON_VERSION  numpy scipy matplotlib nose astropy
+  - conda create --yes -q -n test-environment python=$TRAVIS_PYTHON_VERSION  numpy scipy matplotlib nose astropy
   - source activate test-environment
   # Coverage packages are on my binstar channel
   - conda install --yes -c python-coveralls
