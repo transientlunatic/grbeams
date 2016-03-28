@@ -34,7 +34,7 @@ install:
   - python setup.py install
 
 # command to run tests, e.g. python setup.py test
-script: coverage run setup.py tests
+script: coverage run setup.py test
 
 # After you create the Github repo and add it to Travis, run the
 # travis_pypi_setup.py script to finish PyPI deployment setup
