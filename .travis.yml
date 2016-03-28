@@ -28,7 +28,8 @@ before_install:
   # - sudo ln -s /run/shm /dev/shm
 # Install packages
 install:
-  - conda create --yes -q -n test-environment python=$TRAVIS_PYTHON_VERSION  numpy scipy matplotlib nose astropy coveralls tox
+  - conda create --yes -q -n test-environment python=$TRAVIS_PYTHON_VERSION  numpy scipy matplotlib nose astropy tox
+  - conda install -c https://conda.anaconda.org/jesserobertson python-coveralls
   - source activate test-environment
   - python setup.py install
 
