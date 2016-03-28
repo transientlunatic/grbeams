@@ -1,0 +1,103 @@
+class Distribution():
+    """
+    Represents a statistical distribution.
+    
+    """
+    pass
+
+class DeltaDistribution(Distribution):
+    """
+    Represents a delta distribution.
+    """
+    name = "delta"
+    ndim = 1
+    def __init__(self, x):
+        """
+        A dirac delta distribution.
+        
+        Parameters
+        ----------
+        x : float
+            The location of the delta spike.
+        """
+        self.x = x
+        self.range = x
+        pass
+    
+    def pdf(self, e):
+        """
+        Calculate the probability density at a given value.
+        
+        Parameters
+        ----------
+        e : float
+            The value at which the PDF should be evaluated.
+        """
+        if e == self.x:
+            return 1.0
+        else:
+            return 0.0
+        
+    def sampler(self):
+        """
+        Sample this PDF using an emcee ensemble sampler.
+        
+        Parameters
+        -----------
+        nwalkers : int
+            The number of MCMC walkers to be used for the sampling.
+        """
+        # Inititalize sampler
+        self.sampler = emcee.EnsembleSampler(nwalkers, self.ndim,
+                                             self.comp_theta_prob, args=[float(self.efficiency_prior.split(',')[1])])
+
+class JeffreyDistribution(Distribution):
+    """
+    Represents a delta distribution.
+    """
+    name = "jeffrey"
+    ndim = 2
+    def __init__(self, x, range=(0.0,1.0)):
+        """
+        A dirac delta distribution.
+        
+        Parameters
+        ----------
+        x : float
+            The location of the delta spike.
+        """
+        self.x = x
+        self.range = np.array(range)
+        pass
+    
+    def pdf(e):
+        prior_dist = stats.beta(0.5,0.5)
+        if (e>=min(self.range)) and (efficiency<max(self.range)):
+            return prior_dist.pdf(e)
+        else:
+            return 0.0
+
+class UniformDistribution(Distribution):
+    """
+    Represents a uniform distribution.
+    """
+    name = "uniform"
+    ndim = 2
+    def __init__(self, x, range=(0.0,1.0)):
+        """
+        A uniform distribution.
+        
+        Parameters
+        ----------
+        x : float
+            The location of the delta spike.
+        """
+        self.x = x
+        self.range = np.array(range)
+        pass
+    
+    def pdf(e):
+        if (e>=min(self.range)) and (efficiency<max(self.range)):
+            return 1./(max(self.range)-min(self.range))
+        else:
+            return 0.0
