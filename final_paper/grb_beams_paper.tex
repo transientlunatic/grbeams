@@ -64,7 +64,7 @@
 \usepackage{soul} 
 \usepackage{ulem} \normalem 
 \newcommand{\ec}[1]{{\noindent\color{red}{\it [[#1]] }}}
-\newcommand{\laura}[1]{{\color{blue}{#1}}}
+\newcommand{\ish}[1]{{\color{blue}{#1}}}
 \newcommand{\LC}[1]{{\color{red}{[[LC #1]]}}}
 \newcommand{\AB}[1]{{\color{blue}{[[AB #1]]}}}
 \newcommand{\highlight}[1]{\colorbox{yellow}{#1}}
@@ -230,7 +230,7 @@ ratio is rather insensitive to the width}
 In this section, we discuss our approach to estimating the \sgrb{} beaming
 angle based on the binary neutron star inspiral rate, estimated through a number
 of \gw{} observations of \bns{} coalescence. We demonstrate the approach by
-considering plausible detection scenarios in aLIGO.  Our ultimate goal is to
+considering plausible detection scenarios in aLIGO \ish{detailed in [ref]}.  Our ultimate goal is to
 develop a generic approach that folds in uncertainties in in the binary neutron
 star inspiral rate and our ignorance about the probability with which binary
 neutron star inspirals actually result in \sgrb{s}.
@@ -274,7 +274,7 @@ An overview of the general method is as follows:
 
 Our goal is to infer the posterior probability distribution for the mean \sgrb{}
 beaming angle $\theta$ from \gw{} constraints on the rate of \bns{} coalescence
-$\cbcrate$.  The core ingredient to the analysis then, is the posterior
+$\cbcrate$.  The core ingredient to the analysis is the posterior
 probability distribution on the coalescence rate $p(\cbcrate|D,I)$, where $D$
 represents some \gw{} observation and $I$ denotes other unenumerated prior
 information.   To begin we will demonstrate how $p(\cbcrate|D,I)$ may be
@@ -287,7 +287,12 @@ yielded by previous \gw{} analyses.
 To form the posterior on the coalescence rate, we begin by constructing the
 posterior on the \emph{signal} rate.  Note that these are not identical since
 only those \bns{} mergers which occur within a certain range yield a detectable
-signal.  Assume we have a data analysis pipeline (e.g.,
+signal.  
+\ish{Gravitational wave data analysis pipelines (eg. {\tt FINDCHIRP}~\cite{2012PhRvD..85l2006A})
+identify discrete `events' which are characterized by network signal-to-noise ratios, $rho_c$, 
+which, for the case of \bns{} searches, indicate the strength of the nspiral \gw{} signal from 
+\bns{} coalescence.}
+Assume we have a data analysis pipeline (e.g.,
 {\tt FINDCHIRP}~\cite{2012PhRvD..85l2006A}) which, when applied to the data from
 our instrument, results in discrete `events' which are characterized by network
 signal-to-noise ratio $\rho_c$ and which correspond to the potential
@@ -307,7 +312,7 @@ b = \text{background rate}.
 Typically for an all-sky, all-time analysis, a threshold $\rho_c\geq 12$ is
 applied to the events arising from the pipeline such that
 $b=10^{-2}$\,yr$^{-1}$~\cite{ade_prospects}.  Since the background rate $b$ is
-known then, we are just left with the problem of inferring the signal rate $s$.
+known, we are just left with the problem of inferring the signal rate $s$.
 Assuming a uniform prior on $s$ and a Poisson process underlying the events, it
 may be shown (e.g.,~\cite{2010blda.book.....G}) that the posterior for the
 signal rate, given a known background rate $b$ and $n$ events observed over a
@@ -351,7 +356,7 @@ a trivial transformation of the posterior on the signal rate $s$,
                                    & = & N_G(\dhor)p(s|n,T,b).
 \end{eqnarray}
 %
-We see then that in this approach, the rate posterior depends only on the number
+We see that in this approach, the rate posterior depends only on the number
 of signal detections $n$, the observation time $T$, the background rate $b$ and
 the horizon distance of the search $\dhor$.  It is precisely these quantities
 that comprise the detection scenarios outlined in~\cite{ade_prospects}.  Before
@@ -361,7 +366,7 @@ rate to beaming angle.
 \subsection{Constructing the beaming angle posterior}
 Inferences of the GRB beaming angle are made from the posterior probability
 density on the beaming angle $p(\theta|D,I)$ where, as usual $D$ indicates some
-set of observations and $I$ unenumerated prior knowledge.  Our goal then, is to
+set of observations and $I$ unenumerated prior knowledge.  Our goal is to
 transform the measured posterior probability density on the rate $\cbcrate$ to a
 posterior on the beaming angle.
 %
@@ -398,7 +403,7 @@ that,
 p(\epsilon,\cbcrate) = p(\epsilon|\cbcrate)p(\cbcrate) = p(\epsilon)p(\cbcrate).
 \end{equation}
 %
-It is important note here that the entire procedure of deriving the jet angle
+It is important note that the entire procedure of deriving the jet angle
 posterior is completely independent of the approach used to derive the rate
 posterior. In the preceeding section we adopted a straightforward Bayesian
 analysis of a Poisson rate which is amenable to a simple application of plausible
@@ -406,8 +411,10 @@ future detection scenarios; there is no inherent requirement to use that method
 to derive the rate posterior.
 
 Given the posterior on the rate $p(\cbcrate)$ then, the final ingredient in this
-approach is the specification of some prior distribution for $\epsilon$.  In
-this work, we will present results using three different priors:
+approach is the specification of some prior distribution for $\epsilon$.   \ish{Given 
+the lack of information on the value and distribution of $\epsilon$, we choose 
+three plausible priors and study their effects on our beaming angle inference. 
+Our choice of priors are:}
 %
 \begin{description}
 \item [Delta-function] $p(\epsilon) = \delta(\epsilon=0.5)$;
