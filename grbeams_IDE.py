@@ -29,7 +29,7 @@ import argparse
 import matplotlib
 from matplotlib import pyplot as pl
 
-import grbeams_utils
+from .. import grbeams_utils
 
 from pylal import bayespputils as bppu
 

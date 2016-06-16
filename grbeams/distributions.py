@@ -47,6 +47,7 @@ class JeffreyDistribution(Distribution):
     """
     name = "jeffrey"
     ndim = 2
+    range = (0,1.0)
     def __init__(self):
         """
         A Jeffrey distribution.
@@ -83,7 +84,4 @@ class UniformDistribution(Distribution):
         pass
     
     def pdf(self, e):
-        if (e>=min(self.range)) and (e<max(self.range)):
-            return 1./(max(self.range)-min(self.range))
-        else:
-            return 0.0
+        return ((e>min(self.range)) & (e<=max(self.range))) * 1./(max(self.range)-min(self.range))

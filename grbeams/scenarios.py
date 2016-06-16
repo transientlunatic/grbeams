@@ -15,7 +15,7 @@ class BNSDistribution():
            The pdf at each computed rate value.
         """
         self.rates = rate_data.to(u.megaparsec**(-3)*u.year**(-1))
-        self.pdf_data = rate_pdf
+        self.pdf_data = rate_pdf#.to(u.megaparsec**(3)*u.year**(1))
 
     def pdf(self, rate):
         """
@@ -31,10 +31,16 @@ class BNSDistribution():
         probability : float
            The probability density of that rate.
         """
-        rate = rate.to(u.megaparsec**(-3)*u.year**(-1))
+        try:
+            rate = rate.to(u.megaparsec**(-3)*u.year**(-1))
+        except:
+            pass
         if rate < 0 : return 0
         if rate > max(self.rates): return 0
-        return np.interp(rate.value, self.rates.value, self.pdf_data)
+        try:
+            return np.interp(rate.value, self.rates.value, self.pdf_data)
+        except:
+            return np.interp(rate, self.rates, self.pdf_data)
 
 class Scenario():
     """

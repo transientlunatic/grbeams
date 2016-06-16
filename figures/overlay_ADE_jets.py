@@ -20,6 +20,8 @@ import numpy as np
 from matplotlib import pyplot as pl
 import grbeams_utils
 
+pl.style.use('/home/daniel/repositories/burst-style/burst.mplstyle')
+
 resultsfiles = sys.argv[1].split('|')
 epoch=sys.argv[2]
 rate=sys.argv[3]

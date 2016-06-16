@@ -2,10 +2,10 @@
 # -*- coding: utf-8 -*-
 
 """
-test_distributions
+test_scenarios
 ----------------------------------
 
-Tests for `distributions` module.
+Tests for `scenarios` module.
 """
 
 import unittest
@@ -20,7 +20,7 @@ class TestScenarios(unittest.TestCase):
         self.rateunits = u.megaparsec**-3*u.year**-1
         # Create a BNS distribution which is uniform
         rates = np.linspace(0, 100, 100)*self.rateunits
-        pdf = np.ones(len(rates)) * (1.0/100)
+        pdf = np.ones(len(rates)) * (1.0/100) * self.rateunits**-1
         self.bnsuniform = scenarios.BNSDistribution(rates, pdf)
         # Create an observing scenario with the same BNS distribution
         self.uniformscenario = scenarios.Scenario(self.bnsuniform)
