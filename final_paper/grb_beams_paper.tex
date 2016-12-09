@@ -30,6 +30,7 @@
 \newcommand{\rhostar}{{\rho^*}}
 \newcommand{\dhor}{{\mathcal D}_{\mathrm{hor}}}
 
+\newacro{aLIGO}[aLIGO]{Advanced LIGO}
 \newacro{GRB}[GRB]{gamma-ray burst}
 \newacro{sGRB}[sGRB]{short gamma-ray burst}
 \newacro{SGR}[SGR]{soft gamma-ray repeater}
@@ -95,14 +96,14 @@ Gravitational Wave Observations}
 \maketitle
 
 \section{Introduction}
-Gamma-ray bursts (GRBs)\acused{GRB} are extremely energetic cosmological events, and are observed at a rate of around one per day.
-There appear to be at least two separate populations of \acp{GRB}, divided roughly according to their duration and spectral hardness~\cite{Kouveliotou:1993yx}, although with significant overlapping between populations.
+Gamma-ray bursts (GRBs)\acused{GRB} are extremely energetic cosmological events observed at a rate of around one per day.
+There appear to be at least two separate populations of \acp{GRB}, divided roughly according to their duration and spectral hardness~\cite{Kouveliotou:1993yx}, although with significant overlap obscuring any clear distinction between populations~\cite{Zhang:2009uf,Bromberg:2012gp}.
 Both types are generally associated with systems which are also expected to be \ac{GW} sources.
 Those with long durations ($\gtrsim 2\,s$) and softer spectra are associated with core collapse supernovae~\cite{Galama:1998ea,MacFadyen:1998vz,Woosley:2006fn}, while \acp{sGRB}, which exhibit on avergae harder spectra, are thought to be related to compact binary coalescences involving at least one \ac{NS}~\cite{Eichler:1989ve,Paczynski:1991aq,Narayan:1992iy,Lee:2007js}.
 
 The detection of a \ac{GW} signal in coincidence with a \ac{GRB} would provide tremendous insight in the  astrophysics of these systems.
 A binary merger signal associated with an \ac{sGRB} would confirm the compact binary merger nature of the engine and allow for measurements of the binary component masses and spins, as well as constraints on the beaming angles and the \ac{NS} equation of state.
-Both \BNS and \NSBH progenitors are possible, with the requirement that post merger torus of material accreting onto a compact central object~\cite{Blandford:1977ds,Rosswog:2002rt,Giacomazzo:2012zt}.
+Both \BNS and \NSBH progenitors are possible, with the requirement that a post merger torus of material accretes onto a compact central object~\cite{Blandford:1977ds,Rosswog:2002rt,Giacomazzo:2012zt}.
 A population of \JOINT observations could allow us to measure the fraction of \acp{sGRB} associated with each progenitor type~\cite{Kreidberg:2012ud}.
 A degeneracy between distance and binary orbital inclination angle means that it will be difficult to measure the \ac{sGRB} beaming angle based on a single observation.
 However, with a population of binary merger sources, with and without \ac{sGRB} counterparts, we can constrain the average opening angle~\cite{Clark:2014jpa}.
@@ -112,8 +113,8 @@ In this work, we investigate what statements can \emph{currently} be made on the
 We first discuss the relationship between \acp{sGRB} and compact binary coalescences.
 In particular, we will focus on \BNS inspirals as the widely accepted progenitor for \acp{sGRB}.
 We then present our method for robustly inferring the jet opening angles of \acp{sGRB}, using only \ac{GW} observations.
-We demonstrate our method by assuming the nominal number of \ac{GW} signals observed from \BNS inspirals expected for Advanced LIGO and Advanced Virgo in 2016 and 2022 as defined in [ref].
-We also show that our approach can be used to place restrictions on the \ac{sGRB} jet opening angle if there are no detections.
+We demonstrate our method assuming the nominal number of \ac{GW} signals observed from \BNS inspirals expected for \ac{aLIGO} and Advanced Virgo in planned \arw{`2017--2018' and `2022+'?} observing scenarios, as defined in~\cite{Aasi:2013wya}.
+We also show that our approach can be used to place restrictions on the \ac{sGRB} jet opening angle if there are no detections, and demonstrate this using results of the recent first observing run of \ac{aLIGO}, during which no \BNS or \NSBH signals were observed~\cite{Abbott:2016ymx}.
 Finally, we conclude with a discussion on the implications of our work as well as possible avenues for further extension of the work presented here.
 
 
@@ -121,13 +122,13 @@ Finally, we conclude with a discussion on the implications of our work as well a
 \label{sec:sgrbs}
 The compact binary coalescence hypothesis for \acp{sGRB} is supported by a number of observations, notably: the large average separation of \acp{sGRB} from their candidate host galaxies~\cite{Church:2011gk}, and the lower average star formation rate of these hosts~\cite{Fong:2013eqa} --- suggesting old progenitor systems; their short durations and rapid variability~\cite{Rees:1994nw} --- suggesting very compact sources; and the observation of a kilonova associated with GRB~130603B~\cite{Berger:2013wna,Tanvir:2013pia}.
 
-At their design sensitivities, the current generation of advanced \ac{GW} detectors could observe these mergers out to distances of $\sim 400\,$Mpc for \BNS or $\sim 1\,$Gpc for \NSBH, each at a rate of $\sim 1\,$yr$^{-1}$~\cite{MetzgerBerger, Clark:2014ut}.
+At their design sensitivities, the current generation of advanced \ac{GW} detectors could observe these mergers out to distances of $\sim 400\,$Mpc for \BNS or $\sim 1\,$Gpc for \NSBH, each at a rate of $\sim 1\,$yr$^{-1}$~\cite{Aasi:2013wya}.
 It is worth noting that at galactic or near-galactic distances, \ac{SGR} hyperflares can resemble \acp{sGRB}.
-These \ac{SGR} hyperflares are the likely explanations for GRB~070201 and GRB~051103, since compact binary coalescences at the distance of their probable host galaxies were excluded with greater than $90\%$ confidence [refs]. 
+These \ac{SGR} hyperflares are the likely explanations for GRB~070201 and GRB~051103, since compact binary coalescences at the distance of their probable host galaxies were excluded with greater than $90\%$ confidence \cite{Abbott:2007rh,Abadie:2012bz}. 
 
-Given the link between \acp{sGRB} and compact binary coalescences, it is interesting to ask whether the \ac{sGRB} beaming angle can be inferred from \ac{GW} observations.
+Given the possible link between \acp{sGRB} and compact binary coalescences, it is interesting to ask whether the \ac{sGRB} beaming angle can be inferred from \ac{GW} observations.
 For example, a \JOINT observation could, in principle, constrain the beaming angle by directly measuring the orbital inclination of the system.
-As discussed in~\cite{0004-637X-809-1-53}, however, the likely low \ac{SNR} of such an observation coupled with the degeneracy between orbital inclination and distance suggest that a comparison of the populations of observed \acp{sGRB} and \BNS mergers may be more promising.
+As discussed in~\cite{Clark:2014jpa}, however, the likely low \ac{SNR} of such an observation coupled with the degeneracy between orbital inclination and distance suggest that a comparison of the populations of observed \acp{sGRB} and \BNS mergers may be more promising.
 Motivated by the study in~\cite{2013PhRvL.111r1101C}, we note that if the \ac{sGRB} population posseses a distribution of beaming angles then the \emph{observed} rate of \acp{sGRB} is related to the rate of \BNS coalescences $\cbcrate$ via,
 %
 \begin{equation}\label{eq:rate2angle}
@@ -135,9 +136,9 @@ Motivated by the study in~\cite{2013PhRvL.111r1101C}, we note that if the \ac{sG
 \end{equation}
 %
 where angled brackets $\langle \rangle$ indicate the population mean and $\epsilon$ is the probability that a binary coalescence results in an observed \ac{sGRB}.
-In this work, we assume $\grbrate=10$\,Gpc$^{-3}$\,yr$^{-1}$~\cite{nakar-2007,Dietz11} and we shall refer to $\epsilon$ as the \ac{sGRB} \emph{efficiency}.
+In this work, we assume $\grbrate=10$\,Gpc$^{-3}$\,yr$^{-1}$~\cite{Nakar:2007yr,Dietz:2010eh} and we shall refer to $\epsilon$ as the \ac{sGRB} \emph{efficiency}.
 Generally, the efficiency with which \BNS mergers produce \acp{sGRB} is unknown but will depend on a variety of progenitor physics.
-We note that efforts are underway [Pannarale] to characterize systems which are likely to yield \acp{sGRB}.
+In particular, a significant fraction of \NSBH systems may be incapable of powering an \ac{sGRB}~\cite{Pannarale:2014rea}.
 Combining this knowledge with measurements of the binary parameters of of a population of\JOINT observations could be used to constrain $\epsilon$.
 In this work, we will make no attempt to characterize $\epsilon$ and we simply aim to provide a framework which allows one to incorporate various levels of assumptions (or ignorance) regarding its value.
 
@@ -147,40 +148,38 @@ We arrange the following toy problem:
 %
 \begin{enumerate}
     \item Set the number of `observed \acp{sGRB} to zero: $N_{\mathrm{GRB}}=0$.
-    \item Draw $N_{\mathrm{bns}}$ values of orbital inclination $\iota$ from a distribution which is uniform in $\cos \iota$ in the range $[0,1]$.
+    \item Draw $N_{\mathrm{BNS}}$ values of orbital inclination $\iota$ from a distribution which is uniform in $\cos \iota$ in the range $[0,1]$.
     \item For each value of $\iota$, draw a value for the beaming angle $\theta$, from some distribution with finite width and limited to the range $(0,90]^{\circ}$.
     \item If $\iota<\theta$ then this combination of orbital inclination and beaming angle would result in an observable \ac{sGRB}, so increment $N_{\mathrm{GRB}}$.
 \end{enumerate}
 %
-Such a simulation allows us to study the ratio of the number of observed \ac{sGRB} to the total number of \BNS mergers $N_{\mathrm{GRB}}/N_{\mathrm{bns}}$.
-Since it is the comparison of the rates of these events that informs our inference on $\theta$,  studying the ratio $N_{\mathrm{GRB}}/N_{\mathrm{bns}}$ provides some intuition as to the effect and features of various $\theta$ distributions.
+Such a simulation allows us to study the ratio of the number of observed \ac{sGRB} to the total number of \BNS mergers $N_{\mathrm{GRB}}/N_{\mathrm{BNS}}$.
+Since it is the comparison of the rates of these events that informs our inference on $\theta$,  studying the ratio $N_{\mathrm{GRB}}/N_{\mathrm{BNS}}$ provides some intuition as to the effect and features of various $\theta$ distributions.
 Figure~\ref{fig:thetapop} plots this ratio as a function of various truncated normal distributions to demonstrate the effect of shifting the mean and scaling the width of the distribution.
 Points along the $x$-axis correspond to different choices of the distribution width $\sigma_{\theta}$, and the separate curves correspond to different choices of the distribution mean $\langle \theta \rangle$.
 Let us denote this truncated normal distribution ${\mathcal N}(\langle \theta \rangle, \sigma_{\theta})$.
-We stress here that such $\theta$ distributions are \emph{not} intended to represent the true distribution; they are merely intended to easily demonstrate the qualitative effects of different $\theta$ distributions on the ratio $N_{\mathrm{GRB}}/N_{\mathrm{bns}}$.
+We stress here that such $\theta$ distributions are \emph{not} intended to represent the true distribution; they are merely intended to easily demonstrate the qualitative effects of different $\theta$ distributions on the ratio $N_{\mathrm{GRB}}/N_{\mathrm{BNS}}$.
 
 \begin{figure}
-\centering
-\includegraphics[width=\linewidth]{theta_dist_grbfrac.eps}
-\caption{\label{fig:thetapopulation} Expected relative
-numbers of observed GRBs and binary coalescences for different distributions
-on the GRB beaming angle.  Lines in the figure correspond to jet angle
-population means, while the $x$-axis shows the width of the distribution.  All 
-distributions are Gaussian, truncated at $(0, 90]$ degrees.\label{fig:thetapop}}
+    \centering
+    \includegraphics[width=\linewidth]{figure1.pdf}
+    \caption{Expected ratio of observed SGRBs and binary coalescences for different distributions on the SGRB beaming angle.
+        For a series of jet angle population means, $\langle \theta \rangle$, we plot this ratio as a function of the distribution width, $\sigma_{\theta}$.
+        All jet angle distributions are normal, truncated at $(0, 90]$ degrees.
+        \label{fig:thetapop}}
 \end{figure}
 
 Figure~\ref{fig:thetapop} reveals that a population of \ac{sGRB} beaming angles with a large mean but narrow width is, on the basis of rate measurements, indidstinguishable from a population of \ac{sGRB} beaming angles with a small mean and large width.
-For example, for the ${\mathcal N}(15,8)$ and ${\mathcal N}(10,12)$ beaming angle populations, the ratios of $N_{\mathrm{GRB}}/N_{\mathrm{bns}}$ are equal \red{add a line to the figure}.
-Thus, a sufficiently wide spread of \ac{sGRB} beaming angles will yield relative rates for \BNS and \acp{sGRB} that can lead to an underestimate of the beaming angle.
+For example, for the ${\mathcal N}(15,9)$ and ${\mathcal N}(10,13)$ beaming angle populations, the ratios of $N_{\mathrm{GRB}}/N_{\mathrm{BNS}}$ are almost equal ($\sim 4.8\%$).
+Thus, a sufficiently wide spread of \ac{sGRB} beaming angles will yield relatively high rates for \BNS and \acp{sGRB} that could lead to an overestimate of the mean beaming angle.
 The population-based constraints on $\theta$ must, therefore, be regarded as upper bounds on the mean of a distribution of beaming angles.
-\red{not sure if i've got this the right way round}
+Having said this, for a given mean value $\langle \theta \rangle$, the ratio is rather insensitive to the width.
 
-\red{Also need to mention that the variation in the ratio with distribution width is quite small; for a given mean value $\langle \theta \rangle$, the ratio is rather insensitive to the width}
 
 \section{From Rates To Beaming Angles}
 
 In this section, we discuss our approach to estimating the \ac{sGRB} beaming angle based on the binary neutron star inspiral rate, estimated through a number of \ac{GW} observations of \BNS coalescence.
-We demonstrate the approach by considering plausible detection scenarios in aLIGO \ish{detailed in [ref]}.
+We demonstrate the approach by considering plausible detection scenarios for \ac{aLIGO}~\cite{Aasi:2013wya}.
 Our ultimate goal is to develop a generic approach that folds in uncertainties in the \BNS merger rate and our ignorance about the probability with which such mergers actually result in \acp{sGRB}.
 %
 An overview of the general method is as follows:
@@ -222,13 +221,13 @@ An overview of the general method is as follows:
 
 Our goal is to infer the posterior probability distribution for the mean \ac{sGRB} beaming angle $\theta$ from \ac{GW} constraints on the rate of \BNS coalescence $\cbcrate$.
 The core ingredient to the analysis is the posterior probability distribution on the coalescence rate $p(\cbcrate|D,I)$, where $D$ represents some \ac{GW} observation and $I$ denotes other unenumerated prior information.
-To begin we will demonstrate how $p(\cbcrate|D,I)$ may be constructed given a variety of the projected observation scenarios using aLIGO which are described in~\cite{ade_prospects}.
-Later, in section~\ref{sec:beaming_limits} where we extend the analysis to place upper limits on $\theta$ from the initial detector era, we consider the rate posterior yielded by previous \ac{GW} analyses.
+We will first demonstrate how $p(\cbcrate|D,I)$ may be constructed for a few projected observing scenarios from~\cite{Aasi:2013wya}.
+Later, in section~\ref{sec:beaming_limits}, we will extend the analysis to place upper limits on $\theta$ \arw{based upon the lack of detection during O1}.
 
 To form the posterior on the coalescence rate, we begin by constructing the posterior on the \emph{signal} rate.
-Note that these are not identical since only those \BNS mergers which occur within a certain range yield a detectable signal.  \ish{Gravitational wave data analysis pipelines (eg. {\tt FINDCHIRP}~\cite{2012PhRvD..85l2006A}) identify discrete `events' which are characterized by network \acp{SNR}, $rho_c$, which, for the case of \BNS searches, indicate the strength of the nspiral \ac{GW} signal from \BNS coalescence.}
-Assume we have a data analysis pipeline (e.g., {\tt FINDCHIRP}~\cite{2012PhRvD..85l2006A}) which, when applied to the data from our instrument, results in discrete `events' which are characterized by network \acp{SNR} $\rho_c$ and which correspond to the potential detection of an inspiral \ac{GW} signal from \BNS coalescence.
-The measured rate $r$ of these events consists of two components, one due to the signals of interest $s$, and the other a background rate $b$, which arises due to random chance and, more importantly, instrumental and terrestrial disturbances:
+Note that these are not identical since only those \BNS mergers which occur within a certain range yield a detectable signal.
+\ac{GW} data analysis pipelines (e.g. {\tt FINDCHIRP}~\cite{2012PhRvD..85l2006A}, {\tt PyCBC}~\cite{Canton:2014ena,Usman:2015kfa,alex_nitz_2016_197080}) identify discrete `candidate events' which are characterized by network \acp{SNR}, $\rho_c$, which, for the case of \BNS searches, indicate the similarity between the detector data and a set of template \BNS coalescence waveforms.
+The measured rate $r$ of these events consists of two components: a population of true \ac{GW} signals, $s$; and a background rate, $b$, due to noise fluctuations due to instrumental and environmental disturbances.
 %
 \begin{equation}
 r = s + b
@@ -238,7 +237,9 @@ b = \text{background rate}.
 \end{cases}
 \end{equation}
 %
-Typically for an all-sky, all-time analysis, a threshold $\rho_c\geq 12$ is applied to the events arising from the pipeline such that $b=10^{-2}$\,yr$^{-1}$~\cite{ade_prospects}.
+Typically for an all-sky, all-time analysis, like that described in~\cite{Usman:2015kfa}, the significance of a candidate event is empirically measured against `background' data representative of the detector noise, which naturally varies from candidate to candidate.
+A detection requires this significance to be above some pre-determined threshold (e.g. $5\sigma$ for GW150914 and GW151226~\cite{Abbott:2016blz,Abbott:2016nmj}).
+We follow the method in~\cite{Aasi:2013wya}, which defines a detection as a candidate with $\rho_c \geq 12$, corresponding approximately to $b=10^{-2}$\,yr$^{-1}$.
 Since the background rate $b$ is known, we are just left with the problem of inferring the signal rate $s$.
 Assuming a uniform prior on $s$ and a Poisson process underlying the events, it may be shown (e.g.,~\cite{2010blda.book.....G}) that the posterior for the signal rate, given a known background rate $b$ and $n$ events observed over a time period $T$ is,
 %
@@ -272,7 +273,7 @@ Finally, the posterior on the binary coalescence rate $\cbcrate$ is obtained fro
 \end{eqnarray}
 %
 We see that in this approach, the rate posterior depends only on the number of signal detections $n$, the observation time $T$, the background rate $b$, and the horizon distance of the search $\dhor$.
-It is precisely these quantities that comprise the detection scenarios outlined in~\cite{ade_prospects}.
+It is precisely these quantities that comprise the detection scenarios outlined in~\cite{Aasi:2013wya}.
 Before constructing expected rate posteriors, let us outline the transformation from rate to beaming angle.
 
 \subsection{Constructing the beaming angle posterior}
@@ -347,12 +348,12 @@ We then obtain the marginal distribution $p(\theta)$ via \ac{KDE} of the $\theta
 The mode of the \ac{KDE} yields the maximimum a posteriori estimate for the measurement, and the upper and lower bounds are found from the 95\% confidence interval around the median of the samples.
 
 
-\section{Prospects For Beaming Angle Constraints With aLIGO}
+\section{Prospects For Beaming Angle Constraints With Advanced LIGO}
 We now demonstrate the derivation of the rate posterior $p(\cbcrate)$ and the subsequent transformation to the beaming angle posterior $p(\theta)$.
-We consider four \ac{GW} observation scenarios with aLIGO based on the work in~\cite{ade_prospects}.
-An observing scenario essentially consists of an epoch of aLIGO operation, which defines an expected search sensitivity (i.e., \BNS horizon distance $\dhor$) and observation time $T$; as well as an assumption on the rate of \BNS coalescence in the local universe $\cbcrate$.
+We consider four \ac{GW} observation scenarios with \ac{aLIGO} based on the work in~\cite{Aasi:2013wya}.
+An observing scenario essentially consists of an epoch of \ac{aLIGO} operation, which defines an expected search sensitivity (i.e., \BNS horizon distance $\dhor$) and observation time $T$; as well as an assumption on the rate of \BNS coalescence in the local universe $\cbcrate$.
 Each observing scenario ultimately results in an expectation for the number of observed \acp{GW} from \BNS coalescences.
-For this study, we consider two operation epochs: the 2016 and 2022+ scenarios described in~\cite{ade_prospects} and we assume the `realistic rate' for $\cbcrate$ as described in~\cite{rates_paper}.
+For this study, we consider two operation epochs: the 2016 and 2022+ scenarios described in~\cite{Aasi:2013wya} and we assume the `realistic rate' for $\cbcrate$ as described in~\cite{rates_paper}.
 
 Our first goal is to establish the expected number of detections in each scenario.
 Given the observation time and horizon distance of the observation epoch we first compute the 4-volume accessible to the analysis,
@@ -363,9 +364,9 @@ Given the observation time and horizon distance of the observation epoch we firs
 \end{equation}
 %
 where the factor 2.26 arises from averaging over source sky location and orientation, $T$ is the observation time and $\gamma$ is the \emph{duty cycle} for the science run.
-Following~\cite{ade_prospects}, we take $\gamma=0.5$.
-For comparison, during the first observing run of Advanced LIGO, the two interferometers observed in coincidence achieving $\gamma_{\mathrm{coinc}} = 0.41$.
-Where there is a range in the horizon distances quoted in~\cite{ade_prospects} to account for uncertainty in the sensitivity of the early configuration of the detectors, we use the arithmetic mean of the lower and upper bounds when computing the search volume.
+Following~\cite{Aasi:2013wya}, we take $\gamma=0.5$.
+For comparison, during the first observing run of \ac{aLIGO}, the two interferometers observed in coincidence achieving $\gamma_{\mathrm{coinc}} = 0.41$.
+Where there is a range in the horizon distances quoted in~\cite{Aasi:2013wya} to account for uncertainty in the sensitivity of the early configuration of the detectors, we use the arithmetic mean of the lower and upper bounds when computing the search volume.
 Table~\ref{table:scenarios} lists the details of each observing scenario.
 
 %
@@ -387,17 +388,17 @@ $\langle V_{\mathrm{search}}\rangle$ & $\cbcrate$ & $n$ \\
     $T$ is the expected duration of the science run and $\dhor$ is the \BNS horizon distance for the sensitivity expected to be acheived at the given epoch.
 $\langle V_{\mathrm{search}}\rangle $ is the sensitive volume of the search, where the angled brackets $\langle \rangle$ indicate averaging over the range in horzizon distance, $\cbcrate$ is the assumed \BNS coalescence rate, and $n$ is the expected number of \ac{GW} detections.
     Note that the quoted search volume accounts for a network duty cycle of $\sim 50\%$.
-    Full details may be foud in~\cite{ade_prospects}.
+    Full details may be foud in~\cite{Aasi:2013wya}.
     \label{table:scenarios}}
 \end{table}
 %
 
 \subsection{Posterior Results}
-Figure~\ref{fig:aligorate} shows the rate posteriors resulting from the observations described in table~\ref{table:scenarios} for the expected early aLIGO sensitivity in the 2016 epoch (broad, solid curve) and the nominal design sensivity (narrow, dashed curve), using the `realistic' rate $\cbcrate=10^{-6}$\,Mpc$^{-3}$yr$^{-1}$.
+Figure~\ref{fig:aligorate} shows the rate posteriors resulting from the observations described in table~\ref{table:scenarios} for the expected early \ac{aLIGO} sensitivity in the 2016 epoch (broad, solid curve) and the nominal design sensivity (narrow, dashed curve), using the `realistic' rate $\cbcrate=10^{-6}$\,Mpc$^{-3}$yr$^{-1}$.
 %\footnote{The curves corresponding to the
 %`high' rate show similar qualitative behaviour and are not included here in the
 %interests of brevity.}  
-We now use curves such as these together with the prior distributions described in section~\ref{sec:rate_posterior} and the observed rate of \acp{sGRB} (as described in section~\ref{sec:sgrbs}, we use $\grbrate=10$\,Gpc$^{-3}$yr$^{-1}$~\cite{nakar-2007,Dietz11}) to derive the corresponding beaming angle posteriors.
+We now use curves such as these together with the prior distributions described in section~\ref{sec:rate_posterior} and the observed rate of \acp{sGRB} (as described in section~\ref{sec:sgrbs}, we use $\grbrate=10$\,Gpc$^{-3}$yr$^{-1}$~\cite{Nakar:2007yr,Dietz:2010eh}) to derive the corresponding beaming angle posteriors.
 
 \begin{figure}
 \centering
@@ -497,11 +498,11 @@ Scenario & $\delta(\epsilon=0.5)$ & $\delta(\epsilon=1)$ & $U(0,1)$ & $\beta(\fr
 Our proposed approach is also valid in the regime where no \ac{GW} signals from \BNS coalescence have been observed.
 In this case, the procedure is identical: construct the posterior probability density function on the \BNS coalescence rate, transform to the joint posterior on the beaming angle and \ac{sGRB} efficiency, $\epsilon$, and marginalise over the nuisance parameter $\epsilon$ to yield the posterior on the beaming angle.
 Now, however, rather than quoting the maximum a posteriori estimate, together with some confidence interval, we simply integrate the beaming angle posterior from $\theta=0$ until we reach that value which contains some desired confidence.
-Thus, we obtain an upper limit on the beaming angle, analogous to the rate upper limits set by past LIGO observations~\cite{S6lowmass}.
+Thus, we obtain an upper limit on the beaming angle, analogous to the rate upper limits set by past LIGO observations~\cite{Colaboration:2011np}.
 
-In this section, we demonstrate the procedure using the \BNS coalescence rate measurements from the final science run of LIGO, prior to the upgrade to aLIGO.
+In this section, we demonstrate the procedure using the \BNS coalescence rate measurements from the final science run of LIGO, prior to the upgrade to \ac{aLIGO}.
 
-\arw{Here, and elsewhere, we should change to using O1 upper limits.}
+\arw{Here, and elsewhere, we should change to using O1 upper limits from the O1 BNS/NSBH paper~\cite{Abbott:2016ymx}. These are $\cbcrate=1.21\times 10^{-5}$\,Mpc$^{-3}$yr$^{-1}$ for `low spin' and $\cbcrate=1.26\times 10^{-5}$\,Mpc$^{-3}$yr$^{-1}$ for `high spin'.}
 
 \subsection{Constructing The Rate Posterior}
 Our first objective is the construction of the rate posterior.
@@ -568,13 +569,13 @@ C_L(\rhostar)T = -\frac{\log(1-\alpha)}{\cbcrate_{\alpha}},
 \begin{figure}
 \centering
 \includegraphics[width=\linewidth]{S6_rate.eps}
-\caption{Posterior on the rate of \BNS coalescence based on obsevations taken during the S6/VSR2,3 science runs of initial LIGO and Virgo~\cite{S6lowmass}.
+\caption{Posterior on the rate of \BNS coalescence based on obsevations taken during the S6/VSR2,3 science runs of initial LIGO and Virgo~\cite{Colaboration:2011np}.
     The posterior is constructed using the loudest event procedure~\cite{Biswas09,BradyFairhurst08} and reconstructed from published upper limits (see text).
     \label{fig:s6rate}}
 \end{figure}
 
-Using the most stringent 90\% confidence upper limit from \ac{GW} observations on the rate of binary neutron star coalescences to date, $\cbcrate^{90\%}_{{\rm bns}} = 1.3\times 10^{-4}$\,Mpc$^{-3}$yr$^{-1}$~\cite{S6lowmass}, gives $C_L(\rhostar)T=17712$.
-The full rate posterior from~\cite{S6lowmass} is then found by inserting this value and $\lambda=0$ in equation~\ref{eq:loudestEventPosterior}.
+Using the most stringent 90\% confidence upper limit from \ac{GW} observations on the rate of binary neutron star coalescences to date, $\cbcrate^{90\%}_{{\rm BNS}} = 1.3\times 10^{-4}$\,Mpc$^{-3}$yr$^{-1}$~\cite{Colaboration:2011np}, gives $C_L(\rhostar)T=17712$.
+The full rate posterior from~\cite{Colaboration:2011np} is then found by inserting this value and $\lambda=0$ in equation~\ref{eq:loudestEventPosterior}.
 The result is shown in figure~\ref{fig:s6rate}.
 
 
@@ -605,16 +606,16 @@ This has the important implication that the constraint thus obtained is the \emp
 \end{equation}
 %
 where $\cbcrate^{\mathrm{ul}}$ is the \emph{upper limit} on the \BNS rate.
-The same idea is used in~\cite{0004-637X-809-1-53} to estimate beaming constraints in the advanced detector era.
+The same idea is used in~\cite{Clark:2014jpa} to estimate beaming constraints in the advanced detector era.
 Thus, when comparing the constraints in e.g.,~\cite{2013PhRvL.111r1101C} and the upper limits obtained from the transformed posterior (i.e., equation~\ref{eq:beam_posterior} and figure~\ref{fig:s6angle}), one should remember that they are quite different quantities.
-There are two other noteworthy differences between~\cite{2013PhRvL.111r1101C} and this work: (i) the rate upper limit is computed based on the sensitivity of the initial LIGO/Virgo network (see e.g.,~\cite{BradyFairhurst08}), which gives $\cbcrate=4.5\times 10^{-4}$\,Mpc$^{-3}$yr$^{-1}$ (as compared with $\cbcrate=1.3 \times 10^{-4}$\,Mpc$^{-3}$yr$^{-1}$ from the analysis in~\cite{S6lowmass}); and (ii) it is implicitly assumed that \emph{all} \BNS mergers yield an \ac{sGRB}.
+There are two other noteworthy differences between~\cite{2013PhRvL.111r1101C} and this work: (i) the rate upper limit is computed based on the sensitivity of the initial LIGO-Virgo network (see e.g.,~\cite{BradyFairhurst08}), which gives $\cbcrate=4.5\times 10^{-4}$\,Mpc$^{-3}$yr$^{-1}$ (as compared with $\cbcrate=1.3 \times 10^{-4}$\,Mpc$^{-3}$yr$^{-1}$ from the analysis in~\cite{Colaboration:2011np}); and (ii) it is implicitly assumed that \emph{all} \BNS mergers yield an \ac{sGRB}.
 That is, there is no factor or $\epsilon$ to account for the unknown fraction of mergers which successfully launch an \ac{sGRB} jet.
 With these differences noted, the lower bound on the beaming angle is found to be $\theta \geq 0.8^{\circ}$, as compared with our 95\% confidence upper limit $\theta^{\mathrm{ul}}=1.94^{\circ}$ when assuming $\epsilon=1$.
 
 \begin{figure}
 \centering
 \includegraphics[width=\linewidth]{jet_angle_posterior_iligo.eps}
-\caption{Beaming angle posterior using the rate posterior (see figure~\ref{fig:s6rate}) obtained from S6/VSR2,3 observations~\cite{S6lowmass}.
+\caption{Beaming angle posterior using the rate posterior (see figure~\ref{fig:s6rate}) obtained from S6/VSR2,3 observations~\cite{Colaboration:2011np}.
     Priors on $\epsilon$ now dominate our results.
     \label{fig:s6angle}}
 \end{figure}
