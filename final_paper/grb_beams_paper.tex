@@ -230,15 +230,28 @@ An overview of the general method is as follows:
 %tells us everything we need to know.  Specifically, the following sentance has
 %the information we need:
 
-Our goal is to infer the posterior probability distribution for the mean \ac{sGRB} beaming angle $\theta$ from \ac{GW} constraints on the rate of \BNS coalescence $\cbcrate$.
-The core ingredient to the analysis is the posterior probability distribution on the coalescence rate $p(\cbcrate|D,I)$, where $D$ represents some \ac{GW} observation and $I$ denotes other unenumerated prior information.
-We will first demonstrate how $p(\cbcrate|D,I)$ may be constructed for a few projected observing scenarios from~\cite{Aasi:2013wya}.
-Later, in section~\ref{sec:beaming_limits}, we will extend the analysis to place upper limits on $\theta$ \arw{based upon the lack of detection during O1}.
+Our goal is to infer the posterior probability distribution for the mean
+\ac{sGRB} beaming angle $\theta$ from \ac{GW} constraints on the rate of \BNS
+coalescence $\cbcrate$.  The core ingredient to the analysis is the posterior
+probability distribution on the coalescence rate $p(\cbcrate|D,I)$, where $D$
+represents some \ac{GW} observation and $I$ denotes other unenumerated prior
+information.  We will first demonstrate how $p(\cbcrate|D,I)$ may be constructed
+for a few projected observing scenarios from~\cite{Aasi:2013wya}.  Later, in
+section~\ref{sec:beaming_limits}, we will extend the analysis to place upper
+limits on $\theta$ \arw{based upon the lack of detection during O1}.
 
-To form the posterior on the coalescence rate, we begin by constructing the posterior on the \emph{signal} rate.
-Note that these are not identical since only those \BNS mergers which occur within a certain range yield a detectable signal.
-\ac{GW} data analysis pipelines (e.g. {\tt FINDCHIRP}~\cite{2012PhRvD..85l2006A}, {\tt PyCBC}~\cite{Canton:2014ena,Usman:2015kfa,alex_nitz_2016_197080}) identify discrete `candidate events' which are characterized by network \acp{SNR}, $\rho_c$, which, for the case of \BNS searches, indicate the similarity between the detector data and a set of template \BNS coalescence waveforms.
-The measured rate $r$ of these events consists of two components: a population of true \ac{GW} signals, $s$; and a background rate, $b$, due to noise fluctuations due to instrumental and environmental disturbances.
+To form the posterior on the coalescence rate, we begin by constructing the
+posterior on the \emph{signal} rate.  Note that these are not identical since
+only those \BNS mergers which occur within a certain range yield a detectable
+signal.  \ac{GW} data analysis pipelines (e.g. {\tt
+FINDCHIRP}~\cite{2012PhRvD..85l2006A}, {\tt
+PyCBC}~\cite{Canton:2014ena,Usman:2015kfa,alex_nitz_2016_197080}) identify
+discrete `candidate events' which are characterized by network \acp{SNR},
+$\rho_c$, which, for the case of \BNS searches, indicate the similarity between
+the detector data and a set of template \BNS coalescence waveforms.  The
+measured rate $r$ of these events consists of two components: a population of
+true \ac{GW} signals, $s$; and a background rate, $b$, due to noise fluctuations
+due to instrumental and environmental disturbances.
 %
 \begin{equation}
 r = s + b
@@ -516,87 +529,96 @@ In this section, we demonstrate the procedure using the \BNS coalescence rate me
 
 \arw{Here, and elsewhere, we should change to using O1 upper limits from the O1 BNS/NSBH paper~\cite{Abbott:2016ymx}. These are $\cbcrate=1.21\times 10^{-5}$\,Mpc$^{-3}$yr$^{-1}$ for `low spin' and $\cbcrate=1.26\times 10^{-5}$\,Mpc$^{-3}$yr$^{-1}$ for `high spin'.}
 
-\subsection{Constructing The Rate Posterior}
-Our first objective is the construction of the rate posterior.
-Since our ultimate goal here is to derive a beaming angle posterior based on initial LIGO observations, it is convenient to adopt the same approach to constructing the rate posterior that was used in past analyses.
-Following~\cite{Biswas09,BradyFairhurst08}, the posterior on the binary coalescence rate may be determined from the loudest event in the \ac{GW} analysis and takes the form,
-%Specifically, for a foreground event rate due to  binary coalescence $\cbcrate$,
-%the probability of obtaning no events with ranking statistic $\rho$ greater than
-%the observed loudested event $\rhostar$ is,
+%   \subsection{Constructing The Rate Posterior} Our first objective is the
+%   construction of the rate posterior.  Since our ultimate goal here is to derive a
+%   beaming angle posterior based on initial LIGO observations, it is convenient to
+%   adopt the same approach to constructing the rate posterior that was used in past
+%   analyses.  Following~\cite{Biswas09,BradyFairhurst08}, the posterior on the
+%   binary coalescence rate may be determined from the loudest event in the \ac{GW}
+%   analysis and takes the form,
+%   %Specifically, for a foreground event rate due to  binary coalescence
+%   %$\cbcrate$, the probability of obtaning no events with ranking statistic $\rho$
+%   %greater than the observed loudested event $\rhostar$ is,
+%   %
+%   %\begin{equation} P_F(\rhostar | \cbcrate, C_L, T) = e^{-\cbcrate C_L(\rhostar)
+%   %T}, \end{equation}
+%   %
+%   %where $C_L(\rhostar)$ is the total luminosity to which the search is sensitive
+%   %and $T$ is the duration of the search.  The overall probability of obtaining no
+%   %events with ranking statistic $\rho>\rhostar$ is the product of obtaining no
+%   %such events from foreground \emph{and} the probability of obtaining no such
+%   %events from the background in the detector, denoted $P_B(\rhostar)$,
+%   %
+%   %\begin{equation} P(\rhostar|\cbcrate,I) = P_B(\rhostar|I)e^{-\cbcrate
+%   %C_L(\rhostar) T} \end{equation}
+%   %
+%   %Using a uniform prior on $\cbcrate$ and inverting the overall probability with
+%   %Bayes' theorem, we arrive at,
+%   %
+%   \begin{equation}\label{eq:loudestEventPosterior} p(\cbcrate | C_L({\rhostar}),
+%   T, \Lambda) \propto p(\cbcrate) \left[ \frac{1+\Lambda C_L(\rhostar)
+%   T}{1+\Lambda}\right] e^{-\cbcrate C_L(\rhostar) T}, \end{equation}
+%   %
+%   where $p(\cbcrate)$ is the prior probability distribution on the rate, assumed
+%   to be uniform, $C_L(\rhostar)$ is the total luminosity to which the search is
+%   sensitive, and $T$ is the observation time.  The quantity $\Lambda$ is
+%   essentially the relative likelihood that the loudest event arose from a \ac{GW}
+%   signal to the likelihood of background.  See section\,3
+%   of~\cite{BradyFairhurst08} for the derivation of this distribution and the
+%   quantities involved.
 %
-%\begin{equation}
-%P_F(\rhostar | \cbcrate, C_L, T) = e^{-\cbcrate C_L(\rhostar) T},
-%\end{equation}
+%   We can now use the published upper limits on the rate of \BNS coalescence to
+%   re-derive the full rate posterior.  The upper limit on the binary coalescence
+%   rate at confidence $\alpha$ is found by integrating the rate posterior from zero
+%   to $\alpha$.  Assuming a uniform prior on the rate $\cbcrate$ and using the rate
+%   posterior given by equation~\ref{eq:loudestEventPosterior}, the upper limit on
+%   the rate $\cbcrate_{\alpha}$ is given by equation 21 in~\cite{BradyFairhurst08}:
+%   %
+%   \begin{equation}
+%   1-\alpha =  e^{-\cbcrate_{\alpha} C_L(\rhostar)T)}
+%   \left[ 
+%   1+ \left(\frac{\Lambda}{1+\Lambda}\right) \cbcrate_{\alpha} T C_L(\rhostar)
+%   \right ].
+%   \label{eq:rateIntegral}
+%   \end{equation}
+%   %
+%   In the event that no \ac{GW} signal has been observed and the loudest event is
+%   umabiguously due to background noise fluctuations, we are in the limit in which
+%   $\Lambda \rightarrow 0$.
+%   In this case, we simply have,
+%   \begin{equation}
+%   C_L(\rhostar)T = -\frac{\log(1-\alpha)}{\cbcrate_{\alpha}},
+%   \end{equation}
+%   %
+%   %and the value of $\cbcrate$ can be taken straight from the literature
+%   %\footnote{Note
+%   %that this procedure necessarily confines our jet angle inferences based on
+%   %progenitor systems for which the rate upper limits are available.  Given that
+%   %the binary coalesence rate limits are quoted for canonical binary neutron star
+%   %and neutron star-black hole systems, both plausible sGRB progenitors, this
+%   %simply means our inferences on the jet angle are specific to each system and
+%   %treated separately.}
+%   %
 %
-%where $C_L(\rhostar)$ is the total luminosity to which the search is sensitive
-%and $T$ is the duration of the search.  The overall probability of obtaining
-%no events with ranking statistic $\rho>\rhostar$ is the product of obtaining
-%no such events from foreground \emph{and} the probability of obtaining no such
-%events from the background in the detector, denoted $P_B(\rhostar)$,
+%   \begin{figure}
+%   \centering
+%   %\includegraphics[width=\linewidth]{S6_rate.eps}
+%   \caption{Posterior on the rate of \BNS coalescence based on obsevations taken during the S6/VSR2,3 science runs of initial LIGO and Virgo~\cite{Colaboration:2011np}.
+%       The posterior is constructed using the loudest event procedure~\cite{Biswas09,BradyFairhurst08} and reconstructed from published upper limits (see text).
+%       \label{fig:s6rate}}
+%   \end{figure}
 %
-%\begin{equation}
-%P(\rhostar|\cbcrate,I) = P_B(\rhostar|I)e^{-\cbcrate C_L(\rhostar) T}
-%\end{equation}
+%   Using the most stringent 90\% confidence upper limit from \ac{GW} observations on the rate of binary neutron star coalescences to date, $\cbcrate^{90\%}_{{\rm BNS}} = 1.3\times 10^{-4}$\,Mpc$^{-3}$yr$^{-1}$~\cite{Colaboration:2011np}, gives $C_L(\rhostar)T=17712$.
+%   The full rate posterior from~\cite{Colaboration:2011np} is then found by inserting this value and $\lambda=0$ in equation~\ref{eq:loudestEventPosterior}.
+%   The result is shown in figure~\ref{fig:s6rate}.
 %
-%Using a uniform prior on $\cbcrate$ and inverting the overall probability with
-%Bayes' theorem, we arrive at,
 %
-\begin{equation}\label{eq:loudestEventPosterior}
-p(\cbcrate | C_L({\rhostar}), T, \Lambda) \propto p(\cbcrate) \left[ \frac{1+\Lambda
-C_L(\rhostar) T}{1+\Lambda}\right] e^{-\cbcrate C_L(\rhostar) T},
-\end{equation}
-%
-where $p(\cbcrate)$ is the prior probability distribution on the rate, assumed to be uniform, $C_L(\rhostar)$ is the total luminosity to which the search is sensitive, and $T$ is the observation time.
-The quantity $\Lambda$ is essentially the relative likelihood that the loudest event arose from a \ac{GW} signal to the likelihood of background.
-See section\,3 of~\cite{BradyFairhurst08} for the derivation of this distribution and the quantities involved.
+%   %Similarly, for NS-BH systems,  $\cbcrate^{90\%}_{{\rm
+%   %nsbh}} = 3.1\times 10^{-5}$\,Mpc$^{-3}$yr$^{-1}$ gives $C_L(\rhostar)T=74277$.
+%   %The posteriors on the rates, assuming these values and $\Lambda=0$, are shown in
+%   %figure~\ref{fig:reconstructedRatePosterior}.  
 
-We can now use the published upper limits on the rate of \BNS coalescence to re-derive the full rate posterior.
-The upper limit on the binary coalescence rate at confidence $\alpha$ is found by integrating the rate posterior from zero to $\alpha$.
-Assuming a uniform prior on the rate $\cbcrate$ and using the rate posterior given by equation~\ref{eq:loudestEventPosterior}, the upper limit on the rate $\cbcrate_{\alpha}$ is given by equation 21 in~\cite{BradyFairhurst08}:
-%
-\begin{equation}
-1-\alpha =  e^{-\cbcrate_{\alpha} C_L(\rhostar)T)}
-\left[ 
-1+ \left(\frac{\Lambda}{1+\Lambda}\right) \cbcrate_{\alpha} T C_L(\rhostar)
-\right ].
-\label{eq:rateIntegral}
-\end{equation}
-%
-In the event that no \ac{GW} signal has been observed and the loudest event is umabiguously due to background noise fluctuations, we are in the limit in which $\Lambda \rightarrow 0$.
-In this case, we simply have,
-\begin{equation}
-C_L(\rhostar)T = -\frac{\log(1-\alpha)}{\cbcrate_{\alpha}},
-\end{equation}
-%
-%and the value of $\cbcrate$ can be taken straight from the literature
-%\footnote{Note
-%that this procedure necessarily confines our jet angle inferences based on
-%progenitor systems for which the rate upper limits are available.  Given that
-%the binary coalesence rate limits are quoted for canonical binary neutron star
-%and neutron star-black hole systems, both plausible sGRB progenitors, this
-%simply means our inferences on the jet angle are specific to each system and
-%treated separately.}
-%
-
-\begin{figure}
-\centering
-%\includegraphics[width=\linewidth]{S6_rate.eps}
-\caption{Posterior on the rate of \BNS coalescence based on obsevations taken during the S6/VSR2,3 science runs of initial LIGO and Virgo~\cite{Colaboration:2011np}.
-    The posterior is constructed using the loudest event procedure~\cite{Biswas09,BradyFairhurst08} and reconstructed from published upper limits (see text).
-    \label{fig:s6rate}}
-\end{figure}
-
-Using the most stringent 90\% confidence upper limit from \ac{GW} observations on the rate of binary neutron star coalescences to date, $\cbcrate^{90\%}_{{\rm BNS}} = 1.3\times 10^{-4}$\,Mpc$^{-3}$yr$^{-1}$~\cite{Colaboration:2011np}, gives $C_L(\rhostar)T=17712$.
-The full rate posterior from~\cite{Colaboration:2011np} is then found by inserting this value and $\lambda=0$ in equation~\ref{eq:loudestEventPosterior}.
-The result is shown in figure~\ref{fig:s6rate}.
-
-
-%Similarly, for NS-BH systems,  $\cbcrate^{90\%}_{{\rm
-%nsbh}} = 3.1\times 10^{-5}$\,Mpc$^{-3}$yr$^{-1}$ gives $C_L(\rhostar)T=74277$.
-%The posteriors on the rates, assuming these values and $\Lambda=0$, are shown in
-%figure~\ref{fig:reconstructedRatePosterior}.  
-
-\subsection{Results}
+%\subsection{Results}
 Figure~\ref{fig:s6angle} shows the four posteriors on the beaming angle, corresponding to the four priors on the \ac{sGRB} efficiency, $\epsilon$, using the rate posterior obtained from \ac{GW} measurements in the final science run of the first generation of ground based \ac{GW} detectors.
 In this non-detection scenario, we choose to compute the 95\% confidence \emph{upper} limit on the beaming angle,
 \begin{equation}
