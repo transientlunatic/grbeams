@@ -177,6 +177,9 @@ distributions are Gaussian, truncated at $(0, 90]$ degrees.\label{fig:thetapop}}
     %     \label{fig:thetapop}}
 \end{figure}
 
+
+
+
 Figure~\ref{fig:thetapop} reveals that a population of \ac{sGRB} beaming angles with a large mean but narrow width is, on the basis of rate measurements, indidstinguishable from a population of \ac{sGRB} beaming angles with a small mean and large width.
 For example, for the ${\mathcal N}(15,9)$ and ${\mathcal N}(10,13)$ beaming angle populations, the ratios of $N_{\mathrm{GRB}}/N_{\mathrm{BNS}}$ are almost equal ($\sim 4.8\%$).
 Thus, a sufficiently wide spread of \ac{sGRB} beaming angles will yield relatively high rates for \BNS and \acp{sGRB} that could lead to an overestimate of the mean beaming angle.
@@ -381,15 +384,16 @@ Table~\ref{table:scenarios} lists the details of each observing scenario.
 \begin{table}
 \centering
 \begin{tabular}{l c c c c c }
-\toprule
-Epoch & $T$ & $\dhor$ &
-$\langle V_{\mathrm{search}}\rangle$ & $\cbcrate$ & $n$ \\
- & [yr] & [Mpc] & [Mpc$^3$yr] &  [Mpc$^{-3}$yr$^{-1}$] \\
-\colrule
-2016 & 0.5 & 80--120 & $1.05\times10^6$ & $10^{-6}$ & 1.3 \\
-%2016 & 0.5 & 80--120 & $1.05\times10^6$ & $10^{-5}$ & 13 \\
-2022+ & 1 & 200 & $4\times10^7$ & $10^{-6}$ & 40 \\
-%2022+ & 1 & 200 & $4\times10^7$ & $10^{-5}$ & 400 \\
+  \toprule
+  Epoch & $T$ & D.C. & $\dhor$ & $n$ \\
+        & [yr]& [\%] & [Mpc]   &     \\
+  \colrule
+  A     & 0.2 & 50   & 70      & 0 \\
+  B     & 0.5 & 50   & 80      & 1 \\% 1.3 \\
+  % 2016 & 0.5 & 80--120 & $1.05\times10^6$ & $10^{-5}$ & 13 \\
+  %B & 1.0 & 50 & 120 & &
+  %2022+ & 1 & 100 & 200 & $4\times10^7$ & $10^{-6}$ & 40 \\
+  % 2022+ & 1 & 200 & $4\times10^7$ & $10^{-5}$ & 400 \\
 \botrule
 \end{tabular}
 \caption{Advanced detector era observing scenarios considered in this work.
@@ -410,7 +414,7 @@ We now use curves such as these together with the prior distributions described 
 
 \begin{figure}
 \centering
-{\includegraphics[width=\linewidth]{aligo_rate_re.eps}}
+{\includegraphics[width=\linewidth]{rate_posteriors_violin.pdf}}
 \caption{Posterior probability distribution for the rate of \BNS coalescence assuming the 2016 (solid curve) \& 2022 (dashed curve) detection scenarios.
     These posteriors have been computed assuming a number of \ac{GW} inspiral detections commensurate with the `realistic' value $\cbcrate=10^{-6}$\,Mpc$^{3}$yr$^{-1}$.
     The 2022 epoch results in a greater number of expected detections (40 vs 1.3), reducing the uncertainty in the measurement.
@@ -426,19 +430,19 @@ Finally, we simply use this \emph{artificial} value for $\grbrate$ in equation~\
 %
 \begin{figure}%[H]
 \centering
-{\includegraphics[width=\linewidth]{jet_angle_posterior_aligo_2016.eps}}
+%{\includegraphics[width=\linewidth]{jet_angle_posterior_aligo_2016.eps}}
 \caption{Beaming angle posteriors with different priors.
     An artificial \ac{sGRB} rate has been imposed in order that the target value of the beaming angle is $\theta = 30^{\circ}$.
-    These posteriors are based on the 2016 observing scenario (see table~\ref{table:scenarios}).
+    These posteriors are based on the O1 observing scenario (see table~\ref{table:scenarios}).
     \label{fig:injjetposterio2016}}
 \end{figure}
 %
 \begin{figure}%[H]
 \centering
-{\includegraphics[width=\linewidth]{jet_angle_posterior_aligo_2022.eps}}
+%{\includegraphics[width=\linewidth]{jet_angle_posterior_aligo_2022.eps}}
 \caption{Beaming angle posteriors with different priors.
     An artificial \ac{sGRB} rate has been imposed in order that the target value of the beaming angle is $\theta = 30^{\circ}$.
-    These posteriors are based on the 2022 observing scenario (see table~\ref{table:scenarios}).
+    These posteriors are based on the O2 observing scenario (see table~\ref{table:scenarios}).
     \label{fig:injjetposterio2022}}
 \end{figure}
 %
@@ -460,15 +464,15 @@ The inferences drawn from each scenario and each prior are summarised in terms o
 
 \begin{figure}
 \centering
-{\includegraphics[width=\linewidth]{jet_angle_posterior_aligo_2016_re_real.eps}}
-\caption{Beaming angle posteriors using different priors on \ac{sGRB} efficiency $\epsilon$ in the 2016 observing scenario.
+{\includegraphics[width=\linewidth]{O1_beaming_posteriors_violin.pdf}}
+\caption{Beaming angle posteriors using different priors on \ac{sGRB} efficiency $\epsilon$ in observing scenario A.
     \label{fig:jetposterior2016}}
 \end{figure}
 
 \begin{figure}
 \centering
-{\includegraphics[width=\linewidth]{jet_angle_posterior_aligo_2022_re_real.eps}}
-\caption{Beaming angle posteriors using different priors on \ac{sGRB} efficiency $\epsilon$ in the 2022 observing scenario.
+{\includegraphics[width=\linewidth]{O2_beaming_posteriors_violin.pdf}}
+\caption{Beaming angle posteriors using different priors on \ac{sGRB} efficiency $\epsilon$ in observing scenario B.
     \label{fig:jetposterior2022}}
 \end{figure}
 
@@ -576,7 +580,7 @@ C_L(\rhostar)T = -\frac{\log(1-\alpha)}{\cbcrate_{\alpha}},
 
 \begin{figure}
 \centering
-\includegraphics[width=\linewidth]{S6_rate.eps}
+%\includegraphics[width=\linewidth]{S6_rate.eps}
 \caption{Posterior on the rate of \BNS coalescence based on obsevations taken during the S6/VSR2,3 science runs of initial LIGO and Virgo~\cite{Colaboration:2011np}.
     The posterior is constructed using the loudest event procedure~\cite{Biswas09,BradyFairhurst08} and reconstructed from published upper limits (see text).
     \label{fig:s6rate}}
@@ -622,12 +626,25 @@ With these differences noted, the lower bound on the beaming angle is found to b
 
 \begin{figure}
 \centering
-\includegraphics[width=\linewidth]{jet_angle_posterior_iligo.eps}
+%\includegraphics[width=\linewidth]{jet_angle_posterior_iligo.eps}
 \caption{Beaming angle posterior using the rate posterior (see figure~\ref{fig:s6rate}) obtained from S6/VSR2,3 observations~\cite{Colaboration:2011np}.
     Priors on $\epsilon$ now dominate our results.
     \label{fig:s6angle}}
 \end{figure}
 
+\begin{figure}
+\centering
+\includegraphics[width=\linewidth]{volume_v_nevents.pdf}
+%\includegraphics[width=\linewidth]{color_relativenumber.pdf}
+\caption{\label{fig:volumevevents} The median beaming angle for different observed volumes and numbers of observed events.}
+
+    % \centering
+    % \includegraphics[width=\linewidth]{figure1.pdf}
+    % \caption{Expected ratio of observed SGRBs and binary coalescences for different distributions on the SGRB beaming angle.
+    %     For a series of jet angle population means, $\langle \theta \rangle$, we plot this ratio as a function of the distribution width, $\sigma_{\theta}$.
+    %     All jet angle distributions are normal, truncated at $(0, 90]$ degrees.
+    %     \label{fig:thetapop}}
+\end{figure}
 
 %%% EDITED TO HERE %%%
 \section{Conclusion}
@@ -697,6 +714,8 @@ Finally:
 \frac{\partial(\cbcrate,\epsilon)}{\partial(\theta,\epsilon)}
 \right\rvert\right\rvert = \frac{2\grbrate\sin\theta}{\epsilon(\cos\theta-1)^2} 
 \end{equation}
+
+
 
 \section{Null-detection Jet Angle Posteriors With Different Priors}
 
