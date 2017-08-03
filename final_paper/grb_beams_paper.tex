@@ -585,10 +585,39 @@ to derive the corresponding beaming angle posteriors.
 \centering
 {\includegraphics[width=\linewidth]{rate_posteriors_violin.pdf}}
 \caption{Posterior probability distribution for the rate of \BNS
-  coalescence assuming the scenarios A (red shading) \& B (blue shading)
-  detection scenarios. The 95\% confidence interval is represented with a horizontal line through the centre of the plot, with vertical lines delineating the 2.5\% and 97.5\% percentiles; the median is represented by a square marker, and the maximum \latin{a posteriori} (\ac{MAP}) value is denoted by a diamond.  \dwnote{* TODO I should update these plots so that they reflect the correct scenario names.}
-  \label{fig:aligorate}}
+  coalescence assuming the scenarios A (red shading) \& B (blue
+  shading) detection scenarios. The 95\% confidence interval is
+  represented with a horizontal line through the centre of the plot,
+  with vertical lines delineating the 2.5\% and 97.5\% percentiles;
+  the median is represented by a square marker, and the maximum
+  \latin{a posteriori} (\ac{MAP}) value is denoted by a diamond. A
+  summary of these values is given in table
+  \ref{tab:rateposteriors}. \label{fig:aligorate} }
 \end{figure}
+
+
+\begin{table}
+\begin{center}
+  \begin{tabular}{lrrrr}
+    \toprule
+    Scenario & Lower       & MAP             & Median          & Upper\\
+             & [$\yr^{-1}$] & [$\yr^{-1}$]    & [$\yr^{-1}$]    & [$\yr^{-1}$]  \\
+    \colrule
+    2015 -- 2016 & 0.20 & 0.00 & 5.48 & 29.42\\
+    2016 -- 2017 & 0.96 & 4.03 & 6.70 & 22.40\\
+    2017 -- 2018 & 2.90 & 7.36 & 9.80 & 23.39\\
+    2019+ & 11.00 & 19.59 & 21.33 & 36.75\\
+    2022+ & 26.05 & 40.92 & 41.31 & 61.73\\
+    \botrule
+\end{tabular}
+\end{center}
+
+\caption{Summary of the NS-NS coalesence posteriors for each of the observing
+  scenarios which are considered in this work; these posteriors are plotted
+  in figure \ref{fig:aligorate}.
+  \label{tab:rateposteriors}
+}
+\end{table}
 
 \subsubsection{Validation}
 Before we derive beaming angle posteriors corresponding to the
@@ -614,6 +643,27 @@ resulting posterior should yield an inference consistent with the
     \dwnote{* TODO I should update these plots so that they reflect the correct scenario names.}
     \label{fig:injjetposterio2016}}
 \end{figure}
+
+\begin{table}
+  \centering
+  \begin{tabular}{lrrrr}
+    \toprule
+    Prior & Lower & MAP & Median & Upper\\
+          & [$^\circ$] & [$^\circ$]& [$^\circ$]& [$^\circ$] \\
+    \colrule
+    \(U(0,1)\) & 4.53 & 7.62 & 13.16 & 65.01\\
+    Jeffreys & 4.39 & 5.74 & 13.04 & 69.75\\
+    $\delta(0.5)$ & 5.13 & 8.32 & 12.06 & 51.90\\
+    \botrule
+\end{tabular}
+\caption{Summary of the beaming angle posteriors from figure
+  \ref{fig:injjetposterio2016}, for the 2015--2016 observing scenario,
+  with an artificial GRB rate imposed to produce a target beaming
+  angle of $\theta = $ \dwnote{Check what this angle actually is,
+    because it isn't 30}.}
+  \label{tab:summaryinj2015}
+\end{table}
+
 %
 \begin{figure}%[H]
 \centering
@@ -624,6 +674,25 @@ resulting posterior should yield an inference consistent with the
     \dwnote{* TODO I should update these plots so that they reflect the correct scenario names.}
     \label{fig:injjetposterio2022}}
 \end{figure}
+\begin{table}
+  \centering
+  \begin{tabular}{lrrrr}
+    \toprule
+    Prior & Lower & MAP & Median & Upper\\
+          & [$^\circ$] & [$^\circ$]& [$^\circ$]& [$^\circ$] \\
+    \colrule
+    \(U(0,1)\) & 4.58 & 6.25 & 10.47 & 46.32\\
+    Jeffreys & 4.38 & 6.18 & 10.44 & 61.59\\
+    \(δ(0.5)\) & 5.19 & 6.63 & 9.46 & 25.36\\
+    \botrule
+\end{tabular}
+\caption{Summary of the beaming angle posteriors from figure
+  \ref{fig:injjetposterio2022}, for the 2016--2017 observing scenario,
+  with an artificial GRB rate imposed to produce a target beaming
+  angle of $\theta = $ \dwnote{Check what this angle actually is,
+    because it isn't 30}.}
+  \label{tab:summaryinj2015}
+\end{table}
 %
 Figures~\ref{fig:injjetposterio2016} and~\ref{fig:injjetposterio2022}
 show the beaming angle posteriors which result from this analysis for
@@ -670,29 +739,38 @@ table~\ref{table:aligo_beam_inference}.
 \begin{figure}
 \centering
 {\includegraphics[width=\linewidth]{O1_beaming_posteriors_violin.pdf}}
-\caption{Beaming angle posteriors using different priors on \ac{sGRB} efficiency $\epsilon$ in observing scenario A.
-  \dwnote{* TODO I should update these plots so that they reflect the correct scenario names.}
+\caption{Beaming angle posteriors using different priors on \ac{sGRB} efficiency $\epsilon$ in the 2015--2016 observing scenario.
+  %\dwnote{* TODO I should update these plots so that they reflect the correct scenario names.}
     \label{fig:jetposterior2016}}
 \end{figure}
 
 \begin{figure}
 \centering
 {\includegraphics[width=\linewidth]{O2_beaming_posteriors_violin.pdf}}
-  \dwnote{* TODO I should update these plots so that they reflect the correct scenario names.}
-\caption{Beaming angle posteriors using different priors on \ac{sGRB} efficiency $\epsilon$ in observing scenario B.
+  %\dwnote{* TODO I should update these plots so that they reflect the correct scenario names.}
+\caption{Beaming angle posteriors using different priors on \ac{sGRB} efficiency $\epsilon$ in the 2016--2017 observing scenario.
     \label{fig:jetposterior2022}}
 \end{figure}
 
 \begin{table}
 \centering
-\begin{tabular}{l c c c c }
-\toprule
-% &\multicolumn{4}{c}{Prior} \\
-Scenario & $\delta(\epsilon=0.5)$ & $\delta(\epsilon=1)$ & $U(0,1)$ & $\beta(\frac{1}{2},\frac{1}{2})$\\
-\cline{1-1}\cline{2-5}
-\colrule
-2016  & $4.10^{+6.67}_{-1.16}$ & $2.90^{+4.34}_{-0.82}$ &\ $6.50^{+68.37}_{-3.00}$ & $6.20^{76.34}_{-2.26}$ \\
-2022 & $6.20^{+0.99}_{-0.73}$ & $4.30^{+0.79}_{-0.46}$ & $7.00^{+65.99}_{-2.11}$ & $6.90^{+72.85}_{-2.29}$ \\
+\begin{tabular}{llrrrr}
+  \toprule
+  % &\multicolumn{4}{c}{Prior} \\
+  % Scenario & $\delta(\epsilon=0.5)$ & $\delta(\epsilon=1)$ & $U(0,1)$ & $\beta(\frac{1}{2},\frac{1}{2})$\\
+  Scenario & Prior & Lower & MAP & Median & Upper \\
+  \colrule
+  2015--2016 & $U(0,1)$ & 1.48 & 2.47 & 4.33 & 30.96\\
+    & Jeffreys & 1.41 & 2.44 & 4.53 & 46.88\\
+    & $\delta(1)$ &1.17 & 0.68 & 2.70 & 13.89\\
+    & $\delta(0.5)$ &1.65 & 2.63 & 3.81 & 19.53\\
+  \colrule
+  2016--2017 & $U(0,1)$ & 1.29 & 0.67 & 2.96 & 15.22\\
+    & Jeffreys & 1.23 & 0.66 & 3.06 & 34.06\\
+    & $\delta(1)$ & 1.05 & 0.65 & 1.90 & 5.04\\
+    & $\delta(0.5)$ & 1.48 & 2.52 & 2.70 & 7.14\\
+% 2016  & $4.10^{+6.67}_{-1.16}$ & $2.90^{+4.34}_{-0.82}$ &\ $6.50^{+68.37}_{-3.00}$ & $6.20^{76.34}_{-2.26}$ \\
+% 2022 & $6.20^{+0.99}_{-0.73}$ & $4.30^{+0.79}_{-0.46}$ & $7.00^{+65.99}_{-2.11}$ & $6.90^{+72.85}_{-2.29}$ \\
 \botrule
 \end{tabular}
 \caption{Summary of the beaming angle inferences for each prior in the two observing scenarios considered in this work.
