@@ -253,11 +253,12 @@ distributions on the ratio $N_{\mathrm{GRB}}/N_{\mathrm{BNS}}$.
 \centering
 %\includegraphics[width=\linewidth]{theta_dist_grbfrac.eps}
 \includegraphics[width=\linewidth]{color_relativenumber.pdf}
-\caption{\label{fig:thetapopulation} Expected relative
-numbers of observed GRBs and binary coalescences for different distributions
-on the GRB beaming angle.  Lines in the figure correspond to jet angle
-population means, while the $x$-axis shows the width of the distribution.  All 
-distributions are Gaussian, truncated at $(0, 90]$ degrees.\label{fig:thetapop}}
+\caption{\label{fig:thetapopulation} Expected relative numbers of
+  observed GRBs and binary coalescences for different distributions on
+  the GRB beaming angle.  Lines in the figure correspond to jet angle
+  population means, while the $x$-axis shows the width of the
+  distribution.  All distributions are Gaussian, truncated at
+  $(0, 90]$ degrees.\label{fig:thetapop}}
     % \centering
     % \includegraphics[width=\linewidth]{figure1.pdf}
     % \caption{Expected ratio of observed SGRBs and binary coalescences for different distributions on the SGRB beaming angle.
@@ -548,7 +549,7 @@ the details of each observing scenario.
 \begin{tabular}{lcccc}
   \toprule
   Epoch & $T$ & \dhor & $V_{\mathrm{search}}$ & $N$ \\
-        & [yr] & [Mpc] & [$\ee{6} \mpc³\,\yr^{-1}$ & \\
+        & [yr] & [Mpc] & [$\ee{6} \mpc³\,\yr^{-1}$] & [$\yr^{-1}$] \\
   \colrule
   2015 - 2016 & 0.25 & 73 & 0.45 & 0 \\
   2016 - 2017 & 0.5 & 100 & 1.3 & 1\\
@@ -559,7 +560,7 @@ the details of each observing scenario.
 \end{tabular}
 \caption{Advanced detector era observing scenarios considered in this work.
     $T$ is the expected duration of the science run and $\dhor$ is the \BNS horizon distance for the sensitivity expected to be achieved at the given epoch.
-$V_{\mathrm{search}}$ is the sensitive volume of the search, defined by equation~\ref{eq:search_volume}, and $n$ is the expected number of \ac{GW} detections.
+$V_{\mathrm{search}}$ is the sensitive volume of the search, defined by equation~\ref{eq:search_volume}, and $N$ is the expected number of \ac{GW} detections.
     Note that the quoted search volume accounts for a network duty cycle of $\sim 50\%$.
     These scenarios are derived from those detailed in~\cite{Aasi:2013wya}.
     \label{table:scenarios}}
@@ -637,11 +638,16 @@ resulting posterior should yield an inference consistent with the
 \begin{figure}%[H]
 \centering
 {\includegraphics[width=\linewidth]{O1_injections_violin.pdf}}
-\caption{Beaming angle posteriors with different priors.
-    An artificial \ac{sGRB} rate has been imposed in order that the target value of the beaming angle is $\theta = 30^{\circ}$.
-    These posteriors are based on the O1 observing scenario (see table~\ref{table:scenarios}).
-    \dwnote{* TODO I should update these plots so that they reflect the correct scenario names.}
-    \label{fig:injjetposterio2016}}
+\caption{ In order to validate the algorithm an artificial scenario
+  was constructed with a known beaming angle by artifically setting a
+  GRB rate of $100 \yr^{-1}$ to induce a beaming angle of $\theta \approx 10^{\circ}$.
+  The algorithm was then tested with the various priors used in the
+  analysis (with the exception of $\epsilon \sim \delta(1.0)$), using
+  the same horizon distance, observing time, and duty cycle as the 2015--2016
+  observing scenario. to ensure that the correct beaming angle was inferred. 
+  These posteriors are based on the simulated 2015--2016 obseigrving scenario (see
+  table~\ref{table:scenarios}).
+  \label{fig:injjetposterio2016}}
 \end{figure}
 
 \begin{table}
@@ -659,8 +665,7 @@ resulting posterior should yield an inference consistent with the
 \caption{Summary of the beaming angle posteriors from figure
   \ref{fig:injjetposterio2016}, for the 2015--2016 observing scenario,
   with an artificial GRB rate imposed to produce a target beaming
-  angle of $\theta = $ \dwnote{Check what this angle actually is,
-    because it isn't 30}.}
+  angle of $\theta = 10^{\circ}$.}
   \label{tab:summaryinj2015}
 \end{table}
 
@@ -668,11 +673,9 @@ resulting posterior should yield an inference consistent with the
 \begin{figure}%[H]
 \centering
 {\includegraphics[width=\linewidth]{O2_injections_violin.pdf}}
-\caption{Beaming angle posteriors with different priors.
-    An artificial \ac{sGRB} rate has been imposed in order that the target value of the beaming angle is $\theta = 30^{\circ}$.
-    These posteriors are based on the O2 observing scenario (see table~\ref{table:scenarios}).
-    \dwnote{* TODO I should update these plots so that they reflect the correct scenario names.}
-    \label{fig:injjetposterio2022}}
+\caption{The procedure used to produce figure \ref{fig:injjetposterio2016} was repeated for the observing time and the horizon distance of the 2016--2017 observing scenario, with a GRB rate of $135 \yr^{-1}$ used to induce a beaming angle of $\theta \approx 10^{\circ}$.
+  \dwnote{Do we need this in addition to 2015--2016.}
+  \label{fig:injjetposterio2022}}
 \end{figure}
 \begin{table}
   \centering
@@ -689,8 +692,7 @@ resulting posterior should yield an inference consistent with the
 \caption{Summary of the beaming angle posteriors from figure
   \ref{fig:injjetposterio2022}, for the 2016--2017 observing scenario,
   with an artificial GRB rate imposed to produce a target beaming
-  angle of $\theta = $ \dwnote{Check what this angle actually is,
-    because it isn't 30}.}
+  angle of $\theta \approx 10^{\circ}$.}
   \label{tab:summaryinj2015}
 \end{table}
 %
@@ -920,19 +922,12 @@ There are two other noteworthy differences between~\cite{2013PhRvL.111r1101C} an
 That is, there is no factor or $\epsilon$ to account for the unknown fraction of mergers which successfully launch an \ac{sGRB} jet.
 With these differences noted, the lower bound on the beaming angle is found to be $\theta \geq 0.8^{\circ}$, as compared with our 95\% confidence upper limit $\theta^{\mathrm{ul}}=1.94^{\circ}$ when assuming $\epsilon=1$.
 
-\begin{figure}
-\centering
-%\includegraphics[width=\linewidth]{jet_angle_posterior_iligo.eps}
-\caption{Beaming angle posterior using the rate posterior (see figure~\ref{fig:s6rate}) obtained from S6/VSR2,3 observations~\cite{Colaboration:2011np}.
-    Priors on $\epsilon$ now dominate our results.
-    \label{fig:s6angle}}
-\end{figure}
 
 \begin{figure}
 \centering
 \includegraphics[width=\linewidth]{volume_v_nevents.pdf}
 %\includegraphics[width=\linewidth]{color_relativenumber.pdf}
-\caption{\label{fig:volumevevents} The median beaming angle for different observed volumes and numbers of observed events.}
+\caption{\label{fig:volumevevents} The 95\% upper-limit on the beaming angle for different observed volumes and numbers of observed events.}
 
     % \centering
     % \includegraphics[width=\linewidth]{figure1.pdf}
