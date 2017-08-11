@@ -673,7 +673,7 @@ resulting posterior should yield an inference consistent with the
 \begin{figure}%[H]
 \centering
 {\includegraphics[width=\linewidth]{O2_injections_violin.pdf}}
-\caption{The procedure used to produce figure \ref{fig:injjetposterio2016} was repeated for the observing time and the horizon distance of the 2016--2017 observing scenario, with a GRB rate of $135 \yr^{-1}$ used to induce a beaming angle of $\theta \approx 10^{\circ}$.
+\caption{The procedure used to produce figure \ref{fig:injjetposterio2016} was repeated for the observing time and the horizon distance of the 2016--2017 observing scenario, with a GRB rate of $135 \,\yr^{-1}$ used to induce a beaming angle of $\theta \approx 10^{\circ}$.
   \dwnote{Do we need this in addition to 2015--2016.}
   \label{fig:injjetposterio2022}}
 \end{figure}
@@ -794,14 +794,22 @@ table~\ref{table:aligo_beam_inference}.
 
 \section{Beaming Angle Constraints With No \ac{GW} Detections}
 \label{sec:beaming_limits}
-Our proposed approach is also valid in the regime where no \ac{GW} signals from \BNS coalescence have been observed.
-In this case, the procedure is identical: construct the posterior probability density function on the \BNS coalescence rate, transform to the joint posterior on the beaming angle and \ac{sGRB} efficiency, $\epsilon$, and marginalise over the nuisance parameter $\epsilon$ to yield the posterior on the beaming angle.
-Now, however, rather than quoting the maximum a posteriori estimate, together with some confidence interval, we simply integrate the beaming angle posterior from $\theta=0$ until we reach that value which contains some desired confidence.
-Thus, we obtain an upper limit on the beaming angle, analogous to the rate upper limits set by past LIGO observations~\cite{Colaboration:2011np}.
+Our proposed approach is also valid in the regime where no \ac{GW}
+signals from \BNS coalescence have been observed.  In this case, the
+procedure is identical: construct the posterior probability density
+function on the \BNS coalescence rate, transform to the joint
+posterior on the beaming angle and \ac{sGRB} efficiency, $\epsilon$,
+and marginalise over the nuisance parameter $\epsilon$ to yield the
+posterior on the beaming angle.  Now, however, rather than quoting the
+maximum a posteriori estimate, together with some confidence interval,
+we simply integrate the beaming angle posterior from $\theta=0$ until
+we reach that value which contains some desired confidence.  Thus, we
+obtain an upper limit on the beaming angle, analogous to the rate
+upper limits set by past LIGO observations~\cite{Colaboration:2011np}.
 
-In this section, we demonstrate the procedure using the \BNS coalescence rate measurements from the final science run of LIGO, prior to the upgrade to \ac{aLIGO}.
+%% In this section, we demonstrate the procedure using the \BNS coalescence rate measurements from the final science run of LIGO, prior to the upgrade to \ac{aLIGO}.
 
-\arw{Here, and elsewhere, we should change to using O1 upper limits from the O1 BNS/NSBH paper~\cite{Abbott:2016ymx}. These are $\cbcrate=1.21\times 10^{-5}$\,Mpc$^{-3}$yr$^{-1}$ for `low spin' and $\cbcrate=1.26\times 10^{-5}$\,Mpc$^{-3}$yr$^{-1}$ for `high spin'.}
+%% \arw{Here, and elsewhere, we should change to using O1 upper limits from the O1 BNS/NSBH paper~\cite{Abbott:2016ymx}. These are $\cbcrate=1.21\times 10^{-5}$\,Mpc$^{-3}$yr$^{-1}$ for `low spin' and $\cbcrate=1.26\times 10^{-5}$\,Mpc$^{-3}$yr$^{-1}$ for `high spin'.}
 
 
 %   \subsection{Constructing The Rate Posterior} Our first objective is the
@@ -895,50 +903,146 @@ In this section, we demonstrate the procedure using the \BNS coalescence rate me
 
 %\subsection{Results}
 
-Figure~\ref{fig:s6angle} shows the four posteriors on the beaming angle, corresponding to the four priors on the \ac{sGRB} efficiency, $\epsilon$, using the rate posterior obtained from \ac{GW} measurements in the final science run of the first generation of ground based \ac{GW} detectors.
-In this non-detection scenario, we choose to compute the 95\% confidence \emph{upper} limit on the beaming angle,
-\begin{equation}
-    \label{eq:beaming_upper_limit}
-    0.95 = \int_0^{\theta^{\mathrm{ul}}} p(\theta|D,I)~\diff \theta
-\end{equation}
+Figure~\ref{fig:s6angle} shows the four posteriors on the beaming
+angle, corresponding to the four priors on the \ac{sGRB} efficiency,
+$\epsilon$, using the rate posterior obtained from \ac{GW}
+measurements in the final science run of the first generation of
+ground based \ac{GW} detectors.  We define the \emph{upper} limit on
+the beaming angle as the upper limit of the 95\% confidence interval
+centred on the median of the posterior (i.e. as the 97.5 percentile of
+the posterior distribution). Similarly we define the \emph{lower}
+limit as the lower limit (2.5 percentile) of the same confidence
+interval.
+%% In this non-detection scenario, we choose to compute \emph{upper} limit on the 95\% confidence interval the beaming angle,
+%% \begin{equation}
+%%     \label{eq:beaming_upper_limit}
+%%     0.975 = \int_0^{\theta^{\mathrm{ul}}} p(\theta|D,I)~\diff \theta
+%% \end{equation}
 %
-We see that here, where the rate posterior is rather uninformative, the results are dominated by the uncertainty in $\epsilon$: there are substantive differences in the beaming angle upper limits yielded by the uniform ($U(0,1)$) and $\beta$-distribution priors, while the $\delta$-function priors yield dramatically different upper limits.
-Indeed, the most stringent (and mutually incompatible) upper limits are obtained using the strong $\delta$-function priors.
-In fact, these beaming angle upper limits are also incompatible with the values of $3^{\circ}\mbox{-}8^{\circ}$ that have been inferred from observations of jet breaks in \ac{sGRB} afterglows~\cite{Fong:2013lba,2006MNRAS.367L..42P, 2012A&A...538L...7N}.
-Recall, however, from the discussion in section~\ref{sec:sgrbs} that we interpret the beaming angle inference from our rate measurements as the upper bound on the mean of a population of beaming angles.
-It would, therefore, seem premature to conclude that there is tension in these results; instead, we can only state that either the population of \acp{sGRB} have a distributio of beaming angles with some finite width or that the fraction of \BNS mergers which yield a \ac{sGRB} is smaller than 0.5.
+We see that here, where the rate posterior is rather uninformative,
+the results are dominated by the uncertainty in $\epsilon$: there are
+substantive differences in the beaming angle upper limits yielded by
+the uniform ($U(0,1)$) and $\beta$-distribution priors, while the
+$\delta$-function priors yield dramatically different upper limits.
+Indeed, the most stringent (and mutually incompatible) upper limits
+are obtained using the strong $\delta$-function priors.  In fact,
+these beaming angle upper limits are also incompatible with the values
+of $3^{\circ}\mbox{-}8^{\circ}$ that have been inferred from
+observations of jet breaks in \ac{sGRB}
+afterglows~\cite{Fong:2013lba,2006MNRAS.367L..42P,
+  2012A&A...538L...7N}.  Recall, however, from the discussion in
+section~\ref{sec:sgrbs} that we interpret the beaming angle inference
+from our rate measurements as the upper bound on the mean of a
+population of beaming angles.  It would, therefore, seem premature to
+conclude that there is tension in these results; instead, we can only
+state that either the population of \acp{sGRB} have a distributio of
+beaming angles with some finite width or that the fraction of \BNS
+mergers which yield a \ac{sGRB} is smaller than 0.5.
 
-It is also interesting to compare these upper limits on the beaming angle with those in~\cite{2013PhRvL.111r1101C}, where the upper limit on the rate itself is used as a constraint (rather than transforming the posterior).
-This has the important implication that the constraint thus obtained is the \emph{smallest} angle consistent with the rate:
+It is also interesting to compare these upper limits on the beaming
+angle with those in~\cite{2013PhRvL.111r1101C}, where the upper limit
+on the rate itself is used as a constraint (rather than transforming
+the posterior).  This has the important implication that the
+constraint thus obtained is the \emph{smallest} angle consistent with
+the rate:
 %
 \begin{equation}
     1 - \cos \theta \geq \frac{\grbrate}{\epsilon \cbcrate^{\mathrm{ul}}},
 \end{equation}
 %
-where $\cbcrate^{\mathrm{ul}}$ is the \emph{upper limit} on the \BNS rate.
-The same idea is used in~\cite{Clark:2014jpa} to estimate beaming constraints in the advanced detector era.
-Thus, when comparing the constraints in e.g.,~\cite{2013PhRvL.111r1101C} and the upper limits obtained from the transformed posterior (i.e., equation~\ref{eq:beam_posterior} and figure~\ref{fig:s6angle}), one should remember that they are quite different quantities.
-There are two other noteworthy differences between~\cite{2013PhRvL.111r1101C} and this work: (i) the rate upper limit is computed based on the sensitivity of the initial LIGO-Virgo network (see e.g.,~\cite{BradyFairhurst08}), which gives $\cbcrate=4.5\times 10^{-4}$\,Mpc$^{-3}$yr$^{-1}$ (as compared with $\cbcrate=1.3 \times 10^{-4}$\,Mpc$^{-3}$yr$^{-1}$ from the analysis in~\cite{Colaboration:2011np}); and (ii) it is implicitly assumed that \emph{all} \BNS mergers yield an \ac{sGRB}.
-That is, there is no factor or $\epsilon$ to account for the unknown fraction of mergers which successfully launch an \ac{sGRB} jet.
-With these differences noted, the lower bound on the beaming angle is found to be $\theta \geq 0.8^{\circ}$, as compared with our 95\% confidence upper limit $\theta^{\mathrm{ul}}=1.94^{\circ}$ when assuming $\epsilon=1$.
+where $\cbcrate^{\mathrm{ul}}$ is the \emph{upper limit} on the \BNS
+rate.  The same idea is used in~\cite{Clark:2014jpa} to estimate
+beaming constraints in the advanced detector era.  Thus, when
+comparing the constraints in e.g.,~\cite{2013PhRvL.111r1101C} and the
+upper limits obtained from the transformed posterior (i.e.,
+equation~\ref{eq:beam_posterior} and figure~\ref{fig:s6angle}), one
+should remember that they are quite different quantities.  There are
+two other noteworthy differences between~\cite{2013PhRvL.111r1101C}
+and this work: (i) the rate upper limit is computed based on the
+sensitivity of the initial LIGO-Virgo network (see
+e.g.,~\cite{BradyFairhurst08}), which gives $\cbcrate=4.5\times
+10^{-4}$\,Mpc$^{-3}$yr$^{-1}$ (as compared with $\cbcrate=1.3 \times
+10^{-4}$\,Mpc$^{-3}$yr$^{-1}$ from the analysis
+in~\cite{Colaboration:2011np}); and (ii) it is implicitly assumed that
+\emph{all} \BNS mergers yield an \ac{sGRB}.  That is, there is no
+factor or $\epsilon$ to account for the unknown fraction of mergers
+which successfully launch an \ac{sGRB} jet.  With these differences
+noted, the lower bound on the beaming angle is found to be $\theta
+\geq 0.8^{\circ}$, as compared with our 95\% confidence upper limit
+$\theta^{\mathrm{ul}}=1.94^{\circ}$ when assuming $\epsilon=1$.
 
+
+%%% EDITED TO HERE %%%
+
+\section{Beaming Angle Constraints in Future Scenarios}
+
+With the advent of gravitational wave astronomy, and with the
+expectation of the detection of \BNS gravitational wave signals during
+the lifetime of the advanced detectors it will become possible to
+place further constraints on the 95\% confidence interval of the sGRB
+beaming angle, as both the searched 4-volume of space increases, and
+the observed rate of gravitational wave \BNS events is established.
 
 \begin{figure}
 \centering
 \includegraphics[width=\linewidth]{volume_v_nevents.pdf}
-%\includegraphics[width=\linewidth]{color_relativenumber.pdf}
-\caption{\label{fig:volumevevents} The 95\% upper-limit on the beaming angle for different observed volumes and numbers of observed events.}
-
-    % \centering
-    % \includegraphics[width=\linewidth]{figure1.pdf}
-    % \caption{Expected ratio of observed SGRBs and binary coalescences for different distributions on the SGRB beaming angle.
-    %     For a series of jet angle population means, $\langle \theta \rangle$, we plot this ratio as a function of the distribution width, $\sigma_{\theta}$.
-    %     All jet angle distributions are normal, truncated at $(0, 90]$ degrees.
-    %     \label{fig:thetapop}}
+\caption{\label{fig:volumevevents} The upper-bound of the 95\%
+  confidence limit on the beaming angle as a function of the observed
+  number of events and the observed search 4-volume, taking a Jeffreys
+  prior on the efficiency of gravitational wave production from BNS
+  events. The search volumes corresponding to each observing scenario
+  are marked as vertical lines on the plot, }
 \end{figure}
 
-%%% EDITED TO HERE %%%
+In figure \ref{fig:volumevevents} we present the inferred upper-limit
+on the 95\% confidence interval for a range of search 4-volumes and
+gravitational wave event rates; overlayed on this plot are indications
+of the anticipated annual search volume for the advanced LIGO
+detectors in each of the observing scenarios detailed in table
+\ref{tab:scenarios}. These limits were determined by assuming a
+Jeffreys prior on the efficiency parameter of the model, and following
+the same procedure used to produce the posteriors in figures
+\ref{fig:jetposterior2016,fig:jetposterior2022} for scenarios with
+search volumes ranging from $0$ to $50 \mpc^4$. 
+
+\begin{figure}
+\centering
+\includegraphics[width=\linewidth]{volume_v_nevents_lower.pdf}
+\caption{\label{fig:volumevevents_lower} The lower-bound of the 95\%
+  confidence limit on the beaming angle as a function of the observed
+  number of events and the observed search 4-volume, taking a Jeffreys
+  prior on the efficiency of gravitational wave production from BNS
+  events. The search volumes corresponding to each observing scenario
+  are marked as vertical lines on the plot, }
+\end{figure}
+
+The lower limit (the 2.5\% of the posterior) for the same range of
+scenarios is plotted in figure \ref{fig:volumevevents_lower}, with the
+same anticipated detector search volumes plotted.
+
 \section{Conclusion}
+
+We have presented a Bayesian analysis which demonstrates the ability
+of the current generation of advanced gravitational wave detectors to
+produce observations which will allow the inference of confidence
+intervals on the angle at which short Gamma Ray Bursts' jets are
+oriented with respect to the orbital inclination of the progenitor
+binary neutron star coalensence. In doing so we have made minimal
+assumptions about the processes which produce the jet, beyond the
+assumption that they are produced by BNS events.
+
+We demonstrate that with a year's worth of gravitational wave
+observations by the 2-detector Advanced LIGO network at its design
+sensitivity the observation of 15 BNS events in gravitational waves is
+sufficient to place an upper limit of $30^{\circ}$ on the jet beaming
+angle, while a 3-detector network is capable of establishing this
+limit by observing three gravitational wave BNS events in a year.
+
+We also demonstrate that the Advanced LIGO 2-detector network is
+capable of establishing a lower limit on the beaming angle of
+$2^{\circ}$ with a rate of 15 BNS events per year, while the
+three-detector network can establish this limit with 1 detection per
+year.
 
 \begin{comment}
 
