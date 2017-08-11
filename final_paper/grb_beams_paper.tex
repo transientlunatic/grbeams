@@ -96,7 +96,23 @@ Gravitational Wave Observations}
 \date{\today}
 
 \begin{abstract}
-\dots
+Short gamma-ray bursts are energetic electromagnetic events which are
+associated with binary neutron star coalesence events, which are also
+promising targets for observation with gravitational wave
+detectors. The electromagnetic radiation from a sGRB is believed to be
+stongly beamed, whereas the gravitational radiation from the BNS
+coalsence is not. We present a method for inferring limits on the
+extent of this beaming by comparing the number of sGRBs observed
+electromagnetically to the number of BNS events detected in
+gravitational waves. We demonstrate that a year of observations with
+the 2-detector Advanced LIGO gravitational wave detector is capable of
+placing an upper limit of $\sim 80^{\circ}$ on the beaming angle even
+in the case of no BNS events being detected, and $\sim 40^{\circ}$
+under the assumption that a plausible number are detected
+\dwnote{reword this}. We also demonstrate that the same detector
+network is capable of placing a lower limit on the angle of
+$4^{\circ}$ after a year with no observations, and $2^{\circ}$ given a
+plausible number of detections.
 \end{abstract}
 
 \maketitle
@@ -540,22 +556,18 @@ detectors, we use the arithmetic mean of the lower and upper bounds
 when computing the search volume.  Table~\ref{table:scenarios} lists
 the details of each observing scenario.
 %
-\dwnote{We probably want to consider exactly which observing scenarios
-  we include here; it's reasonably trivial to generate new ones from
-  the code.}%
-%
 \begin{table}
 \centering
-\begin{tabular}{lcccc}
+\begin{tabular}{lccccc}
   \toprule
-  Epoch & $T$ & \dhor & $V_{\mathrm{search}}$ & $N$ \\
-        & [yr] & [Mpc] & [$\ee{6} \mpc³\,\yr^{-1}$] & [$\yr^{-1}$] \\
+  Epoch & Label & $T$ & \dhor & $V_{\mathrm{search}}$ & $N$ \\
+        &       & [yr] & [Mpc] & [$\ee{6} \mpc³\,\yr^{-1}$] & [$\yr^{-1}$] \\
   \colrule
-  2015 - 2016 & 0.25 & 73 & 0.45 & 0 \\
-  2016 - 2017 & 0.5 & 100 & 1.3 & 1\\
-  2017 - 2018 & 0.75 & 145 & 6.5 & 3\\
-  2019 + & 1 & 200 & 20 & 10\\
-  2022 + & 1 & 200 & 40 & 20\\
+  2015 - 2016 &A& 0.25 & 73 & 0.45 & 0 \\
+  2016 - 2017 &B& 0.5 & 100 & 1.3 & 1\\
+  2017 - 2018 &C& 0.75 & 145 & 6.5 & 3\\
+  2019 +      &D& 1    & 200 & 20 & 10\\
+  2022 +      &E& 1    & 200 & 40 & 20\\
   \botrule
 \end{tabular}
 \caption{Advanced detector era observing scenarios considered in this work.
@@ -568,15 +580,18 @@ $V_{\mathrm{search}}$ is the sensitive volume of the search, defined by equation
 %
 
 \subsection{Posterior Results}
-Figure~\ref{fig:aligorate} shows the rate posteriors resulting from
-the observations described in table~\ref{table:scenarios} for the
-expected early \ac{aLIGO} sensitivity in the 2016 epoch (broad, solid
-curve) and the nominal design sensivity (narrow, dashed curve), using
-the `realistic' rate $\cbcrate=10^{-6}$\,Mpc$^{-3}$yr$^{-1}$.
+Figure~\ref{fig:aligorate} shows the \BNS rate posteriors resulting from
+the observations in the scenarios in table~\ref{table:scenarios}
+generated using the procedure described in
+section~\ref{sec:rate_posterior}.
+%%  for the expected early \ac{aLIGO} sensitivity in the 2016 epoch
+%% (broad, solid curve) and the nominal design sensivity (narrow,
+%% dashed curve), using the `realistic' rate
+%% $\cbcrate=10^{-6}$\,Mpc$^{-3}$yr$^{-1}$.
 %\footnote{The curves corresponding to the
 %`high' rate show similar qualitative behaviour and are not included here in the
 %interests of brevity.}  
-We now use curves such as these together with the prior distributions
+We now use these posteriors together with the prior distributions
 described in section~\ref{sec:rate_posterior} and the observed rate of
 \acp{sGRB} (as described in section~\ref{sec:sgrbs}, we use
 $\grbrate=10$\,Gpc$^{-3}$yr$^{-1}$~\cite{Nakar:2007yr,Dietz:2010eh})
@@ -613,7 +628,7 @@ to derive the corresponding beaming angle posteriors.
 \end{tabular}
 \end{center}
 
-\caption{Summary of the NS-NS coalesence posteriors for each of the observing
+\caption{Summary of the \BNS rate posteriors for each of the observing
   scenarios which are considered in this work; these posteriors are plotted
   in figure \ref{fig:aligorate}.
   \label{tab:rateposteriors}
@@ -625,15 +640,15 @@ Before we derive beaming angle posteriors corresponding to the
 aforementioned observing scenarios, it is useful to establish some
 form of validation for our procedure.  This validation is performed by
 first selecting values of the beaming angle, the \ac{sGRB} efficiency,
-and the rate of \BNS coalescence.  We choose $\theta=30^{\circ}$,
-$\epsilon=0.5$, and the `realistic' rate
-$\cbcrate = 10^{-6}$\,Mpc$^{-3}$yr$^{-1}$.  We then compute the value
-of the \ac{sGRB} rate that would correspond to these parameter
-choices.  Finally, we simply use this \emph{artificial} value for
-$\grbrate$ in equation~\ref{eq:beam_posterior} when we compute the
-posterior on the beaming angle, with the understanding that the
-resulting posterior should yield an inference consistent with the
-`true' value $\theta=30^{\circ}$.
+and the rate of \BNS coalescence.  We choose $\theta=10^{\circ}$, and
+the `realistic' \BNS rate $\cbcrate = 10^{-6}$\,Mpc$^{-3}$yr$^{-1}$.
+We then compute the value of the \ac{sGRB} rate that would correspond
+to these parameter choices.  Finally, we simply use this
+\emph{artificial} value for $\grbrate$ in
+equation~\ref{eq:beam_posterior} when we compute the posterior on the
+beaming angle, with the understanding that the resulting posterior
+should yield an inference consistent with the `true' value
+$\theta=q0^{\circ}$.
 %
 \begin{figure}%[H]
 \centering
@@ -698,33 +713,38 @@ resulting posterior should yield an inference consistent with the
 %
 Figures~\ref{fig:injjetposterio2016} and~\ref{fig:injjetposterio2022}
 show the beaming angle posteriors which result from this analysis for
-the 2016 and 2022 scenarios respectively.  Unsurprisingly, the most
-accurate constraints arise when we already have the tightest possible
-constraints on the \ac{sGRB} efficiency, $\epsilon$.  That is, the
-beaming angle posterior arising from the $\delta$-function prior on
-$\epsilon$ is the narrowest, yielding the shortest possible confidence
-interval.  It is well worth remembering, however, that had we been
-incorrect regarding the value of $\epsilon$ when using the
+the 2015--2016 and 2016--2017 scenarios respectively for each choice
+of prior distribution on the efficiency parameter.  Unsurprisingly,
+the most accurate constraints arise when we already have the tightest
+possible constraints on the \ac{sGRB} efficiency, $\epsilon$.  That
+is, the beaming angle posterior arising from the $\delta$-function
+prior on $\epsilon$ is the narrowest, yielding the shortest possible
+confidence interval.  It is well worth remembering, however, that had
+we been incorrect regarding the value of $\epsilon$ when using the
 $\delta$-function prior, the result would be significantly biased and
 our inference on the beaming angle would be incorrect.  This
 highlights the necessity of building a suitable representation of our
 ignorance into the analysis.  Finally, we note that the results from
-the uniform and $\beta$-distribution priors are broadly equivalent.
+the uniform and Jeffreys distribution priors are broadly equivalent.
 
 
 \subsubsection{Jet Angle Posteriors From Observing Scenarios}
 Figures~\ref{fig:jetposterior2016} and~\ref{fig:jetposterior2022} show
-the beaming angle posteriors obtained for our two detection scenarios.
+the beaming angle posteriors obtained for two of the detection
+scenarios.
 \footnote{A note on implementation: rather than directly evaluating
   the beaming angle posterior in equation~\ref{eq:beam_posterior} we
   choose to sample points from the posterior using a Markov-Chain
   Monte-Carlo algorithm, implemented using the python package
   \texttt{PyMC3}~\cite{salvatier2016probabilistic}.}
-Since it is a common assumption in related literature, we also now
-include a prior on the \ac{sGRB} efficiency which dictates that all
-\BNS produce a \ac{sGRB}, $p(\epsilon|I)=\delta(\epsilon=1)$, as well
-as our previous strong $\delta$-function prior.  For the 2016 scenario
-where inferences are somewhat weak (i.e., broad posteriors) due to the
+\footnote{While we present the entire posterior for only these two
+  observing scenarios in this section, we provide an overview of all
+  of the observing scenarios in section~\ref{sec:future}.} Since it is
+a common assumption in related literature, we also now include a prior
+on the \ac{sGRB} efficiency which dictates that all \BNS produce a
+\ac{sGRB}, $p(\epsilon|I)=\delta(\epsilon=1)$, as well as our previous
+strong $\delta$-function prior.  For the 2016 scenario where
+inferences are somewhat weak (i.e., broad posteriors) due to the
 sparcity of \ac{GW} detections, the uncertainties are large enough
 that the results from each prior are broadly consistent.  In the 2022
 scenario, where the posterior is more peaked, it is clear that the
@@ -903,17 +923,19 @@ upper limits set by past LIGO observations~\cite{Colaboration:2011np}.
 
 %\subsection{Results}
 
-Figure~\ref{fig:s6angle} shows the four posteriors on the beaming
-angle, corresponding to the four priors on the \ac{sGRB} efficiency,
-$\epsilon$, using the rate posterior obtained from \ac{GW}
-measurements in the final science run of the first generation of
-ground based \ac{GW} detectors.  We define the \emph{upper} limit on
-the beaming angle as the upper limit of the 95\% confidence interval
-centred on the median of the posterior (i.e. as the 97.5 percentile of
-the posterior distribution). Similarly we define the \emph{lower}
-limit as the lower limit (2.5 percentile) of the same confidence
-interval.
-%% In this non-detection scenario, we choose to compute \emph{upper} limit on the 95\% confidence interval the beaming angle,
+Figure~\ref{fig:jetposterior2016} shows the four posteriors on the
+beaming angle, corresponding to the four priors on the \ac{sGRB}
+efficiency, $\epsilon$, using the observing 2015--2016 observing
+scenario from table~\ref{table:scenarios}, which corresponds closely
+to the conditions of the first science run of the advanced generation
+of ground based \ac{GW} detectors.  We define the \emph{upper} limit
+on the beaming angle as the upper limit of the 95\% confidence
+interval centred on the median of the posterior (i.e. as the 97.5
+percentile of the posterior distribution). Similarly we define the
+\emph{lower} limit as the lower limit (2.5 percentile) of the same
+confidence interval.  In this non-detection scenario, we choose to
+compute \emph{upper} limit on the 95\% median-centered confidence
+interval the beaming angle.
 %% \begin{equation}
 %%     \label{eq:beaming_upper_limit}
 %%     0.975 = \int_0^{\theta^{\mathrm{ul}}} p(\theta|D,I)~\diff \theta
@@ -975,7 +997,7 @@ $\theta^{\mathrm{ul}}=1.94^{\circ}$ when assuming $\epsilon=1$.
 %%% EDITED TO HERE %%%
 
 \section{Beaming Angle Constraints in Future Scenarios}
-
+\label{sec:future}
 With the advent of gravitational wave astronomy, and with the
 expectation of the detection of \BNS gravitational wave signals during
 the lifetime of the advanced detectors it will become possible to
@@ -987,11 +1009,16 @@ the observed rate of gravitational wave \BNS events is established.
 \centering
 \includegraphics[width=\linewidth]{volume_v_nevents.pdf}
 \caption{\label{fig:volumevevents} The upper-bound of the 95\%
-  confidence limit on the beaming angle as a function of the observed
-  number of events and the observed search 4-volume, taking a Jeffreys
-  prior on the efficiency of gravitational wave production from BNS
-  events. The search volumes corresponding to each observing scenario
-  are marked as vertical lines on the plot, }
+  confidence limit on the beaming angle as a function of the rate of
+  observed gravitational wave BNS events and the observed search
+  4-volume, taking a Jeffreys prior on the efficiency of gravitational
+  wave production from BNS events. The search volumes corresponding to
+  each observing scenario are marked as vertical lines on the plot,
+  with each line assuming that observations are carried out over the
+  period of one year, achieving the search volume outlined in table
+  \ref{table:scenarios}. Note that the labels on each scenario
+  correspond to the labels given in the second column of table
+  \ref{table:scenarios}, with D corresponding to the 2019+ scenario.}
 \end{figure}
 
 In figure \ref{fig:volumevevents} we present the inferred upper-limit
@@ -1003,7 +1030,7 @@ detectors in each of the observing scenarios detailed in table
 Jeffreys prior on the efficiency parameter of the model, and following
 the same procedure used to produce the posteriors in figures
 \ref{fig:jetposterior2016,fig:jetposterior2022} for scenarios with
-search volumes ranging from $0$ to $50 \mpc^4$. 
+search volumes ranging from $0$ to $100 \mpc^3 \yr^{-1}$. 
 
 \begin{figure}
 \centering
