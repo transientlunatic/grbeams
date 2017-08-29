@@ -96,33 +96,30 @@ Gravitational Wave Observations}
 \date{\today}
 
 \begin{abstract}
-Short gamma-ray bursts are energetic electromagnetic events which are
-associated with binary neutron star coalesence events, which are also
-promising targets for observation with gravitational wave
-detectors. The electromagnetic radiation from a sGRB is believed to be
-stongly beamed, whereas the gravitational radiation from the BNS
-coalsence is not. We present a method for inferring limits on the
-extent of this beaming by comparing the number of sGRBs observed
-electromagnetically to the number of BNS events detected in
-gravitational waves. We demonstrate that a year of observations with
-the 2-detector Advanced LIGO gravitational wave detector is capable of
-placing an upper limit of $\sim 80^{\circ}$ on the beaming angle even
-in the case of no BNS events being detected, and $\sim 40^{\circ}$
-under the assumption that a plausible number are detected
-\dwnote{reword this}. We also demonstrate that the same detector
-network is capable of placing a lower limit on the angle of
-$4^{\circ}$ after a year with no observations, and $2^{\circ}$ given a
-plausible number of detections.
+Short gamma-ray bursts are high-energy events possibly associated with merging
+binary neutron stars and/or neutron star--black hole binaries. These mergers are
+promising targets for current gravitational wave detectors. The prompt
+electromagnetic emission from a short gamma-ray burst is thought to be beamed,
+whereas the gravitational radiation is not. We present a method for inferring
+limits on the extent of this beaming by comparing the number of short gamma-ray
+bursts observed electromagnetically to the number of neutron star binary mergers
+detected in gravitational waves. We demonstrate that a year of observations with
+the two Advanced LIGO gravitational wave detectors should be sufficient to place
+an upper limit on the beaming angle of $\sim 40^{\circ}$ under the assumption
+that a plausible number of neutron star binaries are detected, and
+$\sim 80^{\circ}$ even in the case of no detections. We also demonstrate that
+the same detector network is capable of placing a lower limit on the angle of
+$4^{\circ}$ after a year with no observations, and $2^{\circ}$ given a plausible
+number of detections.
 \end{abstract}
 
 \maketitle
 
 \section{Introduction}
-Gamma-ray bursts (GRBs)\acused{GRB} are extremely energetic
-cosmological events observed at a rate of around one per day.  There
-appear to be at least two separate populations of \acp{GRB}, divided
-roughly according to their duration and spectral
-hardness~\cite{Kouveliotou:1993yx}, although with significant overlap
+Gamma-ray bursts (GRBs)\acused{GRB} are extremely energetic cosmological events
+observed around once per day. There appear to be at least two separate
+populations of \acp{GRB}, divided roughly according to their duration and
+spectral hardness~\cite{Kouveliotou:1993yx}, although with significant overlap
 obscuring any clear distinction between
 populations~\cite{Zhang:2009uf,Bromberg:2012gp}.  Both types are
 generally associated with systems which are also expected to be
@@ -156,18 +153,17 @@ provide constraints on cosmological
 models~\cite{Schutz:1986gp,Chen:2012qh}.
 
 In this work, we investigate what statements can \emph{currently} be
-made on the beaming angle itself using the upper limits placed on
-$\cbcrate$ from all-sky, all-time \ac{GW} searches and explore the
-potential for direct inference of \ac{sGRB} beaming angles in the
-advanced detector era.  We first discuss the relationship between
-\acp{sGRB} and compact binary coalescences.  In particular, we will
-focus on \BNS inspirals as the widely accepted progenitor for
-\acp{sGRB}.  We then present our method for robustly inferring the jet
-opening angles of \acp{sGRB}, using only \ac{GW} observations.  We
-demonstrate our method assuming the nominal number of \ac{GW} signals
-observed from \BNS inspirals expected for \ac{aLIGO} and Advanced
-Virgo in planned \arw{`2017--2018' and `2022+'?} observing scenarios,
-as defined in~\cite{Aasi:2013wya}.  We also show that our approach can
+made on the beaming angle itself using the upper limits placed on the binary
+merger rate $\cbcrate$ from all-sky, all-time \ac{GW} searches and explore the
+potential for direct inference of \ac{sGRB} beaming angles in the advanced
+detector era.  We first discuss the relationship between \acp{sGRB} and compact
+binary coalescences.  In particular, we will focus on \BNS inspirals as the
+commonly assumed progenitor for \acp{sGRB}.  We then present our method for
+robustly inferring the jet opening angles of \acp{sGRB}, using only \ac{GW}
+observations.  We demonstrate our method assuming the nominal number of \ac{GW}
+signals observed from \BNS inspirals expected for \ac{aLIGO} and Advanced
+Virgo in planned observing scenarios, as defined in~\cite{Aasi:2013wya}.
+We also show that our approach can
 be used to place restrictions on the \ac{sGRB} jet opening angle if
 there are no detections, and demonstrate this using results of the
 recent first observing run of \ac{aLIGO}, during which no \BNS or
@@ -179,13 +175,15 @@ possible avenues for further extension of the work presented here.
 \section{Short gamma-ray bursts and compact binary coalescences}
 \label{sec:sgrbs}
 The compact binary coalescence hypothesis for \acp{sGRB} is supported
-by a number of observations, notably: the large average separation of
-\acp{sGRB} from their candidate host galaxies~\cite{Church:2011gk},
-and the lower average star formation rate of these
-hosts~\cite{Fong:2013eqa} --- suggesting old progenitor systems; their
-short durations and rapid variability~\cite{Rees:1994nw} ---
-suggesting very compact sources; and the observation of a kilonova
-associated with GRB~130603B~\cite{Berger:2013wna,Tanvir:2013pia}.
+by a number of observables when compared to longer duration \acp{GRB}, notably:
+the larger average separation of \acp{sGRB} from their candidate host
+galaxies~\cite{Church:2011gk}, and the lower average star formation rate of
+these hosts~\cite{Fong:2013eqa} --- suggesting old progenitor systems that
+have undergone significant kicks;
+their short durations and rapid variability~\cite{Rees:1994nw} --- suggesting
+very compact sources;
+and the observation of a kilonova associated with
+GRB~130603B~\cite{Berger:2013wna,Tanvir:2013pia}.
 
 At their design sensitivities, the current generation of advanced
 \ac{GW} detectors could observe these mergers out to distances of
@@ -225,19 +223,18 @@ is unknown but will depend on a variety of progenitor physics.  In
 particular, a significant fraction of \NSBH systems may be incapable
 of powering an \ac{sGRB}~\cite{Pannarale:2014rea}.  Combining this
 knowledge with measurements of the binary parameters of of a
-population of\JOINT observations could be used to constrain
+population of \JOINT observations could be used to constrain
 $\epsilon$.  In this work, we will make no attempt to characterize
 $\epsilon$ and we simply aim to provide a framework which allows one
 to incorporate various levels of assumptions (or ignorance) regarding
 its value.
 
-If the \ac{sGRB} population has a distribution of beaming angles, as
-would seem likely from \electro{} observations, characterizing the
-relative rates of \ac{sGRB} and \BNS coalescence will inform us as to
-the mean of that population, $\langle \theta \rangle$.  To explore
-this point further we construct a simple Monte Carlo simulation to
-study the effect on the relative rates of \acp{sGRB} and \BNS mergers.
-We arrange the following toy problem:
+If the \ac{sGRB} population has a distribution of beaming angles, as would seem
+likely from \electro{} observations~\cite{Fong:2015oha}, characterizing the
+relative rates of \ac{sGRB} and \BNS coalescence will inform us as to the mean
+of that population, $\langle \theta \rangle$.  To explore this point further we
+construct a simple Monte Carlo simulation to study the effect on the relative
+rates of \acp{sGRB} and \BNS mergers. We arrange the following toy problem:
 %
 \begin{enumerate}
     \item Set the number of `observed \acp{sGRB} to zero: $N_{\mathrm{GRB}}=0$.
@@ -344,14 +341,14 @@ represents some \ac{GW} observation and $I$ denotes other unenumerated prior
 information.  We will first demonstrate how $p(\cbcrate|D,I)$ may be constructed
 for a few projected observing scenarios from~\cite{Aasi:2013wya}.  Later, in
 section~\ref{sec:beaming_limits}, we will extend the analysis to place upper
-limits on $\theta$ \arw{based upon the lack of detection during O1}.
+limits on $\theta$ based upon the lack of detection during O1.
 
 To form the posterior on the coalescence rate, we begin by constructing the
 posterior on the \emph{signal} rate.  Note that these are not identical since
 only those \BNS mergers which occur within a certain range yield a detectable
 signal.  \ac{GW} data analysis pipelines (e.g. {\tt
 FINDCHIRP}~\cite{2012PhRvD..85l2006A}, {\tt
-PyCBC}~\cite{Canton:2014ena,Usman:2015kfa,alex_nitz_2016_197080}) identify
+PyCBC}~\cite{Canton:2014ena,Usman:2015kfa,alex_nitz_2017_844934}) identify
 discrete `candidate events' which are characterized by network \acp{SNR},
 $\rho_c$, which, for the case of \BNS searches, indicate the similarity between
 the detector data and a set of template \BNS coalescence waveforms.  The
@@ -649,7 +646,7 @@ to these parameter choices.  Finally, we simply use this
 equation~\ref{eq:beam_posterior} when we compute the posterior on the
 beaming angle, with the understanding that the resulting posterior
 should yield an inference consistent with the `true' value
-$\theta=q0^{\circ}$.
+$\theta=10^{\circ}$.
 %
 \begin{figure}%[H]
 \centering
@@ -686,6 +683,7 @@ $\theta=q0^{\circ}$.
 \end{table}
 
 %
+
 \begin{figure}%[H]
 \centering
 {\includegraphics[width=\linewidth]{O2_injections_violin.pdf}}
@@ -711,6 +709,7 @@ $\theta=q0^{\circ}$.
   angle of $\theta \approx 10^{\circ}$.   \dwnote{Need to update these numbers to proper intervals.}}
   \label{tab:summaryinj2015}
 \end{table}
+
 %
 Figures~\ref{fig:injjetposterio2016} and~\ref{fig:injjetposterio2022}
 show the beaming angle posteriors which result from this analysis for
@@ -732,17 +731,18 @@ the uniform and Jeffreys distribution priors are broadly equivalent.
 \subsubsection{Jet Angle Posteriors From Observing Scenarios}
 Figures~\ref{fig:jetposterior2016} and~\ref{fig:jetposterior2022} show
 the beaming angle posteriors obtained for two of the detection
-scenarios.
-\footnote{A note on implementation: rather than directly evaluating
-  the beaming angle posterior in equation~\ref{eq:beam_posterior} we
-  choose to sample points from the posterior using a Markov-Chain
-  Monte-Carlo algorithm, implemented using the python package
-  \texttt{PyMC3}~\cite{salvatier2016probabilistic}.}
-\footnote{While we present the entire posterior for only these two
-  observing scenarios in this section, we provide an overview of all
-  of the observing scenarios in section~\ref{sec:future}.} Since it is
-a common assumption in related literature, we also now include a prior
-on the \ac{sGRB} efficiency which dictates that all \BNS produce a
+scenarios.\footnote{
+    A note on implementation: rather than directly evaluating
+    the beaming angle posterior in equation~\ref{eq:beam_posterior} we
+    choose to sample points from the posterior using a Markov-Chain
+    Monte-Carlo algorithm, implemented using the python package
+    \texttt{PyMC3}~\cite{salvatier2016probabilistic}.
+}\footnote{
+    While we present the entire posterior for only these two
+    observing scenarios in this section, we provide an overview of all
+    of the observing scenarios in section~\ref{sec:future}.}
+Since it is a common assumption in related literature, we also now include
+a prior on the \ac{sGRB} efficiency which dictates that all \BNS produce a
 \ac{sGRB}, $p(\epsilon|I)=\delta(\epsilon=1)$, as well as our previous
 strong $\delta$-function prior.  For the 2016 scenario where
 inferences are somewhat weak (i.e., broad posteriors) due to the
@@ -763,6 +763,7 @@ table~\ref{table:aligo_beam_inference}.
 \centering
 {\includegraphics[width=\linewidth]{O1_beaming_posteriors_violin.pdf}}
 \caption{Beaming angle posteriors using different priors on \ac{sGRB} efficiency $\epsilon$ in the 2015--2016 observing scenario.
+  \arw{Make grid lines like Figure 5?}
   %\dwnote{* TODO I should update these plots so that they reflect the correct scenario names.}
     \label{fig:jetposterior2016}}
 \end{figure}
@@ -1002,8 +1003,6 @@ noted, the lower bound on the beaming angle is found to be $\theta
 \geq 0.8^{\circ}$, as compared with our 95\% confidence upper limit
 $\theta^{\mathrm{ul}}=1.94^{\circ}$ when assuming $\epsilon=1$.
 
-
-%%% EDITED TO HERE %%%
 
 \section{Beaming Angle Constraints in Future Scenarios}
 \label{sec:future}
