@@ -602,7 +602,7 @@ to derive the corresponding beaming angle posteriors.
 {\includegraphics[width=\linewidth]{rate_posteriors_violin.pdf}}
 \caption{Posterior probability distribution for the rate of \BNS
   coalescence assuming the scenarios A (red shading) \& B (blue
-  shading) detection scenarios. The 95\% confidence interval is
+  shading) detection scenarios. The 95\% credible interval is
   represented with a horizontal line through the centre of the plot,
   with vertical lines delineating the 2.5\% and 97.5\% percentiles;
   the median is represented by a square marker, and the maximum
@@ -631,6 +631,7 @@ to derive the corresponding beaming angle posteriors.
 \caption{Summary of the \BNS rate posteriors for each of the observing
   scenarios which are considered in this work; these posteriors are plotted
   in figure \ref{fig:aligorate}.
+  \dwnote{Need to update these numbers to proper intervals.}
   \label{tab:rateposteriors}
 }
 \end{table}
@@ -680,7 +681,7 @@ $\theta=q0^{\circ}$.
 \caption{Summary of the beaming angle posteriors from figure
   \ref{fig:injjetposterio2016}, for the 2015--2016 observing scenario,
   with an artificial GRB rate imposed to produce a target beaming
-  angle of $\theta = 10^{\circ}$.}
+  angle of $\theta = 10^{\circ}$.   \dwnote{Need to update these numbers to proper intervals.}}
   \label{tab:summaryinj2015}
 \end{table}
 
@@ -707,7 +708,7 @@ $\theta=q0^{\circ}$.
 \caption{Summary of the beaming angle posteriors from figure
   \ref{fig:injjetposterio2022}, for the 2016--2017 observing scenario,
   with an artificial GRB rate imposed to produce a target beaming
-  angle of $\theta \approx 10^{\circ}$.}
+  angle of $\theta \approx 10^{\circ}$.   \dwnote{Need to update these numbers to proper intervals.}}
   \label{tab:summaryinj2015}
 \end{table}
 %
@@ -754,8 +755,8 @@ distributions, by contrast, are again largely consistent with each
 other yielding more conservative and robust results, as well as being
 a more representative expression of our state of knowledge.  The
 inferences drawn from each scenario and each prior are summarised in
-terms of the maximum \emph{a posteriori} measurement and the 90\%
-confidence interval around the maximum in
+terms of the maximum \emph{a posteriori} measurement and the 95\%
+credible interval around the maximum in
 table~\ref{table:aligo_beam_inference}.
 
 \begin{figure}
@@ -782,21 +783,29 @@ table~\ref{table:aligo_beam_inference}.
   % Scenario & $\delta(\epsilon=0.5)$ & $\delta(\epsilon=1)$ & $U(0,1)$ & $\beta(\frac{1}{2},\frac{1}{2})$\\
   Scenario & Prior & Lower & MAP & Median & Upper \\
   \colrule
-  2015--2016 & $U(0,1)$ & 1.48 & 2.47 & 4.33 & 30.96\\
-    & Jeffreys & 1.41 & 2.44 & 4.53 & 46.88\\
-    & $\delta(1)$ &1.17 & 0.68 & 2.70 & 13.89\\
-    & $\delta(0.5)$ &1.65 & 2.63 & 3.81 & 19.53\\
+  % 2015--2016 & $U(0,1)$ & 1.48 & 2.47 & 4.33 & 30.96\\
+  %   & Jeffreys & 1.41 & 2.44 & 4.53 & 46.88\\
+  %   & $\delta(1)$ &1.17 & 0.68 & 2.70 & 13.89\\
+  %   & $\delta(0.5)$ &1.65 & 2.63 & 3.81 & 19.53\\
+2015--2016 & $U(0,1)$ & 0.91 & 2.48 & 4.31 & 21.05\\
+           & Jeffreys & 0.82 & 2.42 & 4.55 & 32.45\\
+        & $\delta(1)$ & 0.80 & 0.61 & 2.69 & 9.88\\
+      & $\delta(0.5)$ & 1.15 & 2.67 & 3.81 & 13.96\\
   \colrule
-  2016--2017 & $U(0,1)$ & 1.29 & 0.67 & 2.96 & 15.22\\
-    & Jeffreys & 1.23 & 0.66 & 3.06 & 34.06\\
-    & $\delta(1)$ & 1.05 & 0.65 & 1.90 & 5.04\\
-    & $\delta(0.5)$ & 1.48 & 2.52 & 2.70 & 7.14\\
+  % 2016--2017 & $U(0,1)$ & 1.29 & 0.67 & 2.96 & 15.22\\
+  %   & Jeffreys & 1.23 & 0.66 & 3.06 & 34.06\\
+  %   & $\delta(1)$ & 1.05 & 0.65 & 1.90 & 5.04\\
+  %   & $\delta(0.5)$ & 1.48 & 2.52 & 2.70 & 7.14\\
+    2016--2017 & $U(0,1)$ & 1.00 & 2.58 & 3.32 & 12.16\\
+               & Jeffreys & 0.89 & 2.47 & 3.41 & 22.83\\
+             &$\delta(1)$ & 0.97 & 1.65 & 2.13 & 4.73\\
+           &$\delta(0.5)$ & 1.35 & 2.38 & 3.02 & 6.66\\
 % 2016  & $4.10^{+6.67}_{-1.16}$ & $2.90^{+4.34}_{-0.82}$ &\ $6.50^{+68.37}_{-3.00}$ & $6.20^{76.34}_{-2.26}$ \\
 % 2022 & $6.20^{+0.99}_{-0.73}$ & $4.30^{+0.79}_{-0.46}$ & $7.00^{+65.99}_{-2.11}$ & $6.90^{+72.85}_{-2.29}$ \\
 \botrule
 \end{tabular}
-\caption{Summary of the beaming angle inferences for each prior in the two observing scenarios considered in this work.
-    Point estimates are the maximimum a posteriori estimates and errors correspond to the $90\%$ confidence interval around the maximum.
+\caption{Summary of the beaming angle inferences for each prior in two of the observing scenarios considered in this work.
+    Point estimates are the maximimum a posteriori estimates and errors correspond to the $95\%$ Bayesian credible interval.
     \label{table:aligo_beam_inference}}
 \end{table}
 
@@ -934,8 +943,8 @@ interval centred on the median of the posterior (i.e. as the 97.5
 percentile of the posterior distribution). Similarly we define the
 \emph{lower} limit as the lower limit (2.5 percentile) of the same
 confidence interval.  In this non-detection scenario, we choose to
-compute \emph{upper} limit on the 95\% median-centered confidence
-interval the beaming angle.
+compute \emph{upper} limit on the 95\% credible
+interval on the beaming angle.
 %% \begin{equation}
 %%     \label{eq:beaming_upper_limit}
 %%     0.975 = \int_0^{\theta^{\mathrm{ul}}} p(\theta|D,I)~\diff \theta
@@ -1001,7 +1010,7 @@ $\theta^{\mathrm{ul}}=1.94^{\circ}$ when assuming $\epsilon=1$.
 With the advent of gravitational wave astronomy, and with the
 expectation of the detection of \BNS gravitational wave signals during
 the lifetime of the advanced detectors it will become possible to
-place further constraints on the 95\% confidence interval of the sGRB
+place further constraints on the 95\% credible interval of the sGRB
 beaming angle, as both the searched 4-volume of space increases, and
 the observed rate of gravitational wave \BNS events is established.
 
