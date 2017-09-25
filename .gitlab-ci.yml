@@ -12,5 +12,5 @@ publish:
   artifacts:
     expire_in: 4w
     paths:
-      - grb_beams_paper.pdf
+      - final_paper/grb_beams_paper.pdf
 
