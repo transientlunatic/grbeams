@@ -1,0 +1,16 @@
+---
+image: ligo/publisher:latest
+
+publish:
+  before_script:
+    - cd final_paper
+  script:
+    - make
+  cache:
+    key: "$CI_PROJECT_NAMESPACE/$CI_PROJECT_NAME/$CI_JOB_NAME"
+    untracked: true
+  artifacts:
+    expire_in: 4w
+    paths:
+      - final_paper/grb_beams_paper.pdf
+
