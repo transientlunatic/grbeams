@@ -31,6 +31,24 @@ expect to see in some given time t, given that there are n CBC events.
    |  1.48 | 2.52 |   2.70 |  7.14 |
 
 
+* Post GW170817 fall-out
+
+
+  ￼<15:03:55> "Ik Siong Heng": I was looking at the GRB-GW paper and thinking about that
+  ￼<15:04:06> "Daniel Williams [h]": Yeah
+  ￼<15:04:25> "Daniel Williams [h]": I'm not sure what effect the top-hat-or-not situation has
+  ￼<15:07:14> "Ik Siong Heng": For us, it does because the approach assumes an "on-off" counting
+  ￼<15:09:25> "Daniel Williams [h]": Sure
+  ￼<15:09:29> "Daniel Williams [h]": That's a good point
+  ￼<15:10:45> "Ik Siong Heng": Perhaps the easiest thing to do in the near term is to assume an updated, localised rate based on the detection of GW170817A
+  ￼<15:11:06> "Ik Siong Heng": we can convert GW detection volume into redshift
+  ￼<15:11:25> "Ik Siong Heng": and then find and appropriate corresponding rate
+  ￼<15:11:50> "Ik Siong Heng": and then, we redo the calculation based on that local rate
+  ￼<15:12:49> "Ik Siong Heng": Perhaps this is something we should thought of earlier because I think it makes sense to have a GRB beaming limit based on a localised detection volume
+  ￼<15:12:54> "Ik Siong Heng": ....maybe
+  ￼<15:13:03> "Daniel Williams [h]": Hmm, okay
+  ￼<15:13:20> "Ik Siong Heng": Chris may have a little more time now and you could find him to have a chat about this
+
 * Redraft of the paper
 
 ** Observing scenarios table
