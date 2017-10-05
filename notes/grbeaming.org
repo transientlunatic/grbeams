@@ -33,7 +33,7 @@ expect to see in some given time t, given that there are n CBC events.
 
 * Post GW170817 fall-out
 
-
+** Conversation with Siong on Tuesday 3 October
   ￼<15:03:55> "Ik Siong Heng": I was looking at the GRB-GW paper and thinking about that
   ￼<15:04:06> "Daniel Williams [h]": Yeah
   ￼<15:04:25> "Daniel Williams [h]": I'm not sure what effect the top-hat-or-not situation has
@@ -48,6 +48,29 @@ expect to see in some given time t, given that there are n CBC events.
   ￼<15:12:54> "Ik Siong Heng": ....maybe
   ￼<15:13:03> "Daniel Williams [h]": Hmm, okay
   ￼<15:13:20> "Ik Siong Heng": Chris may have a little more time now and you could find him to have a chat about this
+
+** A local rate?
+   It's clear that things are more complicated than we had originally
+   hoped, and that we have two different scenarios to consider.  The
+   first of these is that the rate which we were using in the first
+   place is probably wrong; the second is that it's now not clear that
+   all sGRB observations are of the beamed emission (although
+   GRB170817A is probably the only example of an observation where it
+   seems likely that the emission is not from the beaming cone). 
+
+   I'm not sure that there's a simple and neat way around the second
+   problem; we may want to assume a model (e.g. the strongly beamed
+   model from the left hand cartoon in figure 4 of the GRB association
+   paper) and work off that, since the paper doesn't provide strong
+   evidence for which model we should use, and assuming a structured
+   jet substantially complicates matters.
+
+   For the first problem Siong's suggestion seems sensible, which is
+   that we should limit the inspiral distance for the detector into a
+   redshift, then we can calculate the rate of GRBs which are expected
+   to occur within that region of space. This introduces a new prior
+   (on H0) into the analysis.
+
 
 * Redraft of the paper
 
