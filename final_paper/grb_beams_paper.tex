@@ -29,6 +29,7 @@
 \newcommand{\diff}{{\mathrm d}}
 \newcommand{\rhostar}{{\rho^*}}
 \newcommand{\dhor}{\ensuremath{{\mathcal D}_{\mathrm{hor}}}}
+\newcommand{\dins}{\ensuremath{{\mathcal D}_{\mathrm{insp}}}}
 \newcommand{\latin}[1]{\textit{#1}}
 \newcommand{\mpc}{\mathrm{Mpc}}
 \newcommand{\yr}{\mathrm{yr}}
@@ -569,7 +570,7 @@ the details of each observing scenario.
 \centering
 \begin{tabular}{lccccc}
   \toprule
-  Epoch & Label & $T$ & \dhor & $V_{\mathrm{search}}$ & $N$ \\
+  Epoch & Label & $T$ & \dinsp & $V_{\mathrm{search}}$ & $N$ \\
         &       & [yr] & [Mpc] & [$\ee{6} \mpc³\,\yr^{-1}$] & [$\yr^{-1}$] \\
   \colrule
   2015 - 2016 &A& 0.25 & 73 & 0.45 & 0 \\
@@ -579,11 +580,15 @@ the details of each observing scenario.
   2022 +      &E& 1    & 200 & 40 & 20\\
   \botrule
 \end{tabular}
-\caption{Advanced detector era observing scenarios considered in this work.
-    $T$ is the expected duration of the science run and $\dhor$ is the \BNS horizon distance for the sensitivity expected to be achieved at the given epoch.
-$V_{\mathrm{search}}$ is the sensitive volume of the search, defined by equation~\ref{eq:search_volume}, and $N$ is the expected number of \ac{GW} detections.
-    Note that the quoted search volume accounts for a network duty cycle of $\sim 50\%$.
-    These scenarios are derived from those detailed in~\cite{Aasi:2013wya}.
+\caption{Advanced detector era observing scenarios considered in this
+  work.  $T$ is the expected duration of the science run and $\dinsp$
+  is the \BNS inspiral distance for the sensitivity expected to be
+  achieved at the given epoch, which is equal to $\dhor / 2.26$..
+  $V_{\mathrm{search}}$ is the sensitive volume of the search, defined
+  by equation~\ref{eq:search_volume}, and $N$ is the expected number
+  of \ac{GW} detections.  Note that the quoted search volume accounts
+  for a network duty cycle of $\sim 50\%$.  These scenarios are
+  derived from those detailed in~\cite{Aasi:2013wya}.
     \label{table:scenarios}}
 \end{table}
 %
