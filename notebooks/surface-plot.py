@@ -6,7 +6,7 @@ from theano.compile.ops import as_op
 import matplotlib
 matplotlib.use("agg")
 import matplotlib.pyplot as plt
-plt.style.use("/home/daniel/papers/thesis/thesis-style.mpl")
+plt.style.use("/home/daniel/thesis/thesis-style.mpl")
 
 import matplotlib
 font = {'family' : 'normal',
@@ -111,15 +111,18 @@ for model in scenarios:
     with model:
         step = pm.Metropolis()
         trace = pm.sample(samples, step, )
-        trace = pm.sample(samples, step, )
+        #trace = pm.sample(samples, step, )
         traces.append(trace)
         t_data = trace[10000:]['angle'][np.isfinite(trace[10000:]['angle'])]
-        lower, upper = pymc3.stats.hpd(t_data, alpha=0.05, transform=np.rad2deg)
-        angles975.append(np.nanpercentile(trace['angle'][10000:], 97.5))
-        angles025.append(np.nanpercentile(trace['angle'][10000:], 2.5))
+        lower, upper = pm.stats.hpd(t_data, alpha=0.05, transform=np.rad2deg)
+        #angles975.append(np.nanpercentile(trace['angle'][10000:], 97.5))
+        #angles025.append(np.nanpercentile(trace['angle'][10000:], 2.5))
         angles500.append(np.nanpercentile(trace['angle'][10000:], 50))
         lowers.append(lower)
         uppers.append(upper)
+        np.savetxt("upper.dat", uppers)
+        np.savetxt("lower.dat", lowers)
+        np.savetxt("500perc.dat", angles500)
 
 np.savetxt("upper.dat", uppers)
 np.savetxt("lower.dat", lowers)
