@@ -795,6 +795,7 @@ table~\ref{table:aligo_beam_inference}.
   % &\multicolumn{4}{c}{Prior} \\
   % Scenario & $\delta(\epsilon=0.5)$ & $\delta(\epsilon=1)$ & $U(0,1)$ & $\beta(\frac{1}{2},\frac{1}{2})$\\
   Scenario & Prior & Lower & MAP & Median & Upper \\
+  && [$\yr^{-1}$] & [$\yr^{-1}$]    & [$\yr^{-1}$]    & [$\yr^{-1}$]  \\
   \colrule
   % 2015--2016 & $U(0,1)$ & 1.48 & 2.47 & 4.33 & 30.96\\
   %   & Jeffreys & 1.41 & 2.44 & 4.53 & 46.88\\
@@ -951,16 +952,21 @@ efficiency, $\epsilon$, using the observing 2015--2016 observing
 scenario from table~\ref{table:scenarios}, which corresponds closely
 to the conditions of the first science run of the advanced generation
 of ground based \ac{GW} detectors.  We define the \emph{upper} limit
-on the beaming angle as the upper limit of the 95\% credible interval. Similarly we define the
-\emph{lower} limit as the lower limit (2.5 percentile) of the same
-credible interval.  In this non-detection scenario, we choose to
-compute \emph{upper} limit on the 95\% credible
-interval on the beaming angle.
-%% \begin{equation}
-%%     \label{eq:beaming_upper_limit}
-%%     0.975 = \int_0^{\theta^{\mathrm{ul}}} p(\theta|D,I)~\diff \theta
-%% \end{equation}
-%
+on the beaming angle as the upper limit of the 95\% credible interval
+where the credible interval is defined as the narrowest interval
+$(\theta^{\mathrm{ll}}, \theta^{\mathrm{ul}})$ which satisfies the expression
+\begin{equation}
+    \label{eq:beaming_upper_limit}
+    0.975 = \int_{\theta&{\mathrm{ll}}}^{\theta^{\mathrm{ul}}} p(\theta|D,I)~\diff \theta,
+\end{equation}
+with $p(\theta|D,I)$ the posterior over which the interval is
+computed.
+
+Similarly we define the \emph{lower} limit as the lower
+limit (2.5 percentile) of the same credible interval.  In this
+non-detection scenario, we choose to compute \emph{upper} limit on the
+95\% credible interval on the beaming angle.
+
 We see that here, where the rate posterior is rather uninformative,
 the results are dominated by the uncertainty in $\epsilon$: there are
 substantive differences in the beaming angle upper limits yielded by
