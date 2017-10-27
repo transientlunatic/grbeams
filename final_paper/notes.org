@@ -1,0 +1,5 @@
+* From rates to beaming angles
+
+In this section we discuss our approach to estimating the sGRB beaming
+angle on the binary neutron star inspiral rate, estimated through a
+number of GW observations

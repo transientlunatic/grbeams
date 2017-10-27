@@ -13,6 +13,22 @@ expect to see in some given time t, given that there are n CBC events.
 3. If i < θ we would observe the GRB, and so we increment "observed GRBs"
 4. Repeat this for a range of values of n
 
+** O1-like injections
+| Prior    | Lower |  MAP | Median | Upper |
+|----------+-------+------+--------+-------|
+| $U(0,1)$ |  4.53 | 7.62 |  13.16 | 65.01 |
+| Jeffreys |  4.39 | 5.74 |  13.04 | 69.75 |
+| $δ(0.5)  |  5.13 | 8.32 |  12.06 | 51.90 |
+
+** O2-like injections
+| Prior    | Lower |  MAP | Median | Upper |
+|----------+-------+------+--------+-------|
+| $U(0,1)$ |  4.58 | 6.25 |  10.47 | 46.32 |
+| Jeffreys |  4.38 | 6.18 |  10.44 | 61.59 |
+| $δ(0.5)$ |  5.19 | 6.63 |   9.46 | 25.36 |
+
+
+
 * Results
 ** O1 Jet angle posterior
    | Lower | MAP	 | Median	 | Upper |
@@ -21,6 +37,16 @@ expect to see in some given time t, given that there are n CBC events.
    |  1.41 |        2.44 |           4.53 | 46.88 |
    |  1.17 |        0.68 |           2.70 | 13.89 |
    |  1.65 |        2.63 |           3.81 | 19.53 |
+*** New results
+    These results use the correct Bayesian confidence intervals
+    | Lower	 | MAP	  | Median	 | Upper	 |
+    |---------------+--------------+----------------+---------------|
+    | 0.91	  | 2.48	 | 4.31	   | 21.05	 |
+    | 0.82	  | 2.42	 | 4.55	   | 32.45	 |
+    | 0.80	  | 0.61	 | 2.69	   | 9.88	  |
+    | 1.15	  | 2.67	 | 3.81	   | 13.96	 |
+
+
 
 ** O2 Jet angle posterior
    | Lower |  MAP | Median | Upper |
@@ -29,6 +55,25 @@ expect to see in some given time t, given that there are n CBC events.
    |  1.23 | 0.66 |   3.06 | 34.06 |
    |  1.05 | 0.65 |   1.90 |  5.04 |
    |  1.48 | 2.52 |   2.70 |  7.14 |
+
+*** New results
+| Lower	 | MAP	  | Median	 | Upper	 |
+|---------------+--------------+----------------+---------------|
+| 1.00	  | 2.58	 | 3.32	   | 12.16	 |
+| 0.89	  | 2.47	 | 3.41	   | 22.83	 |
+| 0.97	  | 1.65	 | 2.13	   | 4.73	  |
+| 1.35	  | 2.38	 | 3.02	   | 6.66	  |
+
+
+** CBC Posteriors
+
+| Scenario    | Lower	 | MAP	   | Median	 | Upper	 |
+|-------------+---------------+---------------+----------------+---------------|
+| 2015 – 2016 | 0.20	  | 0.00	  | 5.48	   | 29.42	 |
+| 2016 – 2017 | 0.96	  | 4.03	  | 6.70	   | 22.40	 |
+| 2017 – 2018 | 2.90	  | 7.36	  | 9.80	   | 23.39	 |
+| 2019 +      | 11.00	 | 19.59	 | 21.33	  | 36.75	 |
+| 2022 +      | 26.05	 | 40.92	 | 41.31	  | 61.73	 |
 
 
 * Post GW170817 fall-out
