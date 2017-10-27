@@ -39,6 +39,7 @@
 \newacro{SGR}[SGR]{soft gamma-ray repeater}
 \newacro{GW}[GW]{gravitational wave}
 \newacro{NS}[NS]{neutron star}
+\newacro{BNS}{binary neutron star}
 \newacro{BH}[BH]{black hole}
 \newacro{SNR}[SNR]{signal-to-noise ratio}
 \newacro{MWEG}[MWEG]{Milky Way Equivalent Galaxy}
@@ -70,6 +71,12 @@
 \newcommand{\placeholder}[2]{{\color{red}{[PLACEHOLDER](#1):}}{\color{red}{[}}#2{\color{red}{]}}}
 \providecommand{\todo}[1]{{\color{red}$\blacksquare$~\textsf{[TODO: #1]}}}
 
+\renewcommand{\dwnote}{}
+\renewcommand{\JC}{}
+\renewcommand{\placeholder}{}
+\renewcommand{\todo}{}
+
+
 
 \def\pasp{Publications of the Astronomical Society of the Pacific}
 \def\mnras{Monthly Notices of the Royal Astronomical Society}
@@ -92,7 +99,7 @@
 
 \title{Constraints On Short, Hard Gamma-Ray Burst Beaming Angles From
 Gravitational Wave Observations}
-\author{Daniel Williams, James Clark, Andrew Williamson, Ik Siong Heng, Martin Hendry}
+\author{Daniel Williams, James Clark, Andrew Williamson, Ik Siong Heng}
 \date{\today}
 
 \begin{abstract}
@@ -116,6 +123,7 @@ number of detections.
 \maketitle
 
 \section{Introduction}
+
 Gamma-ray bursts (GRBs)\acused{GRB} are extremely energetic cosmological events
 observed around once per day. There appear to be at least two separate
 populations of \acp{GRB}, divided roughly according to their duration and
@@ -130,14 +138,18 @@ supernovae~\cite{Galama:1998ea,MacFadyen:1998vz,Woosley:2006fn}, while
 related to compact binary coalescences involving at least one
 \ac{NS}~\cite{Eichler:1989ve,Paczynski:1991aq,Narayan:1992iy,Lee:2007js}.
 
-The detection of a \ac{GW} signal in coincidence with a \ac{GRB} would
-provide tremendous insight in the astrophysics of these systems.  A
-binary merger signal associated with an \ac{sGRB} would confirm the
-compact binary merger nature of the engine and allow for measurements
-of the binary component masses and spins, as well as constraints on
-the beaming angles and the \ac{NS} equation of state.  Both \BNS and
-\NSBH progenitors are possible, with the requirement that a post
-merger torus of material accretes onto a compact central
+The first observation of a \ac{BNS} coalescence event, GW170817, in
+August 2017, and its associated electromagnetic emission provided an
+abundance of evidence for the connection between \ac{sGRB} and
+\ac{BNS}. GW170817 was detected in coincidence as both a \ac{GW}
+signal and as a \ac{GRB}, GRB170817A, providing tremendous insight in
+the astrophysics of these systems.  The \ac{GW} signal associated with
+the \ac{sGRB} confirmed that compact binary merger is the engine for
+at least some \ac{sGRB}, and allowed for measurements of the binary
+component masses and spins, as well as placing constraints on the
+beaming angles and the \ac{NS} equation of state.  Both \BNS and \NSBH
+progenitors are possible, with the requirement that a post merger
+torus of material accretes onto a compact central
 object~\cite{Blandford:1977ds,Rosswog:2002rt,Giacomazzo:2012zt}.  A
 population of \JOINT observations could allow us to measure the
 fraction of \acp{sGRB} associated with each progenitor
@@ -1078,6 +1090,14 @@ capable of establishing a lower limit on the beaming angle of
 $2^{\circ}$ with a rate of 15 BNS events per year, while the
 three-detector network can establish this limit with 1 detection per
 year.
+]
+\section{Acknowledgements}
+\label{sec:ackn}
+The authors wish to thank Martin Hendry for many insightful and
+valuable discussions during the development of this technique. DW is
+funded by STFC grant 000000000. This document has been assigned the
+control number LIGO-P1600102 by the LIGO document control centre.
+
 
 \begin{comment}
 
