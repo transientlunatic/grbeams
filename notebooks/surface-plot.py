@@ -60,9 +60,13 @@ def grb_model(number_events, background_rate,
                             logp=lambda value: log_signal_rate(value, number_events, background_rate, observation_time),
                            testval=50)
 
-        n_galaxy = number_mweg(horizon)
+        volume = (4.0 / 3.0) * np.pi * horizon**3
+        
+        n_galaxy = number_mweg(volume)
     
-        cbc_rate = pm.Deterministic('cbc_rate', signal_rate * n_galaxy)
+        cbc_rate = pm.Deterministic('cbc_rate', signal_rate / n_galaxy)
+        
+        grb_rate = (grb_rate / number_mweg(1e9)) #/ n_galaxy
         
         # Allow the efficiency prior to be switched-out
         if efficiency_prior == "uniform":
