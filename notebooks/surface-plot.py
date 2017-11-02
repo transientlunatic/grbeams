@@ -15,8 +15,6 @@ font = {'family' : 'normal',
 
 matplotlib.rc('font', **font)
 
-
-
 def background_rate_f(b, T, n):
     """
     
@@ -40,12 +38,13 @@ def signal_rate_part(s, n, b, T):
 def log_signal_rate(s,n,b,T):
     #if theano.tensor.lt(0, s): return np.array([[0.0]])
     p = -log_background_rate(b,T,n) + np.log(signal_rate_part(s,n,b,T))
-    
     return p
 
-
-def number_mweg(horizon):
-    return 4./3 * np.pi * horizon**3 *(2.26)**-3* (0.0116) #* horizon**3
+def number_mweg(volume):
+    """
+    Calculates the number of MWEGs in a volume, given in units of Mpc^3
+    """
+    return volume * (0.0116) 
 
 import theano.tensor as T
 from pymc3 import DensityDist, Uniform, Normal
@@ -61,12 +60,14 @@ def grb_model(number_events, background_rate,
                            testval=50)
 
         volume = (4.0 / 3.0) * np.pi * horizon**3
-        
+        print "volume: {}".format(volume)
         n_galaxy = number_mweg(volume)
     
         cbc_rate = pm.Deterministic('cbc_rate', signal_rate / n_galaxy)
         
         grb_rate = (grb_rate / number_mweg(1e9)) #/ n_galaxy
+
+
         
         # Allow the efficiency prior to be switched-out
         if efficiency_prior == "uniform":
@@ -80,24 +81,26 @@ def grb_model(number_events, background_rate,
             return T.switch((grb_rate >= cbc_rate*efficiency), -np.Inf, 
                                  (1.0 - ((grb_rate/(cbc_rate*efficiency)))))
         
-        costheta = pm.Deterministic('cos_angle', cosangle(cbc_rate, efficiency, grb_rate)
-                                    
-                                    )
+        costheta = pm.Deterministic('cos_angle', cosangle(cbc_rate, efficiency, grb_rate))                            
 
         angle = pm.Deterministic("angle", theano.tensor.arccos(costheta))
         
         return model
 
-
+horizon_int = 10 #200
+events_max = 20
 
 # make a plot of the beaming angle as a function of observation volume against number of detections
 # O1 Scenarios
 scenarios = []
-for events in range(20):
-    for horizon in np.linspace(10, 1000, 200):
+for events in range(events_max):
+    for horizon in np.linspace(10, 1000, horizon_int):
+
+        #print "Horizon: {}\t Events: {}".format(horizon, events)
+        
         number_events = events # There were no BNS detections in O1
         background_rate = 0.01 # We take the FAR to be 1/100 yr
-        observation_time = 1.  # The number of days of analysis conducted by gstLAL
+        observation_time = 1.  # Years
         grb_rate = 10.0
         o1_models = []
         #for prior in priors:
@@ -115,15 +118,22 @@ for model in scenarios:
     with model:
         step = pm.Metropolis()
         trace = pm.sample(samples, step, )
-        trace = pm.sample(samples, step, )
+        #trace = pm.sample(samples, step, )
         traces.append(trace)
         t_data = trace[10000:]['angle'][np.isfinite(trace[10000:]['angle'])]
-        lower, upper = pymc3.stats.hpd(t_data, alpha=0.05, transform=np.rad2deg)
-        angles975.append(np.nanpercentile(trace['angle'][10000:], 97.5))
-        angles025.append(np.nanpercentile(trace['angle'][10000:], 2.5))
+        try:
+            lower, upper = pm.stats.hpd(t_data, alpha=0.05, transform=np.rad2deg)
+        except ValueError:
+            lower, upper = np.nan, np.nan
+            print "There weren't enough samples."
+            #angles975.append(np.nanpercentile(trace['angle'][10000:], 97.5))
+        #angles025.append(np.nanpercentile(trace['angle'][10000:], 2.5))
         angles500.append(np.nanpercentile(trace['angle'][10000:], 50))
         lowers.append(lower)
         uppers.append(upper)
+        np.savetxt("upper.dat", uppers)
+        np.savetxt("lower.dat", lowers)
+        np.savetxt("500perc.dat", angles500)
 
 np.savetxt("upper.dat", uppers)
 np.savetxt("lower.dat", lowers)
