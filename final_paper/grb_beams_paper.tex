@@ -562,8 +562,7 @@ to derive the corresponding beaming angle posteriors.
 \caption{Posterior probability distribution for the rate of \BNS
     coalescence assuming the scenarios in table \ref{tab:scenarios}.
     The 95\% credible interval is represented with a horizontal line through
-    the centre of the plot, with vertical lines delineating the 2.5\% and
-    97.5\% percentiles; the median is represented by a square marker, and the
+    the centre of the plot, with vertical lines delineating the lower and upper limits; the median is represented by a square marker, and the
     maximum \latin{a posteriori} (\ac{MAP}) value is denoted by a diamond. A
     summary of these values is given in table \ref{tab:rateposteriors}.
     \label{fig:aligorate} }
@@ -797,11 +796,10 @@ where the credible interval is defined as the narrowest interval
 $(\theta^{\mathrm{ll}}, \theta^{\mathrm{ul}})$ which satisfies the expression
 \begin{equation}
     \label{eq:beaming_upper_limit}
-    0.975 = \int_{\theta_{\mathrm{ll}}}^{\theta^{\mathrm{ul}}} p(\theta|D,I)~\diff \theta,
+    0.95 = \int_{\theta_{\mathrm{ll}}}^{\theta^{\mathrm{ul}}} p(\theta|D,I)~\diff \theta,
 \end{equation}
 with $p(\theta|D,I)$ the posterior over which the interval is
 computed.
-\dwnote{Talk everywhere else about 95\% but here have 0.975?}
 
 Similarly we define the \emph{lower} limit as the lower
 limit (2.5 percentile) of the same credible interval.  In this
