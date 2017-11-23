@@ -570,7 +570,7 @@ the details of each observing scenario.
 \caption{Advanced detector era observing scenarios considered in this
   work.  $T$ is the expected duration of the science run and $\dinsp$
   is the \BNS inspiral distance for the sensitivity expected to be
-  achieved at the given epoch, which is equal to $\dhor / 2.26$..
+  achieved at the given epoch, which is equal to $\dhor / 2.26$.
   $V_{\mathrm{search}}$ is the sensitive volume of the search, defined
   by equation~\ref{eq:search_volume}, and $n$ is the expected number
   of \ac{GW} detections.  Note that the quoted search volume accounts
@@ -581,10 +581,15 @@ the details of each observing scenario.
 %
 
 \subsection{Posterior Results}
-Figure~\ref{fig:aligorate} shows the \BNS rate posteriors resulting from
-the observations in the scenarios in table~\ref{tab:scenarios}
+Figure~\ref{fig:aligorate} shows the \BNS rate posteriors resulting
+from the observations in the scenarios in table~\ref{tab:scenarios}
 generated using the procedure described in
-section~\ref{sec:rate_posterior}.
+section~\ref{sec:rate_posterior}. Where a range of potential inspiral
+distances is given for a scenario we choose the median value, so for
+the 2015--2016 scenario we take \dinsp{} to be $60\,\mpc$, for
+example. Likewise we choose an illustrative value of $n$, the number
+of expected \ac{GW} detections, from each range; these are listed in
+table \ref{tab:rateposteriors}.
 %%  for the expected early \ac{aLIGO} sensitivity in the 2016 epoch
 %% (broad, solid curve) and the nominal design sensivity (narrow,
 %% dashed curve), using the `realistic' rate
@@ -615,24 +620,23 @@ to derive the corresponding beaming angle posteriors.
 
 \begin{table}
 \begin{center}
-  \begin{tabular}{lrrrr}
+  \begin{tabular}{lrrrrr}
     \toprule
-    Scenario & Lower       & MAP             & Median          & Upper\\
-             & [$\yr^{-1}$] & [$\yr^{-1}$]    & [$\yr^{-1}$]    & [$\yr^{-1}$]  \\
+    Scenario &    $n$ & Lower       & MAP             & Median          & Upper\\
+             &        & [$\yr^{-1}$] & [$\yr^{-1}$]    & [$\yr^{-1}$]    & [$\yr^{-1}$]  \\
     \colrule
-    2015 -- 2016 & 0.20 & 0.00 & 5.48 & 29.42\\
-    2016 -- 2017 & 0.96 & 4.03 & 6.70 & 22.40\\
-    2017 -- 2018 & 2.90 & 7.36 & 9.80 & 23.39\\
-    2019+ & 11.00 & 19.59 & 21.33 & 36.75\\
-    2022+ & 26.05 & 40.92 & 41.31 & 61.73\\
+    2015 -- 2016 & 0  & 0.20 & 0.00 & 5.48 & 29.42\\
+    2016 -- 2017 & 1  & 0.96 & 4.03 & 6.70 & 22.40\\
+    2017 -- 2018 & 3  & 2.90 & 7.36 & 9.80 & 23.39\\
+    2019+        & 10 & 11.00 & 19.59 & 21.33 & 36.75\\
+    2022+        & 20 & 26.05 & 40.92 & 41.31 & 61.73\\
     \botrule
 \end{tabular}
 \end{center}
 
 \caption{Summary of the \BNS rate posteriors for each of the observing
   scenarios which are considered in this work; these posteriors are plotted
-  in figure \ref{fig:aligorate}.
-  \dwnote{Need to update these numbers to proper intervals.}
+  in figure \ref{fig:aligorate}. Here $n$ is the number of \ac{GW} events which were assumed to be observed in each scenario, chosen from the ranges in table \ref{tab:scenarios}.
   \label{tab:rateposteriors}
 }
 \end{table}
@@ -682,7 +686,7 @@ $\delta(0.5)$ & 5.14	 & 8.27	 & 11.97	 & 50.86	 \\
 \caption{Summary of the beaming angle posteriors from figure
   \ref{fig:injjetposterio2016}, for the 2015--2016 observing scenario,
   with an artificial GRB rate imposed to produce a target beaming
-  angle of $\theta = 10^{\circ}$.   \dwnote{Need to update these numbers to proper intervals.}}
+  angle of $\theta = 10^{\circ}$.}
   \label{tab:summaryinj2015}
 \end{table}
 
@@ -692,7 +696,6 @@ $\delta(0.5)$ & 5.14	 & 8.27	 & 11.97	 & 50.86	 \\
 \centering
 {\includegraphics[width=\linewidth]{O2_injections_violin.pdf}}
 \caption{The procedure used to produce figure \ref{fig:injjetposterio2016} was repeated for the observing time and the horizon distance of the 2016--2017 observing scenario, with a GRB rate of $2.5 \,\yr^{-1}$ used to induce a beaming angle of $\theta \approx 10^{\circ}$.
-  \dwnote{Do we need this in addition to 2015--2016.}
   \label{fig:injjetposterio2022}}
 \end{figure}
 \begin{table}
@@ -710,7 +713,7 @@ $\delta(0.5)$ & 6.00	 & 8.99	 & 10.95	 & 28.73	 \\
 \caption{Summary of the beaming angle posteriors from figure
   \ref{fig:injjetposterio2022}, for the 2016--2017 observing scenario,
   with an artificial GRB rate imposed to produce a target beaming
-  angle of $\theta \approx 10^{\circ}$.   \dwnote{Need to update these numbers to proper intervals.}}
+  angle of $\theta \approx 10^{\circ}$.}
   \label{tab:summaryinj2016}
 \end{table}
 
@@ -738,14 +741,12 @@ the uniform and Jeffreys distribution priors are broadly equivalent.
 \centering
 {\includegraphics[width=\linewidth]{O1_beaming_posteriors_violin.pdf}}
 \caption{Beaming angle posteriors using different priors on \ac{SGRB} efficiency $\epsilon$ in the 2015--2016 observing scenario.
-  %\dwnote{* TODO I should update these plots so that they reflect the correct scenario names.}
     \label{fig:jetposterior2016}}
 \end{figure}
 
 \begin{figure}
 \centering
 {\includegraphics[width=\linewidth]{O2_beaming_posteriors_violin.pdf}}
-  %\dwnote{* TODO I should update these plots so that they reflect the correct scenario names.}
 \caption{Beaming angle posteriors using different priors on \ac{SGRB} efficiency $\epsilon$ in the 2016--2017 observing scenario.
     \label{fig:jetposterior2022}}
 \end{figure}
