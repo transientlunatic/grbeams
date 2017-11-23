@@ -69,10 +69,10 @@
 \newcommand{\placeholder}[2]{{\color{red}{[PLACEHOLDER](#1):}}{\color{red}{[}}#2{\color{red}{]}}}
 \providecommand{\todo}[1]{{\color{red}$\blacksquare$~\textsf{[TODO: #1]}}}
 
-\renewcommand{\dwnote}{}
-\renewcommand{\JC}{}
-\renewcommand{\placeholder}{}
-\renewcommand{\todo}{}
+%\renewcommand{\dwnote}{}
+%\renewcommand{\JC}{}
+%\renewcommand{\placeholder}{}
+%\renewcommand{\todo}{}
 
 
 
@@ -108,15 +108,14 @@ thought to be highly relativistically beamed. We present a method for inferring
 limits on the extent of this beaming by comparing the number of short gamma-ray
 bursts observed electromagnetically to the number of neutron star binary mergers
 detected in gravitational waves.
-
 We demonstrate that an observing run comparable to what was expected
-from the advanced LIGO network between 2016 and 2017 would be capable
+from the Advanced LIGO network in 2016--2017 would be capable
 of placing limits on the beaming angle of approximately
-$\theta \in (7.4^{\circ}, 67.0^{\circ})$, given the detection of one
-binary neutron star system. We anticipate that this would improve by
-2019, when the two-detector network reaches full sensitivity, when a
-this range would reduce to $\theta \in (9^\circ,50^\circ)$ with a year
-of observations. 
+$\theta \in (7.4^\circ,67.0^\circ)$, given one binary neutron star
+detection.
+We anticipate that after a year of observations with Advanced LIGO at design
+sensitivity in 2019--2020 these constraints would improve to
+$\theta \in (9^\circ,50^\circ)$. 
 \end{abstract}
 
 \maketitle
@@ -129,7 +128,7 @@ populations of \acp{GRB}, divided roughly according to their duration and
 spectral hardness~\cite{Kouveliotou:1993yx}, although with significant overlap
 obscuring any clear distinction between
 populations~\cite{Zhang:2009uf,Bromberg:2012gp}.
-Those with long durations ($\gtrsim 2\,s$) and softer spectra are associated
+Those with long durations ($\gtrsim 2\,\mathrm{s}$) and softer spectra are associated
 with core collapse
 supernovae~\cite{Galama:1998ea,MacFadyen:1998vz,Woosley:2006fn}. Short, hard
 \acp{GRB} (SGRBs)\acused{SGRB} were long suspected of being the signatures of
@@ -187,7 +186,7 @@ the work presented here.
 \label{sec:sgrbs}
 At their design sensitivities, the current generation of advanced
 \ac{GW} detectors could observe \BNS mergers out to distances of
-${\sim}400\,\mpc$ at a rate of $0.1-200\,$yr$^{-1}$~\cite{Aasi:2013wya}.
+${\sim}400\,\mpc$ at a rate of $0.1\text{--}200\,$yr$^{-1}$~\cite{Aasi:2013wya}.
 It is worth noting that at galactic or near-galactic distances, \ac{SGR}
 hyperflares can resemble \acp{SGRB}. These \ac{SGR} hyperflares are the likely
 explanations for GRB~070201 and GRB~051103, since compact binary coalescences at
@@ -289,7 +288,7 @@ An overview of the general method is as follows:
 
 \begin{enumerate}
     \item Estimate the posterior probability distribution on the \BNS merger rate
-    in the local Universe from a number of observed gravitational wave signals
+    in the local universe from a number of observed gravitational wave signals
     and our knowledge of the sensitivity of the detectors.  We construct a joint
     posterior distribution on the \BNS rate and the (unknown) probability
     $\epsilon$ that a given merger results in a \ac{SGRB}.
@@ -375,18 +374,18 @@ $\cbcrate$ and the number of \BNS mergers which would result in a
 rate in terms of the number of mergers per \ac{MWEG}, per year then we
 require the number of galaxies $N_{\mathrm{G}}$ which may be probed by
 the \ac{GW} analysis.  At large distances, this is well approximated
-at large distances by~\cite{rates_paper},
+by~\cite{rates_paper},
 %
 \begin{equation}
     N_G = \frac{4}{3} \pi \left( \frac{\dhor}{\mpc}
 \right)^3 (2.26)^{-3} (0.0116),
 \end{equation}
 %
-where $\dhor$ is the horizon distance; the distance at which an
-optimally-oriented \BNS merger yields $\rho_c\geq12$, the factor of
-2.26 results from averaging over sky-locations and orientations, and
-$1.16\times 10^{-2}$\,Mpc$^{-3}$ is the extrapolated density of
-\ac{MWEG} in space.
+where $\dhor$ is the horizon distance (defined as the distance at which an
+optimally-oriented \BNS merger yields $\rho_c\geq12$), the factor of 2.26
+results from averaging over sky-locations and orientations, and
+$1.16\times 10^{-2}$\,Mpc$^{-3}$ is the extrapolated density of \ac{MWEG} in
+space.
 
 Finally, the posterior on the binary coalescence rate $\cbcrate$ is obtained from a trivial transformation of the posterior on the signal rate $s$,
 %
@@ -400,8 +399,7 @@ number of signal detections $n$, the observation time $T$, the
 background rate $b$, and the horizon distance of the search $\dhor$.
 It is precisely these quantities that comprise the detection scenarios
 outlined in~\cite{Aasi:2013wya}.  Before constructing expected rate
-posteriors, let us outline the transformation from rate to beaming
-angle.
+posteriors, we outline the transformation from rate to beaming angle.
 
 \subsection{Constructing the beaming angle posterior}
 Inferences of the \ac{SGRB} beaming angle are made from the posterior
@@ -422,7 +420,7 @@ p(\theta,\epsilon) = p(\cbcrate,\epsilon)
 \end{equation}
 %
 where we have dropped conditioning statements for notational convenience.
-The Jacobian determinant is can be  computed from equation~\ref{eq:rate2angle}.
+The Jacobian determinant can be  computed from equation~\ref{eq:rate2angle}.
 It is then straightforward to marginalize over $\epsilon$ to yield the posterior on $\theta$ itself:
 %
 \begin{eqnarray}
@@ -442,7 +440,7 @@ where we have assumed $\epsilon$ and $\cbcrate$ are logically independent such t
 p(\epsilon,\cbcrate) = p(\epsilon|\cbcrate)p(\cbcrate) = p(\epsilon)p(\cbcrate).
 \end{equation}
 %
-It is important note that the entire procedure of deriving the jet
+It is important to note that the entire procedure of deriving the jet
 angle posterior is completely independent of the approach used to
 derive the rate posterior.  In the preceding section we adopted a
 straightforward Bayesian analysis of a Poisson rate which is amenable
@@ -452,10 +450,9 @@ posterior.
 
 Given the posterior on the rate, $p(\cbcrate)$, the final ingredient
 in this approach is the specification of some prior distribution for
-$\epsilon$.  Given the lack of information on the value and
-  distribution of $\epsilon$, we choose three plausible priors and
-  study their effects on our beaming angle inference.  Our choice of
-  priors are:
+$\epsilon$. Given the lack of information on the value and distribution
+of $\epsilon$, we choose three plausible priors and study their effects
+on our beaming angle inference. Our choice of priors are:
 %
 \begin{description}
 \item [Delta-function] $p(\epsilon) = \delta(\epsilon=0.5)$;
@@ -485,9 +482,8 @@ distance $\dhor$) and observation time $T$; as well as an assumption
 on the rate of \BNS{} coalescence in the local universe $\cbcrate$.
 Each observing scenario ultimately results in an expectation for the
 number of observed \acp{GW} from \BNS coalescences.  For this study,
-we consider two operation epochs: the 2016 and 2022+ scenarios
-described in~\cite{Aasi:2013wya} and we assume the `realistic rate'
-for $\cbcrate$ as described in~\cite{rates_paper}.
+we assume the `realistic rate' for $\cbcrate$ as described
+in~\cite{rates_paper}.
 
 Our first goal is to establish the expected number of detections in
 each scenario.  Given the observation time and horizon distance of the
@@ -518,11 +514,11 @@ the details of each observing scenario.
   Epoch &  $T$ & \dinsp & $V_{\mathrm{search}}$ & $n$ \\
         &   [yr] & [Mpc] & [$\ee{6} \mpc³\,\yr^{-1}$] & [$\yr^{-1}$] \\
   \colrule
-  2015 - 2016 & 0.25 & 40--80   & 0.05--0.4 & 0.0005--4 \\
-  2016 - 2017 & 0.5 & 80--120 & 0.6--2.0 & 0.006-20\\
-  2017 - 2018 & 0.75 & 120--170 & 3--10 & 0.04--100\\
-  2019 +      & 1    & 200 & 20 & 0.2--200 \\
-  2022 +      & 1    & 200 & 40 & 0.4--400 \\
+  2015--2016 & 0.25 & 40--80   & 0.05--0.4 & 0.0005--4 \\
+  2016--2017 & 0.5 & 80--120 & 0.6--2.0 & 0.006-20\\
+  2017--2018 & 0.75 & 120--170 & 3--10 & 0.04--100\\
+  2019+      & 1    & 200 & 20 & 0.2--200 \\
+  2022+      & 1    & 200 & 40 & 0.4--400 \\
   \botrule
 \end{tabular}
 \caption{Advanced detector era observing scenarios considered in this
@@ -533,7 +529,12 @@ the details of each observing scenario.
   by equation~\ref{eq:search_volume}, and $n$ is the expected number
   of \ac{GW} detections.  Note that the quoted search volume accounts
   for a network duty cycle of $\sim 50\%$.  These scenarios are
-  derived from those detailed in~\cite{Aasi:2013wya}. While the 2019 + and 2022 + scenarios appear identical in terms of the sensitivity of the detectors, the 2022 + scenario includes a third advanced LIGO detector in India. This expansion of the network is expected to lead to a doubling of its duty cycle, resulting in a twice the volume being searched per year.
+  derived from those detailed in~\cite{Aasi:2013wya}. While the 2019+ and 2022+
+  scenarios appear identical in terms of the sensitivity of the detectors, the
+  2022+ scenario includes a third advanced LIGO detector in India. This
+  expansion of the network is expected to lead to a doubling of its duty cycle,
+  resulting in twice the volume being searched per year.
+    \dwnote{Why do the numbers in column N not agree with Figure 2?}
   \label{tab:scenarios}}
 \end{table}
 %
@@ -559,14 +560,13 @@ to derive the corresponding beaming angle posteriors.
 \centering
 {\includegraphics[width=\linewidth]{rate_posteriors_violin.pdf}}
 \caption{Posterior probability distribution for the rate of \BNS
-  coalescence assuming the scenarios A (red shading) \& B (blue
-  shading) detection scenarios. The 95\% credible interval is
-  represented with a horizontal line through the centre of the plot,
-  with vertical lines delineating the 2.5\% and 97.5\% percentiles;
-  the median is represented by a square marker, and the maximum
-  \latin{a posteriori} (\ac{MAP}) value is denoted by a diamond. A
-  summary of these values is given in table
-  \ref{tab:rateposteriors}. \label{fig:aligorate} }
+    coalescence assuming the scenarios in table \ref{tab:scenarios}.
+    The 95\% credible interval is represented with a horizontal line through
+    the centre of the plot, with vertical lines delineating the 2.5\% and
+    97.5\% percentiles; the median is represented by a square marker, and the
+    maximum \latin{a posteriori} (\ac{MAP}) value is denoted by a diamond. A
+    summary of these values is given in table \ref{tab:rateposteriors}.
+    \label{fig:aligorate} }
 \end{figure}
 
 
@@ -577,11 +577,11 @@ to derive the corresponding beaming angle posteriors.
     Scenario &    $n$ & Lower       & MAP             & Median          & Upper\\
              &        & [$\yr^{-1}$] & [$\yr^{-1}$]    & [$\yr^{-1}$]    & [$\yr^{-1}$]  \\
     \colrule
-    2015 -- 2016 & 0  & 0.20 & 0.00 & 5.48 & 29.42\\
-    2016 -- 2017 & 1  & 0.96 & 4.03 & 6.70 & 22.40\\
-    2017 -- 2018 & 3  & 2.90 & 7.36 & 9.80 & 23.39\\
-    2019+        & 10 & 11.00 & 19.59 & 21.33 & 36.75\\
-    2022+        & 20 & 26.05 & 40.92 & 41.31 & 61.73\\
+    2015--2016 & 0  & 0.20 & 0.00 & 5.48 & 29.42\\
+    2016--2017 & 1  & 0.96 & 4.03 & 6.70 & 22.40\\
+    2017--2018 & 3  & 2.90 & 7.36 & 9.80 & 23.39\\
+    2019+      & 10 & 11.00 & 19.59 & 21.33 & 36.75\\
+    2022+      & 20 & 26.05 & 40.92 & 41.31 & 61.73\\
     \botrule
 \end{tabular}
 \end{center}
@@ -589,6 +589,9 @@ to derive the corresponding beaming angle posteriors.
 \caption{Summary of the \BNS rate posteriors for each of the observing
   scenarios which are considered in this work; these posteriors are plotted
   in figure \ref{fig:aligorate}. Here $n$ is the number of \ac{GW} events which were assumed to be observed in each scenario, chosen from the ranges in table \ref{tab:scenarios}.
+  \dwnote{Need to update these numbers to proper intervals.
+    A lot of these numbers look suspect when compared with Figure 2.
+    How do we get MAP of 0 in the top row...?}
   \label{tab:rateposteriors}
 }
 \end{table}
@@ -630,16 +633,19 @@ $\theta=10^{\circ}$.
     Prior & Lower & MAP & Median & Upper\\
           & [$^\circ$] & [$^\circ$]& [$^\circ$]& [$^\circ$] \\
     \colrule
-U(0,1) & 4.64	 & 5.90	 & 13.20	 & 63.79	 \\
-Jeffreys & 4.30	 & 5.62	 & 13.22	 & 70.05	 \\
-$\delta(0.5)$ & 5.14	 & 8.27	 & 11.97	 & 50.86	 \\
+    U(0,1)        & 4.64 & 5.90	& 13.20 & 63.79 \\
+    Jeffreys      & 4.30 & 5.62	& 13.22	& 70.05 \\
+    $\delta(0.5)$ & 5.14 & 8.27	& 11.97	& 50.86 \\
     \botrule
 \end{tabular}
 \caption{Summary of the beaming angle posteriors from figure
   \ref{fig:injjetposterio2016}, for the 2015--2016 observing scenario,
   with an artificial GRB rate imposed to produce a target beaming
-  angle of $\theta = 10^{\circ}$.}
-  \label{tab:summaryinj2015}
+  angle of $\theta = 10^{\circ}$.
+    \dwnote{Need to update these numbers to proper intervals.
+    For readability, can the orders in the tables be changed to match the orders
+    in the plots (from top to bottom?)}
+  \label{tab:summaryinj2015}}
 \end{table}
 
 %
@@ -795,6 +801,7 @@ $(\theta^{\mathrm{ll}}, \theta^{\mathrm{ul}})$ which satisfies the expression
 \end{equation}
 with $p(\theta|D,I)$ the posterior over which the interval is
 computed.
+\dwnote{Talk everywhere else about 95\% but here have 0.975?}
 
 Similarly we define the \emph{lower} limit as the lower
 limit (2.5 percentile) of the same credible interval.  In this
