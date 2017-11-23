@@ -19,8 +19,6 @@
 
 \graphicspath{{poster/figures/}}
 
-%\newcommand{\gw}{gravitational wave }
-%\newcommand{\gws}{gravitational waves }
 \newcommand{\subgw}{_{\textrm{\scriptsize{GW}}}}
 \newcommand{\ee}[1]{\ensuremath{\!\times\!10^{#1}}}
 \newcommand{\prob}{{\rm Pr}}
@@ -262,7 +260,6 @@ distributions on the ratio $N_{\mathrm{GRB}}/N_{\mathrm{BNS}}$.
 
 \begin{figure}
 \centering
-%\includegraphics[width=\linewidth]{theta_dist_grbfrac.eps}
 \includegraphics[width=\linewidth]{color_relativenumber.pdf}
 \caption{\label{fig:thetapopulation} Expected relative numbers of
   observed GRBs and binary coalescences for different distributions on
@@ -270,12 +267,6 @@ distributions on the ratio $N_{\mathrm{GRB}}/N_{\mathrm{BNS}}$.
   population means, while the $x$-axis shows the width of the
   distribution.  All distributions are Gaussian, truncated at
   $(0, 90]$ degrees.\label{fig:thetapop}}
-    % \centering
-    % \includegraphics[width=\linewidth]{figure1.pdf}
-    % \caption{Expected ratio of observed SGRBs and binary coalescences for different distributions on the SGRB beaming angle.
-    %     For a series of jet angle population means, $\langle \theta \rangle$, we plot this ratio as a function of the distribution width, $\sigma_{\theta}$.
-    %     All jet angle distributions are normal, truncated at $(0, 90]$ degrees.
-    %     \label{fig:thetapop}}
 \end{figure}
 
 
@@ -314,22 +305,7 @@ An overview of the general method is as follows:
 
 \subsection{Constructing The Rate Posterior}
 \label{sec:rate_posterior}
-%   Gregory's book, `Logical Data Analysis For The Physical Sciences' has an entire
-%   chapter (\S 14) devoted to `Bayesian Inference With Poisson Sampling'.  This
-%   seems to match our problem rather well.  In particular, he derives expressions
-%   for a Poisson rate posterior in \S 14.3, `Signal + known background' and \S
-%   14.4, `Analysis of ON/OFF measurements' (``we want to infer the source rate, s,
-%   when the background rate, b, is imprecisely measured'').
-%
-%It's tempting to jump straight into the On/off measurement stuff in \S~14.4 of
-%Gregory, where the construction of the rate posterior includes the raw
-%measurements of background rate.  I actually think this over-complicates things;
-%if we wanted to do follow that procedure, we have to figure out the expected FAR
-%for a given size of template bank etc.  There's a pretty well-established
-%procedure for measuring this number: time-slides.  In fact, we don't even have
-%to do any analysis.  Figure 3 (left panel) from the observing scenarios paper
-%tells us everything we need to know.  Specifically, the following sentance has
-%the information we need:
+
 
 Our goal is to infer the posterior probability distribution for the mean
 \ac{SGRB} beaming angle $\theta$ from \ac{GW} constraints on the rate of \BNS
@@ -476,10 +452,10 @@ posterior.
 
 Given the posterior on the rate, $p(\cbcrate)$, the final ingredient
 in this approach is the specification of some prior distribution for
-$\epsilon$.  \ish{Given the lack of information on the value and
+$\epsilon$.  Given the lack of information on the value and
   distribution of $\epsilon$, we choose three plausible priors and
   study their effects on our beaming angle inference.  Our choice of
-  priors are:}
+  priors are:
 %
 \begin{description}
 \item [Delta-function] $p(\epsilon) = \delta(\epsilon=0.5)$;
@@ -497,24 +473,6 @@ $\epsilon$.  \ish{Given the lack of information on the value and
         determinant of the Fisher information for the Bernoulli distribution, is
         a $\beta$-distribution with shape parameters $\alpha=\beta=\frac{1}{2}$.
 \end{description}
-
-%   \begin{figure}%[ht]
-%   \centering
-%   {\includegraphics[width=\linewidth]{efficiency_prior.eps}}\label{fig:priors}
-%   \caption{Priors}
-%   \end{figure}
-
-% \subsection{A Note On Implementation} %
-%{\tt EMCEE}~\cite{2013PASP..125..306F}.
-% Points are sampled from the joint distribution $p(\theta,\epsilon)$,
-% where equation~\ref{eq:rate2angle} is used to derive the corresponding
-% value of $\cbcrate$ for a given $(\theta,\epsilon)$.  We then obtain
-% the marginal distribution $p(\theta)$ via \ac{KDE} of the
-% $\theta$-samples.  The mode of the \ac{KDE} yields the maximimum a
-% posteriori estimate for the measurement, and the upper and lower
-% bounds are found from the 95\% confidence interval around the median
-% of the samples.
-
 
 \section{Prospects For Beaming Angle Constraints With Advanced LIGO}
 We now demonstrate the derivation of the rate posterior $p(\cbcrate)$
@@ -590,13 +548,7 @@ the 2015--2016 scenario we take \dinsp{} to be $60\,\mpc$, for
 example. Likewise we choose an illustrative value of $n$, the number
 of expected \ac{GW} detections, from each range; these are listed in
 table \ref{tab:rateposteriors}.
-%%  for the expected early \ac{aLIGO} sensitivity in the 2016 epoch
-%% (broad, solid curve) and the nominal design sensivity (narrow,
-%% dashed curve), using the `realistic' rate
-%% $\cbcrate=10^{-6}$\,Mpc$^{-3}$yr$^{-1}$.
-%\footnote{The curves corresponding to the
-%`high' rate show similar qualitative behaviour and are not included here in the
-%interests of brevity.}  
+
 We now use these posteriors together with the prior distributions
 described in section~\ref{sec:rate_posterior} and the observed rate of
 \acp{SGRB} (as described in section~\ref{sec:sgrbs}, we use
@@ -787,8 +739,6 @@ table~\ref{tab:aligo_beam_inference}.
 \centering
 \begin{tabular}{llrrrr}
   \toprule
-  % &\multicolumn{4}{c}{Prior} \\
-  % Scenario & $\delta(\epsilon=0.5)$ & $\delta(\epsilon=1)$ & $U(0,1)$ & $\beta(\frac{1}{2},\frac{1}{2})$\\
   Scenario & Prior & Lower & MAP & Median & Upper \\
   && [$\yr^{-1}$] & [$\yr^{-1}$]    & [$\yr^{-1}$]    & [$\yr^{-1}$]  \\
   \colrule
@@ -829,101 +779,6 @@ which contains some desired confidence.  Thus, we obtain an upper
 limit on the beaming angle, analogous to the rate upper limits set by
 past LIGO observations~\cite{Colaboration:2011np}.
 
-%% In this section, we demonstrate the procedure using the \BNS coalescence rate measurements from the final science run of LIGO, prior to the upgrade to \ac{aLIGO}.
-
-%% \arw{Here, and elsewhere, we should change to using O1 upper limits from the O1 BNS/NSBH paper~\cite{Abbott:2016ymx}. These are $\cbcrate=1.21\times 10^{-5}$\,Mpc$^{-3}$yr$^{-1}$ for `low spin' and $\cbcrate=1.26\times 10^{-5}$\,Mpc$^{-3}$yr$^{-1}$ for `high spin'.}
-
-
-%   \subsection{Constructing The Rate Posterior} Our first objective is the
-%   construction of the rate posterior.  Since our ultimate goal here is to derive a
-%   beaming angle posterior based on initial LIGO observations, it is convenient to
-%   adopt the same approach to constructing the rate posterior that was used in past
-%   analyses.  Following~\cite{Biswas09,BradyFairhurst08}, the posterior on the
-%   binary coalescence rate may be determined from the loudest event in the \ac{GW}
-%   analysis and takes the form,
-%   %Specifically, for a foreground event rate due to  binary coalescence
-%   %$\cbcrate$, the probability of obtaning no events with ranking statistic $\rho$
-%   %greater than the observed loudested event $\rhostar$ is,
-%   %
-%   %\begin{equation} P_F(\rhostar | \cbcrate, C_L, T) = e^{-\cbcrate C_L(\rhostar)
-%   %T}, \end{equation}
-%   %
-%   %where $C_L(\rhostar)$ is the total luminosity to which the search is sensitive
-%   %and $T$ is the duration of the search.  The overall probability of obtaining no
-%   %events with ranking statistic $\rho>\rhostar$ is the product of obtaining no
-%   %such events from foreground \emph{and} the probability of obtaining no such
-%   %events from the background in the detector, denoted $P_B(\rhostar)$,
-%   %
-%   %\begin{equation} P(\rhostar|\cbcrate,I) = P_B(\rhostar|I)e^{-\cbcrate
-%   %C_L(\rhostar) T} \end{equation}
-%   %
-%   %Using a uniform prior on $\cbcrate$ and inverting the overall probability with
-%   %Bayes' theorem, we arrive at,
-%   %
-%   \begin{equation}\label{eq:loudestEventPosterior} p(\cbcrate | C_L({\rhostar}),
-%   T, \Lambda) \propto p(\cbcrate) \left[ \frac{1+\Lambda C_L(\rhostar)
-%   T}{1+\Lambda}\right] e^{-\cbcrate C_L(\rhostar) T}, \end{equation}
-%   %
-%   where $p(\cbcrate)$ is the prior probability distribution on the rate, assumed
-%   to be uniform, $C_L(\rhostar)$ is the total luminosity to which the search is
-%   sensitive, and $T$ is the observation time.  The quantity $\Lambda$ is
-%   essentially the relative likelihood that the loudest event arose from a \ac{GW}
-%   signal to the likelihood of background.  See section\,3
-%   of~\cite{BradyFairhurst08} for the derivation of this distribution and the
-%   quantities involved.
-%
-%   We can now use the published upper limits on the rate of \BNS coalescence to
-%   re-derive the full rate posterior.  The upper limit on the binary coalescence
-%   rate at confidence $\alpha$ is found by integrating the rate posterior from zero
-%   to $\alpha$.  Assuming a uniform prior on the rate $\cbcrate$ and using the rate
-%   posterior given by equation~\ref{eq:loudestEventPosterior}, the upper limit on
-%   the rate $\cbcrate_{\alpha}$ is given by equation 21 in~\cite{BradyFairhurst08}:
-%   %
-%   \begin{equation}
-%   1-\alpha =  e^{-\cbcrate_{\alpha} C_L(\rhostar)T)}
-%   \left[ 
-%   1+ \left(\frac{\Lambda}{1+\Lambda}\right) \cbcrate_{\alpha} T C_L(\rhostar)
-%   \right ].
-%   \label{eq:rateIntegral}
-%   \end{equation}
-%   %
-%   In the event that no \ac{GW} signal has been observed and the loudest event is
-%   umabiguously due to background noise fluctuations, we are in the limit in which
-%   $\Lambda \rightarrow 0$.
-%   In this case, we simply have,
-%   \begin{equation}
-%   C_L(\rhostar)T = -\frac{\log(1-\alpha)}{\cbcrate_{\alpha}},
-%   \end{equation}
-%   %
-%   %and the value of $\cbcrate$ can be taken straight from the literature
-%   %\footnote{Note
-%   %that this procedure necessarily confines our jet angle inferences based on
-%   %progenitor systems for which the rate upper limits are available.  Given that
-%   %the binary coalesence rate limits are quoted for canonical binary neutron star
-%   %and neutron star-black hole systems, both plausible SGRB progenitors, this
-%   %simply means our inferences on the jet angle are specific to each system and
-%   %treated separately.}
-%   %
-%
-%   \begin{figure}
-%   \centering
-%   %\includegraphics[width=\linewidth]{S6_rate.eps}
-%   \caption{Posterior on the rate of \BNS coalescence based on obsevations taken during the S6/VSR2,3 science runs of initial LIGO and Virgo~\cite{Colaboration:2011np}.
-%       The posterior is constructed using the loudest event procedure~\cite{Biswas09,BradyFairhurst08} and reconstructed from published upper limits (see text).
-%       \label{fig:s6rate}}
-%   \end{figure}
-%
-%   Using the most stringent 90\% confidence upper limit from \ac{GW} observations on the rate of binary neutron star coalescences to date, $\cbcrate^{90\%}_{{\rm BNS}} = 1.3\times 10^{-4}$\,Mpc$^{-3}$yr$^{-1}$~\cite{Colaboration:2011np}, gives $C_L(\rhostar)T=17712$.
-%   The full rate posterior from~\cite{Colaboration:2011np} is then found by inserting this value and $\lambda=0$ in equation~\ref{eq:loudestEventPosterior}.
-%   The result is shown in figure~\ref{fig:s6rate}.
-%
-%
-%   %Similarly, for NS-BH systems,  $\cbcrate^{90\%}_{{\rm
-%   %nsbh}} = 3.1\times 10^{-5}$\,Mpc$^{-3}$yr$^{-1}$ gives $C_L(\rhostar)T=74277$.
-%   %The posteriors on the rates, assuming these values and $\Lambda=0$, are shown in
-%   %figure~\ref{fig:reconstructedRatePosterior}.  
-
-%\subsection{Results}
 
 Figure~\ref{fig:jetposterior2016} shows the four posteriors on the
 beaming angle, corresponding to the four priors on the \ac{SGRB}
@@ -1082,79 +937,6 @@ supported by the Science and Technology Research Council (STFC) grant
 ST/N504075/1. SH is supported by the STFC grant ST/L000946/1. This
 document has been assigned the control number LIGO-P1600102 by the
 LIGO document control centre.
-
-
-\begin{comment}
-
-\appendix
-
-
-\section{Jacobian Calculation}
-This doesn't need to be in the publication, these are just notes for James'
-benefit and possibly verification.
-
-\begin{equation}
-\cbcrate=\frac{\grbrate}{\epsilon(1-\cos \theta)},
-\end{equation}
-
-\begin{equation}
-p(\theta) = \int_{\epsilon} p(\theta,\epsilon)~\diff \epsilon,
-\end{equation}
-
-\begin{equation}
-p(\theta,\epsilon) = p(\cbcrate,\epsilon)
-\left\lvert\left\lvert
-\frac{\partial(\cbcrate,\epsilon)}{\partial(\theta,\epsilon)}
-\right\rvert\right\rvert,
-\end{equation}
-
-% Increase matrix line spacing
-\begingroup
-\renewcommand*{\arraystretch}{1.5}
-
-% matrix:
-\begin{equation}
-\frac{\partial (\cbcrate,\epsilon)}{\partial(\theta,\epsilon)} =
-\begin{bmatrix}
-\frac{\partial \cbcrate}{\partial \theta} & \frac{\partial \cbcrate}{\partial \epsilon} \\
-\frac{\partial \epsilon}{\partial \theta} & \frac{\partial \epsilon}{\partial \epsilon}
-\end{bmatrix}.
-\end{equation}
-
-% end line spacing increase
-\endgroup
-
-\begin{eqnarray}
-\frac{\partial \cbcrate}{\partial \theta} & = &
--\frac{\grbrate\sin\theta}{\epsilon(\cos\theta - 1)^2}\\
-\frac{\partial \cbcrate}{\partial \epsilon} & = &
-\frac{\grbrate}{\epsilon^2(\cos\theta-1)}\\
-\frac{\partial \epsilon}{\partial \theta} & = &
--\frac{\grbrate\sin\theta}{\cbcrate(\cos\theta-1)^2}\\
-\frac{\partial \epsilon}{\partial \epsilon} & = & 1\\
-\end{eqnarray}
-
-\begin{eqnarray}
-\left\lvert
-\frac{\partial(\cbcrate,\epsilon)}{\partial(\theta,\epsilon)}
-\right\rvert & = & \frac{\partial \cbcrate}{\partial \theta}
-\frac{\partial \epsilon}{\partial \epsilon} - \frac{\partial \cbcrate}{\partial
-\epsilon}\frac{\partial \epsilon}{\partial \theta} \\
-& = & -\frac{2\sin\theta}{\epsilon(\cos\theta-1)^2}
-\end{eqnarray}
-%
-Finally:
-\begin{equation}
-\left\lvert\left\lvert
-\frac{\partial(\cbcrate,\epsilon)}{\partial(\theta,\epsilon)}
-\right\rvert\right\rvert = \frac{2\grbrate\sin\theta}{\epsilon(\cos\theta-1)^2} 
-\end{equation}
-
-
-
-\section{Null-detection Jet Angle Posteriors With Different Priors}
-
-\end{comment}
 
 \bibliography{grb_beams_paper}
 
