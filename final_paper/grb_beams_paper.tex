@@ -1,4 +1,5 @@
-\documentclass[twocolumn,nofootinbib]{revtex4-1}
+%\documentclass[twocolumn,nofootinbib]{revtex4-1}
+\documentclass[twocolumn]{aastex61}
 \usepackage{graphics}
 \usepackage[caption=false]{subfig}
 \usepackage{amsmath}
@@ -97,8 +98,23 @@
 
 \title{Constraints On Short, Hard Gamma-Ray Burst Beaming Angles From
 Gravitational Wave Observations}
-\author{Daniel Williams, James Clark, Andrew Williamson, Ik Siong Heng}
-\date{\today}
+%\author{Daniel Williams, James Clark, Andrew Williamson, Ik Siong Heng}
+
+\author[0000-0003-3772-198X]{Daniel Williams}
+\affiliation{SUPA, University of Glasgow, Glasgow G12 8QQ, United Kingdom}
+\author{James Clark}
+\affiliation{Center for Relativistic Astrophysics and School of Physics, Georgia Institute of Technology, Atlanta, GA 30332}
+\author{Andrew Williamson}
+\affiliation{Department of Astrophysics/IMAPP, Radboud University Nijmegen, P.O. Box 9010, 6500 GL Nijmegen, Netherlands}
+\author{Ik Siong Heng}
+\affiliation{SUPA, University of Glasgow, Glasgow G12 8QQ, United Kingdom}
+
+\correspondingauthor{Daniel Williams}
+\email{d.williams.2@research.gla.ac.uk}
+
+
+\keywords{gamma-ray burst: general, gravitational waves}
+
 
 \begin{abstract}
 The first detection of a binary neutron star merger, GW170817, and an associated
@@ -118,7 +134,7 @@ sensitivity in 2019--2020 these constraints would improve to
 $\theta \in (9^\circ,50^\circ)$. 
 \end{abstract}
 
-\maketitle
+%\maketitle
 
 \section{Introduction}
 
@@ -534,7 +550,6 @@ the details of each observing scenario.
   2022+ scenario includes a third advanced LIGO detector in India. This
   expansion of the network is expected to lead to a doubling of its duty cycle,
   resulting in twice the volume being searched per year.
-    \dwnote{Why do the numbers in column N not agree with Figure 2?}
   \label{tab:scenarios}}
 \end{table}
 %
@@ -588,9 +603,6 @@ to derive the corresponding beaming angle posteriors.
 \caption{Summary of the \BNS rate posteriors for each of the observing
   scenarios which are considered in this work; these posteriors are plotted
   in figure \ref{fig:aligorate}. Here $n$ is the number of \ac{GW} events which were assumed to be observed in each scenario, chosen from the ranges in table \ref{tab:scenarios}.
-  \dwnote{Need to update these numbers to proper intervals.
-    A lot of these numbers look suspect when compared with Figure 2.
-    How do we get MAP of 0 in the top row...?}
   \label{tab:rateposteriors}
 }
 \end{table}
@@ -632,18 +644,15 @@ $\theta=10^{\circ}$.
     Prior & Lower & MAP & Median & Upper\\
           & [$^\circ$] & [$^\circ$]& [$^\circ$]& [$^\circ$] \\
     \colrule
-    U(0,1)        & 4.64 & 5.90	& 13.20 & 63.79 \\
-    Jeffreys      & 4.30 & 5.62	& 13.22	& 70.05 \\
     $\delta(0.5)$ & 5.14 & 8.27	& 11.97	& 50.86 \\
+    Jeffreys      & 4.30 & 5.62	& 13.22	& 70.05 \\
+    U(0,1)        & 4.64 & 5.90	& 13.20 & 63.79 \\
     \botrule
 \end{tabular}
 \caption{Summary of the beaming angle posteriors from figure
   \ref{fig:injjetposterio2016}, for the 2015--2016 observing scenario,
   with an artificial GRB rate imposed to produce a target beaming
   angle of $\theta = 10^{\circ}$.
-    \dwnote{Need to update these numbers to proper intervals.
-    For readability, can the orders in the tables be changed to match the orders
-    in the plots (from top to bottom?)}
   \label{tab:summaryinj2015}}
 \end{table}
 
@@ -662,9 +671,9 @@ $\theta=10^{\circ}$.
     Prior & Lower & MAP & Median & Upper\\
           & [$^\circ$] & [$^\circ$]& [$^\circ$]& [$^\circ$] \\
     \colrule
-$U(0,1)$ & 5.23	 & 8.09	 & 12.04	 & 51.77	 \\
-jeffreys & 4.99	 & 6.42	 & 11.89	 & 65.31	 \\
-$\delta(0.5)$ & 6.00	 & 8.99	 & 10.95	 & 28.73	 \\
+    $\delta(0.5)$ & 6.00	 & 8.99	 & 10.95	 & 28.73	 \\
+    Jeffreys & 4.99	 & 6.42	 & 11.89	 & 65.31	 \\
+    $U(0,1)$ & 5.23	 & 8.09	 & 12.04	 & 51.77	 \\
 \botrule
 \end{tabular}
 \caption{Summary of the beaming angle posteriors from figure
@@ -934,14 +943,30 @@ $3^{\circ}$ with a rate of 15 BNS events per year, while the
 three-detector network can establish this limit with 1 detection per
 year.
 
-\section{Acknowledgements}
-\label{sec:ackn}
+%\section{Acknowledgements}
+%\label{sec:ackn}
+
+\acknowledgments
 The authors wish to thank Martin Hendry for many insightful and
-valuable discussions during the development of this technique. DW is
-supported by the Science and Technology Research Council (STFC) grant
-ST/N504075/1. SH is supported by the STFC grant ST/L000946/1. This
-document has been assigned the control number LIGO-P1600102 by the
-LIGO document control centre.
+valuable discussions during the development of this technique.
+
+DW is supported by the Science
+and Technology Research Council (STFC) grant ST/N504075/1. JC
+acknowledges support from NSF awards PHYS-1505824 and PHYS-1505524SH
+is supported by the STFC grant ST/L000946/1. This document has been
+assigned the control number LIGO-P1600102 by the LIGO document control
+centre.
+
+\software{
+The analysis presented in this manuscript made extensive use of the
+\texttt{numpy}~\cite{numpy} and \texttt{pymc3}~\cite{pymc3} python
+packages, while the figures were produced using
+\texttt{matplotlib}~\cite{Hunter:2007}.} 
+
+The python code used to produce this analysis is available as both a
+Jupyter (iPython) notebook, and plain python scripts via Zonodo (doi:
+10.5281/zenodo.1066019), along with the data used to produce figures
+\ref{fig:volumevevents} and \ref{fig:volumevevents_lower}.
 
 \bibliography{grb_beams_paper}
 
