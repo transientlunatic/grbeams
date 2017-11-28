@@ -99,13 +99,13 @@
 \title{Constraints On Short, Hard Gamma-Ray Burst Beaming Angles From
 Gravitational Wave Observations}
 
-\author[0000-0003-3772-198X]{Daniel Williams}
+\author[0000-0003-3772-198X]{D. Williams}
 \affiliation{SUPA, University of Glasgow, Glasgow G12 8QQ, United Kingdom}
-\author[0000-0003-3243-1393]{James Clark}
+\author[0000-0003-3243-1393]{J. A. Clark}
 \affiliation{Center for Relativistic Astrophysics and School of Physics, Georgia Institute of Technology, Atlanta, GA 30332}
-\author[0000-0002-7627-8688]{Andrew Williamson}
+\author[0000-0002-7627-8688]{A. R. Williamson}
 \affiliation{Department of Astrophysics/IMAPP, Radboud University Nijmegen, P.O. Box 9010, 6500 GL Nijmegen, Netherlands}
-\author[0000-0002-1977-0019]{Ik Siong Heng}
+\author[0000-0002-1977-0019]{I. S. Heng}
 \affiliation{SUPA, University of Glasgow, Glasgow G12 8QQ, United Kingdom}
 
 \correspondingauthor{Daniel Williams}
@@ -123,11 +123,10 @@ thought to be highly relativistically beamed. We present a method for inferring
 limits on the extent of this beaming by comparing the number of short gamma-ray
 bursts observed electromagnetically to the number of neutron star binary mergers
 detected in gravitational waves.
-We demonstrate that an observing run comparable to what was expected
-from the Advanced LIGO network in 2016--2017 would be capable
-of placing limits on the beaming angle of approximately
-$\theta \in (8.14^\circ,64.8^\circ)$, given one binary neutron star
-detection.
+We demonstrate that an observing run comparable to the expected Advanced LIGO
+2016--2017 run would be capable of placing limits on the beaming angle of
+approximately $\theta \in (8.14^\circ,64.8^\circ)$, given one binary neutron
+star detection.
 We anticipate that after a year of observations with Advanced LIGO at design
 sensitivity in 2019--2020 these constraints would improve to
 $\theta \in (9^\circ,50^\circ)$. 
@@ -227,8 +226,8 @@ an observed \ac{SGRB}.  In this work, we assume an illustrative
 $\grbrate=10$\,Gpc$^{-3}$\,yr$^{-1}$~\cite{Nakar:2007yr,Dietz:2010eh}
 and we shall refer to $\epsilon$ as the \ac{SGRB}
 \emph{efficiency}. The method we present, however, is amenable to
-using alternative values for $\grbrate$, or indeed to extension,
-sampling values prior distribution on the \ac{SGRB} rate.  Generally,
+using alternative values for $\grbrate$, or indeed to being extended to
+sampling values from a prior distribution on the \ac{SGRB} rate. Generally,
 the efficiency with which \BNS mergers produce \acp{SGRB} is unknown
 but will depend on a variety of progenitor physics.  In particular, a
 significant fraction of \NSBH systems may be incapable of powering an
@@ -247,7 +246,7 @@ construct a simple Monte Carlo simulation to study the effect on the relative
 rates of \acp{SGRB} and \BNS mergers. We arrange the following toy problem:
 %
 \begin{enumerate}
-    \item Set the number of `observed \acp{SGRB} to zero: $N_{\mathrm{GRB}}=0$.
+    \item Set the number of `observed' \acp{SGRB} to zero: $N_{\mathrm{GRB}}=0$.
     \item Draw $N_{\mathrm{BNS}}$ values of orbital inclination $\iota$ from a distribution which is uniform in $\cos \iota$ in the range $[0,1]$.
     \item For each value of $\iota$, draw a value for the beaming angle $\theta$, from some distribution with finite width and limited to the range $(0,90]^{\circ}$.
     \item If $\iota<\theta$ then this combination of orbital inclination and beaming angle would result in an observable \ac{SGRB}, so increment $N_{\mathrm{GRB}}$.
@@ -590,11 +589,11 @@ to derive the corresponding beaming angle posteriors.
     Scenario &    $n$ & Lower       & MAP             & Median          & Upper\\
              &        & [$\yr^{-1}$] & [$\yr^{-1}$]    & [$\yr^{-1}$]    & [$\yr^{-1}$]  \\
     \colrule
-    2015 -- 2016 & 0   & 0.00	 & 0.45	 & 2.80	 & 11.98	\\
-    2016 -- 2017 & 1   & 0.17	 & 4.07	 & 6.74	 & 19.13	\\
-    2017 -- 2018 & 3   & 1.81	 & 8.59	 & 9.80	 & 21.08	\\
-    2019+        & 10  & 9.95 	 & 20.35	 & 21.34	 & 35.15	\\
-    2022+        & 20  & 25.05	 & 40.25	 & 41.32	 & 60.38	\\
+    2015--2016 & 0   & 0.00	 & 0.45	 & 2.80	 & 11.98	\\
+    2016--2017 & 1   & 0.17	 & 4.07	 & 6.74	 & 19.13	\\
+    2017--2018 & 3   & 1.81	 & 8.59	 & 9.80	 & 21.08	\\
+    2019+      & 10  & 9.95  & 20.35 & 21.34 & 35.15	\\
+    2022+      & 20  & 25.05 & 40.25 & 41.32 & 60.38	\\
     \botrule
 \end{tabular}
 \end{center}
@@ -661,7 +660,7 @@ $\theta=10^{\circ}$.
 \centering
 {\includegraphics[width=\linewidth]{O2_injections_violin.pdf}}
 \caption{The procedure used to produce figure \ref{fig:injjetposterio2016} was repeated for the observing time and the horizon distance of the 2016--2017 observing scenario, with a GRB rate of $2.5 \,\yr^{-1}$ used to induce a beaming angle of $\theta \approx 10^{\circ}$.
-  \label{fig:injjetposterio2022}}
+  \label{fig:injjetposterio2017}}
 \end{figure}
 \begin{table}
   \centering
@@ -677,14 +676,14 @@ $\theta=10^{\circ}$.
 \botrule
 \end{tabular}
 \caption{Summary of the beaming angle posteriors from figure
-  \ref{fig:injjetposterio2022}, for the 2016--2017 observing scenario,
+  \ref{fig:injjetposterio2017}, for the 2016--2017 observing scenario,
   with an artificial GRB rate imposed to produce a target beaming
   angle of $\theta \approx 10^{\circ}$.}
   \label{tab:summaryinj2016}
 \end{table}
 
 %
-Figures~\ref{fig:injjetposterio2016} and~\ref{fig:injjetposterio2022}
+Figures~\ref{fig:injjetposterio2016} and~\ref{fig:injjetposterio2017}
 show the beaming angle posteriors which result from this analysis for
 the 2015--2016 and 2016--2017 scenarios respectively for each choice
 of prior distribution on the efficiency parameter.  Unsurprisingly,
@@ -714,10 +713,10 @@ the uniform and Jeffreys distribution priors are broadly equivalent.
 \centering
 {\includegraphics[width=\linewidth]{O2_beaming_posteriors_violin.pdf}}
 \caption{Beaming angle posteriors using different priors on \ac{SGRB} efficiency $\epsilon$ in the 2016--2017 observing scenario.
-    \label{fig:jetposterior2022}}
+    \label{fig:jetposterior2017}}
 \end{figure}
 
-Figures~\ref{fig:jetposterior2016} and~\ref{fig:jetposterior2022} show
+Figures~\ref{fig:jetposterior2016} and~\ref{fig:jetposterior2017} show
 the beaming angle posteriors obtained for two of the detection
 scenarios.\footnote{
     A note on implementation: rather than directly evaluating
@@ -761,7 +760,7 @@ table~\ref{tab:aligo_beam_inference}.
            & Jeffreys 	 & 7.70	 & 17.19	& 27.16	& 74.57	 \\
            & U(0,1) 	 & 7.91	 & 17.64	& 27.99	& 73.43	 \\
   \colrule
-  2016 -- 2017 & $\delta(0.5)$ 	 & 14.45	 & 25.33	& 30.85	& 64.02	 \\
+  2016--2017 & $\delta(0.5)$ 	 & 14.45	 & 25.33	& 30.85	& 64.02	 \\
            & $\delta(1)$ 	 & 9.87	 & 18.09	& 21.81	& 47.84	 \\
            & U(0,1) 	 & 11.91	 & 23.52	& 31.60	& 73.74	 \\
            & Jeffreys 	 & 11.06	 & 21.71	& 30.09	& 74.21	 \\
@@ -886,12 +885,10 @@ the observed rate of gravitational wave \BNS events is established.
   observed gravitational wave BNS events and the observed search
   4-volume, taking a Jeffreys prior on the efficiency of gravitational
   wave production from BNS events. The search volumes corresponding to
-  each observing scenario are marked as vertical lines on the plot,
+  observing scenarios are marked as vertical lines on the plot,
   with each line assuming that observations are carried out over the
   period of one year, achieving the search volume outlined in table
-  \ref{tab:scenarios}. Note that the labels on each scenario
-  correspond to the labels given in the second column of table
-  \ref{tab:scenarios}, with D corresponding to the 2019+ scenario.}
+  \ref{tab:scenarios}.}
 \end{figure}
 
 In figure \ref{fig:volumevevents} we present the inferred upper-limit
@@ -902,8 +899,7 @@ detectors in each of the observing scenarios detailed in table
 \ref{tab:scenarios}. These limits were determined by assuming a
 Jeffreys prior on the efficiency parameter of the model, and following
 the same procedure used to produce the posteriors in figures
-\ref{fig:jetposterior2016} and \ref{fig:jetposterior2022} for scenarios with
-search volumes ranging from $0$ to $100\, \mpc^3 \yr^{-1}$. 
+\ref{fig:jetposterior2016} and \ref{fig:jetposterior2017}.
 
 \begin{figure}
 \centering
@@ -912,8 +908,8 @@ search volumes ranging from $0$ to $100\, \mpc^3 \yr^{-1}$.
   credible limit on the beaming angle as a function of the observed
   number of events and the observed search 4-volume, taking a Jeffreys
   prior on the efficiency of gravitational wave production from BNS
-  events. The search volumes corresponding to each observing scenario
-  are marked as vertical lines on the plot, }
+  events. The search volumes corresponding to observing scenarios
+  are marked as vertical lines on the plot.}
 \end{figure}
 
 The lower limit (the 2.5\% of the posterior) for the same range of
