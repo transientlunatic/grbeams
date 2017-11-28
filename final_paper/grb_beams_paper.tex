@@ -98,15 +98,14 @@
 
 \title{Constraints On Short, Hard Gamma-Ray Burst Beaming Angles From
 Gravitational Wave Observations}
-%\author{Daniel Williams, James Clark, Andrew Williamson, Ik Siong Heng}
 
 \author[0000-0003-3772-198X]{Daniel Williams}
 \affiliation{SUPA, University of Glasgow, Glasgow G12 8QQ, United Kingdom}
-\author{James Clark}
+\author[0000-0003-3243-1393]{James Clark}
 \affiliation{Center for Relativistic Astrophysics and School of Physics, Georgia Institute of Technology, Atlanta, GA 30332}
-\author{Andrew Williamson}
+\author[0000-0002-7627-8688]{Andrew Williamson}
 \affiliation{Department of Astrophysics/IMAPP, Radboud University Nijmegen, P.O. Box 9010, 6500 GL Nijmegen, Netherlands}
-\author{Ik Siong Heng}
+\author[0000-0002-1977-0019]{Ik Siong Heng}
 \affiliation{SUPA, University of Glasgow, Glasgow G12 8QQ, United Kingdom}
 
 \correspondingauthor{Daniel Williams}
@@ -947,7 +946,7 @@ year.
 %\section{Acknowledgements}
 %\label{sec:ackn}
 
-\acknowledgments
+\acknowledgements{
 The authors wish to thank Martin Hendry for many insightful and
 valuable discussions during the development of this technique.
 
@@ -958,16 +957,18 @@ is supported by the STFC grant ST/L000946/1. This document has been
 assigned the control number LIGO-P1600102 by the LIGO document control
 centre.
 
+The python code used to produce this analysis is available as both a
+Jupyter (iPython) notebook, and plain python scripts via Zonodo (doi:
+10.5281/zenodo.1066019), along with the data used to produce figures
+\ref{fig:volumevevents} and \ref{fig:volumevevents_lower}.}
+
 \software{
 The analysis presented in this manuscript made extensive use of the
 \texttt{numpy}~\cite{numpy} and \texttt{pymc3}~\cite{pymc3} python
 packages, while the figures were produced using
 \texttt{matplotlib}~\cite{Hunter:2007}.} 
 
-The python code used to produce this analysis is available as both a
-Jupyter (iPython) notebook, and plain python scripts via Zonodo (doi:
-10.5281/zenodo.1066019), along with the data used to produce figures
-\ref{fig:volumevevents} and \ref{fig:volumevevents_lower}.
+
 
 \bibliography{grb_beams_paper}
 
