@@ -135,7 +135,7 @@ for events in range(events_max):
 
         ##
 
-        volume = np.pi * (4./3.) * (2.26*horizon)**3
+        volume = np.pi * (4./3.) * (horizon)**3
         print "Horizon: {}\t Events: {}\t MWEG: {}\t volume: {}".format(horizon, events, number_mweg(volume), volume)
 
         number_events = events # There were no BNS detections in O1
