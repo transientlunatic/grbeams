@@ -525,8 +525,8 @@ the details of each observing scenario.
 \centering
 \begin{tabular}{lccccc}
   \toprule
-  Epoch &  $T$ & \dinsp & $V_{\mathrm{search}}$ & Plausible Number of BNS \\
-        &   [yr] & [Mpc] & [$\ee{6} \mpc³\,\yr^{-1}$] &  \\
+  Epoch &  $T$ & \dinsp & $V_{\mathrm{search}}$ & Est. BNS \\
+        &   [yr] & [Mpc] & [$\ee{6} \mpc³\,\yr^{-1}$] & Detections \\
   \colrule
   2015--2016 & 0.25 & 40--80   & 0.05--0.4 & 0.0005--4 \\
   2016--2017 & 0.5 & 80--120 & 0.6--2.0 & 0.006-20\\
@@ -540,14 +540,16 @@ the details of each observing scenario.
   is the \BNS inspiral distance for the sensitivity expected to be
   achieved at the given epoch, which is equal to $\dhor / 2.26$.
   $V_{\mathrm{search}}$ is the sensitive volume of the search, defined
-  by equation~\ref{eq:search_volume}, and $n$ is the expected number
-  of \ac{GW} detections.  Note that the quoted search volume accounts
-  for a network duty cycle of $\sim 50\%$.  These scenarios are
-  derived from those detailed in~\cite{Aasi:2013wya}. While the 2020+ and 2024+
-  scenarios appear identical in terms of the sensitivity of the detectors, the
-  2024+ scenario includes a third advanced LIGO detector in India. This
-  expansion of the network is expected to lead to an increase in the network duty cycle,
-  resulting in a greater volume being searched per year.
+  by equation~\ref{eq:search_volume}; the final column contains the
+  estimated range of the number of \ac{GW} detections.  Note that the
+  quoted search volume accounts for a network duty cycle of
+  $\sim 80\%$ per detector.  These scenarios are derived from those detailed
+  in~\cite{Aasi:2013wya}. While the 2020+ and 2024+ scenarios appear
+  identical in terms of the sensitivity of the detectors, the 2024+
+  scenario includes a third advanced LIGO detector in India. This
+  expansion of the network is expected to lead to an increase in the
+  network duty cycle, resulting in a greater volume being searched per
+  year.
   \label{tab:scenarios}}
 \end{table}
 %
@@ -851,38 +853,38 @@ state that either the population of \acp{SGRB} have a distribution of
 beaming angles with some finite width or that the fraction of \BNS
 mergers which yield a \ac{SGRB} is smaller than 0.5.
 
-% It is also interesting to compare these upper limits on the beaming
-% angle with those in~\cite{Chen:2012qh}, where the upper limit
-% on the rate itself is used as a constraint (rather than transforming
-% the posterior).  This has the important implication that the
-% constraint thus obtained is the \emph{smallest} angle consistent with
-% the rate:
-% %
-% \begin{equation}
-%     1 - \cos \theta \geq \frac{\grbrate}{\epsilon \cbcrate^{\mathrm{ul}}},
-% \end{equation}
-% %
-% where $\cbcrate^{\mathrm{ul}}$ is the \emph{upper limit} on the \BNS
-% rate.  The same idea is used in~\cite{Clark:2014jpa} to estimate
-% beaming constraints in the advanced detector era.  Thus, when
-% comparing the constraints in e.g.,~\cite{Chen:2012qh} and the
-% upper limits obtained from the transformed posterior (i.e.,
-% equation~\ref{eq:beam_posterior} and figure~\ref{fig:volumevevents}), one
-% should remember that they are quite different quantities.  There are
-% two other noteworthy differences between~\cite{Chen:2012qh}
-% and this work: (i) the rate upper limit is computed based on the
-% sensitivity of the initial LIGO-Virgo network (see
-% e.g.,~\cite{BradyFairhurst08}), which gives $\cbcrate=4.5\times
-% 10^{-4}$\,Mpc$^{-3}$yr$^{-1}$ (as compared with $\cbcrate=1.3 \times
-% 10^{-4}$\,Mpc$^{-3}$yr$^{-1}$ from the analysis
-% in~\cite{Colaboration:2011np}); and (ii) it is implicitly assumed that
-% \emph{all} \BNS mergers yield an \ac{SGRB}.  That is, there is no
-% factor or $\epsilon$ to account for the unknown fraction of mergers
-% which successfully launch an \ac{SGRB} jet.  With these differences
-% noted, the lower bound on the beaming angle is found to be $\theta
-% \geq 0.8^{\circ}$, as compared with the lower limit of the 95\%
-% credible interval $\theta^{\mathrm{ll}}=1.94^{\circ}$ when assuming
-% $\epsilon=1$.
+It is also interesting to compare these upper limits on the beaming
+angle with those in~\cite{Chen:2012qh}, where the upper limit
+on the rate itself is used as a constraint (rather than transforming
+the posterior).  This has the important implication that the
+constraint thus obtained is the \emph{smallest} angle consistent with
+the rate:
+%
+\begin{equation}
+    1 - \cos \theta \geq \frac{\grbrate}{\epsilon \cbcrate^{\mathrm{ul}}},
+\end{equation}
+%
+where $\cbcrate^{\mathrm{ul}}$ is the \emph{upper limit} on the \BNS
+rate.  The same idea is used in~\cite{Clark:2014jpa} to estimate
+beaming constraints in the advanced detector era.  Thus, when
+comparing the constraints in e.g.,~\cite{Chen:2012qh} and the
+upper limits obtained from the transformed posterior (i.e.,
+equation~\ref{eq:beam_posterior} and figure~\ref{fig:volumevevents}), one
+should remember that they are quite different quantities.  There are
+two other noteworthy differences between~\cite{Chen:2012qh}
+and this work: (i) the rate upper limit is computed based on the
+sensitivity of the initial LIGO-Virgo network (see
+e.g.,~\cite{BradyFairhurst08}), which gives $\cbcrate=4.5\times
+10^{-4}$\,Mpc$^{-3}$yr$^{-1}$ (as compared with $\cbcrate=1.3 \times
+10^{-4}$\,Mpc$^{-3}$yr$^{-1}$ from the analysis
+in~\cite{Colaboration:2011np}); and (ii) it is implicitly assumed that
+\emph{all} \BNS mergers yield an \ac{SGRB}.  That is, there is no
+factor or $\epsilon$ to account for the unknown fraction of mergers
+which successfully launch an \ac{SGRB} jet.  With these differences
+noted, the lower bound on the beaming angle is found to be $\theta
+\geq 0.8^{\circ}$, as compared with the lower limit of the 95\%
+credible interval $\theta^{\mathrm{ll}}=1.76^{\circ}$ when assuming
+$\epsilon=1$, and the 2015-2016 observing scenario.
 
 
 \section{Beaming Angle Constraints in Future Scenarios}
@@ -944,17 +946,22 @@ cases like GW170817, \acp{SGRB} are observed only by observers within the cone
 of the jet.
 
 We demonstrate that with a year's worth of gravitational wave
-observations by the 2-detector \ac{aLIGO} network at its design
-sensitivity the observation of 15 BNS events in gravitational waves is
-sufficient to place an upper limit of $40^{\circ}$ on the jet beaming
-angle, while a 3-detector network is capable of establishing this
-limit by observing three gravitational wave BNS events in a year.
+observations by the 2-detector \ac{aLIGO} network during its 2016-2017
+observing run, and assuming a single \BNS detection, that we can place
+a lower limit of $2.85^{\circ}$, and an upper limit of $46.93^{\circ}$
+on the jet beaming angle, given an uninformative prior on the
+efficiency at which \BNS events produce observable
+\acp{SGRB}. Assuming that \emph{all} \BNS produce an observable
+\acp{SGRB} we can narrow these limits to between $1.76^{\circ}$ and
+$21.04^{\circ}$.
 
-We also demonstrate that the \ac{aLIGO} 2-detector network is
-capable of establishing a lower limit on the beaming angle of
-$3^{\circ}$ with a rate of 15 BNS events per year, while the
-three-detector network can establish this limit with 1 detection per
-year.
+When the advanced LIGO design sensitivity is acheived in 2020 the
+observation of 10 BNS events in gravitational waves is sufficient to
+place an upper limit of $^{\circ}$ on the jet beaming angle, and can
+establishing the limit on the beaming angle to be between
+$8.45^{\circ}$ and $58.93^{\circ}$, assuming an uninformative prior on
+the \acp{SGRB} production efficiency. These limits narrow between
+$8.80^{\circ}$ and $16.20^{\circ}$ if perfect efficiency is assumed.
 
 %\section{Acknowledgements}
 %\label{sec:ackn}
@@ -963,12 +970,11 @@ year.
 The authors wish to thank Martin Hendry for many insightful and
 valuable discussions during the development of this technique.
 
-DW is supported by the Science
-and Technology Research Council (STFC) grant ST/N504075/1. JC
-acknowledges support from NSF awards PHYS-1505824 and PHYS-1505524SH
-is supported by the STFC grant ST/L000946/1. This document has been
-assigned the control number LIGO-P1600102 by the LIGO document control
-centre.
+DW is supported by the Science and Technology Research Council (STFC)
+grant ST/N504075/1. JC acknowledges support from NSF awards
+PHYS-1505824 and PHYS-1505524SH.  ISH is supported by STFC grant
+ST/L000946/1. This document has been assigned the control number
+LIGO-P1600102 by the LIGO document control centre.
 
 The python code used to produce this analysis is available as both a
 Jupyter (iPython) notebook, and plain python scripts via Zonodo (doi:
