@@ -18,8 +18,6 @@
 %\usepackage{graphicx}
 %\usepackage{psfrag}
 
-\graphicspath{{poster/figures/}}
-
 \newcommand{\subgw}{_{\textrm{\scriptsize{GW}}}}
 \newcommand{\ee}[1]{\ensuremath{\!\times\!10^{#1}}}
 \newcommand{\prob}{{\rm Pr}}
@@ -125,11 +123,11 @@ bursts observed electromagnetically to the number of neutron star binary mergers
 detected in gravitational waves.
 We demonstrate that an observing run comparable to the expected Advanced LIGO
 2016--2017 run would be capable of placing limits on the beaming angle of
-approximately $\theta \in (2.85^\circ,46.93^\circ)$, given one binary neutron
+approximately $\theta \in (2.88^\circ,14.15^\circ)$, given one binary neutron
 star detection.
 We anticipate that after a year of observations with Advanced LIGO at design
-sensitivity in 202 these constraints would improve to
-$\theta \in (8.5^\circ,58.9^\circ)$. 
+sensitivity in 2020 these constraints would improve to
+$\theta \in (8.10^\circ,14.95^\circ)$. 
 \end{abstract}
 
 %\maketitle
@@ -247,16 +245,16 @@ rates of \acp{SGRB} and \BNS mergers. We arrange the following toy problem:
 %
 \begin{enumerate}
     \item Set the number of `observed' \acp{SGRB} to zero: $N_{\mathrm{GRB}}=0$.
-    \item Draw $N_{\mathrm{BNS}}$ values of orbital inclination $\iota$ from a distribution which is uniform in $\cos \iota$ in the range $[0,1]$.
+    \item Draw $N_{\mathrm{\BNS}}$ values of orbital inclination $\iota$ from a distribution which is uniform in $\cos \iota$ in the range $[0,1]$.
     \item For each value of $\iota$, draw a value for the beaming angle $\theta$, from some distribution with finite width and limited to the range $(0,90]^{\circ}$.
     \item If $\iota<\theta$ then this combination of orbital inclination and beaming angle would result in an observable \ac{SGRB}, so increment $N_{\mathrm{GRB}}$.
 \end{enumerate}
 %
 Such a simulation allows us to study the ratio of the number of
 observed \ac{SGRB} to the total number of \BNS mergers
-$N_{\mathrm{GRB}}/N_{\mathrm{BNS}}$.  Since it is the comparison of
+$N_{\mathrm{GRB}}/N_{\mathrm{\BNS}}$.  Since it is the comparison of
 the rates of these events that informs our inference on $\theta$,
-studying the ratio $N_{\mathrm{GRB}}/N_{\mathrm{BNS}}$ provides some
+studying the ratio $N_{\mathrm{GRB}}/N_{\mathrm{\BNS}}$ provides some
 intuition as to the effect and features of various $\theta$
 distributions.  Figure~\ref{fig:thetapop} plots this ratio as a
 function of various truncated normal distributions to demonstrate the
@@ -269,7 +267,7 @@ distribution ${\mathcal N}(\langle \theta \rangle, \sigma_{\theta})$.
 We stress here that such $\theta$ distributions are \emph{not}
 intended to represent the true distribution; they are merely intended
 to easily demonstrate the qualitative effects of different $\theta$
-distributions on the ratio $N_{\mathrm{GRB}}/N_{\mathrm{BNS}}$.
+distributions on the ratio $N_{\mathrm{GRB}}/N_{\mathrm{\BNS}}$.
 
 \begin{figure}
 \centering
@@ -286,7 +284,7 @@ distributions on the ratio $N_{\mathrm{GRB}}/N_{\mathrm{BNS}}$.
 
 
 Figure~\ref{fig:thetapop} reveals that a population of \ac{SGRB} beaming angles with a large mean but narrow width is, on the basis of rate measurements, indistinguishable from a population of \ac{SGRB} beaming angles with a small mean and large width.
-For example, for the ${\mathcal N}(15,9)$ and ${\mathcal N}(10,13)$ beaming angle populations, the ratios of $N_{\mathrm{GRB}}/N_{\mathrm{BNS}}$ are almost equal ($\sim 4.8\%$).
+For example, for the ${\mathcal N}(15,9)$ and ${\mathcal N}(10,13)$ beaming angle populations, the ratios of $N_{\mathrm{GRB}}/N_{\mathrm{\BNS}}$ are almost equal ($\sim 4.8\%$).
 Thus, a sufficiently wide spread of \ac{SGRB} beaming angles will yield relatively high rates for \BNS and \acp{SGRB} that could lead to an overestimate of the mean beaming angle.
 The population-based constraints on $\theta$ must, therefore, be regarded as upper bounds on the mean of a distribution of beaming angles.
 Having said this, for a given mean value $\langle \theta \rangle$, the ratio is rather insensitive to the width.
@@ -525,7 +523,7 @@ the details of each observing scenario.
 \centering
 \begin{tabular}{lccccc}
   \toprule
-  Epoch &  $T$ & \dinsp & $V_{\mathrm{search}}$ & Est. BNS \\
+  Epoch &  $T$ & \dinsp & $V_{\mathrm{search}}$ & Est. \BNS \\
         &   [yr] & [Mpc] & [$\ee{6} \mpc³\,\yr^{-1}$] & Detections \\
   \colrule
   2015--2016 & 0.25 & 40--80   & 0.05--0.4 & 0.0005--4 \\
@@ -901,13 +899,26 @@ the observed rate of gravitational wave \BNS events is established.
 \includegraphics[width=\linewidth]{volume_v_nevents.pdf}
 \caption{\label{fig:volumevevents} The upper-bound of the 95\%
   credible interval on the beaming angle as a function of the rate of
-  observed gravitational wave BNS events and the observed search
-  4-volume, taking a Jeffreys prior on the efficiency of gravitational
-  wave production from BNS events. The search volumes corresponding to
-  observing scenarios are marked as vertical lines on the plot,
-  with each line assuming that observations are carried out over the
-  period of one year, achieving the search volume outlined in table
+  observed gravitational wave \BNS events and the observed search
+  4-volume, taking a Jeffreys prior on the efficiency of \ac{GRB}
+  production from \BNS{} events. The search volumes corresponding to
+  observing scenarios are marked as vertical lines on the plot, with
+  each line assuming that observations are carried out over the period
+  of one year, achieving the search volume outlined in table
   \ref{tab:scenarios}.}
+\end{figure}
+
+\begin{figure}
+\centering
+\includegraphics[width=\linewidth]{volume_v_nevents_e1.pdf}
+\caption{\label{fig:volumeveventse1} The upper-bound of the 95\%
+  credible interval on the beaming angle as a function of the rate of
+  observed gravitational wave \BNS events and the observed search
+  4-volume, assuming that all \BNS events produce a \ac{GRB}. The
+  search volumes corresponding to observing scenarios are marked as
+  vertical lines on the plot, with each line assuming that
+  observations are carried out over the period of one year, achieving
+  the search volume outlined in table \ref{tab:scenarios}.}
 \end{figure}
 
 In figure \ref{fig:volumevevents} we present the inferred upper-limit
@@ -918,7 +929,10 @@ detectors in each of the observing scenarios detailed in table
 \ref{tab:scenarios}. These limits were determined by assuming a
 Jeffreys prior on the efficiency parameter of the model, and following
 the same procedure used to produce the posteriors in figures
-\ref{fig:jetposterior2016} and \ref{fig:jetposterior2017}.
+\ref{fig:jetposterior2016} and \ref{fig:jetposterior2017}. In figure
+\ref{fig:volumeveventse1} we present a similar plot, showing the upper
+limits on the beaming angle under the stronger assumption that every
+\BNS event also produces a \ac{GRB}.
 
 \begin{figure}
 \centering
@@ -926,14 +940,28 @@ the same procedure used to produce the posteriors in figures
 \caption{\label{fig:volumevevents_lower} The lower-bound of the 95\%
   credible limit on the beaming angle as a function of the observed
   number of events and the observed search 4-volume, taking a Jeffreys
-  prior on the efficiency of gravitational wave production from BNS
+  prior on the efficiency of \ac{GRB} production from \BNS
   events. The search volumes corresponding to observing scenarios
   are marked as vertical lines on the plot.}
 \end{figure}
 
+\begin{figure}
+\centering
+\includegraphics[width=\linewidth]{volume_v_nevents_lower_e1.pdf}
+\caption{\label{fig:volumevevents_lowere1} The lower-bound of the 95\%
+  credible limit on the beaming angle as a function of the observed
+  number of events and the observed search 4-volume, assuming that
+  every gravitational wave \BNS event produces a \ac{GRB}. The search
+  volumes corresponding to observing scenarios are marked as vertical
+  lines on the plot.}
+\end{figure}
+
 The lower limit (the 2.5\% of the posterior) for the same range of
 scenarios is plotted in figure \ref{fig:volumevevents_lower}, with the
-same anticipated detector search volumes plotted.
+same anticipated detector search volumes plotted, again assuming a
+Jeffreys prior on the efficiency, and in figure
+\ref{fig:volumevevents_lowere1} we present those lower limits under
+the assumption that every \BNS event produces a \ac{GRB}.
 
 \section{Conclusion}
 
@@ -952,16 +980,16 @@ a lower limit of $2.85^{\circ}$, and an upper limit of $46.93^{\circ}$
 on the jet beaming angle, given an uninformative prior on the
 efficiency at which \BNS events produce observable
 \acp{SGRB}. Assuming that \emph{all} \BNS produce an observable
-\acp{SGRB} we can narrow these limits to between $1.76^{\circ}$ and
-$21.04^{\circ}$.
+\acp{SGRB} we can narrow these limits to between $2.88^{\circ}$ and
+$14.15^{\circ}$.
 
 When the advanced LIGO design sensitivity is acheived in 2020 the
-observation of 10 BNS events in gravitational waves is sufficient to
-place an upper limit of $^{\circ}$ on the jet beaming angle, and can
+observation of 10 \BNS events in gravitational waves is sufficient to
+place an upper limit of $56.99^{\circ}$ on the jet beaming angle, and can
 establishing the limit on the beaming angle to be between
-$8.45^{\circ}$ and $58.93^{\circ}$, assuming an uninformative prior on
+$7.82^{\circ}$ and $56.99^{\circ}$, assuming an uninformative prior on
 the \acp{SGRB} production efficiency. These limits narrow between
-$8.80^{\circ}$ and $16.20^{\circ}$ if perfect efficiency is assumed.
+$8.10^{\circ}$ and $14.95^{\circ}$ if perfect efficiency is assumed.
 
 
 
