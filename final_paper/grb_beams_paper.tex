@@ -548,7 +548,7 @@ the details of each observing scenario.
   identical in terms of the sensitivity of the detectors, the 2024+
   scenario includes a third advanced LIGO detector in India. This
   expansion of the network is expected to lead to an increase in the
-  network duty cycle, resulting in a greater volume being searched per
+  network duty cycle, and an increase in the area of the sky which the network is sensitive to, resulting in a greater volume being searched per
   year.
   \label{tab:scenarios}}
 \end{table}
@@ -593,9 +593,9 @@ to derive the corresponding beaming angle posteriors.
     \colrule
     2015--2016 & 0   & 0.00	 & 0.45	 & 2.80	 & 11.98	\\
     2016--2017 & 1   & 0.17	 & 4.07	 & 6.74	 & 19.13	\\
-    2018--2019 & 3   & 1.81	 & 8.59	 & 9.80	 & 21.08	\\
-    2020+      & 10  & 9.95  & 20.35 & 21.34 & 35.15	\\
-    2024+      & 20  & 25.05 & 40.25 & 41.32 & 60.38	\\
+    2017 -- 2018 & 1.37	 & 5.88	 & 6.99	 & 15.26 \\	
+    2020+ & 7.30	 & 14.47	 & 15.25	 & 25.25	\\
+    2024+ & 12.42	 & 20.35	 & 20.65	 & 30.09	\\
     \botrule
 \end{tabular}
 \end{center}
@@ -773,17 +773,17 @@ table~\ref{tab:aligo_beam_inference}.
 & $\delta(0.5)$ 	 & 8.98	 & 14.02	& 15.55	& 26.15	 \\
   \colrule
   2020+    
-& U(0,1) 	 & 8.97	 & 14.02	& 17.36	& 47.93	 \\
-& Jeffreys 	 & 8.45	 & 13.12	& 16.50	& 58.93	 \\
-& $\delta(1)$ 	 & 8.80	 & 11.76	& 12.03	& 16.20	 \\
-& $\delta(0.5)$ 	 & 12.44	 & 16.28	& 17.05	& 22.96	 \\
+& U(0,1) 	 & 8.20	 & 12.66	& 16.04	& 44.73	 \\
+& Jeffreys 	 & 7.82	 & 12.21	& 15.35	& 56.99	 \\
+& $\delta(1)$ 	 & 8.10	 & 10.85	& 11.12	& 14.95	 \\
+& $\delta(0.5)$ 	 & 11.47	 & 14.92	& 15.75	& 21.17	 \\
   \colrule
   2024+    
-& U(0,1) 	 & 8.27	 & 11.76	& 14.75	& 42.03	 \\
-& Jeffreys 	 & 8.01	 & 11.31	& 14.09	& 54.05	 \\
-& $\delta(1)$ 	 & 8.28	 & 9.95	& 10.33	& 12.78	 \\
-& $\delta(0.5)$ 	 & 11.71	 & 14.47	& 14.64	& 18.14	 \\
-\botrule
+& U(0,1) 	 & 9.05	 & 13.12	& 16.07	& 45.10	 \\
+& Jeffreys 	 & 8.58	 & 12.21	& 15.28	& 56.30	 \\
+& $\delta(1)$ 	 & 9.09	 & 11.31	& 11.30	& 14.02	 \\
+           & $\delta(0.5)$ 	 & 12.82	 & 15.83	& 16.00	& 19.82	 \\
+  \botrule
 \end{tabular}
 \caption{Summary of the beaming angle inferences for each prior in each of the observing scenarios detailed in table \ref{tab:scenarios}.
     The lower and upper values correspond to the lower and upper bounds of the 95\% Bayesian credible interval for each scenario.
@@ -962,6 +962,8 @@ establishing the limit on the beaming angle to be between
 $8.45^{\circ}$ and $58.93^{\circ}$, assuming an uninformative prior on
 the \acp{SGRB} production efficiency. These limits narrow between
 $8.80^{\circ}$ and $16.20^{\circ}$ if perfect efficiency is assumed.
+
+
 
 %\section{Acknowledgements}
 %\label{sec:ackn}
