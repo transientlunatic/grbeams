@@ -44,6 +44,7 @@
 \newacro{MAP}[MAP]{Maximum \latin{a posteriori}}
 
 \newcommand{\BNS}{\ac{NS}--\ac{NS}\xspace}
+\newcommand{\BNSmm}{\ac{NS}-\ac{NS}} %math-mode friendly BNS
 \newcommand{\NSBH}{\ac{NS}--\ac{BH}\xspace}
 \newcommand{\JOINT}{\ac{GW}--\ac{SGRB}\xspace}
 
@@ -245,16 +246,16 @@ rates of \acp{SGRB} and \BNS mergers. We arrange the following toy problem:
 %
 \begin{enumerate}
     \item Set the number of `observed' \acp{SGRB} to zero: $N_{\mathrm{GRB}}=0$.
-    \item Draw $N_{\mathrm{\BNS}}$ values of orbital inclination $\iota$ from a distribution which is uniform in $\cos \iota$ in the range $[0,1]$.
+    \item Draw $N_{\mathrm{\BNSmm}}$ values of orbital inclination $\iota$ from a distribution which is uniform in $\cos \iota$ in the range $[0,1]$.
     \item For each value of $\iota$, draw a value for the beaming angle $\theta$, from some distribution with finite width and limited to the range $(0,90]^{\circ}$.
     \item If $\iota<\theta$ then this combination of orbital inclination and beaming angle would result in an observable \ac{SGRB}, so increment $N_{\mathrm{GRB}}$.
 \end{enumerate}
 %
 Such a simulation allows us to study the ratio of the number of
 observed \ac{SGRB} to the total number of \BNS mergers
-$N_{\mathrm{GRB}}/N_{\mathrm{\BNS}}$.  Since it is the comparison of
+$N_{\mathrm{GRB}}/N_{\mathrm{\BNSmm}}$.  Since it is the comparison of
 the rates of these events that informs our inference on $\theta$,
-studying the ratio $N_{\mathrm{GRB}}/N_{\mathrm{\BNS}}$ provides some
+studying the ratio $N_{\mathrm{GRB}}/N_{\mathrm{\BNSmm}}$ provides some
 intuition as to the effect and features of various $\theta$
 distributions.  Figure~\ref{fig:thetapop} plots this ratio as a
 function of various truncated normal distributions to demonstrate the
@@ -267,7 +268,7 @@ distribution ${\mathcal N}(\langle \theta \rangle, \sigma_{\theta})$.
 We stress here that such $\theta$ distributions are \emph{not}
 intended to represent the true distribution; they are merely intended
 to easily demonstrate the qualitative effects of different $\theta$
-distributions on the ratio $N_{\mathrm{GRB}}/N_{\mathrm{\BNS}}$.
+distributions on the ratio $N_{\mathrm{GRB}}/N_{\mathrm{\BNSmm}}$.
 
 \begin{figure}
 \centering
@@ -284,7 +285,7 @@ distributions on the ratio $N_{\mathrm{GRB}}/N_{\mathrm{\BNS}}$.
 
 
 Figure~\ref{fig:thetapop} reveals that a population of \ac{SGRB} beaming angles with a large mean but narrow width is, on the basis of rate measurements, indistinguishable from a population of \ac{SGRB} beaming angles with a small mean and large width.
-For example, for the ${\mathcal N}(15,9)$ and ${\mathcal N}(10,13)$ beaming angle populations, the ratios of $N_{\mathrm{GRB}}/N_{\mathrm{\BNS}}$ are almost equal ($\sim 4.8\%$).
+For example, for the ${\mathcal N}(15,9)$ and ${\mathcal N}(10,13)$ beaming angle populations, the ratios of $N_{\mathrm{GRB}}/N_{\mathrm{\BNSmm}}$ are almost equal ($\sim 4.8\%$).
 Thus, a sufficiently wide spread of \ac{SGRB} beaming angles will yield relatively high rates for \BNS and \acp{SGRB} that could lead to an overestimate of the mean beaming angle.
 The population-based constraints on $\theta$ must, therefore, be regarded as upper bounds on the mean of a distribution of beaming angles.
 Having said this, for a given mean value $\langle \theta \rangle$, the ratio is rather insensitive to the width.
