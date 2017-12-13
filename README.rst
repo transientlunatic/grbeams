@@ -2,6 +2,11 @@
 Constraints On Short, Hard Gamma-Ray Burst Beaming Angles From Gravitational Wave Observations
 ==============================================================================================
 
+.. image:: https://zenodo.org/badge/54910948.svg
+   :target: https://zenodo.org/badge/latestdoi/54910948
+
+	    
+
 This is the repository for the analysis and the paper related to the method for inferring the GRB opening angle from the rates of gamma ray bursts and neutron star merger events.
 
 The pre-print of the paper describing this work and its results is available on the `arXiv`_ as document 1712.02585.
