@@ -1,6 +1,6 @@
-===
+==============================================================================================
 Constraints On Short, Hard Gamma-Ray Burst Beaming Angles From Gravitational Wave Observations
-===
+==============================================================================================
 
 This is the repository for the analysis and the paper related to the method for inferring the GRB opening angle from the rates of gamma ray bursts and neutron star merger events.
 
@@ -34,19 +34,20 @@ Citing this work
 You can cite our arXiv preprint (BibTeX):
 
 ::
+   
    @ARTICLE{2017arXiv171202585W,
-   author = {{Williams}, D. and {Clark}, J.~A. and {Williamson}, A.~R. and 
+      author = {{Williams}, D. and {Clark}, J.~A. and {Williamson}, A.~R. and 
 	{Heng}, I.~S.},
-    title = "{Constraints On Short, Hard Gamma-Ray Burst Beaming Angles From Gravitational Wave Observations}",
-    journal = {ArXiv e-prints},
-    archivePrefix = "arXiv",
-    eprint = {1712.02585},
-    primaryClass = "astro-ph.HE",
-    keywords = {Astrophysics - High Energy Astrophysical Phenomena, General Relativity and Quantum Cosmology},
-    year = 2017,
-    month = dec,
-    adsurl = {http://adsabs.harvard.edu/abs/2017arXiv171202585W},
-    adsnote = {Provided by the SAO/NASA Astrophysics Data System}
+       title = "{Constraints On Short, Hard Gamma-Ray Burst Beaming Angles From Gravitational Wave Observations}",
+       journal = {ArXiv e-prints},
+       archivePrefix = "arXiv",
+       eprint = {1712.02585},
+       primaryClass = "astro-ph.HE",
+       keywords = {Astrophysics - High Energy Astrophysical Phenomena, General Relativity and Quantum Cosmology},
+       year = 2017,
+       month = dec,
+       adsurl = {http://adsabs.harvard.edu/abs/2017arXiv171202585W},
+       adsnote = {Provided by the SAO/NASA Astrophysics Data System}
     }
 
 and you can also cite our data release:
