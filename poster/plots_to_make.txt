@@ -1,6 +1,0 @@
-1) Efficiency priors
-2) Jet angle comparison plot
-3) iLIGO rate posterior
-4) iLIGO jet posterior with different priors
-5) aLIGO rate posterior
-6) aLIGO jet posterior with different priors
