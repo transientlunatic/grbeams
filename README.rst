@@ -51,7 +51,29 @@ You can cite our arXiv preprint (BibTeX):
     }
 
 and you can also cite our data release:
-    
+
+
+Reproducing our results
+-----------------------
+
+This repository contains all of the analysis code required to
+reproduce the results presented in the paper, however the surface
+plots require a fairly large amount of time to produce, so for
+convenience we have provided the data for these in the `/data`
+directory. The majority of the analysis is conducted in `jupyter`
+format notebooks, and these can be found in the `notebooks` directory,
+which has its own `README` file. To reproduce the analysis for the
+surface plots see the `surface-plot.py` script in the `scripts`
+directory.
+
+You can install the requirements for this analysis in a virtual
+environment by first running
+
+::
+   
+   pip install -r requirements.txt
+
+inside this directory.
 
 .. _here: https://git.ligo.org/daniel-williams/grb-beaming/-/jobs/7589/artifacts/file/final_paper/grb_beams_paper.pdf
 .. _LIGO-P1600102: https://dcc.ligo.org/LIGO-P1600102
