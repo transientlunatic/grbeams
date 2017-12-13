@@ -52,6 +52,31 @@ You can cite our arXiv preprint (BibTeX):
 
 and you can also cite our data release:
 
+.. image:: https://zenodo.org/badge/DOI/10.5281/zenodo.1066019.svg
+   :target: https://doi.org/10.5281/zenodo.1066019
+
+::
+
+   @article{williams, daniel_clark, james_williamson, andrew_heng, ik
+   siong_2017, title={Constraints On Short, Hard Gamma-Ray Burst
+   Beaming Angles From Gravitational Wave Observations : Supplementary
+   Material}, DOI={10.5281/zenodo.1066019}, abstractNote={<p>Data and
+   code to produce the analysis presented in &quot;Constraints On
+   Short, Hard Gamma-Ray Burst Beaming Angles From<br> Gravitational
+   Wave Observations&quot;.</p>}, note={This is the version of the
+   data release which corresponds to v1 of the paper on arXiv. DW is
+   supported by the Science and Technology Research Council (STFC)
+   grant ST/N504075/1. JC acknowledges support from NSF awards
+   PHYS-1505824 and PHYS-1505524SH. ISH is supported by STFC grant
+   ST/L000946/1. ARW acknowledges support from the Netherlands
+   Organization for Scientific Research through the NWO TOP Grant
+   No. 62002444­­-Nissanke. This document has been assigned the
+   control number LIGO-P1600102 by the LIGO document control centre.},
+   publisher={Zenodo}, author={Williams, Daniel and Clark, James and
+   Williamson, Andrew and Heng, Ik Siong}, year={2017}, month={Dec}}
+
+   
+   
 
 Reproducing our results
 -----------------------
